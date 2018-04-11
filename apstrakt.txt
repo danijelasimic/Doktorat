@@ -1,0 +1,32 @@
+U klasičnoj matematici postoji mnogo rayličitih geometrija. Veze između različitih geometrija su jake. Na 
+primer, može se pokazati da Dekartova ravan predstavlja model formalnih teorija geometrije. Iako su Euklidovi 
+"Elementi" jedan od najuticajnih radova iz matematike, on nije sasvim precizan, neki dokazi su bili nekompletni 
+ili su imali greške. Ove praznine su uticale na pojavu drugih aksiomatskih sistema čiji je cilj bio da daju 
+formalnu aksiomatizaciju Euklidove geometije. Najvažniji su Hilbertov sistem aksioma, sistem aksioma Tarskog.
+
+Značajna alatka za istraživanje osobina objekata u različitim geometrijama su kompleksni brojevi i njihovo 
+otkriće je bitno uticalo na razvoj geometrije. Zamenom Dekartove koordinatne ravni kompleksnom ravni 
+dobijaju se jednostavnije formule koje opisuju geometrijske objekte. Primena kompleksih brojeva je posebno 
+značajna za geometriju Lobačevskog i izučavanje neeuklidskih geometrija. Posebno značajne za izučavanje su 
+izometrije kompleksne ravni koje se nazivaju Mebijusove transformacije.
+
+Potreba za rigoroznim zasnivanjem matematike postoji veoma dugo i sa razvojem matematike povećavao se i stepen 
+rigoroznosti. Često, mehanički provereni dokazi popunjavaju praznine koje postoje u definicijama i dokazima i 
+upućuju na dublju analizu teme koja se izučava. Sa pojavom računara pojavila se mogućnost mašinski proverivih 
+dokaza i pojavili su se sistemi za formalno dokazivanje teorema. 
+
+Postoje dve grupe sistema za proveru dokaza, jedni su automatski, a drugi su zasnovani na interakciji korisnika 
+i računara. Sistemi zasnovani na iterakciji korisnika i računara su poluautomatski, oni kontrolišu ispravnost 
+dokaza i pronalaze, ako je to moguće, automatske dokaze. Nazivaju se asisteni za dokazivanje teorema. Među 
+automatskim dokazivačima posebno se izdavajaju automatski dokazivači u geoemtriji koji se imaju analitički 
+pristup u dokazivanju i po uspešnosti izdavajaju se Vu'ov metod i metod Grebnerovih baza. 
+
+Biće prikazana formalizacija analitičke geometrije u okviru asistenta za dokazivanje teorema i biće pokazano da 
+je ona model sistema aksioma Tarskog i sistema aksioma Hilberta. Biće predstavljena formalizacija teorije 
+proširene kompleksne ravni, njenih objekata i njenih transformacija.
+
+
+
+ 
+
+

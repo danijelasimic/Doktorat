@@ -1,0 +1,11 @@
+dim 100 100
+
+ang_picture 0 0 100 100
+ang_origin 50 50
+ang_unit 45
+
+ang_drawsystem_p 
+
+
+
+

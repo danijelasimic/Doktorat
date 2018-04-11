@@ -1,0 +1,56 @@
+%Ovo je paket koji veoma uspe\v sno preslovljava dokumente pripremljene na
+%latini\v cnom pismu u \' cirili\v cno pismo.
+%Da biste koristili ovaj paket dovoljno je prekopirati ga u direktorijum u
+%kojem se nalazi dokument za preslovljavanje i u preambuli dokumenta ukucajte
+%\usepackage{cirilica}
+%Paket veoma uspe\v sno preslovljava kombinovana slova, kao \v sto su slova
+%\v s, \' c, \v c,...
+
+\usepackage[OT1,OT2]{fontenc}
+\usepackage[serbian]{babel}
+
+\DeclareTextCompositeCommand{\v}{OT2}{c}{\char'161}
+\DeclareTextCompositeCommand{\d}{OT2}{z}{\char'12}
+\DeclareTextCompositeCommand{\d}{OT2}{Z}{\char'2}
+\DeclareTextCompositeCommand{\v}{OT2}{z}{\char'31}
+\DeclareTextCompositeCommand{\v}{OT2}{Z}{\char'21}
+\DeclareTextCompositeCommand{\v}{OT2}{s}{\char'170}
+\DeclareTextCompositeCommand{\v}{OT2}{S}{\char'130}
+\DeclareTextCompositeCommand{\'}{OT2}{c}{\char'17}
+\DeclareTextCompositeCommand{\'}{OT2}{C}{\char'7}
+\DeclareTextCompositeCommand{\v}{OT2}{C}{\char'121}
+
+\def\dj{\char'16}
+\def\Dj{\char'6}
+\def\DJ{\char'6}
+
+\newcommand{\dzn}{,\kern-0.07em,{}}
+\newcommand{\gzn}{{}``}
+
+%% Serifna latinica unutar cirilicnih tekstova se dobija komandom \lat
+%%
+\newcommand{\lat}{\fontencoding{OT1}\fontfamily{cmr}\def\'##1{\accent"13 ##1}%
+\def\v##1{{\accent20 ##1}} \let\^^_=\v%
+\def\dj{d\kern-0.4em\char"16\kern-0.1em}%
+\def\Dj{\mbox{\raise0.3ex\hbox{-}\kern-0.4em D}}%
+\def\DJ{\mbox{\raise0.3ex\hbox{-}\kern-0.4em D}}\selectfont}
+
+%% Sanserifna latinica unutar cirilicnih tekstova se dobija komandom \latsf
+%%
+\newcommand{\latsf}{\fontencoding{OT1}\fontfamily{cmss}\def\'##1{\accent"13 ##1}%
+\def\v##1{{\accent20 ##1}} \let\^^_=\v%
+\def\dj{d\kern-0.4em\char"16\kern-0.1em}%
+\def\Dj{\mbox{\raise0.3ex\hbox{-}\kern-0.36em D}}%
+\def\DJ{\mbox{\raise0.3ex\hbox{-}\kern-0.36em D}}\selectfont}
+
+%% Sanserifna latinica unutar cirilicnih tekstova se dobija komandom \latsf koja ostavlja sve u tt formatu
+\newcommand{\lattt}{\fontencoding{OT1}\fontfamily{cmtt}\def\'##1{\accent"13 ##1}%
+\def\v##1{{\accent20 ##1}} \let\^^_=\v%
+\def\dj{d\kern-0.4em\char"16\kern-0.1em}%
+\def\Dj{\mbox{\raise0.3ex\hbox{-}\kern-0.36em D}}%
+\def\DJ{\mbox{\raise0.3ex\hbox{-}\kern-0.36em D}}\selectfont}
+
+\endinput
+
+%Autor paketa
+%Aleksandar Prokopovi\' c

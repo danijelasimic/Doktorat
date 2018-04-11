@@ -1,0 +1,74 @@
+\begin{tikzpicture}
+\clip (0,0) rectangle (7.500000,4.800000);
+{\footnotesize
+
+% Drawing 2D Cartesian system
+\draw (7.000000,0.500000) node [anchor=north] { $x$ };%
+\draw (0.500000,4.500000) node [anchor=east] { $y$ };%
+\draw [line width=0.016cm] (0.000000,0.500000) -- (0.460000,0.500000);%
+\draw [line width=0.016cm] (0.540000,0.500000) -- (2.460000,0.500000);%
+\draw [line width=0.016cm] (2.540000,0.500000) -- (4.911500,0.500000);%
+\draw [line width=0.016cm] (4.991500,0.500000) -- (7.000000,0.500000);%
+\draw [line width=0.016cm] (6.702567,0.539158) -- (7.000000,0.500000);%
+\draw [line width=0.016cm] (6.702567,0.539158) -- (6.900000,0.500000);%
+\draw [line width=0.016cm] (6.702567,0.460842) -- (7.000000,0.500000);%
+\draw [line width=0.016cm] (6.702567,0.460842) -- (6.900000,0.500000);%
+\draw [line width=0.016cm] (0.500000,0.000000) -- (0.500000,0.460000);%
+\draw [line width=0.016cm] (0.500000,0.540000) -- (0.500000,4.500000);%
+\draw [line width=0.016cm] (0.460842,4.202567) -- (0.500000,4.500000);%
+\draw [line width=0.016cm] (0.460842,4.202567) -- (0.500000,4.400000);%
+\draw [line width=0.016cm] (0.539158,4.202567) -- (0.500000,4.500000);%
+\draw [line width=0.016cm] (0.539158,4.202567) -- (0.500000,4.400000);%
+
+% Marking point C by circle
+\draw [line width=0.016cm] (0.500000,0.500000) circle (0.040000);%
+\draw (0.530000,0.470000) node [anchor=south east] { $C$ };%
+
+% Marking point P by circle
+\draw [line width=0.016cm] (2.500000,0.500000) circle (0.040000);%
+\draw (2.470000,0.470000) node [anchor=south west] { $P$ };%
+
+% Marking point A by circle
+\draw [line width=0.016cm] (4.951500,0.500000) circle (0.040000);%
+\draw (4.921500,0.470000) node [anchor=south west] { $A$ };%
+
+% Marking point Q by circle
+\draw [line width=0.016cm] (2.500000,2.500000) circle (0.040000);%
+\draw (2.500000,2.500000) node [anchor=west] { $Q$ };%
+
+% Marking point B by circle
+\draw [line width=0.016cm] (2.280500,4.031500) circle (0.040000);%
+\draw (2.280500,4.031500) node [anchor=west] { $B$ };%
+
+% Drawing circle k1
+\draw [line width=0.016cm] (2.450673,4.800000) -- (2.443736,4.780064) arc (161:173:3.268327 and 3.268327) -- (2.285036,4.071242);%
+\draw [line width=0.016cm] (2.277316,3.991627) -- (2.273634,3.943987) arc (176:201:3.268327 and 3.268327) -- (2.485610,2.537322);%
+\draw [line width=0.016cm] (2.515369,2.463072) -- (2.525489,2.438963) arc (203:259:3.268327 and 3.268327) -- (4.912184,0.507370);%
+\draw [line width=0.016cm] (4.990901,0.493112) -- (5.022720,0.487912) arc (261:306:3.268327 and 3.268327) -- (7.499998,1.105097);%
+
+% Changing color 141 39 72
+\definecolor{r141g39b72}{rgb}{0.552941,0.152941,0.282353}%
+\color{r141g39b72}% 
+
+% Drawing circle k
+\draw [line width=0.016cm] (2.542017,4.800000) -- (2.507722,4.717019) arc (158:164:5.653980 and 5.653980) -- (2.290771,4.070159);%
+\draw [line width=0.016cm] (2.270502,3.992770) -- (2.263968,3.966822) arc (166:184:5.653980 and 5.653980) -- (2.113372,2.156378);%
+\draw [line width=0.016cm] (2.120199,2.076673) -- (2.126993,2.007999) arc (186:201:5.653980 and 5.653980) -- (2.485348,0.537222);%
+\draw [line width=0.016cm] (2.515047,0.462940) -- (2.545484,0.389815) arc (203:207:5.653980 and 5.653980) -- (2.728776,0.000002);%
+
+% Drawing line l
+\draw [line width=0.016cm] (0.000000,0.000000) -- (0.471716,0.471716);%
+\draw [line width=0.016cm] (0.528284,0.528284) -- (2.088216,2.088216);%
+\draw [line width=0.016cm] (2.144784,2.144784) -- (2.471716,2.471716);%
+\draw [line width=0.016cm] (2.528284,2.528284) -- (4.800000,4.800000);%
+
+% Changing color 225 0 0
+\definecolor{r225g0b0}{rgb}{0.882353,0.000000,0.000000}%
+\color{r225g0b0}% 
+
+% Marking point X by circle
+\draw [line width=0.016cm] (2.116500,2.116500) circle (0.040000);%
+\draw (2.116500,2.116500) node [anchor=east] { $X$ };%
+\color{black}
+}
+\end{tikzpicture}

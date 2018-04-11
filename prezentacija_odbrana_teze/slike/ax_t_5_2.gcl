@@ -1,0 +1,24 @@
+number XSIZE 55
+number YSIZE 15
+dim XSIZE YSIZE 
+
+point A 2 5
+point C 45 5
+point P 10 5
+point Q 40 5
+point B 30 5
+
+
+line a A C
+
+
+drawline a
+
+cmark_b A
+cmark_b P
+cmark_b Q
+cmark_b C
+
+color 225 0 0
+
+cmark_b B

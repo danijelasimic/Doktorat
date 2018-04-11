@@ -1,0 +1,7 @@
+\beamer@endinputifotherversion {3.24pt}
+\select@language {serbian}
+\beamer@sectionintoc {1}{Dokaziva\v ci teorema -- motivacija}{2}{0}{1}
+\beamer@sectionintoc {2}{Formalizacija analiti\v cke geometrije}{6}{0}{2}
+\beamer@sectionintoc {3}{Formalizacija geometrije kompleksne ravni}{13}{0}{3}
+\beamer@sectionintoc {4}{Primena algebarskih metoda u stereometriji}{41}{0}{4}
+\beamer@sectionintoc {5}{Zaklju\v cak}{42}{0}{5}

@@ -1,0 +1,38 @@
+\begin{tikzpicture}
+\clip (0,0) rectangle (5.500000,1.500000);
+{\footnotesize
+
+% Drawing line a
+\draw [line width=0.016cm] (0.000000,0.500000) -- (0.160000,0.500000);%
+\draw [line width=0.016cm] (0.240000,0.500000) -- (0.960000,0.500000);%
+\draw [line width=0.016cm] (1.040000,0.500000) -- (2.960000,0.500000);%
+\draw [line width=0.016cm] (3.040000,0.500000) -- (3.960000,0.500000);%
+\draw [line width=0.016cm] (4.040000,0.500000) -- (4.460000,0.500000);%
+\draw [line width=0.016cm] (4.540000,0.500000) -- (5.500000,0.500000);%
+
+% Marking point A by circle
+\draw [line width=0.016cm] (0.200000,0.500000) circle (0.040000);%
+\draw (0.200000,0.500000) node [anchor=north] { $A$ };%
+
+% Marking point P by circle
+\draw [line width=0.016cm] (1.000000,0.500000) circle (0.040000);%
+\draw (1.000000,0.500000) node [anchor=north] { $P$ };%
+
+% Marking point Q by circle
+\draw [line width=0.016cm] (4.000000,0.500000) circle (0.040000);%
+\draw (4.000000,0.500000) node [anchor=north] { $Q$ };%
+
+% Marking point C by circle
+\draw [line width=0.016cm] (4.500000,0.500000) circle (0.040000);%
+\draw (4.500000,0.500000) node [anchor=north] { $C$ };%
+
+% Changing color 225 0 0
+\definecolor{r225g0b0}{rgb}{0.882353,0.000000,0.000000}%
+\color{r225g0b0}% 
+
+% Marking point B by circle
+\draw [line width=0.016cm] (3.000000,0.500000) circle (0.040000);%
+\draw (3.000000,0.500000) node [anchor=north] { $B$ };%
+\color{black}
+}
+\end{tikzpicture}

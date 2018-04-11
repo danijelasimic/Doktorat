@@ -1,0 +1,330 @@
+\documentclass{article}
+
+\begin{document}
+
+\section{Dokaziva\v ci teorema -- motivacija}
+
+\subsection{Frame 1}
+\begin{itemize}
+\item Aksiomatski dokaziva\v ci -- dat skup aksioma i primenom logike (metod rezolucije, tabloa, prirodna dedukcija) dolazi se do nekih zaklju\v caka. \\
+      Vidjeno u radu Vesne i Sane. (i tu izvrsena provera u okviru sistema Isabelle/HOL)\\
+      Velika je mana \v sto nisu efikasni.
+      
+\item Algebarski dokaziva\v ci -- mogu dokazati veliki broj teorema. Problem je \v sto dokazi nisu \v citljivi. Zasnivaju se na analiti\v ckom pristipu u dokazima, tj.
+      na reprezentaciji ta\v caka kori\v s\'cenjem koordinata. Prolem je i \v sto nismo "sigurni" u dobijeni dokaz.
+  
+\end{itemize}
+
+\subsection{Frame 2}
+
+Prica preuzeta od Bezema: http://dream.inf.ed.ac.uk/events/adg2012/uploads/talks/ADG2012-Beeson.pdf
+
+Ideja je da se ispri\v ca motivacija za ovaj doktorat, otkuda sve to.
+
+
+Svaku granu grafa objasniti:
+
+\begin{itemize}
+\item {\bf Geometrijska teorema -- Geometrijski dokaz} Bilo bi idealno da idemo ovim putem. Od teoreme ka dokazu, a pri tome koristimo geometrijske alatke (aksiome, 
+      prirodnu dedukciju itd.) \\
+      Veliki je probelm \v sto ovo uop\v ste nije jednostavno uraditi. Naime, problem mo\v ze biti te\v zak i nedokaziv za \v coveka.
+      Tu u pri\v cu dolaze ra\v cunari. \\
+      Ali, ako koristimo aksiomatske dokaziva\v ce -- ne moramo biti uspe\v sni (oni nisu ba\v s najusp[e\v sniji u dokazivanju). \\
+      Zato idemo ZAOBILAZNIM putem (to je deo grafa koji ide preko Algebraskih dokaziva\v ca).
+      
+\item {\bf Geometrijska teorema -- Algebarska Transformacija} Ovde imamo zapravo dve stvari o kojima treba voditi ra\v cuna:
+  \begin{enumerate}
+  \item Prebacujemo sve u analiti\v cku geometriju -- za\v sto je to ok? Kako smemo da prebacimo u analiti\v cku geometriju?
+  \item Za\v sto su ok konstrukcijski polinomi? -- da li ne\v sto gubimo ili dobijamo prebaciju\'ci u polinome, da li su oni zaista korektni?
+  \end{enumerate}
+
+\item {\bf Algebarska transformacija -- Algebarski dokaz} Grebnerove baze ve\'c formalizovane u okviru sistema Isabelle/HOL
+
+\item {\bf Algebarski dokaz -- Geometrijski dokaz} Da li je dokaz zaista dokaz? Za\v sto mo\v zemo da vratimo nazad? Za\v sto ne\v sto 
+      \v sto va\v zi u analiti\v ckoj geometriji va\v zi i u sinteti\v ckoj? Kako ide formalizacija: pokazati da se u sinteti\v ckoj geometriji
+      mo\v ze izgraditi Dekartova ravan.
+     
+\end{itemize}
+
+\section{Formalizacija analiti\v cke geometrije}
+
+\subsection{Frame 3}
+
+U klasi\v cnoj matematici postoji mnogo razli\v citih geometrija. Tako\d e,
+razli\v cita su gledi\v sta \v sta se smatra standardnom (Euklidskom) geometrijom.
+Ponekad, geometrija se defini\v se kao nezavisna formalna teorija, a ponekad
+kao specifi\v can model. Naravno, veze izme\d u razli\v citih  zasnivanja geometrije 
+su jake.
+ 
+Tradicionalna Euklidska (sinteti\v cka) geometrija, koja datira jo\v s od 
+anti\v cke Gr\v cke, je geometrija zasnovana na \v cesto malom skupu osnovnih
+pojmova (na primer, ta\v cke, linije, relacija podudarnosti, \ldots) i na 
+skupu aksioma koje implicitno defini\v su osnovne pojmove.
+Kori\v s\'cenjem aksioma, teorema, lema i logi\v ckih argumenata mogu\'ce je
+izvoditi nove zaklju\v cke. Iako su Euklidovi "Elementi" jedan od
+najuticajnih radova iz matematike, postavilo se ozbiljno pitanje da li
+sistem aksioma, teorema i lema kojima se geometrija opisuje zaista
+precizan. Ispostavilo se da su nadjene gre\v ske u dokazima u tekstu,
+a i da su neki dokazi bili nekompletni jer su imali implicitne
+pretpostavke nastale zbog intuicije ili posmatranja slike. Ove
+praznine su uticale na pojavu drugih aksioma{t}{s}kih sistema \v ciji je
+cilj bio da daju formalnu aksiomatizaciju Euklidove
+geometrije. Najva\v zniji su Hilbertov sistem aksioma, sistem aksioma 
+Tarskog i najmodernija varijanta -- Avigadov sistem aksioma.
+
+Hilbertov sistem se sastoji iz tri osnovna pojma (ta\v cka, prava i
+ravan), 6 predikata i 20 aksioma podeljenih po grupama. Hilbert nije
+\v zeleo ni\v sta da ostavo intuiciji, ve\' c je i najo\v ciglednija
+tvrdjenja zapisivao kao aksiome i leme. Ovakav pristup je pove\' cao
+nivo rigoroznosti ne samo u geometriji, nego u celoj matematici. 
+
+Sistem Tarskog je manji, sastoji se od jednog osnovnog pojma (ta\v
+cka), 2 predikata i 11 aksioma i njegova osnovna prednost u odnosu na
+Hilbertov sistem je u njegovoj jednostavnosti. Sa druge strane, sistem
+Tarskog uvodi pojam linije kao skup ta\v caka \v, a takav pristup
+dosta ote\v zava rezonovanje jer zahteva da se u dokazima teorema i
+lema koristi kompleksna teorija skupova.
+
+Jеdnо оd naјzna\v caјniјih оtkri\'ca u matеmatici, kоје datira iz XVII
+vеka, јеstе Dеkartоvо оtkrićе kооrdinatnоg sistеma i оnо је
+оmоgu\'cilо da sе algеbarskim izrazima prеdstavе gеоmеtriјski оblici. Tо
+је dоvеlо dо rada na nоvој matеmatičkој оblasti kојa sе zоvе
+\emph{analiti\v cka gеоmеtriјa}. Оna је pоslužila da spојi gеоmеtriјu i
+algеbru i bila је vеоma važna za оtkrićе bеskоna\v cnоsti i matеmati\v ckе
+analizе.
+----------------
+
+Potreba za rigoroznim zasnivanjem matematike postoji veoma dugo i sa
+razvojem matematike pove-\'cavao se i stepen rigoroznosti. Sa pojavom
+ra\v cunara pojavila se mogu\'cnost ma\v sinski proverivih
+dokaza. Tako su se pojavili sistemi za formalno dokazivanje
+teorema. \v Cеstо, mеhani\v cki prоvеrеni dоkazi pоpunjavaјu prazninе kоје
+pоstоје u dеfiniciјama i dоkazima i upućuјu na dublju analizu tеmе kојa
+sе izu\v cava. 
+
+Pоstоje sistemi kоji оmоgu\'cavaju pоtpunо autоma{t}{s}ku
+prоveru dоkaza i оni su naj\v ce\v s\'ce kоriste SАT re\v
+sava\v ce ili tehnike prezapisivanja. Sistemi kоji se zasnivaju na
+lоgikama vi\v seg reda su pоluautоma{t}{s}ki i u prоcesu fоrmalnоg
+dоkazivanja tеоrеma оd strane kоrisnika (\v cestо prоgramer i/ili
+matemati\v car) pоma\v zu takо \v stо kоntrоli\v su ispravnоst dоkaza i,
+kоlikо је tо mоgu\'cе, prоnalaze autоma{t}{s}ke dоkaze. Оvi pоluautоmatski
+dоkaziva\v ci se nazivaju i {\em asistenti za dоkazivanje teоrema}. 
+
+Danas pоstојi mnоgо asistеnata za dоkazivanjе tеоrеma: Isabelle,
+Isabelle/HОL, Cоq, HОL Light, PVS i drugi. Pоsеbnо sе isti\v cu 
+Isabelle/HОL i Cоq kaо sistеmi sa vе\'cim brојеm kоrisnika kојi
+su tоkоm gоdina razvili vеliki skup bibliоtеka sa fоrmalnо dоkazanim
+tеоriјama kоје је mоgu\'cе daljе nadоgradjivati. Аsistеnti za dоkazivanjе
+tеоrеma sе kоristе u razli\v citim оblastima. Prе svеga, isti\v cе sе
+primеna u оbrazоvanju. Pоrеd tоga, mоgu sе kоristiti i za fоrmalnu
+vеrifikaciјu ra\v cunarskih prоgrama. Pоma\v zu razvој i prоdubljivanjе
+matеmatičkоg znanja.
+
+Postoji veliki broj formalizacija fragmenata razli\v citih geometrija
+u okviru asistenata za dokazivanje teorema. Delovi Hilberove knjige
+"Osnove geometrije" su formalizovani u Isabelle-u i 
+Coq-u. U okviru sistema Coq je formalizovana geometrija
+Tarskog, konstruktivna geometrija, projektivna geometrija, geometrija
+lenjira i \v sestara i druge. 
+
+\subsection{Frame 5-6}
+
+Manje-vi\v se kratko re\'ci ono \v sto pi\v se na slajdovima bez osvrtanja na detalje.
+Posebno se osvrnuti na {\bf wlog} kao na veoma va\v znu tehniku.
+
+\section{Formalizing Complex Plane Geometry}
+
+\subsection{Frame 7}
+
+\v Zeleli smo da pro\v sirimo istra\v zivanje i da dodamo formalizaciju Hiperboli\v cke geometrije.
+Krenuli smo od Poinkareovog disk modela i \v zeleli smo da formalizujemo da je on
+model geometrije Loba\v cevskog (va\v ze sve aksiome osim aksiome paralelenosti).
+
+Poincareov disk model predstavljamo jednim jedini\v cnim krugom.
+
+\subsection{Frame 8}
+Linija je normalna na jedini\v cni krug.
+
+To mo\v ze biti prava koja prolazi kroz centar.
+
+\subsection{Frame 9}
+
+Ili mo\v ze bit krug (deo kruga, luk) koji je normalan na jedini\v cni krug.
+
+\subsection{Frame 10}
+Ono \v sto nam je interesantno je da posmatramo relaciju izme\d u.
+
+\subsection{Frame 11}
+
+Jedan od na\v cina da se defini\v se izme\d u bi mogao da bude: preslikamo ta\v cke na x-osu i onda gledamo u kakvom su odnosu.
+
+Postoji vi\v se problema: \\
+-- transformacija koja vr\v si preslikavanja ne sme da menja redosled ta\v 
+   caka, odnosno mora da ga \v cuva \\
+-- voleli bismo da je ta transformacija jednostavna, ali je kompleksna \\
+-- treba ispitati da li se nakon transformacije ta\v cke nalaze na x-osi ili ne. 
+   One koje nisu na x-osi nisu ni na liniji odre\d enoj ovim ta\v ckama (malo 
+detaljnije ovo objasniti) \\
+-- konacno, kako da povezemo ako imamo vise trojki ta\v caka i za njih hocemo da ispitujemo between; kada imamo jedan, onda ga preslikamo i gledamo x-osu, ali ako imamo 6 ta\v caka,
+   kako preslikati svih 6 na x-osu i posmatrati svojsta? Ovaj problem zna\v cajno ote\v zava dokaze.
+   
+\subsection{Frame 12}   
+
+Problem sa ovim res\v senjem: \\
+-- kompleksna definicija (koja razlikuje pravu od kruga) \\
+-- te\v sko pokazati da izmoterija \v cuva between \\
+-- te\v sko uspostaviti vezu izme\d u ove dve definicije \\
+
+Trebala nam je definicija koja \'ce biti jedinstvena. Sistem u kome mo\v zemo jednostavno definisati pravu, i u kome mo\v zemo na jedinstven na\v cin
+definisati between. 
+
+Zato, okre\'cemo se kompleksnoj analizi i algebri koje nude brojna re\v senja. Ipak, da bi ovo razvili, bilo je potrebno razviti veliku teoriju u Isabelle/HOL sistemu
+
+\subsection{Frame 13}
+
+Iako se pojam sferi\v cne geometrije pojavio jo\v s u staroj Gr\v
+ckoj, ozbiljnije istra\v zivanje ne-Euklidske geometrije je zapo\v
+ceto 1829. godina sa radom Loba\v cevskog. Iako je Loba\v cevski
+intenzivno istra\v zivao ne-Euklidsku geometriju i poku\v savao da sa
+njom opi\v se realan svet, ostali nau\v cnici nisu bili toliko
+zainteresovani za ovu oblast i proslo je pola veka pre nego \v sto se
+krenulo sa intenzivnijim istra\v zivanjem.  Ono \v sto je najvi\v se
+uticalo na ovu promenu jeste otkri\'ce kompleksnih brojeva krajem
+{\lat XVIII} veka. Kompleksni brojevi su predstavljali zna\v cajanu
+alatku za istra\v zivanje osobina objekata u razli\v citim
+geometrijama. Zamenom Dekartove koordinatne ravni sa kompleksnom ravni
+dobijaju se jednostavnije formule koje opisuju geometrijske
+objekte. Nakon Gausovog teorije o zakrivljenim povr\v sinama (???? {\lat
+curved surfaces}) i Rimanovog rada o zakrivljenim (??{\lat manifolds})
+geometrija Loba\v cevskog dobija na zna\v cajnosti. Ipak, najve\' ci
+uticaj ima rad Beltramija koji pokazuje da dvodimenzionalna
+ne-Euklidska {\lat kako se pise ne-euklidska} geometrija je ni\v sta
+drugo do izu\v cavanje odgovaraju\' ce povr\v sine konstantne
+negativne krive ??? {\lat constant negative curvature}. Uvodi i pojam
+{\em projektivnog disk modela} koji je kasnije popularizovan od strane
+Klajna. Poinkare posmatra model poluravni {\lat half-plane} koji su
+predlo\v zili {\lat (??? Louville i Beltrami -- kako se oni prevode)} i pre  
+svega izu\v cava
+izometrije hiperboli\v cke ravni koje \v cuvaju orijentaciju. Danas se
+te transformaciju naj\v ce\v s\'ce nazivaju Mebijusove transformacije.
+
+Iako postoji dosta literature na polju kompleksne geometrije, mi nismo na\v sli 
+neku njenu formalizaciju.
+
+Potreba za formalizacijom: puno gre\v saka, netrivijalnih zaklju\v caka koji  
+nisu pokazani, potom i sitne gre\v ske u samim dokazima, recimo zanemaruju se 
+neki slu\v cajevi i uop\v ste se ne pokazuje da tvr\d enje va\v zi, tj. ne va\v 
+zi i u tom specijalnom slu\v caju. \v Cesto u okviru iste knjige su postojale 
+nedoslednosti u pojmovima koji su kori\v s\'ceni, recimo lako se prelazilo sa 
+geometrijskog na alegbarski pojam a da pri tome nije pokazano, tj. opravdano da 
+tako ne\v sto sme. 
+Tako\d e, va\v zno je napomenitu da je va\v zno i iskustvo koje smo imali tokom 
+formalizacije. U knjigama postoje dva pristupa: jedan je vi\v se geometrijski, 
+a drugi je vi\v se algebarski. Pokazuje se da je vrlo va\v zno koji se pristup 
+izabere da bi uop\v ste mogla uspe\v sno da se izvr\v si formalizacija.
+
+\subsection{frame 18}
+
+Uvodimo homogene koordinate koje su posebno va\v zne i zna\v cajno olak\v 
+savaju ra\v cun i reprezenatciju (zapis raznih formula).
+
+Objasniti da je na\v s tip zapravo klasa ekvivalencije skupa ne-nula vektora 
+koji su nadom onom relacijom $\approx$
+
+\subsection{Frame 19}
+
+Prokometarisati da za aritmeti\v cke operacije defin\v semo i ono $\infty \cdot 
+0$ i sli\v cno i da to moramo da defnisi\v semo iako to nije dobro definisano.
+
+\subsection{Frame 20}
+
+Rimanova sfera se mo\v ze postovetiti sa pro\v sirenom kompleksnom ravni kori\v 
+s\'cenjem stereografske projekcije. Ono \v sto je va\v zno je da je Rimanova 
+sfera metri\v cki prostor i da je rastojanje me\d u ta\v ckama zapravo du\v 
+zina tetive izme\d u njih.
+
+\subsection{Frame 21}
+
+Ono \v sto pi\v se na slajdu. Dodati da je Mebijusov identitet u stvari 
+jedini\v cna matrica.
+
+\subsection{Frame 22-23}
+
+Ono \v sto pi\v se.
+
+\subsection{Frame 24}
+
+Ponoviti pri\v cu o klasi ekvivalencije.
+
+Spomenitu postojanje specijalnih krugova -- unit circle, prva kroz koordinatni 
+po\v cetak. Spomenuti da ta prava sadr\v zi beskona\v cno. Euklidske prave su 
+one kad circline sadr\v zi beskona\v cno. A svaka Euklidska prava i krug mogu 
+biti reprezentovani kao circline.
+
+*Kako se ka\v ze na srpskom Hermitean (na\'ci)?
+
+\subsection{Frame 25}
+
+Ispri\v cati da se osobine \v cuvaju.
+
+Spomenuti svojstvo jedinstevnosti uop\v stenog kruga.
+
+\subsection{Frame 26}
+
+Spomenuti da Moebijusova transformacija uop\v stenog kruga ima sli\v cna 
+svojstva kao i Moebijusova transformacija ta\v cke (navesti neka svojstva). 
+Glavna stvar je naglasiti da Mebijusova transformacija \v cuva circline, tj. 
+slika circline u circline (realan u realan). Naglasiti da veza se pravi izme\d 
+u mebijusa nad ta\v ckama i mebijusa nad circline. Tako\d e re\'ci da se 
+simetri\v cne ta\v cke \v cuvaju pod mebijusom.
+
+\subsection{Frame 27}
+
+Kod o\v cuvanja ugla ispri\v cati da postoje dva pristupa kako ugao da 
+predstavimo. Jedan pristup je geometrijski: ugao izme\d u tangenti u ta\v cki 
+preseka. Drugi pristup je alegebarski: ona formula. Iako je prvi vizuelno lep\v 
+si i lak\v si za razumevanje, drugi je mnogo jednostavniji za analizu i 
+pokazivanje svojstava. Ista\'ci da smo mi oba pristupa formalizovali i pokazali 
+smo da oni jesu ekvivalenti.
+
+\section{Primena algebarskih metoda u stereometriji}
+
+\subsection{Frame 28}
+Dodati pri\v cu da treba izvr\v siti formalnu analizu. Bi\'ce napravljen sistem 
+i primenjen na razli\v cite probleme. Formalna analiza transformacija.
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

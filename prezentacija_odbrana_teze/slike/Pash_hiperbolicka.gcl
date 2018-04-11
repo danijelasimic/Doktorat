@@ -1,0 +1,44 @@
+number XSIZE 75
+number YSIZE 48
+dim XSIZE YSIZE
+
+ang_picture 0 0 70 45
+ang_origin 5 5
+ang_unit 50
+ang_drawsystem_p 3 1 1 1 2
+
+
+
+
+ang_point C 0 0
+ang_point P 0.4 0
+ang_point A 0.8903 0
+ang_point Q 0.4 0.4
+ang_point B 0.3561 0.7063
+ang_point X 0.3233 0.3233
+ang_point H 1.0068 0.6432
+ang_point I 1.45 0.4198
+
+cmark_lt C
+cmark_rt P
+cmark_rt A
+cmark_r Q
+cmark_r B
+
+circle k I B
+circle k1 H A
+line l C Q
+
+
+drawcircle k1 
+
+
+color 141 39 72
+
+drawcircle k
+drawline l
+
+
+color 225 0 0
+
+cmark_l X

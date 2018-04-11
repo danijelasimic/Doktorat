@@ -1,0 +1,22 @@
+dim 60 60
+
+ang_picture 0 0 60 60
+ang_origin 30 30
+ang_unit 25
+
+ang_drawsystem_p 1 1 1 1 2
+
+ang_point O 0 0
+ang_point Jedinica 0 1
+
+circle unit_circle O Jedinica
+
+drawcircle unit_circle
+
+ang_line linija1 -0.34 -1.06 0
+
+drawline linija1
+
+
+
+

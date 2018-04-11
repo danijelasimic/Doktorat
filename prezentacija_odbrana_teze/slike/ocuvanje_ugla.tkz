@@ -1,0 +1,86 @@
+\begin{tikzpicture}
+\clip (0,0) rectangle (10.000000,4.800000);
+{\footnotesize
+
+% Drawing 2D Cartesian system
+\draw (9.800000,0.500000) node [anchor=north] { $x$ };%
+\draw (0.500000,4.500000) node [anchor=east] { $y$ };%
+\draw [line width=0.016cm] (0.000000,0.500000) -- (9.800000,0.500000);%
+\draw [line width=0.016cm] (9.502567,0.539158) -- (9.800000,0.500000);%
+\draw [line width=0.016cm] (9.502567,0.539158) -- (9.700000,0.500000);%
+\draw [line width=0.016cm] (9.502567,0.460842) -- (9.800000,0.500000);%
+\draw [line width=0.016cm] (9.502567,0.460842) -- (9.700000,0.500000);%
+\draw [line width=0.016cm] (0.500000,0.000000) -- (0.500000,4.500000);%
+\draw [line width=0.016cm] (0.460842,4.202567) -- (0.500000,4.500000);%
+\draw [line width=0.016cm] (0.460842,4.202567) -- (0.500000,4.400000);%
+\draw [line width=0.016cm] (0.539158,4.202567) -- (0.500000,4.500000);%
+\draw [line width=0.016cm] (0.539158,4.202567) -- (0.500000,4.400000);%
+
+% Drawing circle O O1
+\draw [line width=0.016cm] (5.474937,-0.000002) -- (5.480973,0.064220) arc (355:360:5.000000 and 5.000000) --(5.500000,0.500000) arc (0:59:5.000000 and 5.000000) -- (3.051470,4.800000);%
+
+% Printing text at point K
+\draw (4.040500,4.452500) node [anchor=north] { ${\bf K}$ };%
+
+% Printing text at point Z
+\draw (7.500000,4.500000) node [anchor=north] { $\theta$ };%
+
+% Drawing arc X' D_1 136.00
+\draw [line width=0.016cm] (8.183500,4.155000) -- (8.182145,4.159785) arc (16:151:0.750207 and 0.750207) -- (6.800956,4.309584);%
+
+% Printing text at point Z_1
+\draw (2.753500,2.090000) node [anchor=west] { $-\theta$ };%
+
+% Drawing arc X C 136.00
+\draw [line width=0.016cm] (3.472000,2.630000) -- (3.468071,2.630494) arc (83:218:0.706258 and 0.706258) -- (2.830651,1.488122);%
+
+% Changing color 141 39 72
+\definecolor{r141g39b72}{rgb}{0.552941,0.152941,0.282353}%
+\color{r141g39b72}% 
+
+% Drawing circle I X
+\draw [line width=0.016cm] (3.350146,1.905306) -- (3.233884,1.815592) arc (128:140:12.216320 and 12.216320) -- (1.362091,0.000000);%
+\draw [line width=0.016cm] (10.000000,4.381967) -- (9.902834,4.375562) arc (94:105:12.216320 and 12.216320) -- (7.499576,3.963578);%
+\draw [line width=0.016cm] (7.422540,3.942007) -- (7.387727,3.932081) arc (106:126:12.216320 and 12.216320) -- (3.413933,1.953589);%
+
+% Drawing circle H X
+\draw [line width=0.016cm] (3.377189,1.889790) -- (3.374649,1.866578) arc (174:215:2.736843 and 2.736843) -- (3.862148,0.000000);%
+\draw [line width=0.016cm] (8.330852,-0.000001) -- (8.338390,0.010711) arc (325:360:2.736843 and 2.736843) --(8.833343,1.580500) arc (0:59:2.736843 and 2.736843) -- (7.495499,3.932757);%
+\draw [line width=0.016cm] (7.426154,3.972640) -- (7.423348,3.974197) arc (61:171:2.736843 and 2.736843) -- (3.387391,1.969136);%
+
+% Printing text at point E_1
+\draw (8.833500,1.578500) node [anchor=west] { ${\bf S_1}$ };%
+
+% Printing text at point F_1
+\draw (9.702000,4.360000) node [anchor=north] { ${\bf S_2}$ };%
+
+% Changing color 20 0 150
+\definecolor{r20g0b150}{rgb}{0.078431,0.000000,0.588235}%
+\color{r20g0b150}% 
+
+% Marking point X by circle
+\draw [line width=0.016cm] (3.382000,1.929500) circle (0.040000);%
+\draw (3.382000,1.929500) node [anchor=west] { $X$ };%
+
+% Marking point X' by circle
+\draw [line width=0.016cm] (7.461000,3.953000) circle (0.040000);%
+\draw (7.461000,3.953000) node [anchor=north] { $X'$ };%
+
+% Drawing segment M N
+\draw [line width=0.016cm] (3.153000,0.149000) -- (3.376919,1.889824);%
+\draw [line width=0.016cm] (3.387125,1.969170) -- (3.605000,3.663000);%
+
+% Drawing segment P R
+\draw [line width=0.016cm] (1.849000,0.769000) -- (3.350104,1.905361);%
+\draw [line width=0.016cm] (3.413889,1.953647) -- (4.966500,3.129000);%
+
+% Drawing segment V S
+\draw [line width=0.016cm] (5.988873,4.800000) -- (7.426420,3.973106);%
+\draw [line width=0.016cm] (7.495766,3.933217) -- (9.538000,2.758500);%
+
+% Drawing segment T U
+\draw [line width=0.016cm] (5.827500,3.495500) -- (7.422487,3.942196);%
+\draw [line width=0.016cm] (7.499522,3.963771) -- (10.000000,4.664062);%
+\color{black}
+}
+\end{tikzpicture}

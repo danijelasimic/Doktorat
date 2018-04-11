@@ -1,0 +1,452 @@
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{cirilica}
+\usepackage{pgf}
+\usepackage{wrapfig}
+\usepackage{gclc}
+
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+
+\begin{document}
+       УНИВЕРЗИТЕТ У БЕОГРАДУ  \hfill{У Београду, \_ 2015.} 
+       
+       МАТЕМАТИЧКИ ФАКУЛТЕТ
+ 
+
+\begin{center}
+ {\small Катедри за рачунарство и информатику } \\
+ 
+ {\bf Пријава теме за израду докторске дисертације}
+\end{center}
+
+  Молим да ми одобрите израду докторске дисертације под насловом "Формализација
+  различитих модела геометрије". Тему предлажем у договору 
+  са ментором др Филипом Марићем. 
+  
+  \vspace{1cm}
+  
+  \hfill{Подносилац пријаве} 
+  
+  \vspace{0.5cm}
+  
+  \hfill{\underline{\hspace{ 3in}}} 
+  
+  \hfill{Данијела Симић} 
+  
+  \vspace{1cm}
+  
+  \hfill{Ментор:} 
+  
+  \hfill{др Филип Марић}
+
+  
+  \newpage
+  
+\begin{center}
+{\bf Наставно-научном већу Математичког факултета\\
+Универзитета у Београду}
+
+\vspace{1cm}
+
+{\bf Пријава теме за израду докторске тезе \\
+     кандидата Данијеле Симић (бивше Петровић):}
+
+\vspace{0.5cm}     
+
+{\bf Формализација раличитих модела геометрије i primene}
+\end{center}
+
+\section{Подаци о кандидату}
+\subsection{Биографија}
+   Данијела Симић је рођена 26.09.1986. године у Ваљеву. Основну школу 
+   Жикица Јовановић Шпанац завршила је као ђак генерације и вуковац. 
+   Потом је уписала Ваљевску гимназију, коју је такође завршила као ђак 
+   генерације и вуковац. Током школовања учествовала је на бројним такмичењима
+   при чему се посебно истичу резултати и награде са републичких и савезних 
+   такмичења из физике и програмирања. Године 2005. уписала је Математички
+   факултет, уневерзитета у Београду, смер Рачунарство и Информатика. 
+   Студије је завршила 2009. године са просечном оценом 9.86. Исте године
+   уписала је докторске студије на смеру Информатика. Положила је све испите 
+   на докторским студијама са просечном оценом 10.
+   
+   Запослена је на Математичком факултету, Универзитета у Београду од 2009.
+   године и држала је вежбе из следећих предмета:
+   \begin{itemize}
+   \item Програмирање 1
+   \item Програмирање 2
+   \item Увод у организацију рачунара
+   \item Вештачка интелигенција
+   \end{itemize}
+   
+\subsection{Списак научних радова}
+
+{\em Објављени радови}
+\begin{itemize}
+\item {\lat Filip Marić, Ivan Petrović, Danijela Petrović, Predrag Janičić: \href{http://eptcs.web.cse.unsw.edu.au/paper.cgi?THedu11.4}{Formalization and Implementation of Algebraic Methods in Geometry} (\href{http://about.eptcs.org/}{Electronic Proceedings in Theoretical Computer Science} 79, pp. 63–81.)}
+\item {\lat Filip Mari\'c, Danijela Petrovi\'c: \href{http://argo.matf.bg.ac.rs/publications/2014/moebius.pdf}{Formalizing Complex Plane Geometry} (\href{http://link.springer.com/article/10.1007/s10472-014-9436-4}{Annals of Mathematics and Artificial Intelligence}, November 2014)}
+\item {\lat Danijela Simi\'c: \href{http://argo.matf.bg.ac.rs/publications/2014/small-step-verification.pdf}{Using Small-Step Refinement for Algorithm Verification in Computer Science Education} (accepted for publish in \href{https://www.fose1.plymouth.ac.uk/mathematics\_education/field\%20of\%20work/IJTME/}{The International Journal for Technology in Mathematics Education}, Volume 22, Number 4 (December 2015)}
+\end{itemize}
+
+\noindent {\em Саопштења на научним скуповима}
+\begin{itemize}
+\item {\lat Danijela Petrovi\'c, Filip Mari\'c: \href{http://poincare.matf.bg.ac.rs/~danijela/publications/ADG2012.pdf}{Formalizing Analytic Geometries} (\href{http://dream.inf.ed.ac.uk/events/adg2012/}{Automated Deduction in Geometry 2012})}
+\item {\lat Danijela Petrovi\'c: \href{http://poincare.matf.bg.ac.rs/~danijela/publications/text.pdf}{Using Small-Step Refinement for Algorithm Verification in Computer Science Education} (\href{http://www.uc.pt/en/congressos/thedu/thedu14}{ThEdu'14})}
+\end{itemize}
+
+\subsection{Конференције и летње школе}
+\begin{itemize}
+\item {\lat Automated Deduction in Geometry, Automated Deduction in Geometry} 2012, Единбург, Велика Британија, 17.09. -- 19.09.2012.
+\item {\lat European Summer School in Logic, Language and Information}, Љубљана, Словенија, 01.08. -- 12.08.2011
+\item Vише пута презентовала и учествовала у организацији радионица ARGO групе
+\end{itemize}
+
+\section{Преглед области тезе и постојећих резултата}
+
+\subsection{Formalno dokazivanje teorema}
+
+У класичној математици постоји много различитих геометрија. Такође,
+различита су и гледишта шта се сматра стандардном (Еуклидском)
+геометријом. Пoнекад, геометрија се дефинише као независна формална
+теорија, а понекад као специфични модел. Наравно, везе између
+различтих заснивања геометрије су јаке. На пример, може се показати да
+Декартова раван представља модел формалних теорија геометрије.
+
+Традиционална Еукидска (синетичка) геометрија, која датира још од
+античке Грчке, је геометрија заснована на често малом скупу основних
+појмова (на пример, тачке, линије, релација подударности, \ldots) и на
+скупу аксиома које имплицитно дефинишу ове основне појмове.  Kori\v
+s\'cenjem aksioma, teorema, lema i logi\v ckih argumenata mogu\'ce je
+izvoditi nove zaklju\v cke. Iako su Euklidovi "Elementi" jedan od
+najuticajnih radova iz matematike, postavilo se ozbiljno pitanje da li
+sistem aksioma, teorema i lema kojima se geometrija opisuje zaista
+precizan. Ispostavilo se da su na\dj ene gre\v ske u dokazima u tekstu,
+a i da su neki dokazi bili nekompletni jer su imali implicitne
+pretpostavke nastale zbog intuicije ili posmatranja slike. Ove
+praznine su uticale na pojavu drugih aksioma{t}{s}kih sistema \v ciji je
+cilj bio da daju formalnu aksiomatizaciju Euklidove
+geometrije. Nајважнији су Хилбертов систем аксиома, систем аксиома
+Тарског и најмодернија варијанта -- Авигадов систем аксиома.
+
+Hilbertov sistem se sastoji iz tri osnovna pojma (ta\v cka, prava i
+ravan), 6 predikata i 20 aksioma podeljenih po grupama. Hilbert nije
+\v zeleo ni\v sta da ostavo intuiciji, ve\' c je i najo\v ciglednija
+tvr\dj enja zapisivao kao aksiome i leme. Ovakav pristup je pove\' cao
+nivo rigoroznosti ne samo u geometriji, nego u celoj matematici. 
+
+Sistem Tarskog je manji, sastoji se od jednog osnovnog pojma (ta\v
+cka), 2 predikata i 11 aksioma i njegova osnovna prednost u odnosu na
+Hilbertov sistem je u njegovoj jednostavnosti. Sa druge strane, sistem
+Tarskog uvodi pojam linije kao skup ta\v caka \v, a takav pristup
+dosta ote\v zava rezonovanje jer zahteva da se u dokazima teorema i
+lema koristi kompleksna teorija skupova.
+
+Једнo од најзначајнијих открића у математици, које датира из {\lat
+  XVII} века, јесте Декартово откриће координатног система и оно је
+омогућило да се алгебарским изразима представе геометријски облици. То
+је довело до рада на новој математичкој области која се зове
+\emph{аналитичка геометрија}. Она је послужила да споји геометрију и
+алгебру и била је веома важна за откриће бесконачности и математичке
+анализе.
+
+Iako se pojam sferi\v cne geometrije pojavio jo\v s u staroj Gr\v
+ckoj, ozbiljnije istra\v zivanje ne-Euklidske geometrije je zapo\v
+ceto 1829. godina sa radom Loba\v cevskog. Iako je Loba\v cevski
+intenzivno istra\v zivao ne-Euklidsku geometriju i poku\v savao da sa
+njom opi\v se realan svet, ostali nau\v cnici nisu bili toliko
+zainteresovani za ovu oblast i proslo je pola veka pre nego \v sto se
+krenulo sa intenzivnijim istra\v zivanjem.  Ono \v sto je najvi\v se
+uticalo na ovu promenu jeste otkri\'ce kompleksnih brojeva krajem
+{\lat XVIII} veka. Kompleksni brojevi su predstavljali zna\v cajanu
+alatku za istra\v zivanje osobina objekata u razli\v citim
+geometrijama. Zamenom Dekartove koordinatne ravni sa kompleksnom ravni
+dobijaju se jednostavnije formule koje opisuju geometrijske
+objekte. Nakon Gausovog teorije o zakrivljenim povr\v sinama (???? {\lat
+curved surfaces}) i Rimanovog rada o zakrivljenim (??{\lat manifolds})
+geometrija Loba\v cevskog dobija na zna\v cajnosti. Ipak, najve\' ci
+uticaj ima rad Beltramija koji pokazuje da dvodimenzionalna
+ne-Euklidska {\lat kako se pise ne-euklidska} geometrija je ni\v sta
+drugo do izu\v cavanje odgovaraju\' ce povr\v sine konstantne
+negativne krive ??? {\lat constant negative curvature}. Uvodi i pojam
+{\em projektivnog disk modela} koji je kasnije popularizovan od strane
+Klajna. Poinkare posmatra model poluravni {\lat half-plane} koji su
+predlo\v zili {\lat (??? Louville i Beltrami -- kako se oni prevode)} i pre svega izu\v cava
+izometrije hiperboli\v cke ravni koje \v cuvaju orijentaciju. Danas se
+te transformaciju naj\v ce\v s\'ce nazivaju Mebijusove transformacije
+{\lat (???? $PSL_2R$ -- da li ovo pominjati)}.
+
+//dodati reference za tarskog i hilberta
+
+\begin{itemize}
+\item {\lat Tristan Needham. {\em Visual Complex Analysis.} Oxford University Press, 1998.}
+
+\item {\lat Hans Schwerdtfeger. {\em Geometry of Complex Numbers.} Dover Books on Mathematics. Dover
+Publications, 1979.}
+\end{itemize}
+
+\subsection{Interaktivno dokazivanje teorema uz pomo\'c\ ra\v cunara}
+
+//prosiriti pricu (pre svega u smislu motivacije)
+//veliki rezultati is skorijih rezultata
+//naci kod Filipa na sajtu (ima rad pregled) pa odatle izvuci
+
+Potreba za rigoroznim zasnivanjem matematike postoji veoma dugo i sa
+razvojem matematike pove-\'cavao se i stepen rigoroznosti. Sa pojavom
+ra\v cunara pojavila se mogu\'cnost ma\v sinski proverivih
+dokaza. Tako su se pojavili sistemi za formalno dokazivanje
+teorema. Често, механички проверени докази попуњавају празнине које
+постоје у дефиницијама и доказима и упућују на дубљу анализу теме која
+се изучава. Postoje sistemi koji omogu\'cavaju potpuno automa{t}{s}ku
+proveru dokaza i oni su naj\v ce\v s\'ce koriste {\lat SAT} re\v
+sava\v ce ili tehnike prezapisivanja. Sistemi koji se zasnivaju na
+logikama vi\v seg reda su poluautoma{t}{s}ki i u procesu формалног
+доказивања теорема od strane korisnika (\v cesto programer i/ili
+matemati\v car) poma\v zu тако што контролишу исправност доказа и,
+колико је то могуће, pronalaze automa{t}\phantom {s}ke доказe. Ovi poluautomatski
+dokaziva\v ci se nazivaju i {\em asistenti za dokazivanje teorema}. 
+
+Данас постоји много асистената за доказивање теорема: {\lat Isabelle,
+Isabelle/HOL, Coq, HOL Light, PVS} и други. Посебно се истичу {\lat
+Isabelle/HOL} и {\lat Coq} као системи са већим бројем корисника који
+су током година развили велики скуп библиотека са формално доказаним
+теоријама које је могуће даље надограђивати. Асистенти за доказивање
+теорема се користе у различитим областима. Пре свега, истиче се
+примена у образовању. Поред тога, могу се користити и за формалну
+верификацију рачунарских програма. Помажу развој и продубљивање
+математичког знања.
+
+Postoji veliki broj formalizacija fragmenata razli\v citih geometrija
+u okviru asistenata za dokazivanje teorema. Delovi Hilberove knjige
+"Osnove geometrije" su formalizovani u {\lat Isabelle}-u i {\lat
+Coq}-u. U okviru sistema {\lat Coq} je formalizovana geometrija
+Tarskog, konstruktivna geometrija, projektivna geometrija, geometrija
+lenjira i \v sestara i druge. 
+
+Jедни од најзначајних радова iz formalizacije geometrije су:
+\begin{itemize}
+\item {\lat Laura Meikle and Jacques Fleuriot. {\em Formalizing Hilberts Grundlagen in Isabelle/Isar.}
+In Theorem Proving in Higher Order Logics, volume 2758 of Lecture Notes in Computer
+Science. Springer, 2003.}
+
+\item {\lat Phil Scott. {\em Mechanising Hilberts Foundations of Geometry in Isabelle.} Master’s thesis,
+University of Edinburgh, 2008.}
+
+\item {\lat Julien Narboux. {\em Mechanical Theorem Proving in Tarski’s Geometry.} In Automated De-
+duction in Geometry, volume 4869 of Lecture Notes in Computer Science. Springer, 2007.}
+
+\item {\lat Gilles Kahn. {\em Constructive geometry according to Jan von Plato.} Coq contribution, Coq
+V5.10, 1995.}
+
+\item {\lat Fr\'ed\'erique Guilhot. {\em Formalisation en Coq et visualisation d’un cours de g\'eom\'etrie pour
+le lyc\'ee.} Technique et Science Informatiques, 24(9), 2005.}
+
+\item Nicolas Magaud, Julien Narboux, and Pascal Schreck. {\em Formalizing Projective Plane ge-
+ometry in Coq.} In Automated Deduction in Geometry, volume 6301 of Lecture Notes in
+Computer Science. Springer, 2011.
+\end{itemize}
+
+//dodati lokalne radove, recimo nesto Pedjino
+
+Формализација sistema Tarski za не-Еуклидске геометрије (Клаин-Белтрами модел) урађена је у раду:
+\begin{itemize}
+\item {\lat Timothy James McKenzie Makarios. {\em A mechanical verification of the independence of
+Tarski’s Euclidean axiom.} Master’s thesis, Victoria University of Wellington, 2012.}
+\end{itemize}
+
+Формализација комплексне анализе може се видети у радовима:
+\begin{itemize}
+\item {\lat Robert Milewski. {\em Fundamental theorem of algebra.} Formalized Mathematics, 9(3), 2001.}
+
+\item {\lat Herman Geuvers, Freek Wiedijk, and Jan Zwanenburg. {\em A Constructive Proof of the
+Fundamental Theorem of Algebra without Using the Rationals.} In Types for Proofs and
+Programs, volume 2277 of Lecture Notes in Computer Science. Springer, 2002.}
+\end{itemize}
+
+\subsection{Automa{t}{s}ko dokazivanje teorema}
+
+Jedan od prvih automa{t}{s}kih dokaziva\v ca teorema bio je automa{t}{s}ki
+dokaziva\v c\ za geometriju. Interesovanje za automa{t}{s}ko dokazivanje u
+geometriji postoji jo\v s \ odavno, od vremena Tarskog. On je razvio
+algebarsku metodu za Euklidsku geometriju, ali je ta metoda bila
+neupotrebljiva za komlikovanije teoreme. Ipak, najve\'ci napredak je
+napravljen tek sredinom {\lat XX}-og veka kada je Vu predlo\v zio
+svoju algebarsku metodu za dokazivanje teorema u Euklidskoj
+geometriji. Njegova metoda je mogla da doka\v ze i veoma kompleksne
+teoreme. Jo\v s jedna algebarska metoda koja se razvila u isto vreme
+je metoda Grebnerovih baza. Ovi metodi imaju analiti\v cki pristup u
+dokazivanju i zasnivaju se репрезентацији тачака коришћењем
+координата. Модерни доказивачи теорема који се заснивају на овим
+методима су коришћени да се докажу стотине нетривијалних
+теорема. Ipak, velika mana ovih sistema je \v sto proizvode dokaze
+koji nisu \v citljivi. Devedesetih godina {\lat XX}-og veka postojalo
+je vi\v se poku\v saja da se ovaj problem re\v si i razvijene su nove
+metode zasnovane na aksiomatizaciji sinteti\v cke geometrije -- metoda
+povr\v si (??{\lat area method}), metoda punog ugla (?? {\lat full
+angle method}). Ipak, njihova glavna mana je \v sto su daleko manje
+efikasni u odnosu na algebarske metode.
+
+Primena sistema za automa{t}{s}ko dokazivanje teorema u geometriji je
+velika. Pre svega ovi sistemi se mogu koristiti u obrazovanju. Pored
+toga koriste se u na\v cnim oblastima kao \v sto su robotika,
+biologija, prepoznavanje slika i druge.
+
+Zna\v cajni radovi iz ove oblasti su:
+\begin{itemize}
+\item {\lat Wen-Ts\"un Wu.  {\em On the decision problem and the  mechanization  of  theorem  proving  in  elementary  geometry.}
+Scientia  Sinica ,  21:157--179, 1978}
+
+\item {\lat Deepak Kapur. {\em Using Gr\"obner bases to reason about geometry problems.} Journal of Symbolic Computation, 2(4):399--408, 1986}
+
+\item {\lat  Shang-Ching Chou, Xiao-Shan Gao, and Jing-Zhong  Zhang. {\em Machine  Proofs  in  Geometry.} World Scientific, Singapore, 1994}
+\end{itemize}
+
+\section{Циљеви тезе}
+
+\subsection{Формализација аналитичке геометрије Dekartove ravni}
+
+Синтетичка геометрија се обично изучава ригорозно, као пример
+ригорозног аксиоматског извођења. Са друге стране, аналитичка
+геометрија се углавном изучава неформално. Често се ова два приступа
+представљају независно и веза између њих се ретко показује.
+
+Циљ тезе је да повеже ове празнине. Први циљ је да се формализује
+аналитичка геометрија у оквиру асистента за доказивање теорема.
+Потом, циљ је да се покаже да je анлитичка геометрија модел више
+аксиоматских система, тј. система аксиома Тарског и система аксиома
+Хилберта.
+
+\subsection{Формализација геометрије комплексне равни}
+
+Постоји јако пуно радова и књига које описују геометрију
+комплексне равни. Циљ 
+тезе је да представи потпуно развијену теорију проширене 
+комплексне равни, њених објеката (линија и кругова) и
+њених трансформација (Мебијусове трансформације). Иако је већина 
+појмова већ описана у различитим књигама, циљ тезе је да 
+споји бројне приступе у један униформни приступ у коме ће бити коришћен
+јединствен и прецизан језик за описивање појмова. 
+Наиме, чак и у оквиру исте књиге
+дешава се да аутори користе исти назив за различите појмове. 
+Поред тога, циљ је анализирати и формално показати све случајеве
+који често остану недовољно истражени јер их више раличитих аутора 
+сматра тривијалним. Пре свега, интересантни резултати се очекују 
+у оквиру испитивања Мебијусових трансформација и како оне утичу на
+линије, кругове, углове, релације међу тачкама, оријентацију, 
+унутрашњост и спољашњост диска.
+
+Поред тога, биће формализована два приступа: геометријски приступ и
+алгебарски приступ. Намеће се питање да ли избор приступа утиче на
+ефикасност формалног доказивања у оквиру асистента за доказивање
+теорема.
+
+\subsection{Формализација Поинкареовог диск модела}
+
+Циљ тезе је да формализује Поинкарев диск модел. Иако постоји много
+радова који упућују да би формализација Поинкареовог диск модела могла
+бити тривијална, не постоји ни један рад, нити књига који ту
+формализацију заиста и представљају. Пре свега, циљ је правилно
+дефинисати релацију "између" за три тачке Поинкареове диск равни. Иако
+једна од основних релација, њену дефиницију нисмо пронашли до сада,
+барем не у истакнутој литератури из ове области.  Потом, циљ је
+анализирати како Мебијусове трансформације утичу на релацију "између"
+и доказати да Poinkareov disk model je model geometrije Loba\v
+cevskog.
+
+\subsection{Formalna analiza algebarskih metoda i razmatranje njihove primene na probleme u stereometriji}
+
+Већина система са аналитичким приступом за доказивање теорема се
+користи као софтвер којем се верује иако нису повезани са модерним
+интерактивним доказивачима теорема. Да би се повећала њихова
+поузданост потребно их је повезати са модерним интерактивним
+доказивачима теорема и то је могуће учинити на два начина -- њиховом
+имплементацијом у оквиру интерактивног доказивача теорема и
+показивањем њихиове исправности или коришћењем интерактивних
+доказивача да провере њихова тврђења. Неколико корака у овом правцу је
+већ направљено.
+
+Cilj teze je da dopuni ova istra\v zivanja i da ponudi formalno
+verifikovan sistem za automa{t}{s}ko dokazivanje u geometriji koji koristi
+metod Grebnerovih baza.
+
+
+\section{Прелиминарни садржај тезе}
+
+Теза ће се састојати из 4 велике целина подељених на мање делове при
+чему се неки од делова могу мењати у зависности од тока истраживања:
+
+\begin{enumerate}
+\item \underline{Увод.} У овом поглављу биће описани основни појмови и главни циљеви тезе.
+
+\item \underline{Асистенти за формално доказивање.} Биће описани асистени за формално доказивање
+      теорема са нагласком на систему {\lat Isabelle/HOL} који ће бити коришћен у раду. 
+      
+\item \underline{Различити притупи и тренутни резултати у формализацији геометрије.}
+      \begin{enumerate}[label*=\arabic*.]
+      \item {\em Аутоматско доказивање у геометрији.} Ово поглавље ће представити раличите приступе 
+            у овој области и биће наведени најзначајнији резултати.
+      \item {\em Интерактивно доказивање у геометрији.}  Биће представљени различити приступи у 
+           интерактивном доказивању у геометрији и биће истакнути сви значајни резултати из стално 
+           растућег скупа нових радова и истраживања.
+      \end{enumerate}
+
+\item \underline{Формализација аналитичке геометрије.}
+      \begin{enumerate}[label*=\arabic*.]
+      \item {\em Модел Тарског.} Биће описана формализација аналитичке геометрије у моделу Тарског. Биће
+            представњене дефиниције појмова и докази аксиома Тарског у аналитичког геометрији.
+      \item {\em Модел Хилберта.} Биће представљене дефиниције појмова и докази аксиома Хилберта у
+            аналитичкој геометрији.
+      \end{enumerate}
+      
+\item \underline{Формализација хиперболичке геометрије.}
+      \begin{enumerate}[label*=\arabic*.]
+      \item {\em Формализација геометрије комплексне равни.} Биће приказана формализација многих појмова комплексне геометрије: Мебијусове
+            трансформације, круг, линија, угао итд. У оквиру овог поглавља биће анализирани различити приступи у формализацији.
+      \item {\em Формализација Поинкареовог диск модела.} У овом поглављу биће анализиране аксиоме Тарског у Поинкареовом диск моделу.
+      \end{enumerate}
+
+\item \underline{Formalna analiza algebarskih metoda i razmatranje njihove primene na probleme u stereometriji}
+      \begin{enumerate}[label*=\arabic*.]
+      \item {\em Formalna analiza metode Grebnerovih baza u sistemu {\lat Isabelle/HOL}.} Ovo poglavlje je posve\'ceno analizi polinoma kojima se predstavljaju geometrijske
+            konstrukcije i tvr\dj enja u okviru sistema {\lat Isabelle/HOL}.
+      \item {\em Primena algebarskih metoda na probleme u stereometriji.} Bi\'ce analizirana primena algebarskih metoda na zadatke iz stereometrije.
+      \end{enumerate}
+\end{enumerate}
+
+
+\section{Досадашњи резулатати кандидата}
+
+Формализација аналитичке геометрије је заршена. Показано је да је она модел
+за две аксиоматски засноване геометрије, геометрије Тарског и геометрије 
+Хилберта. Ови резултати су приказани у раду:
+\begin{itemize}
+\item {\lat Petrovi\'c, Danijela, and Filip Mari\'c. "Formalizing Analytic Geometries." {\em Paper presented at ADG 2012: The 9th International Workshop on Automated Deduction in Geometry, held on September 17--19, 2012 at the University of Edinburgh.}}
+\end{itemize}
+
+Поред овог рада, урађена је и формализација геометрије комплексне
+равни. Дефинисани су основни појмови и показане су многе особине
+Мебијусових трансформација. Такође, истражено је како Мебијусове
+трансформације утичу на објекте комплексне равни, као што су линија,
+круг, угао, оријентација. Резултати овог истраживања приказани су у
+раду:
+\begin{itemize}
+\item {\lat Mari\' c, Filip, and Danijela Petrovi\' c. "Formalizing complex plane geometry." {\em Annals of Mathematics and Artificial Intelligence}: 1-38.}
+\end{itemize}
+\end{document} 
+
+
+
+
+________________________________________________________________________________________________________
+
+
