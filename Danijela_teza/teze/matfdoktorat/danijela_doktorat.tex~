@@ -1,0 +1,117 @@
+% Format teze zasnovan je na paketu memoir
+% http://tug.ctan.org/macros/latex/contrib/memoir/memman.pdf ili
+% http://texdoc.net/texmf-dist/doc/latex/memoir/memman.pdf
+% Podešava se veličina papira, veličina slova i jednostrano štampanje
+% Ne menjati ove parametre
+\documentclass[a4paper,12pt,oneside]{memoir}
+
+% Paket koji definiše sve specifičnosti doktorata Matematičkog fakulteta
+\usepackage{matfdoktorat}
+
+% Datoteka sa literaturom u BibTex tj. BibLaTeX/Biber formatu
+%\bib{matfdoktorat-primer}
+
+% Ime doktoranda na srpskom jeziku (u odabranom pismu)
+\autor{Данијела Симић}
+% Ime doktoranda na engleskom jeziku
+\author{Danijela Simić}
+% Naslov teze na srpskom jeziku (u odabranom pismu)
+\naslov{Формализација различитих модела геометрије и примене у верификацији аутоматских доказивача теорема}
+% Naslov teze na engleskom jeziku
+\title{...}
+% Godina u kojoj je teza predana komisiji
+\godina{2015}
+% Ime i afilijacija mentora (u odabranom pismu)
+\mentor{др Филип \textsc{Марић}, доцент\\ Универзитет у Београду, Математички факултет}
+% Ime i afilijacija prvog člana komisije (u odabranom pismu)
+\komisijaA{***др Ана \textsc{Анић}, ванредни професор\\ University of Disneyland, Недођија}
+% Ime i afilijacija drugog člana komisije (u odabranom pismu)
+\komisijaB{***др Лаза \textsc{Лазић}, доцент\\ Универзитет у Београду, Математички факултет}
+% Ime i afilijacija trećeg člana komisije (opciono)
+% \komisijaC{}
+% Ime i afilijacija četvrtog člana komisije (opciono)
+% \komisijaD{}
+% Datum odbrane (obrisati ili iskomentarisati narednu liniju ako datum odbrane nije poznat)
+%\datumodbrane{15. јануар 2016.}
+
+% Apstrakt na srpskom jeziku (u odabranom pismu)
+\apstr{%
+Овде иде апстракт.
+
+}
+
+% Apstrakt na engleskom jeziku
+\abstr{%
+Here it goes.
+}
+
+% Ključne reči na srpskom jeziku (u odabranom pismu)
+\kljucnereci{****}
+
+% Ključne reči na engleskom jeziku
+\keywords{*****}
+
+% Šira i uža oblast teze na srpskom jeziku (u odabranom pismu)
+\oblast{рачунарство}
+\uzaoblast{***}
+
+% Šira i uža oblast teze na engleskom jeziku
+\area{computer science}
+\subarea{****}
+
+% Univerzalna decimalna klasifikacija (UDK tj. UDC)
+% https://en.wikipedia.org/wiki/Universal_Decimal_Classification
+\udk{004.415.5(043.3)}
+
+%!!!!!! ukljucujem sta meni treba
+\usepackage{moji_paketi}
+
+\begin{document}
+% ==============================================================================
+% Uvodni deo teze
+\frontmatter
+% ==============================================================================
+% Naslovna strana
+\naslovna
+% Naslovna strana na engleskom jeziku
+\naslovnaen
+% Strana sa podacima o mentoru i članovima komisije
+\komisija
+% Strana sa posvetom (u odabranom pismu)
+\posveta{коме ћу ја, морам навести целу фамилију}
+% Strana sa podacima o disertaciji na srpskom jeziku
+\apstrakt
+% Strana sa podacima o disertaciji na engleskom jeziku
+\apstrakten
+% Sadržaj teze
+\tableofcontents*
+
+% ==============================================================================
+% Glavni deo teze
+\mainmatter
+% ==============================================================================
+
+\input{prevod_adg}
+
+
+% ==============================================================================
+% Završni deo teze i prilozi
+\backmatter
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+% Biografija doktoranda
+\begin{biografija}
+Овде пишем своју биографију.
+\end{biografija}
+% ------------------------------------------------------------------------------
+
+
+% Prilog 1: Izjava o autorstvu
+\includepdf{_Prilog1.pdf}
+% Prilog 2: Izjava o istovetnosti štampane i elektronske verzije doktorskog rada
+\includepdf{_Prilog2.pdf}
+% Prilog 3: Izjava o korišćenju
+\includepdf{_Prilog3.pdf}
+
+\end{document} 

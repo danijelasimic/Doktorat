@@ -1,0 +1,1679 @@
+@article{avigad,
+  title={A formal system for {Euclid’s} {Elements}},
+  author={Avigad, Jeremy and Dean, Edward and Mumma, John},
+  journal={The Review of Symbolic Logic},
+  volume={2},
+  number={04},
+  pages={700--768},
+  year={2009},
+  publisher={Cambridge Univ Press}
+}
+
+@inproceedings{locales,
+  title={Interpretation of locales in {Isabelle}: {Theories} and proof contexts},
+  author={Ballarin, Clemens},
+  booktitle={Mathematical Knowledge Management},
+  pages={31--43},
+  year={2006},
+  organization={Springer}
+}
+
+@article{buchberger,
+  title={{Bruno} {Buchberger’s} {PhD} thesis 1965: {An} algorithm for finding the basis elements of the residue class ring of a zero dimensional polynomial ideal},
+  author={Buchberger, Bruno},
+  journal={Journal of symbolic computation},
+  volume={41},
+  number={3},
+  pages={475--511},
+  year={2006},
+  publisher={Elsevier}
+}
+
+@incollection{hilbert-coq,
+  title={Higher-order intuitionistic formalization and proofs in {Hilbert’s} elementary geometry},
+  author={Dehlinger, Christophe and Dufourd, Jean-Fran{\c{c}}ois and Schreck, Pascal},
+  booktitle={Automated Deduction in Geometry},
+  pages={306--323},
+  year={2001},
+  publisher={Springer}
+}
+
+@incollection{grassman,
+  title={A formalization of grassmann-cayley algebra in {COQ} and its application to theorem proving in projective geometry},
+  author={Fuchs, Laurent and Th{\'e}ry, Laurent},
+  booktitle={Automated Deduction in Geometry},
+  pages={51--67},
+  year={2011},
+  publisher={Springer}
+}
+
+@incollection{wucoq,
+  title={Formalization of {Wu’s} simple method in {Coq}},
+  author={G{\'e}nevaux, Jean-David and Narboux, Julien and Schreck, Pascal},
+  booktitle={Certified Programs and Proofs},
+  pages={71--86},
+  year={2011},
+  publisher={Springer}
+}
+
+@incollection{grobnercoq,
+  title={Proof certificates for algebra and their application to automatic geometry theorem proving},
+  author={Gr{\'e}goire, Benjamin and Pottier, Lo{\"\i}c and Th{\'e}ry, Laurent},
+  booktitle={Automated Deduction in Geometry},
+  pages={42--59},
+  year={2011},
+  publisher={Springer}
+}
+
+@article{guilhot,
+  title={Formalisation en {Coq} et visualisation d'un cours de g{\'e}om{\'e}trie pour le lyc{\'e}e.},
+  author={Guilhot, Fr{\'e}d{\'e}rique},
+  journal={Technique et Science informatiques},
+  volume={24},
+  number={9},
+  pages={1113--1138},
+  year={2005}
+}
+
+@incollection{wlog,
+  title={Without loss of generality},
+  author={Harrison, John},
+  booktitle={Theorem Proving in Higher Order Logics},
+  pages={43--59},
+  year={2009},
+  publisher={Springer}
+}
+
+@book{hilbert,
+  title={Grundlagen der geometrie},
+  author={Hilbert, David},
+  year={2013},
+  publisher={Springer-Verlag}
+}
+
+@inproceedings{isabelle-quotient,
+  title={Quotients revisited for {Isabelle/HOL}},
+  author={Kaliszyk, Cezary and Urban, Christian},
+  booktitle={Proceedings of the 2011 ACM Symposium on Applied Computing},
+  pages={1639--1644},
+  year={2011},
+  organization={ACM}
+}
+
+@article{kapur,
+  title={Using {Gr{\"o}bner} bases to reason about geometry problems},
+  author={Kapur, Deepak},
+  journal={Journal of Symbolic Computation},
+  volume={2},
+  number={4},
+  pages={399--408},
+  year={1986},
+  publisher={Elsevier}
+}
+
+@incollection{projective-coq1,
+  title={Formalizing projective plane geometry in {Coq}},
+  author={Magaud, Nicolas and Narboux, Julien and Schreck, Pascal},
+  booktitle={Automated Deduction in Geometry},
+  pages={141--162},
+  year={2011},
+  publisher={Springer}
+}
+
+@article{projective-coq2,
+  title={A case study in formalizing projective geometry in {Coq}: {Desargues} theorem},
+  author={Magaud, Nicolas and Narboux, Julien and Schreck, Pascal},
+  journal={Computational Geometry},
+  volume={45},
+  number={8},
+  pages={406--424},
+  year={2012},
+  publisher={Elsevier}
+}
+
+@article{thedu,
+  title={Formalization and implementation of algebraic methods in geometry},
+  author={Mari{\'c}, Filip and Petrovi{\'c}, Ivan and Petrovi{\'c}, Danijela and Jani{\v{c}}i{\'c}, Predrag},
+  journal={arXiv preprint arXiv:1202.4831},
+  year={2012}
+}
+
+@incollection{hilbert-isabelle,
+  title={Formalizing {Hilbert’s} {Grundlagen} in {Isabelle/Isar}},
+  author={Meikle, Laura I and Fleuriot, Jacques D},
+  booktitle={Theorem proving in higher order logics},
+  pages={319--334},
+  year={2003},
+  publisher={Springer}
+}
+
+@incollection{narboux,
+  title={Mechanical theorem proving in {Tarski’s} geometry},
+  author={Narboux, Julien},
+  booktitle={Automated Deduction in Geometry},
+  pages={139--156},
+  year={2007},
+  publisher={Springer}
+}
+
+@incollection{narboux-tarski,
+  title={Mechanical theorem proving in {Tarski’s} geometry},
+  author={Narboux, Julien},
+  booktitle={Automated Deduction in Geometry},
+  pages={139--156},
+  year={2007},
+  publisher={Springer}
+}
+
+@book{Isabelle,
+  title={{Isabelle/HOL}: a proof assistant for higher-order logic},
+  author={Nipkow, Tobias and Paulson, Lawrence C and Wenzel, Markus},
+  volume={2283},
+  year={2002},
+  publisher={Springer Science \& Business Media}
+}
+
+@incollection{coqly,
+  title={A {Coq--based} library for interactive and automated theorem proving in plane geometry},
+  author={Pham, Tuan-Minh and Bertot, Yves and Narboux, Julien},
+  booktitle={Computational Science and Its Applications-ICCSA 2011},
+  pages={368--383},
+  year={2011},
+  publisher={Springer}
+}
+
+@article{grobner_coq,
+  title={Connecting {Gr$\backslash$" obner} Bases Programs with {Coq} to do Proofs in Algebra, Geometry and Arithmetics},
+  author={Pottier, Loic},
+  journal={arXiv preprint arXiv:1007.3615},
+  year={2010}
+}
+
+@misc{william,
+  title={A minimal version of {Hilbert’s} axioms for plane geometry},
+  author={Richter, William},
+  publisher={Citeseer}
+}
+
+@book{tarski,
+  title={Metamathematische methoden in der geometrie},
+  author={Schwabh{\"a}user, Wolfram and Szmielew, Wanda and Tarski, Alfred},
+  year={2013},
+  publisher={Springer-Verlag}
+}
+
+@article{wu,
+  title={On the decision problem and the mechanization of theorem-proving in elementary geometry},
+  author={Wu, Wen-ts{\"u}n},
+  journal={Scientia Sinica},
+  volume={21},
+  number={2},
+  pages={159--172},
+  year={1978}
+}
+
+@book{schwerdtfeger,
+  title={Geometry of complex numbers: circle geometry, {Moebius} transformation, non-euclidean geometry},
+  author={Schwerdtfeger, Hans},
+  year={1979},
+  publisher={Courier Corporation}
+}
+
+@incollection{harrison05,
+  title={A {HOL} theory of {Euclidean} space},
+  author={Harrison, John},
+  booktitle={Theorem proving in higher order logics},
+  pages={114--129},
+  year={2005},
+  publisher={Springer}
+}
+
+@incollection{lifting-transfer,
+  title={Lifting and {Transfer}: A modular design for quotients in {Isabelle/HOL}},
+  author={Huffman, Brian and Kun{\v{c}}ar, Ond{\v{r}}ej},
+  booktitle={Certified Programs and Proofs},
+  pages={131--146},
+  year={2013},
+  publisher={Springer}
+}
+
+@article{hille,
+  title={Analytic Function Theory ({Chelsea}, {New} {York})},
+  author={Hille, E},
+  journal={Vol. II},
+  pages={375},
+  year={1973}
+}
+
+@book{needham,
+  title={Visual complex analysis},
+  author={Needham, Tristan},
+  year={1998},
+  publisher={Oxford University Press}
+}
+
+@INCOLLECTION{howard1995,
+  title={The formulae-as-types notion of construction},
+  author={Howard, William A},
+  year={1995},
+  publisher={Boston, MA, Academic Press}
+}
+
+@InCollection{automath,
+  author =	"N. G. de Bruijn",
+  title =	"The Mathematical Language {AUTOMATH}",
+  pages =	"29--61",
+  series =	"Lecture Notes in Mathematics",
+  volume =	"25",
+  publisher =	"Springer-Verlag",
+  address =	"Berlin",
+  year = 	"1970",
+}
+
+@misc{agda,
+   title = {Agda: {An} interactive proof editor.},
+   howpublished = "\url{http://agda.sf.net}"
+}
+
+
+
+@Article{lf1993,
+  author =	"R. Harper and F. Honsell and G. Plotkin",
+  title =	"A Framework for Defining Logics",
+  year = 	"1993",
+  pages =	"143--184",
+  number =	"1",
+  volume =	"40",
+  journal =	"Journal of the ACM",
+}
+
+@TechReport{lego1992,
+  author =	"Zhaohui Luo and Robert Pollack",
+  title =	"The {LEGO} Proof Development System: {A} User's
+		 Manual",
+  institution =  "University of Edinburgh",
+  month =	may,
+  year = 	"1992",
+  number =	"ECS-LFCS-92-211",
+  keywords =	"misc",
+}
+
+@InCollection{alf1994,
+  author =	"Lena Magnusson and Bengt Nordstr{\"o}m",
+  title =	"The {ALF} Proof Editor and Its Proof Engine",
+  booktitle =	"Types for Proofs and Programs",
+  publisher =	"Springer-Verlag LNCS 806",
+  year = 	"1994",
+  editor =	"Henk Barendregt and Tobias Nipkow",
+  pages =	"213--237",
+  keywords =	"ALF",
+}
+
+
+
+@Book{nuprl86,
+  author =	"R. L. Constable and S. F. Allen and H. M. Bromley and
+		 W. R. Cleaveland and J. F. Cremer and R. W. Harper and
+		 D. J. Howe and T. B. Knoblock and N. P. Mendler and P.
+		 Panangaden and J. T. Saski and S. F. Smith",
+  title =	"Implementing mathematics with the {Nuprl} proof
+		 development system",
+  publisher =	"Prentice Hall",
+  year = 	"1986",
+  keywords =	"logic, constructive mathematics, Pearl",
+}
+
+@misc{coq,
+  title = {The {Coq} proof assistant},  
+   howpublished = "\url{http://coq.inria.fr/}",
+}
+
+@book{landau1960grundlagen,
+  title={Grundlagen der {Analysis}:(das {Rechnen} mit ganzen, rationalen, irrationalen, komplexen {Zahlen})},
+  author={Landau, Edmund},
+  year={1960},
+  publisher={Chelsea Pub. Co.}
+}
+
+@phdthesis{jutting,
+  title={Checking {Landau's'} {Grundlagen'in} the {AUTOMATH} system},
+  author={Jutting, Benthem and van LS, Bert},
+  year={1977},
+  school={Mathematisch Centrum}
+}
+
+@Book{martinlof,
+  author =	"P. {M}artin-{L}{\"o}f",
+  title =	"Intuitionistic Type Theory",
+  publisher =	"Studies in Proof Theory, Bibliopolis",
+  address =	"Napoli",
+  year = 	"1984",
+}
+
+
+
+@Book{martinlof2,
+  author =	"B. Nordstr{\"o}m and K. Petersson and J. Smith",
+  title =	"Programming in {M}artin-{L}{\"o}f's Type Theory: An
+		 Introduction",
+  publisher =	"Oxford University Press",
+  year = 	"1990",
+}
+
+@article{ocaml,
+  title={The {OCaml} programming language},
+  author={Leroy, Xavier},
+  journal={Online: http://caml. inria. fr/ocaml/index. en. html},
+  year={1998}
+}
+
+@article{gonthier,
+  title={Formal proof--the four-color theorem},
+  author={Gonthier, Georges},
+  journal={Notices of the AMS},
+  volume={55},
+  number={11},
+  pages={1382--1393},
+  year={2008}
+}
+
+@incollection{gonthier2,
+  title={A machine-checked proof of the odd order theorem},
+  author={Gonthier, Georges and Asperti, Andrea and Avigad, Jeremy and Bertot, Yves and Cohen, Cyril and Garillot, Fran{\c{c}}ois and Le Roux, St{\'e}phane and Mahboubi, Assia and O’Connor, Russell and Biha, Sidi Ould and others},
+  booktitle={Interactive Theorem Proving},
+  pages={163--179},
+  year={2013},
+  publisher={Springer}
+}
+
+@article{leroy2009formally,
+  title={A formally verified compiler back-end},
+  author={Leroy, Xavier},
+  journal={Journal of Automated Reasoning},
+  volume={43},
+  number={4},
+  pages={363--446},
+  year={2009},
+  publisher={Springer}
+}
+
+@article{pvs,
+  title={PVS specification and verification system},
+  author={Owre, Sam and Rushby, John and Shankar, N and others},
+  journal={URL: pvs. csl. sri. com},
+  year={2001}
+}
+
+@article{pvs2,
+  title={Hybrid verification of an air traffic operational concept},
+  author={Munoz, C{\'e}sar A and Dowek, Gilles},
+  journal={lateral},
+  volume={5000},
+  number={4000},
+  pages={3000},
+  year={2005}
+}
+
+@incollection{matita,
+  title={The {Matita} interactive theorem prover},
+  author={Asperti, Andrea and Ricciotti, Wilmer and Coen, Claudio Sacerdoti and Tassi, Enrico},
+  booktitle={Automated Deduction--CADE-23},
+  pages={64--69},
+  year={2011},
+  publisher={Springer}
+}
+
+@book{agda6,
+  title={Towards a practical programming language based on dependent type theory},
+  author={Norell, Ulf},
+  volume={32},
+  year={2007},
+  publisher={Citeseer}
+}
+
+@incollection{epigram,
+  title={Epigram: {Practical} programming with dependent types},
+  author={McBride, Conor},
+  booktitle={Advanced Functional Programming},
+  pages={130--170},
+  year={2004},
+  publisher={Springer}
+}
+
+@inproceedings{lcf1,
+  title={Implementation and applications of {Scott's} logic for computable functions},
+  author={Milner, Robin},
+  booktitle={ACM sigplan notices},
+  volume={7},
+  number={1},
+  pages={1--6},
+  year={1972},
+  organization={ACM}
+}
+
+@book{standardML,
+  title={Standard {ML}},
+  author={Harper, Robert and MacQueen, David and Milner, Robin},
+  year={1986},
+  publisher={University of Edinburgh. Department of Computer Science. Laboratory for Foundations of Computer Science}
+}
+
+@book{lcfpaulson,
+  title={Logic and computation: interactive proof with {Cambridge} {LCF}},
+  author={Paulson, Lawrence C},
+  volume={2},
+  year={1990},
+  publisher={Cambridge University Press}
+}
+
+@Book{hol,
+  author =	"{M.J.C. Gordon} and {T.F. Melham}",
+  key =  	"GoMe93",
+  publisher =	"Cambridge University Press",
+  title =	"Introduction to {HOL}: {A} Theorem Proving Environment
+		 for Higher Order Logic",
+  year = 	"1993",
+}
+
+@InProceedings{hollight1,
+  title =	"{HOL} {Light}: {An} Overview",
+  author =	"John Harrison",
+  bibdate =	"2009-09-03",
+  bibsource =	"DBLP,
+		 http://dblp.uni-trier.de/db/conf/tphol/tphol2009.html#Harrison09a",
+  booktitle =	"TPHOLs",
+  booktitle =	"Theorem Proving in Higher Order Logics, 22nd
+		 International Conference, {TPHOL}s 2009, Munich,
+		 Germany, August 17-20, 2009. Proceedings",
+  publisher =	"Springer",
+  year = 	"2009",
+  volume =	"5674",
+  editor =	"Stefan Berghofer and Tobias Nipkow and Christian Urban
+		 and Makarius Wenzel",
+  ISBN = 	"978-3-642-03358-2",
+  pages =	"60--66",
+  series =	"Lecture Notes in Computer Science",
+  URL =  	"http://dx.doi.org/10.1007/978-3-642-03359-9",
+}
+
+@Article{hollight2,
+  author =	"J. Harrison",
+  title =	"{HOL} {Light}: {A} Tutorial Introduction",
+  journal =	"Lecture Notes in Computer Science",
+  volume =	"1166",
+  pages =	"265--269",
+  year = 	"1996",
+  CODEN =	"LNCSD9",
+  ISSN = 	"0302-9743",
+  bibdate =	"Sat Dec 21 09:47:26 1996",
+}
+
+@Article{isabellepaulson1,
+  author =	"L. C. Paulson",
+  title =	"Natural Deduction as Higher-Order Resolution",
+  journal =	"Journal of Logic Programming",
+  volume =	"3",
+  pages =	"237--258",
+  year = 	"1988",
+}
+
+@Article{isabellepaulson2,
+  author =	"Lawrence C. Paulson",
+  title =	"The Foundation of a Generic Theorem Prover",
+  journal =	"Journal of Automated Reasoning",
+  year = 	"1989",
+  volume =	"5",
+  pages =	"363--397",
+}
+
+@InProceedings{mizar,
+  author =	"Andrzej Trybulec and Howard Blair",
+  title =	"Computer Assisted Reasoning with {MIZAR}",
+  pages =	"26--28",
+  ISBN = 	"0-934613-02-8",
+  editor =	"Aravind Joshi",
+  booktitle =	"Proceedings of the 9th International Joint Conference
+		 on Artificial Intelligence",
+  address =	"Los Angeles, CA",
+  month =	aug,
+  year = 	"1985",
+  publisher =	"Morgan Kaufmann",
+}
+
+@article{tarskiGrothendieck,
+  title={Tarski {Grothendieck} set theory},
+  author={Trybulec, Andrzej},
+  journal={Journal of Formalized Mathematics},
+  volume={1},
+  year={1989}
+}
+
+
+
+@Article{Jaskowski,
+  author =	"Stanis{\l}aw Ja\'{s}kowski",
+  journal =	"Studia Logica",
+  note = 	"Reprinted in: S.\ McCall (ed.), Polish Logic
+		 1920--1939, Clarendon Press, Oxford, pp.\ 232--258",
+  pages =	"5--32",
+  title =	"On the rules of suppositions in formal logic",
+  volume =	"1",
+  year = 	"1934",
+}
+
+
+
+@Book{Fitchstyle,
+  author =	"Frederic B. Fitch",
+  title =	"Symbolic Logic: {An} Introduction",
+  publisher =	"The Ronald Press Company",
+  address =	"New York",
+  year = 	"1952",
+}
+
+@phdthesis{isar,
+  title={{Isabelle/Isar—a} versatile environment for human-readable formal proof documents},
+  author={Wenzel, Markus and others},
+  year={2002},
+  school={PhD thesis, Institut f{\"u}r Informatik, Technische Universit{\"a}t M{\"u}nchen, 2002. http://tumb1. biblio. tu-muenchen. de/publ/diss/in/2002/wenzel. html}
+}
+
+
+@incollection{mizarhollight,
+  title={Mizar light for {HOL} {Light}},
+  author={Wiedijk, Freek},
+  booktitle={Theorem Proving in Higher Order Logics},
+  pages={378--393},
+  year={2001},
+  publisher={Springer}
+}
+
+@incollection{corbineau,
+  title={A declarative language for the {Coq} proof assistant},
+  author={Corbineau, Pierre},
+  booktitle={Types for Proofs and Programs},
+  pages={69--84},
+  year={2007},
+  publisher={Springer}
+}
+
+@Book{boyer-moore,
+  author =	"R. S. Boyer and J S. Moore",
+  title =	"A Computational Logic Handbook",
+  year = 	"1988",
+  publisher =	"Academic Press",
+  address =	"New York",
+}
+
+@misc{lisp,
+  title={LISP Programming Language},
+  author={McCarthy, John and Russell, Steve and Hart, Timothy P and Levin, Mike and Arc, AutoLISP and Clojure, Common Lisp},
+  year={1985},
+  publisher={MIT Press,}
+}
+
+@InProceedings{acl2,
+  title =	"A Parallelized Theorem Prover for a Logic with
+		 Parallel Execution",
+  author =	"David L. Rager and Warren A. Hunt Jr. and Matt
+		 Kaufmann",
+  bibdate =	"2013-07-24",
+  bibsource =	"DBLP,
+		 http://dblp.uni-trier.de/db/conf/itp/itp2013.html#RagerHK13",
+  booktitle =	"Interactive Theorem Proving - 4th International
+		 Conference, {ITP} 2013, Rennes, France, July 22-26,
+		 2013. Proceedings",
+  publisher =	"Springer",
+  year = 	"2013",
+  volume =	"7998",
+  editor =	"Sandrine Blazy and Christine Paulin-Mohring and David
+		 Pichardie",
+  ISBN = 	"978-3-642-39633-5",
+  pages =	"435--450",
+  series =	"Lecture Notes in Computer Science",
+  URL =  	"http://dx.doi.org/10.1007/978-3-642-39634-2",
+}
+
+@incollection{isabelleautomatic,
+  title={Automatic proof and disproof in {Isabelle/HOL}},
+  author={Blanchette, Jasmin Christian and Bulwahn, Lukas and Nipkow, Tobias},
+  booktitle={Frontiers of Combining Systems},
+  pages={12--27},
+  year={2011},
+  publisher={Springer}
+}
+
+@misc{functions,
+  title={Defining recursive functions in {Isabelle/HOL}},
+  author={Krauss, Alexander},
+  year={2008}
+}
+
+@InProceedings{refinement,
+  title =	"Data Refinement in {Isabelle/{HOL}}",
+  author =	"Florian Haftmann and Alexander Krauss and Ondrej
+		 Kuncar and Tobias Nipkow",
+  bibdate =	"2013-07-24",
+  bibsource =	"DBLP,
+		 http://dblp.uni-trier.de/db/conf/itp/itp2013.html#HaftmannKKN13",
+  booktitle =	"ITP",
+  booktitle =	"Interactive Theorem Proving - 4th International
+		 Conference, {ITP} 2013, Rennes, France, July 22-26,
+		 2013. Proceedings",
+  publisher =	"Springer",
+  year = 	"2013",
+  volume =	"7998",
+  editor =	"Sandrine Blazy and Christine Paulin-Mohring and David
+		 Pichardie",
+  ISBN = 	"978-3-642-39633-5",
+  pages =	"100--115",
+  series =	"Lecture Notes in Computer Science",
+  URL =  	"http://dx.doi.org/10.1007/978-3-642-39634-2",
+}
+
+@phdthesis{gonthierSSReflect,
+  title={A small scale reflection extension for the {Coq} system},
+  author={Gonthier, Georges and Mahboubi, Assia and Tassi, Enrico},
+  year={2014},
+  school={Inria Saclay Ile de France}
+}
+
+@article{compcert1,
+  title={Formal verification of a realistic compiler},
+  author={Leroy, Xavier},
+  journal={Communications of the ACM},
+  volume={52},
+  number={7},
+  pages={107--115},
+  year={2009},
+  publisher={ACM}
+}
+
+@article{compcert2,
+  title={A formally verified compiler back-end},
+  author={Leroy, Xavier},
+  journal={Journal of Automated Reasoning},
+  volume={43},
+  number={4},
+  pages={363--446},
+  year={2009},
+  publisher={Springer}
+}
+
+@inproceedings{l4microkernel1,
+  title={seL4: Formal verification of an OS kernel},
+  author={Klein, Gerwin and Elphinstone, Kevin and Heiser, Gernot and Andronick, June and Cock, David and Derrin, Philip and Elkaduwe, Dhammika and Engelhardt, Kai and Kolanski, Rafal and Norrish, Michael and others},
+  booktitle={Proceedings of the ACM SIGOPS 22nd symposium on Operating systems principles},
+  pages={207--220},
+  year={2009},
+  organization={ACM}
+}
+
+@article{l4microkernel2,
+  title={Comprehensive formal verification of an {OS} microkernel},
+  author={Klein, Gerwin and Andronick, June and Elphinstone, Kevin and Murray, Toby and Sewell, Thomas and Kolanski, Rafal and Heiser, Gernot},
+  journal={ACM Transactions on Computer Systems (TOCS)},
+  volume={32},
+  number={1},
+  pages={2},
+  year={2014},
+  publisher={ACM}
+}
+
+@inproceedings{flyspeck,
+  title={Introduction to the {Flyspeck} project},
+  author={Hales, Thomas C},
+  booktitle={Dagstuhl Seminar Proceedings},
+  year={2006},
+  organization={Schloss Dagstuhl-Leibniz-Zentrum f{\"u}r Informatik}
+}
+
+@article{univalent,
+  title={The {Univalent} Foundations Program. {Homotopy} Type Theory: {Univalent} Foundations of Mathematics. http://homotopytypetheory. org/book, {Institute} for {Advanced} {Study}, 2013, vii+ 583 pp.},
+  author={van Oosten, Jaap},
+  journal={The Bulletin of Symbolic Logic},
+  volume={20},
+  number={04},
+  pages={497--500},
+  year={2014},
+  publisher={Cambridge Univ Press}
+}
+
+@incollection{oddOrder,
+  title={A machine-checked proof of the odd order theorem},
+  author={Gonthier, Georges and Asperti, Andrea and Avigad, Jeremy and Bertot, Yves and Cohen, Cyril and Garillot, Fran{\c{c}}ois and Le Roux, St{\'e}phane and Mahboubi, Assia and O’Connor, Russell and Biha, Sidi Ould and others},
+  booktitle={Interactive Theorem Proving},
+  pages={163--179},
+  year={2013},
+  publisher={Springer}
+}
+
+@article{fourColorTheorem,
+  title={Formal proof--the four-color theorem},
+  author={Gonthier, Georges},
+  journal={Notices of the AMS},
+  volume={55},
+  number={11},
+  pages={1382--1393},
+  year={2008}
+}
+
+@article{avigad2007PrimeNumber,
+  title={A formally verified proof of the prime number theorem},
+  author={Avigad, Jeremy and Donnelly, Kevin and Gray, David and Raff, Paul},
+  journal={ACM Transactions on Computational Logic (TOCL)},
+  volume={9},
+  number={1},
+  pages={2},
+  year={2007},
+  publisher={ACM}
+}
+
+@book{godel,
+  title={Metamathematics, machines and {G{\"o}del's} proof},
+  author={Shankar, Natarajan},
+  number={38},
+  year={1997},
+  publisher={Cambridge University Press}
+}
+
+@article{milewski2001fundamental,
+  title={Fundamental Theorem of Algebra1},
+  author={Milewski, Robert},
+  year={2001}
+}
+
+@incollection{geuvers2000constructive,
+  title={A constructive proof of the {Fundamental} Theorem of Algebra without using the rationals},
+  author={Geuvers, Herman and Wiedijk, Freek and Zwanenburg, Jan},
+  booktitle={Types for Proofs and Programs},
+  pages={96--111},
+  year={2000},
+  publisher={Springer}
+}
+
+@book{harrison2012theorem,
+  title={Theorem proving with the real numbers},
+  author={Harrison, John},
+  year={2012},
+  publisher={Springer Science \& Business Media}
+}
+
+@incollection{cruz2002constructive,
+  title={A constructive formalization of the fundamental theorem of calculus},
+  author={Cruz-Filipe, Lu{\'\i}s},
+  booktitle={Types for Proofs and Programs},
+  pages={108--126},
+  year={2002},
+  publisher={Springer}
+}
+
+@article{harrison2013hol,
+  title={The {HOL} {Light} theory of {Euclidean} space},
+  author={Harrison, John},
+  journal={Journal of Automated Reasoning},
+  volume={50},
+  number={2},
+  pages={173--190},
+  year={2013},
+  publisher={Springer}
+}
+
+@article{scott2008mechanising,
+  title={Mechanising {Hilbert’s} foundations of geometry in {Isabelle}},
+  author={Scott, Phil},
+  journal={Master's thesis, University of Edinburgh},
+  year={2008},
+  publisher={Citeseer}
+}
+
+
+@article{von-plato-formalization,
+  title={Constructive geometry according to {Jan} von {Plato}},
+  author={Kahn, Gilles},
+  journal={Coq contribution. Coq},
+  volume={5},
+  pages={10},
+  year={1995}
+}
+
+@article{vonPlato,
+  title={The axioms of constructive geometry},
+  author={von Plato, Jan},
+  journal={Annals of pure and applied logic},
+  volume={76},
+  number={2},
+  pages={169--200},
+  year={1995},
+  publisher={Elsevier}
+}
+
+@article{duprat2008,
+  title={Une axiomatique de la g{\'e}om{\'e}trie plane en {Coq}},
+  author={Duprat, Jean},
+  journal={Actes des JFLA},
+  pages={123--136},
+  year={2008}
+}
+
+@article{makarios2012,
+  title={A Mechanical Verification of the Independence of {Tarski's} {Euclidean} Axiom},
+  author={Makarios, Timothy James McKenzie},
+  year={2012},
+  publisher={Victoria University of Wellington}
+}
+
+
+@article{hbook,
+  title={Automated Reasoning in Geometry.},
+  author={Chou, Shang-Ching and Gao, Xiao-Shan},
+  journal={Handbook of automated reasoning},
+  volume={1},
+  pages={707--749},
+  year={2001}
+}
+
+@inproceedings{gelernter1959,
+  title={Realization of a geometry theorem proving machine.},
+  author={Gelernter, Herbert},
+  booktitle={IFIP Congress},
+  pages={273--281},
+  year={1959}
+}
+
+@misc{gressier2013,
+   title = {Geometrix {IV}}, 
+   author = {Gressier, J\'er\'emie},
+   howpublished = {\url{http://geometrix.free.fr/}},
+   year = {2013}
+}
+
+@incollection{mccharen2000problems,
+  title={Problems and experiments for and with automated theorem-proving programs},
+  author={McCharen, John D and Overbeek, Ross A and WOS, LAWRENCE T},
+  booktitle={The Collected Works of Larry Wos: (In 2 Volumes) Volume I: Exploring the Power of Automated Reasoning Volume II: Applying Automated Reasoning to Puzzles, Problems, and Open Questions},
+  pages={166--196},
+  year={2000}
+}
+
+@mastersthesis{chou1984,
+  title={Proving elementary geometry theorems using {Wu's} algorithm},
+  author={Chou, Shang-Ching},
+  year={1984},
+  school={University of Texas at Austin}
+}
+
+@article{gao1990,
+  title={Transcendental functions and mechanical theorem proving in elementary geometries},
+  author={Gao, Xiaoshan},
+  journal={Journal of Automated Reasoning},
+  volume={6},
+  number={4},
+  pages={403--417},
+  year={1990},
+  publisher={Springer}
+}
+
+@article{sen1987mechanical,
+  title={A mechanical proving system for constructible theorems in elementary geometry},
+  author={SEN, WANG DONG-MING HU},
+  year={1987}
+}
+
+@inproceedings{kapur1990refutational,
+  title={Refutational proofs of geometry theorems via characteristic set computation},
+  author={Kapur, Deepak and Wan, Hoi K},
+  booktitle={Proceedings of the international symposium on Symbolic and algebraic computation},
+  pages={277--284},
+  year={1990},
+  organization={ACM}
+}
+
+@book{ritt1950differential,
+  title={Differential algebra},
+  author={Ritt, Joseph Fels},
+  volume={33},
+  year={1950},
+  publisher={American Mathematical Soc.}
+}
+
+@article{wen1991mechanical,
+  title={Mechanical theorem proving of differential geometries and some of its applications in mechanics},
+  author={Wen-Tsun, Wu},
+  journal={Journal of Automated Reasoning},
+  volume={7},
+  number={2},
+  pages={171--191},
+  year={1991},
+  publisher={Springer}
+}
+
+@article{yang1998automated,
+  title={Automated proving and discovering of theorems in non-euclidean geometries},
+  author={Yang, L and Gao, X and Chou, S and Zhang, Z},
+  journal={Proceedings of Automated Deduction in Geometry (ADG98), Lecture Notes in Artificial Intelligence},
+  volume={1360},
+  pages={171--188},
+  year={1998}
+}
+
+@techreport{Wu1992,
+  title = {On a finiteness theorem about optimization problems},
+  author = {Wen-Tsun, Wu},
+  institute = {Academia Sinica},
+  year = {1992},
+  journal = {Tehnical Report MM Research Preprints No.8, MMRC}
+}
+
+@inproceedings{chou1993automated,
+  title={Automated production of traditional proofs for constructive geometry theorems},
+  author={Chou, Shang-Ching and Gao, Xiao-Shan and Zhang, Jing-Zhong},
+  booktitle={Logic in Computer Science, 1993. LICS'93., Proceedings of Eighth Annual IEEE Symposium on},
+  pages={48--56},
+  year={1993},
+  organization={IEEE}
+}
+
+@article{chou1996automated,
+  title={Automated generation of readable proofs with geometric invariants},
+  author={Chou, Shang-Ching and Gao, Xiao-Shan and Zhang, Jing-Zhong},
+  journal={Journal of Automated Reasoning},
+  volume={17},
+  number={3},
+  pages={325--347},
+  year={1996},
+  publisher={Springer}
+}
+
+@article{chou1995volume,
+  title={Automated production of traditional proofs in solid geometry},
+  author={Chou, Shang-Ching and Gao, Xiao-Shan and Zhang, Jing-Zhong},
+  journal={Journal of Automated Reasoning},
+  volume={14},
+  number={2},
+  pages={257--291},
+  year={1995},
+  publisher={Springer}
+}
+
+@article{janivcic2012area,
+  title={The area method},
+  author={Jani{\v{c}}i{\'c}, Predrag and Narboux, Julien and Quaresma, Pedro},
+  journal={Journal of Automated Reasoning},
+  volume={48},
+  number={4},
+  pages={489--532},
+  year={2012},
+  publisher={Springer}
+}
+
+@incollection{wang2002geother,
+  title={GEOTHER 1.1: {Handling} and proving geometric theorems automatically},
+  author={Wang, Dongming},
+  booktitle={Automated Deduction in Geometry},
+  pages={194--215},
+  year={2002},
+  publisher={Springer}
+}
+
+@incollection{chou1996introduction,
+  title={An introduction to geometry expert},
+  author={Chou, Shang-Ching and Gao, Xiao-Shan and Zhang, Jing-Zhong},
+  booktitle={Automated Deduction—Cade-13},
+  pages={235--239},
+  year={1996},
+  publisher={Springer}
+}
+
+@incollection{ye2008introduction,
+  title={An introduction to java geometry expert},
+  author={Ye, Zheng and Chou, Shang-Ching and Gao, Xiao-Shan},
+  booktitle={Automated Deduction in Geometry},
+  pages={189--195},
+  year={2008},
+  publisher={Springer}
+}
+
+@inproceedings{wilson2005combining,
+  title={Combining dynamic geometry, automated geometry theorem proving and diagrammatic proofs},
+  author={Wilson, Sean and Fleuriot, Jacques D},
+  booktitle={Workshop on User Interfaces for Theorem Provers (UITP)},
+  year={2005}
+}
+
+@inproceedings{kortenkamp2004using,
+  title={Using automatic theorem proving to improve the usability of geometry software},
+  author={Kortenkamp, Ulrich and Richter-Gebert, J{\"u}rgen},
+  booktitle={Proceedings of MathUI},
+  volume={2004},
+  year={2004}
+}
+
+@article{dhurdjevic2015automated,
+  title={Automated generation of machine verifiable and readable proofs: {A} case study of {Tarski’s} geometry},
+  author={{\DH}ur{\dj}evi{\'c}, Sana Stojanovi{\'c} and Narboux, Julien and Jani{\v{c}}i{\'c}, Predrag},
+  journal={Annals of Mathematics and Artificial Intelligence},
+  volume={74},
+  number={3-4},
+  pages={249--269},
+  year={2015},
+  publisher={Springer}
+}
+
+@article{beesonfinding,
+  title={Finding Proofs in {Tarskian} Geometry},
+  author={Beeson, Michael and Wos, Larry},
+  year = {2016},
+  journal = {to appear, The Journal of Automated Reasoning}
+}
+
+@book{quaife1992automated,
+  title={Automated development of fundamental mathematical theories},
+  author={Quaife, Art},
+  year={1992},
+  publisher={JSTOR}
+}
+
+@article{botana2002dynamic,
+  title={A dynamic--symbolic interface for geometric theorem discovery},
+  author={Botana, Francisco and Valcarce, Jos{\'e} L},
+  journal={Computers \& Education},
+  volume={38},
+  number={1},
+  pages={21--35},
+  year={2002},
+  publisher={Elsevier}
+}
+
+@misc{abbottcocoa,
+  title={CoCoA-5: {A} System for Doing Computations in Commutative Algebra},
+  author={Abbott, J and Bigatti, A and Lagorio, G},
+  year={2014}
+}
+
+@misc{wolfram2008mathematica,
+  title={Mathematica},
+  author={Wolfram Research, Inc},
+  year={2008},
+  publisher={Wolfram Research, Inc. Champaigne, IL}
+}
+
+@article{janivcic2010geometry,
+  title={Geometry constructions language},
+  author={Jani{\v{c}}i{\'c}, Predrag},
+  journal={Journal of Automated Reasoning},
+  volume={44},
+  number={1-2},
+  pages={3--24},
+  year={2010},
+  publisher={Springer}
+}
+
+@incollection{marinkovic2014computer,
+  title={Computer Theorem Proving for Verifiable Solving of Geometric Construction Problems},
+  author={Marinkovi{\'c}, Vesna and Jani{\v{c}}i{\'c}, Predrag and Schreck, Pascal},
+  booktitle={Automated Deduction in Geometry},
+  pages={72--93},
+  year={2014},
+  publisher={Springer}
+}
+
+@article{botana2014automatic,
+  title={Automatic deduction in (dynamic) geometry: {Loci} computation},
+  author={Botana, Francisco and Ab{\'a}nades, Miguel A},
+  journal={Computational Geometry},
+  volume={47},
+  number={1},
+  pages={75--89},
+  year={2014},
+  publisher={Elsevier}
+}
+
+@article{botana2015automated,
+  title={Automated theorem proving in {GeoGebra}: current achievements},
+  author={Botana, Francisco and Hohenwarter, Markus and Jani{\v{c}}i{\'c}, Predrag and Kov{\'a}cs, Zolt{\'a}n and Petrovi{\'c}, Ivan and Recio, Tom{\'a}s and Weitzhofer, Simon},
+  journal={Journal of Automated Reasoning},
+  volume={55},
+  number={1},
+  pages={39--59},
+  year={2015},
+  publisher={Springer}
+}
+
+
+@article{pottier2010connecting,
+  title={Connecting {Gr$\backslash$" obner} Bases Programs with {Coq} to do Proofs in Algebra, Geometry and Arithmetics},
+  author={Pottier, Loic},
+  journal={arXiv preprint arXiv:1007.3615},
+  year={2010}
+}
+
+@article{narboux2015towards,
+  title={Towards A Certified Version of the {Encyclopedia} of Triangle Centers},
+  author={Narboux, Julien and Braun, David},
+  year={2015}
+}
+
+@article{boutry2015reflexive,
+  title={A reflexive tactic for automated generation of proofs of incidence to an affine variety},
+  author={Boutry, Pierre and Narboux, Julien and Schreck, Pascal},
+  year={2015},
+  publisher =	"HAL CCSD"
+}
+
+
+@incollection{braun2012tarski,
+  title={From {Tarski} to {Hilbert}},
+  author={Braun, Gabriel and Narboux, Julien},
+  booktitle={Automated Deduction in Geometry},
+  pages={89--109},
+  year={2012},
+  publisher={Springer}
+}
+
+@inproceedings{boutry2016tarski,
+  title={From {Tarski} to {Descartes}: {Formalization} of the Arithmetization of {Euclidean} Geometry},
+  author={Boutry, Pierre and Braun, Gabriel and Narboux, Julien},
+  booktitle={SCSS 2016 The 7th International Symposium on Symbolic Computation in Software Science},
+  year={2016}
+}
+
+@article{braun2015synthetic,
+  title={A synthetic proof of {Pappus'} theorem in {Tarski's} geometry},
+  author={Braun, Gabriel and Narboux, Julien},
+  year={2015}
+}
+
+@article{boutry2015parallel,
+  title={Parallel postulates and decidability of intersection of lines: a mechanized study within {Tarski's} system of geometry},
+  author={Boutry, Pierre and Narboux, Julien and Schreck, Pascal},
+  year={2015}
+}
+
+@article{adams2015proof,
+  title={Proof Auditing Formalised Mathematics},
+  author={Adams, Mark},
+  year={2016},
+  journal = {Journal of Formalized Reasoning}
+}
+
+@book{chou1988mechanical,
+  title={Mechanical geometry theorem proving},
+  author={Chou, Shang-Ching},
+  volume={41},
+  year={1988},
+  publisher={Springer Science \& Business Media}
+}
+
+
+@article{sternagel2013executable,
+  title={Executable multivariate polynomials},
+  author={Sternagel, Christian and Thiemann, Ren{\'e}},
+  year={2013},
+  publisher={Citeseer}
+}
+
+@article{geuvers2009proof,
+  title={Proof assistants: {History}, ideas and future},
+  author={Geuvers, Herman},
+  journal={Sadhana},
+  volume={34},
+  number={1},
+  pages={3--25},
+  year={2009},
+  publisher={Springer}
+}
+
+
+@article{maricsurvey,
+  title={A SURVEY OF INTERACTIVE THEOREM PROVING},
+  author={Maric, Filip}
+}
+
+@article{avigad2014formally,
+  title={Formally verified mathematics},
+  author={Avigad, Jeremy and Harrison, John},
+  journal={Communications of the ACM},
+  volume={57},
+  number={4},
+  pages={66--75},
+  year={2014},
+  publisher={ACM}
+}
+
+
+@inproceedings{letouzey2002new,
+  title={A new extraction for {Coq}},
+  author={Letouzey, Pierre},
+  booktitle={International Workshop on Types for Proofs and Programs},
+  pages={200--219},
+  year={2002},
+  organization={Springer}
+}
+
+
+
+@article{hudak1992report,
+  title={Report on the programming language {Haskell}: a non-strict, purely functional language version 1.2},
+  author={Hudak, Paul and Peyton Jones, Simon and Wadler, Philip and Boutel, Brian and Fairbairn, Jon and Fasel, Joseph and Guzm{\'a}n, Mar{\'\i}a M and Hammond, Kevin and Hughes, John and Johnsson, Thomas and others},
+  journal={ACM SigPlan notices},
+  volume={27},
+  number={5},
+  pages={1--164},
+  year={1992},
+  publisher={ACM}
+}
+
+
+@misc{sperber2007revised6,
+  title={Revised6 report on the algorithmic language {Scheme} ({Libraries})},
+  author={Sperber, Michael and Dybvig, R Kent and Flatt, Matthew and van Straaten, Anton and Kelsey, Richard and Clinger, William and Rees, Jonathan},
+  year={2007}
+}
+
+
+@article{leroy2014ocaml,
+  title={The {OCaml} system release 4.02},
+  author={Leroy, Xavier and Doligez, Damien and Frisch, Alain and Garrigue, Jacques and R{\'e}my, Didier and Vouillon, J{\'e}r{\^o}me},
+  journal={Institut National de Recherche en Informatique et en Automatique},
+  year={2014}
+}
+
+@book{barendregt2013lambda,
+  title={Lambda calculus with types},
+  author={Barendregt, Henk and Dekkers, Wil and Statman, Richard},
+  year={2013},
+  publisher={Cambridge University Press}
+}
+
+@book{sorensen2006lectures,
+  title={Lectures on the {Curry--Howard} isomorphism},
+  author={S{\o}rensen, Morten Heine and Urzyczyn, Pawel},
+  volume={149},
+  year={2006},
+  publisher={Elsevier}
+}
+
+@article{gentzen1935untersuchungen,
+  title={Untersuchungen {\"u}ber das logische {Schlie{\ss}en}. {I}},
+  author={Gentzen, Gerhard},
+  journal={Mathematische zeitschrift},
+  volume={39},
+  number={1},
+  pages={176--210},
+  year={1935},
+  publisher={Springer}
+}
+
+@article{gentzen1935untersuchungen1,
+  title={Untersuchungen {\"u}ber das logische {Schlie{\ss}en}. {II}},
+  author={Gentzen, Gerhard},
+  journal={Mathematische Zeitschrift},
+  volume={39},
+  number={1},
+  pages={405--431},
+  year={1935},
+  publisher={Springer}
+}
+
+@article{church1940formulation,
+  title={A formulation of the simple theory of types},
+  author={Church, Alonzo},
+  journal={The journal of symbolic logic},
+  volume={5},
+  number={02},
+  pages={56--68},
+  year={1940},
+  publisher={Cambridge Univ Press}
+}
+
+@article{curry1934functionality,
+  title={Functionality in combinatory logic},
+  author={Curry, Haskell B},
+  journal={Proceedings of the National Academy of Sciences},
+  volume={20},
+  number={11},
+  pages={584--590},
+  year={1934},
+  publisher={National Acad Sciences}
+}
+
+@book{mitchell1996foundations,
+  title={Foundations for programming languages},
+  author={Mitchell, John C},
+  volume={1},
+  year={1996},
+  publisher={MIT press Cambridge}
+}
+
+
+@book{church1941calculi,
+  title={The calculi of lambda-conversion},
+  author={Church, Alonzo},
+  number={6},
+  year={1941},
+  publisher={Princeton University Press}
+}
+
+
+@article{church1940formulation,
+  title={A formulation of the simple theory of types},
+  author={Church, Alonzo},
+  journal={The journal of symbolic logic},
+  volume={5},
+  number={02},
+  pages={56--68},
+  year={1940},
+  publisher={Cambridge Univ Press}
+}
+
+@article{church1936note,
+  title={A note on the {Entscheidungsproblem}},
+  author={Church, Alonzo},
+  journal={The journal of symbolic logic},
+  volume={1},
+  number={01},
+  pages={40--41},
+  year={1936},
+  publisher={Cambridge Univ Press}
+}
+
+
+@article{martin1984intuitionistic,
+  title={Intuitionistic type theory},
+  author={Martin-L\"of, Per},
+  journal={Naples: Bibliopolis},
+  volume={76},
+  year={1984}
+}
+
+@article{leroy2009formally,
+  title={A formally verified compiler back-end},
+  author={Leroy, Xavier},
+  journal={Journal of Automated Reasoning},
+  volume={43},
+  number={4},
+  pages={363--446},
+  year={2009},
+  publisher={Springer}
+}
+
+@inproceedings{gonthier2013machine,
+  title={A machine-checked proof of the odd order theorem},
+  author={Gonthier, Georges and Asperti, Andrea and Avigad, Jeremy and Bertot, Yves and Cohen, Cyril and Garillot, Fran{\c{c}}ois and Le Roux, St{\'e}phane and Mahboubi, Assia and O’Connor, Russell and Biha, Sidi Ould and others},
+  booktitle={International Conference on Interactive Theorem Proving},
+  pages={163--179},
+  year={2013},
+  organization={Springer}
+}
+
+@article{gonthier2008formal,
+  title={Formal proof--the four-color theorem},
+  author={Gonthier, Georges},
+  journal={Notices of the AMS},
+  volume={55},
+  number={11},
+  pages={1382--1393},
+  year={2008}
+}
+
+@phdthesis{barras1999auto,
+  title={Auto-validation d'un syst{\`e}me de preuves avec familles inductives},
+  author={Barras, Bruno},
+  year={1999}
+}
+
+@inproceedings{gordon2000lcf,
+  title={From {LCF} to {HOL}: a short history.},
+  author={Gordon, Mike},
+  booktitle={Proof, Language, and Interaction},
+  pages={169--186},
+  year={2000}
+}
+
+@inproceedings{haftmann2006constructive,
+  title={Constructive type classes in {Isabelle}},
+  author={Haftmann, Florian and Wenzel, Makarius},
+  booktitle={International Workshop on Types for Proofs and Programs},
+  pages={160--174},
+  year={2006},
+  organization={Springer}
+}
+
+@book{buchberger1998grobner,
+  title={Gr{\"o}bner bases and applications},
+  author={Buchberger, Bruno and Winkler, Franz},
+  volume={251},
+  year={1998},
+  publisher={Cambridge University Press}
+}
+
+@article{wang1995elimination,
+  title={Elimination procedures for mechanical theorem proving in geometry},
+  author={Wang, Dongming},
+  journal={Annals of Mathematics and Artificial Intelligence},
+  volume={13},
+  number={1-2},
+  pages={1--24},
+  year={1995},
+  publisher={Springer}
+}
+
+@phdthesis{girard1972interpretation,
+  title={Interpr{\'e}tation fonctionelle et {\'e}limination des coupures de l’arithm{\'e}tique d’ordre sup{\'e}rieur},
+  author={Girard, Jean-Yves},
+  year={1972},
+  school={PhD thesis, Universit{\'e} Paris VII}
+}
+
+@article{girard1986system,
+  title={The system {F} of variable types, fifteen years later},
+  author={Girard, Jean-Yves},
+  journal={Theoretical computer science},
+  volume={45},
+  pages={159--192},
+  year={1986},
+  publisher={Elsevier}
+}
+
+@misc{girard1989proofs,
+  title={Proofs and types, volume 7 of {Cambridge} tracts in theoretical computer science},
+  author={Girard, Jean-Yves and Lafont, Yves and Taylor, Paul},
+  year={1989},
+  publisher={Cambridge university press Cambridge}
+}
+
+@article{palmgren2009semantics,
+  title={Semantics of intuitionistic propositional logic},
+  author={Palmgren, Erik},
+  journal={Lecture Notes for Applied Logic},
+  year={2009}
+}
+
+@article{kripke1965semantical,
+  title={Semantical analysis of intuitionistic logic {I}},
+  author={Kripke, Saul A},
+  journal={Studies in Logic and the Foundations of Mathematics},
+  volume={40},
+  pages={92--130},
+  year={1965},
+  publisher={Elsevier}
+}
+
+@article{janicic1997zbirka,
+  title={Zbirka zadataka iz geometrije},
+  author={Janicic, Predrag},
+  journal={Skripta Internacional, Beograd,},
+  year={1997}
+}
+
+@article{shao2016challenging,
+  title={Challenging Theorem Provers with {Mathematical} {Olympiad} Problems in Solid Geometry},
+  author={Shao, Changpeng and Li, Hongbo and Huang, Lei},
+  journal={Mathematics in Computer Science},
+  volume={10},
+  number={1},
+  pages={75--96},
+  year={2016},
+  publisher={Springer}
+}
+
+@article{geogebra-provers,
+  title={Automated theorem proving in {GeoGebra}: {Current} achievements},
+  author={Botana, Francisco and Hohenwarter, Markus and Jani{\v{c}}i{\'c}, Predrag and Kov{\'a}cs, Zolt{\'a}n and Petrovi{\'c}, Ivan and Recio, Tom{\'a}s and Weitzhofer, Simon},
+  journal={Journal of Automated Reasoning},
+  volume={55},
+  number={1},
+  pages={39--59},
+  year={2015},
+  publisher={Springer}
+}
+
+@article{geogebra-3D,
+  title={GeoGebra 4.4 -- {From} desktops to tablets},
+  author={Hohenwarter, Markus},
+  journal={Indagatio Didactica},
+  volume={5},
+  number={1},
+  year={2013}
+}
+
+@article{shao2016challenging,
+  title={Challenging Theorem Provers with {Mathematical} {Olympiad} Problems in Solid Geometry},
+  author={Shao, Changpeng and Li, Hongbo and Huang, Lei},
+  journal={Mathematics in Computer Science},
+  volume={10},
+  number={1},
+  pages={75--96},
+  year={2016},
+  publisher={Springer}
+}
+
+@article{wu2007mathematics,
+  title={Mathematics mechanization and applications after thirty years},
+  author={Wu, Wenjun and Gao, Xiaoshan},
+  journal={Frontiers of Computer Science in China},
+  volume={1},
+  number={1},
+  pages={1--8},
+  year={2007},
+  publisher={Springer}
+}
+
+@article{wang1998decomposing,
+  title={Decomposing polynomial systems into simple systems},
+  author={Wang, Dongming},
+  journal={Journal of Symbolic Computation},
+  volume={25},
+  number={3},
+  pages={295--314},
+  year={1998},
+  publisher={Elsevier}
+}
+
+@inproceedings{gao1991computations,
+  title={Computations with parametric equations},
+  author={Gao, Xiao-Shan and Chou, Shang-Ching},
+  booktitle={Proceedings of the 1991 international symposium on Symbolic and algebraic computation},
+  pages={122--127},
+  year={1991},
+  organization={ACM}
+}
+
+@inproceedings{chen2002projection,
+  title={The projection of quasi variety and its application on geometric theorem proving and formula deduction},
+  author={Chen, XueFeng and Wang, DingKang},
+  booktitle={International Workshop on Automated Deduction in Geometry},
+  pages={21--30},
+  year={2002},
+  organization={Springer}
+}
+
+@book{cox1992ideals,
+  title={Ideals, varieties, and algorithms},
+  author={Cox, David and Little, John and O'shea, Donal},
+  volume={3},
+  year={1992},
+  publisher={Springer}
+}
+
+@article{kutzler1986application,
+  title={On the application of {Buchberger's} algorithm to automated geometry theorem proving},
+  author={Kutzler, Bernhard and Stifter, Sabine},
+  journal={Journal of Symbolic Computation},
+  volume={2},
+  number={4},
+  pages={389--397},
+  year={1986},
+  publisher={Elsevier}
+}
+
+@inproceedings{stifter1993geometry,
+  title={Geometry theorem proving in vector spaces by means of {Gr{\"o}bner} bases},
+  author={Stifter, Sabine},
+  booktitle={Proceedings of the 1993 international symposium on Symbolic and algebraic computation},
+  pages={301--310},
+  year={1993},
+  organization={ACM}
+}
+
+@article{chou1987characteristic,
+  title={Characteristic sets and {Gr{\"o}bner} bases in geometry theorem proving},
+  author={Chou, Shang-Ching and Schelter, William F and Yang, Jin-Gen},
+  journal={Resolution of equations in algebraic structures},
+  volume={2},
+  pages={33--91},
+  year={1987}
+}
+
+@article{lord1985method,
+  title={A Method for Vector Proofs in Geometry},
+  author={Lord, NJ},
+  journal={Mathematics Magazine},
+  volume={58},
+  number={2},
+  pages={84--89},
+  year={1985},
+  publisher={JSTOR}
+}
+
+@book{volumemethod,
+  title={Machine proofs in geometry: {Automated} production of readable proofs for geometry theorems},
+  author={Chou, Shang-Ching and Gao, Xiao-Shan and Zhang, Jing-Zhong},
+  volume={6},
+  year={1994},
+  publisher={World Scientific}
+}
+
+@article{dolzmann1998new,
+  title={A new approach for automatic theorem proving in real geometry},
+  author={Dolzmann, Andreas and Sturm, Thomas and Weispfenning, Volker},
+  journal={Journal of Automated Reasoning},
+  volume={21},
+  number={3},
+  pages={357--380},
+  year={1998},
+  publisher={Springer}
+}
+
+@book{mateljevic2006kompleksne,
+  title={Kompleksne funkcije 1 \& 2},
+  author={Mateljevi{\'c}, Miodrag},
+  year={2006},
+  publisher={Dru{\v{s}}tvo matemati{\v{c}}ara Srbije}
+}
+
+@book{aschbacher2004classification,
+  title={The classification of quasithin groups},
+  author={Aschbacher, Michael and Smith, Stephen D},
+  volume={2},
+  year={2004},
+  publisher={American Mathematical Soc.}
+}
+
+@phdthesis{richter1999foundations,
+  title={Foundations of Dynamic Geometry},
+  author={Richter-Gebert, J{\"u}rgen},
+  year={1999},
+  school={SWISS FEDERAL INSTITUTE OF TECHNOLOGY ZURICH}
+}

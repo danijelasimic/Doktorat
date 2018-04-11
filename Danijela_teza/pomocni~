@@ -1,0 +1,102 @@
+
+
+\subsection{Aksiome za relaciju izme\d u.}
+
+\paragraph{{\lat Identity} relacije izme\d u.}
+
+Prva aksioma (inskluzivne) relacije izme\d u daje jedno
+njeno jednostavno svojstvo i, za na\v s model, dokazuje se gotovo automatski.
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+$\bett{A}{B}{A} \longrightarrow A = B$
+\end{tabbing}
+}
+
+\paragraph{Pa\v sova aksioma.}
+
+Slede\'ca aksioma je Pa\v sova aksioma:
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+$\bett{A}{P}{C} \wedge \bett{B}{Q}{C} \longrightarrow (\exists X.\ (\bett{P}{X}{B} \wedge \bett{Q}{X}{A}))$
+\end{tabbing}
+}
+
+Pod pretpostavkom da su sve ta\v cke koje se pominju u aksiomi razli\v cite, slika koja odgovara aksiomi je:
+
+\begin{center}
+\input{ax_t_5.tkz}
+\end{center}
+
+Pre nego \v sto damo dokaz da u na\v sem modelu Dekartove koordinatne ravni va\v zi ova aksioma, \v zelimo da prodiskutujemo neka pitanja koja se odnose na geometriju Tarskog i koja su se pokazala va\v za za sveukupnu organizaciju na\v seg dokaza. Poslednja verzija aksiomatskog sistema Tarskog je napravljena da bude minimalna (sadr\v zi samo 11 aksioma), i centralne aksiome koje opisuju relaciju izme\d u su {\lat identity} relacije izme\d u i Pa\v sova aksioma. U formalizaciji geometrije Tarskog (\cite{narboux}) sva ostala elementarna svojstva ove relacije se izvode iz ove dve aksiome. Na primer, da bi se izvela simetri\v cnost relacije izme\d u (i.e.,
+$\bett{A}{B}{C} \longrightarrow \bett{C}{B}{A}$), aksioma Pa\v sa se primenjuje na trojke $ABC$ i $BCC$ i tada se dobija ta\v cka $X$ tako da va\v zi $\bett{C}{X}{A}$ i $\bett{B}{X}{B}$, i onda prema aksiomi 1, $X=B$ i $\bett{C}{B}{A}$. Ipak, prema na\v sem iskustvu, u nameri da poka\v zemo da je na\v sa Dekartova koordinatna ravan je model aksioma Tarskog (pogotovo za Pa\v sovu aksiomu), potrebno je da ve\' c imamo pokazane neke njene posledice (kao \v sto su simetri\v cnost i tranzitivnost). Jo\v s da dodamo, da su ranije varijante aksiomatskog sistema Tarskog imale vi\v se aksioma, a ova svojstva su upravo bile neke od tih dodatnih aksioma. Tako\d e, svojstvo simetrije je jednostavnije svojstvo nego Pa\v sova aksioma (na primer, ono uklju\v cuje samo ta\v cke koje le\v ze na liniji, dok u aksiomi Pa\v sa imamo ta\v cke koje le\v ze u ravni i ne moraju biti kolinerane). Dodatno, prethodni dokaz koristi veoma supstilna svojstva koja zavise od toga kako je Pa\v sova aksioma formulisana. Na primer, ako se u njenom zaklju\v cku koristi $\bett{B}{X}{P}$ i $\bett{A}{X}{Q}$ umesto $\bett{P}{X}{B}$ i $\bett{Q}{X}{A}$, onda dokaz ne mo\v ze da se izvede. Zato, mi smo odlu\v cili da bi dobar pristup bio da direktno poka\v zemo da neka elementarna svojstva (kao \v sto su simetrija, tranzitivnost) relacije izme\d u va\v ze u modelu, a onda da koristimo ove \v cinjenice u dokazu mnogo kompleksnije Pa\v sove aksiome.  
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+\>$\agbett{A}{A}{B}$\\
+\>$\agbett{A}{B}{C} \longrightarrow \agbett{C}{B}{A}$\\
+\>$\agbett{A}{X}{B}\ \wedge\ \agbett{A}{B}{Y} \longrightarrow \agbett{X}{B}{Y}$\\
+\>$\agbett{A}{X}{B}\ \wedge\ \agbett{A}{B}{Y} \longrightarrow \agbett{A}{X}{Y}$
+\end{tabbing}
+}
+
+\paragraph{Aksioma ni\v ze dimenzije.\lat{Lower dimension axiom.}}
+Slede\'ca aksioma ka\v ze da postoje 3 nekolinearne ta\v cke. Zato svaki model ovih aksioma mora imati dimenziju ve\'cu od 1.
+\begin{tabbing}
+$\exists\ A\ B\ C.\ \neg\ \colint{A}{B}{C}$
+\end{tabbing}
+}
+\noindent U na\v soj Dekartovoj ravni trivijalno va\v zi (e.g., $(0, 0)$, $(0, 1)$,
+i $(1, 0)$ su nekolinerane).
+
+\paragraph{Aksioma (\v sema) kontinuiteta.}
+
+Aksioma kontinuiteta Tarskog je u stvari \lat{Dedekind cut
+construction}. Intuitivno, ako su sve ta\v cke skupa ta\v caka sa jedne strane ta\v caka koje pripadaju drugom skupu ta\v caka,
+onda postoji ta\v cka koja je izme\d u ta dva skupa. Orginalna Tarski aksiomatizacija je definisana u okviru logike prvog reda
+i skupovi nisu ekplicitno poznati u okviru formalizacije Tarskog. Zato, umesto da koristi skupove ta\v caka, Tarski koristi predikate
+logike prvog reda, $\phi$ i $\psi$. 
+$$(\exists a.\ \forall x.\ \forall y.\ \phi\ x \wedge \psi\ y \longrightarrow \bett{a}{x}{y}) \longrightarrow (\exists b.\ \forall x.\ \forall y.\ \phi\ x \wedge \psi\ y \longrightarrow \bett{x}{b}{y})$$
+
+Ipak, formulacija ove leme u okviru logike vi\v seg reda sistema \lat{Isabelle/HOL} ne ograni\v cava predikate  $\phi$ i $\psi$ da budu predikati 
+logike prvog reda. Zato, strogo gledano, na\v sa formalizacija aksiomatskog sistema Tarskog u okviru sistema Isabelle/HOL daje druga\v ciju geometriju u odnosu na orginalnu geometriju Tarskog.
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+lemma\\
+\>assumes "$\exists a.\ \forall x.\ \forall y.\ \phi\ x \wedge \psi\ y \longrightarrow \agbett{a}{x}{y}$"\\
+\>shows "$\exists b.\ \forall x.\ \forall y.\ \phi\ x \wedge \psi\ y \longrightarrow \agbett{x}{b}{y}$"
+\end{tabbing}
+}
+
+Ipak, ispostavlja se da je mogu\'ce pokazati da Dekartova koordinatna ravan tako\d e zadovoljava stro\v ziju varijantu aksiome (bez ograni\v cavanja da predikati $\phi$ i $\psi$ su predikati logike prvog reda). Ako je jedan skup prazan, tvr\d enje trivijalno va\v zi. Ako skupovi imaju zajedni\v cku ta\v cku, onda je ta ta\v cka ujedno i tra\v zena ta\v cka. U drugim slu\v cajevim, primenjujemo izzometrijske transformacije tako da sve ta\v cke iz oba skupa le\v ze na pozitivnom delu $y$-ose. Onda, dokaz tvr\d enja se svodi na dokazivanje slede\'ceg:
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+lemma\\
+\>assumes\\
+\>"$P = \{x.\ x\ge 0 \wedge \phi(0, x)\}$" "$Q = \{y.\ y\ge 0\wedge \psi(0, y)\}$"\\
+\>"$\neg (\exists b.\ b \in P \wedge b \in Q)$" "$\exists x_0.\ x_0 \in P$" "$\exists y_0.\ y_0 \in Q$"\\
+\>"$\forall x \in P.\ \forall y \in Q.\ \agbett{(0, 0)}{(0, x)}{(0, y)}$"\\
+\>shows\\
+\>"$\exists b.\ \forall x \in P.\ \forall y \in Q.\ \agbett{(0, x)}{(0, b)}{(0, y)}$"
+\end{tabbing}
+}
+
+Dokazivanje ovoga zahteva kori\v s\'cenje netrivijalnih osobina realnih projeva, pre svega, njihovu potpunost. Potpunost realnih u \lat{Isabell/HOL} je formalizovana slede\'com teoremom (supremum, osibina najmanje gornje granice):
+
+\vspace{-7mm}
+$$(\exists x.\ x \in P) \wedge (\exists y.\ \forall x\in P.\ x < y) \longrightarrow
+\exists S.\ (\forall y.\ (\exists x\in P.\ y < x) \leftrightarrow y <
+S)$$
+\vspace{-7mm}
+
+Skup $P$ zadovoljava svojstvo supremuma. Zaista, kako, po pretpostavci, $P$ i $Q$ nemaju zajedni\v cki element, a iz pretpostavke sledi da $\forall x \in P.\ \forall y \in Q.\ x < y$, tako da je bilo koji element iz $Q$ gornja granica za $P$. Po pretpostavci, $P$ i $Q$ su neprazni, tako da postoji element $b$ takav da $\forall x \in P.\ x \leq b$ i $\forall y \in Q.\ b \leq y$, tako da teorema va\v zi.
+
+************************** fali deo
+

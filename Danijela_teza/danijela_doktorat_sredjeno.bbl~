@@ -1,0 +1,932 @@
+\begin{thebibliography}{100}
+
+\bibitem{agda}
+Agda: An interactive proof editor.
+\newblock \url{http://agda.sf.net}.
+
+\bibitem{coq}
+The coq proof assistant.
+\newblock \url{http://coq.inria.fr/}.
+
+\bibitem{abbottcocoa}
+J~Abbott, A~Bigatti, and G~Lagorio.
+\newblock Cocoa-5: A system for doing computations in commutative algebra
+  (2014).
+
+\bibitem{adams2015proof}
+Mark Adams.
+\newblock Proof auditing formalised mathematics.
+\newblock {\em Journal of Formalized Reasoning}, 2016.
+
+\bibitem{matita}
+Andrea Asperti, Wilmer Ricciotti, Claudio~Sacerdoti Coen, and Enrico Tassi.
+\newblock The matita interactive theorem prover.
+\newblock In {\em Automated Deduction--CADE-23}, pages 64--69. Springer, 2011.
+
+\bibitem{avigad}
+Jeremy Avigad, Edward Dean, and John Mumma.
+\newblock A formal system for euclid’s elements.
+\newblock {\em The Review of Symbolic Logic}, 2(04):700--768, 2009.
+
+\bibitem{avigad2007PrimeNumber}
+Jeremy Avigad, Kevin Donnelly, David Gray, and Paul Raff.
+\newblock A formally verified proof of the prime number theorem.
+\newblock {\em ACM Transactions on Computational Logic (TOCL)}, 9(1):2, 2007.
+
+\bibitem{avigad2014formally}
+Jeremy Avigad and John Harrison.
+\newblock Formally verified mathematics.
+\newblock {\em Communications of the ACM}, 57(4):66--75, 2014.
+
+\bibitem{locales}
+Clemens Ballarin.
+\newblock Interpretation of locales in isabelle: Theories and proof contexts.
+\newblock In {\em Mathematical Knowledge Management}, pages 31--43. Springer,
+  2006.
+
+\bibitem{barendregt2013lambda}
+Henk Barendregt, Wil Dekkers, and Richard Statman.
+\newblock {\em Lambda calculus with types}.
+\newblock Cambridge University Press, 2013.
+
+\bibitem{barras1999auto}
+Bruno Barras.
+\newblock {\em Auto-validation d'un syst{\`e}me de preuves avec familles
+  inductives}.
+\newblock PhD thesis, 1999.
+
+\bibitem{beesonfinding}
+Michael Beeson and Larry Wos.
+\newblock Finding proofs in tarskian geometry.
+\newblock {\em to appear, The Journal of Automated Reasoning}, 2016.
+
+\bibitem{isabelleautomatic}
+Jasmin~Christian Blanchette, Lukas Bulwahn, and Tobias Nipkow.
+\newblock Automatic proof and disproof in isabelle/hol.
+\newblock In {\em Frontiers of Combining Systems}, pages 12--27. Springer,
+  2011.
+
+\bibitem{botana2014automatic}
+Francisco Botana and Miguel~A Ab{\'a}nades.
+\newblock Automatic deduction in (dynamic) geometry: Loci computation.
+\newblock {\em Computational Geometry}, 47(1):75--89, 2014.
+
+\bibitem{botana2015automated}
+Francisco Botana, Markus Hohenwarter, Predrag Jani{\v{c}}i{\'c}, Zolt{\'a}n
+  Kov{\'a}cs, Ivan Petrovi{\'c}, Tom{\'a}s Recio, and Simon Weitzhofer.
+\newblock Automated theorem proving in geogebra: current achievements.
+\newblock {\em Journal of Automated Reasoning}, 55(1):39--59, 2015.
+
+\bibitem{botana2002dynamic}
+Francisco Botana and Jos{\'e}~L Valcarce.
+\newblock A dynamic--symbolic interface for geometric theorem discovery.
+\newblock {\em Computers \& Education}, 38(1):21--35, 2002.
+
+\bibitem{boutry2016tarski}
+Pierre Boutry, Gabriel Braun, and Julien Narboux.
+\newblock From tarski to descartes: Formalization of the arithmetization of
+  euclidean geometry.
+\newblock In {\em SCSS 2016 The 7th International Symposium on Symbolic
+  Computation in Software Science}, 2016.
+
+\bibitem{boutry2015parallel}
+Pierre Boutry, Julien Narboux, and Pascal Schreck.
+\newblock Parallel postulates and decidability of intersection of lines: a
+  mechanized study within tarski's system of geometry.
+\newblock 2015.
+
+\bibitem{boutry2015reflexive}
+Pierre Boutry, Julien Narboux, and Pascal Schreck.
+\newblock A reflexive tactic for automated generation of proofs of incidence to
+  an affine variety.
+\newblock 2015.
+
+\bibitem{boyer-moore}
+R.~S. Boyer and J~S. Moore.
+\newblock {\em A Computational Logic Handbook}.
+\newblock Academic Press, New York, 1988.
+
+\bibitem{braun2012tarski}
+Gabriel Braun and Julien Narboux.
+\newblock From tarski to hilbert.
+\newblock In {\em Automated Deduction in Geometry}, pages 89--109. Springer,
+  2012.
+
+\bibitem{braun2015synthetic}
+Gabriel Braun and Julien Narboux.
+\newblock A synthetic proof of pappus' theorem in tarski's geometry.
+\newblock 2015.
+
+\bibitem{buchberger}
+Bruno Buchberger.
+\newblock Bruno buchberger’s phd thesis 1965: An algorithm for finding the
+  basis elements of the residue class ring of a zero dimensional polynomial
+  ideal.
+\newblock {\em Journal of symbolic computation}, 41(3):475--511, 2006.
+
+\bibitem{buchberger1998grobner}
+Bruno Buchberger and Franz Winkler.
+\newblock {\em Gr{\"o}bner bases and applications}, volume 251.
+\newblock Cambridge University Press, 1998.
+
+\bibitem{chen2002projection}
+XueFeng Chen and DingKang Wang.
+\newblock The projection of quasi variety and its application on geometric
+  theorem proving and formula deduction.
+\newblock In {\em International Workshop on Automated Deduction in Geometry},
+  pages 21--30. Springer, 2002.
+
+\bibitem{chou1984}
+Shang-Ching Chou.
+\newblock Proving elementary geometry theorems using wu's algorithm.
+\newblock Master's thesis, University of Texas at Austin, 1984.
+
+\bibitem{hbook}
+Shang-Ching Chou and Xiao-Shan Gao.
+\newblock Automated reasoning in geometry.
+\newblock {\em Handbook of automated reasoning}, 1:707--749, 2001.
+
+\bibitem{chou1993automated}
+Shang-Ching Chou, Xiao-Shan Gao, and Jing-Zhong Zhang.
+\newblock Automated production of traditional proofs for constructive geometry
+  theorems.
+\newblock In {\em Logic in Computer Science, 1993. LICS'93., Proceedings of
+  Eighth Annual IEEE Symposium on}, pages 48--56. IEEE, 1993.
+
+\bibitem{chou1995volume}
+Shang-Ching Chou, Xiao-Shan Gao, and Jing-Zhong Zhang.
+\newblock Automated production of traditional proofs in solid geometry.
+\newblock {\em Journal of Automated Reasoning}, 14(2):257--291, 1995.
+
+\bibitem{chou1996automated}
+Shang-Ching Chou, Xiao-Shan Gao, and Jing-Zhong Zhang.
+\newblock Automated generation of readable proofs with geometric invariants.
+\newblock {\em Journal of Automated Reasoning}, 17(3):325--347, 1996.
+
+\bibitem{chou1996introduction}
+Shang-Ching Chou, Xiao-Shan Gao, and Jing-Zhong Zhang.
+\newblock An introduction to geometry expert.
+\newblock In {\em Automated Deduction—Cade-13}, pages 235--239. Springer,
+  1996.
+
+\bibitem{chou1987characteristic}
+Shang-Ching Chou, William~F Schelter, and Jin-Gen Yang.
+\newblock Characteristic sets and gr{\"o}bner bases in geometry theorem
+  proving.
+\newblock {\em Resolution of equations in algebraic structures}, 2:33--91,
+  1987.
+
+\bibitem{church1940formulation}
+Alonzo Church.
+\newblock A formulation of the simple theory of types.
+\newblock {\em The journal of symbolic logic}, 5(02):56--68, 1940.
+
+\bibitem{church1941calculi}
+Alonzo Church.
+\newblock {\em The calculi of lambda-conversion}.
+\newblock Number~6. Princeton University Press, 1941.
+
+\bibitem{nuprl86}
+R.~L. Constable, S.~F. Allen, H.~M. Bromley, W.~R. Cleaveland, J.~F. Cremer,
+  R.~W. Harper, D.~J. Howe, T.~B. Knoblock, N.~P. Mendler, P.~Panangaden, J.~T.
+  Saski, and S.~F. Smith.
+\newblock {\em Implementing mathematics with the Nuprl proof development
+  system}.
+\newblock Prentice Hall, 1986.
+
+\bibitem{corbineau}
+Pierre Corbineau.
+\newblock A declarative language for the coq proof assistant.
+\newblock In {\em Types for Proofs and Programs}, pages 69--84. Springer, 2007.
+
+\bibitem{cox1992ideals}
+David Cox, John Little, and Donal O'shea.
+\newblock {\em Ideals, varieties, and algorithms}, volume~3.
+\newblock Springer, 1992.
+
+\bibitem{cruz2002constructive}
+Lu{\'\i}s Cruz-Filipe.
+\newblock A constructive formalization of the fundamental theorem of calculus.
+\newblock In {\em Types for Proofs and Programs}, pages 108--126. Springer,
+  2002.
+
+\bibitem{curry1934functionality}
+Haskell~B Curry.
+\newblock Functionality in combinatory logic.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  20(11):584--590, 1934.
+
+\bibitem{automath}
+N.~G. de~Bruijn.
+\newblock The mathematical language {AUTOMATH}.
+\newblock volume~25 of {\em Lecture Notes in Mathematics}, pages 29--61.
+  Springer-Verlag, Berlin, 1970.
+
+\bibitem{hilbert-coq}
+Christophe Dehlinger, Jean-Fran{\c{c}}ois Dufourd, and Pascal Schreck.
+\newblock Higher-order intuitionistic formalization and proofs in hilbert’s
+  elementary geometry.
+\newblock In {\em Automated Deduction in Geometry}, pages 306--323. Springer,
+  2001.
+
+\bibitem{duprat2008}
+Jean Duprat.
+\newblock Une axiomatique de la g{\'e}om{\'e}trie plane en coq.
+\newblock {\em Actes des JFLA}, pages 123--136, 2008.
+
+\bibitem{Fitchstyle}
+Frederic~B. Fitch.
+\newblock {\em Symbolic Logic: An Introduction}.
+\newblock The Ronald Press Company, New York, 1952.
+
+\bibitem{grassman}
+Laurent Fuchs and Laurent Th{\'e}ry.
+\newblock A formalization of grassmann-cayley algebra in coq and its
+  application to theorem proving in projective geometry.
+\newblock In {\em Automated Deduction in Geometry}, pages 51--67. Springer,
+  2011.
+
+\bibitem{gao1991computations}
+Xiao-Shan Gao and Shang-Ching Chou.
+\newblock Computations with parametric equations.
+\newblock In {\em Proceedings of the 1991 international symposium on Symbolic
+  and algebraic computation}, pages 122--127. ACM, 1991.
+
+\bibitem{gao1990}
+Xiaoshan Gao.
+\newblock Transcendental functions and mechanical theorem proving in elementary
+  geometries.
+\newblock {\em Journal of Automated Reasoning}, 6(4):403--417, 1990.
+
+\bibitem{gelernter1959}
+Herbert Gelernter.
+\newblock Realization of a geometry theorem proving machine.
+\newblock In {\em IFIP Congress}, pages 273--281, 1959.
+
+\bibitem{wucoq}
+Jean-David G{\'e}nevaux, Julien Narboux, and Pascal Schreck.
+\newblock Formalization of wu’s simple method in coq.
+\newblock In {\em Certified Programs and Proofs}, pages 71--86. Springer, 2011.
+
+\bibitem{gentzen1935untersuchungen}
+Gerhard Gentzen.
+\newblock Untersuchungen {\"u}ber das logische schlie{\ss}en. i.
+\newblock {\em Mathematische zeitschrift}, 39(1):176--210, 1935.
+
+\bibitem{gentzen1935untersuchungen1}
+Gerhard Gentzen.
+\newblock Untersuchungen {\"u}ber das logische schlie{\ss}en. ii.
+\newblock {\em Mathematische Zeitschrift}, 39(1):405--431, 1935.
+
+\bibitem{geuvers2009proof}
+Herman Geuvers.
+\newblock Proof assistants: History, ideas and future.
+\newblock {\em Sadhana}, 34(1):3--25, 2009.
+
+\bibitem{geuvers2000constructive}
+Herman Geuvers, Freek Wiedijk, and Jan Zwanenburg.
+\newblock A constructive proof of the fundamental theorem of algebra without
+  using the rationals.
+\newblock In {\em Types for Proofs and Programs}, pages 96--111. Springer,
+  2000.
+
+\bibitem{girard1972interpretation}
+Jean-Yves Girard.
+\newblock {\em Interpr{\'e}tation fonctionelle et {\'e}limination des coupures
+  de l’arithm{\'e}tique d’ordre sup{\'e}rieur}.
+\newblock PhD thesis, PhD thesis, Universit{\'e} Paris VII, 1972.
+
+\bibitem{girard1986system}
+Jean-Yves Girard.
+\newblock The system f of variable types, fifteen years later.
+\newblock {\em Theoretical computer science}, 45:159--192, 1986.
+
+\bibitem{girard1989proofs}
+Jean-Yves Girard, Yves Lafont, and Paul Taylor.
+\newblock Proofs and types, volume 7 of cambridge tracts in theoretical
+  computer science, 1989.
+
+\bibitem{gonthier2008formal}
+Georges Gonthier.
+\newblock Formal proof--the four-color theorem.
+\newblock {\em Notices of the AMS}, 55(11):1382--1393, 2008.
+
+\bibitem{fourColorTheorem}
+Georges Gonthier.
+\newblock Formal proof--the four-color theorem.
+\newblock {\em Notices of the AMS}, 55(11):1382--1393, 2008.
+
+\bibitem{gonthier2013machine}
+Georges Gonthier, Andrea Asperti, Jeremy Avigad, Yves Bertot, Cyril Cohen,
+  Fran{\c{c}}ois Garillot, St{\'e}phane Le~Roux, Assia Mahboubi, Russell
+  O’Connor, Sidi~Ould Biha, et~al.
+\newblock A machine-checked proof of the odd order theorem.
+\newblock In {\em International Conference on Interactive Theorem Proving},
+  pages 163--179. Springer, 2013.
+
+\bibitem{oddOrder}
+Georges Gonthier, Andrea Asperti, Jeremy Avigad, Yves Bertot, Cyril Cohen,
+  Fran{\c{c}}ois Garillot, St{\'e}phane Le~Roux, Assia Mahboubi, Russell
+  O’Connor, Sidi~Ould Biha, et~al.
+\newblock A machine-checked proof of the odd order theorem.
+\newblock In {\em Interactive Theorem Proving}, pages 163--179. Springer, 2013.
+
+\bibitem{gonthierSSReflect}
+Georges Gonthier, Assia Mahboubi, and Enrico Tassi.
+\newblock {\em A small scale reflection extension for the Coq system}.
+\newblock PhD thesis, Inria Saclay Ile de France, 2014.
+
+\bibitem{gordon2000lcf}
+Mike Gordon.
+\newblock From lcf to hol: a short history.
+\newblock In {\em Proof, Language, and Interaction}, pages 169--186, 2000.
+
+\bibitem{grobnercoq}
+Benjamin Gr{\'e}goire, Lo{\"\i}c Pottier, and Laurent Th{\'e}ry.
+\newblock Proof certificates for algebra and their application to automatic
+  geometry theorem proving.
+\newblock In {\em Automated Deduction in Geometry}, pages 42--59. Springer,
+  2011.
+
+\bibitem{gressier2013}
+J\'er\'emie Gressier.
+\newblock Geometrix iv.
+\newblock \url{http://geometrix.free.fr/}, 2013.
+
+\bibitem{guilhot}
+Fr{\'e}d{\'e}rique Guilhot.
+\newblock Formalisation en coq et visualisation d'un cours de g{\'e}om{\'e}trie
+  pour le lyc{\'e}e.
+\newblock {\em Technique et Science informatiques}, 24(9):1113--1138, 2005.
+
+\bibitem{refinement}
+Florian Haftmann, Alexander Krauss, Ondrej Kuncar, and Tobias Nipkow.
+\newblock Data refinement in isabelle/{HOL}.
+\newblock In Sandrine Blazy, Christine Paulin-Mohring, and David Pichardie,
+  editors, {\em ITP}, volume 7998 of {\em Lecture Notes in Computer Science},
+  pages 100--115. Springer, 2013.
+
+\bibitem{haftmann2006constructive}
+Florian Haftmann and Makarius Wenzel.
+\newblock Constructive type classes in isabelle.
+\newblock In {\em International Workshop on Types for Proofs and Programs},
+  pages 160--174. Springer, 2006.
+
+\bibitem{flyspeck}
+Thomas~C Hales.
+\newblock Introduction to the flyspeck project.
+\newblock In {\em Dagstuhl Seminar Proceedings}. Schloss
+  Dagstuhl-Leibniz-Zentrum f{\"u}r Informatik, 2006.
+
+\bibitem{lf1993}
+R.~Harper, F.~Honsell, and G.~Plotkin.
+\newblock A framework for defining logics.
+\newblock {\em Journal of the ACM}, 40(1):143--184, 1993.
+
+\bibitem{standardML}
+Robert Harper, David MacQueen, and Robin Milner.
+\newblock {\em Standard ML}.
+\newblock University of Edinburgh. Department of Computer Science. Laboratory
+  for Foundations of Computer Science, 1986.
+
+\bibitem{hollight2}
+J.~Harrison.
+\newblock {HOL} light: {A} tutorial introduction.
+\newblock {\em Lecture Notes in Computer Science}, 1166:265--269, 1996.
+
+\bibitem{harrison05}
+John Harrison.
+\newblock A hol theory of euclidean space.
+\newblock In {\em Theorem proving in higher order logics}, pages 114--129.
+  Springer, 2005.
+
+\bibitem{hollight1}
+John Harrison.
+\newblock {HOL} light: An overview.
+\newblock In Stefan Berghofer, Tobias Nipkow, Christian Urban, and Makarius
+  Wenzel, editors, {\em TPHOLs}, volume 5674 of {\em Lecture Notes in Computer
+  Science}, pages 60--66. Springer, 2009.
+
+\bibitem{wlog}
+John Harrison.
+\newblock Without loss of generality.
+\newblock In {\em Theorem Proving in Higher Order Logics}, pages 43--59.
+  Springer, 2009.
+
+\bibitem{harrison2012theorem}
+John Harrison.
+\newblock {\em Theorem proving with the real numbers}.
+\newblock Springer Science \& Business Media, 2012.
+
+\bibitem{harrison2013hol}
+John Harrison.
+\newblock The hol light theory of euclidean space.
+\newblock {\em Journal of Automated Reasoning}, 50(2):173--190, 2013.
+
+\bibitem{hilbert}
+David Hilbert.
+\newblock {\em Grundlagen der geometrie}.
+\newblock Springer-Verlag, 2013.
+
+\bibitem{hudak1992report}
+Paul Hudak, Simon Peyton~Jones, Philip Wadler, Brian Boutel, Jon Fairbairn,
+  Joseph Fasel, Mar{\'\i}a~M Guzm{\'a}n, Kevin Hammond, John Hughes, Thomas
+  Johnsson, et~al.
+\newblock Report on the programming language haskell: a non-strict, purely
+  functional language version 1.2.
+\newblock {\em ACM SigPlan notices}, 27(5):1--164, 1992.
+
+\bibitem{lifting-transfer}
+Brian Huffman and Ond{\v{r}}ej Kun{\v{c}}ar.
+\newblock Lifting and transfer: A modular design for quotients in isabelle/hol.
+\newblock In {\em Certified Programs and Proofs}, pages 131--146. Springer,
+  2013.
+
+\bibitem{janivcic2010geometry}
+Predrag Jani{\v{c}}i{\'c}.
+\newblock Geometry constructions language.
+\newblock {\em Journal of Automated Reasoning}, 44(1-2):3--24, 2010.
+
+\bibitem{janivcic2012area}
+Predrag Jani{\v{c}}i{\'c}, Julien Narboux, and Pedro Quaresma.
+\newblock The area method.
+\newblock {\em Journal of Automated Reasoning}, 48(4):489--532, 2012.
+
+\bibitem{Jaskowski}
+Stanis{\l}aw Ja\'{s}kowski.
+\newblock On the rules of suppositions in formal logic.
+\newblock {\em Studia Logica}, 1:5--32, 1934.
+\newblock Reprinted in: S.\ McCall (ed.), Polish Logic 1920--1939, Clarendon
+  Press, Oxford, pp.\ 232--258.
+
+\bibitem{jutting}
+Benthem Jutting and Bert van LS.
+\newblock {\em Checking Landau's' Grundlagen'in the AUTOMATH system}.
+\newblock PhD thesis, Mathematisch Centrum, 1977.
+
+\bibitem{von-plato-formalization}
+Gilles Kahn.
+\newblock Constructive geometry according to jan von plato.
+\newblock {\em Coq contribution. Coq}, 5:10, 1995.
+
+\bibitem{isabelle-quotient}
+Cezary Kaliszyk and Christian Urban.
+\newblock Quotients revisited for isabelle/hol.
+\newblock In {\em Proceedings of the 2011 ACM Symposium on Applied Computing},
+  pages 1639--1644. ACM, 2011.
+
+\bibitem{kapur1990refutational}
+Deepak Kapur and Hoi~K Wan.
+\newblock Refutational proofs of geometry theorems via characteristic set
+  computation.
+\newblock In {\em Proceedings of the international symposium on Symbolic and
+  algebraic computation}, pages 277--284. ACM, 1990.
+
+\bibitem{l4microkernel2}
+Gerwin Klein, June Andronick, Kevin Elphinstone, Toby Murray, Thomas Sewell,
+  Rafal Kolanski, and Gernot Heiser.
+\newblock Comprehensive formal verification of an os microkernel.
+\newblock {\em ACM Transactions on Computer Systems (TOCS)}, 32(1):2, 2014.
+
+\bibitem{l4microkernel1}
+Gerwin Klein, Kevin Elphinstone, Gernot Heiser, June Andronick, David Cock,
+  Philip Derrin, Dhammika Elkaduwe, Kai Engelhardt, Rafal Kolanski, Michael
+  Norrish, et~al.
+\newblock sel4: Formal verification of an os kernel.
+\newblock In {\em Proceedings of the ACM SIGOPS 22nd symposium on Operating
+  systems principles}, pages 207--220. ACM, 2009.
+
+\bibitem{kortenkamp2004using}
+Ulrich Kortenkamp and J{\"u}rgen Richter-Gebert.
+\newblock Using automatic theorem proving to improve the usability of geometry
+  software.
+\newblock In {\em Proceedings of MathUI}, volume 2004, 2004.
+
+\bibitem{functions}
+Alexander Krauss.
+\newblock Defining recursive functions in isabelle/hol, 2008.
+
+\bibitem{kripke1965semantical}
+Saul~A Kripke.
+\newblock Semantical analysis of intuitionistic logic i.
+\newblock {\em Studies in Logic and the Foundations of Mathematics},
+  40:92--130, 1965.
+
+\bibitem{kutzler1986application}
+Bernhard Kutzler and Sabine Stifter.
+\newblock On the application of buchberger's algorithm to automated geometry
+  theorem proving.
+\newblock {\em Journal of Symbolic Computation}, 2(4):389--397, 1986.
+
+\bibitem{landau1960grundlagen}
+Edmund Landau.
+\newblock {\em Grundlagen der Analysis:(das Rechnen mit ganzen, rationalen,
+  irrationalen, komplexen Zahlen)}.
+\newblock Chelsea Pub. Co., 1960.
+
+\bibitem{ocaml}
+Xavier Leroy.
+\newblock The ocaml programming language.
+\newblock {\em Online: http://caml. inria. fr/ocaml/index. en. html}, 1998.
+
+\bibitem{compcert1}
+Xavier Leroy.
+\newblock Formal verification of a realistic compiler.
+\newblock {\em Communications of the ACM}, 52(7):107--115, 2009.
+
+\bibitem{leroy2009formally}
+Xavier Leroy.
+\newblock A formally verified compiler back-end.
+\newblock {\em Journal of Automated Reasoning}, 43(4):363--446, 2009.
+
+\bibitem{compcert2}
+Xavier Leroy.
+\newblock A formally verified compiler back-end.
+\newblock {\em Journal of Automated Reasoning}, 43(4):363--446, 2009.
+
+\bibitem{leroy2014ocaml}
+Xavier Leroy, Damien Doligez, Alain Frisch, Jacques Garrigue, Didier R{\'e}my,
+  and J{\'e}r{\^o}me Vouillon.
+\newblock The ocaml system release 4.02.
+\newblock {\em Institut National de Recherche en Informatique et en
+  Automatique}, 2014.
+
+\bibitem{letouzey2002new}
+Pierre Letouzey.
+\newblock A new extraction for coq.
+\newblock In {\em International Workshop on Types for Proofs and Programs},
+  pages 200--219. Springer, 2002.
+
+\bibitem{lord1985method}
+NJ~Lord.
+\newblock A method for vector proofs in geometry.
+\newblock {\em Mathematics Magazine}, 58(2):84--89, 1985.
+
+\bibitem{lego1992}
+Zhaohui Luo and Robert Pollack.
+\newblock The {LEGO} proof development system: {A} user's manual.
+\newblock Technical Report ECS-LFCS-92-211, University of Edinburgh, May 1992.
+
+\bibitem{projective-coq1}
+Nicolas Magaud, Julien Narboux, and Pascal Schreck.
+\newblock Formalizing projective plane geometry in coq.
+\newblock In {\em Automated Deduction in Geometry}, pages 141--162. Springer,
+  2011.
+
+\bibitem{projective-coq2}
+Nicolas Magaud, Julien Narboux, and Pascal Schreck.
+\newblock A case study in formalizing projective geometry in coq: Desargues
+  theorem.
+\newblock {\em Computational Geometry}, 45(8):406--424, 2012.
+
+\bibitem{alf1994}
+Lena Magnusson and Bengt Nordstr{\"o}m.
+\newblock The {ALF} proof editor and its proof engine.
+\newblock In Henk Barendregt and Tobias Nipkow, editors, {\em Types for Proofs
+  and Programs}, pages 213--237. Springer-Verlag LNCS 806, 1994.
+
+\bibitem{makarios2012}
+Timothy James~McKenzie Makarios.
+\newblock A mechanical verification of the independence of tarski's euclidean
+  axiom.
+\newblock 2012.
+
+\bibitem{maricsurvey}
+Filip Maric.
+\newblock A survey of interactive theorem proving.
+
+\bibitem{thedu}
+Filip Mari{\'c}, Ivan Petrovi{\'c}, Danijela Petrovi{\'c}, and Predrag
+  Jani{\v{c}}i{\'c}.
+\newblock Formalization and implementation of algebraic methods in geometry.
+\newblock {\em arXiv preprint arXiv:1202.4831}, 2012.
+
+\bibitem{marinkovic2014computer}
+Vesna Marinkovi{\'c}, Predrag Jani{\v{c}}i{\'c}, and Pascal Schreck.
+\newblock Computer theorem proving for verifiable solving of geometric
+  construction problems.
+\newblock In {\em Automated Deduction in Geometry}, pages 72--93. Springer,
+  2014.
+
+\bibitem{martinlof}
+P.~{M}artin {L}{\"o}f.
+\newblock {\em Intuitionistic Type Theory}.
+\newblock Studies in Proof Theory, Bibliopolis, Napoli, 1984.
+
+\bibitem{martin1984intuitionistic}
+Per Martin-L\"of.
+\newblock Intuitionistic type theory.
+\newblock {\em Naples: Bibliopolis}, 76, 1984.
+
+\bibitem{epigram}
+Conor McBride.
+\newblock Epigram: Practical programming with dependent types.
+\newblock In {\em Advanced Functional Programming}, pages 130--170. Springer,
+  2004.
+
+\bibitem{lisp}
+John McCarthy, Steve Russell, Timothy~P Hart, Mike Levin, AutoLISP Arc, and
+  Common~Lisp Clojure.
+\newblock Lisp programming language, 1985.
+
+\bibitem{mccharen2000problems}
+John~D McCharen, Ross~A Overbeek, and LAWRENCE~T WOS.
+\newblock Problems and experiments for and with automated theorem-proving
+  programs.
+\newblock In {\em The Collected Works of Larry Wos: (In 2 Volumes) Volume I:
+  Exploring the Power of Automated Reasoning Volume II: Applying Automated
+  Reasoning to Puzzles, Problems, and Open Questions}, pages 166--196. 2000.
+
+\bibitem{hilbert-isabelle}
+Laura~I Meikle and Jacques~D Fleuriot.
+\newblock Formalizing hilbert’s grundlagen in isabelle/isar.
+\newblock In {\em Theorem proving in higher order logics}, pages 319--334.
+  Springer, 2003.
+
+\bibitem{milewski2001fundamental}
+Robert Milewski.
+\newblock Fundamental theorem of algebra1.
+\newblock 2001.
+
+\bibitem{lcf1}
+Robin Milner.
+\newblock Implementation and applications of scott's logic for computable
+  functions.
+\newblock In {\em ACM sigplan notices}, volume~7, pages 1--6. ACM, 1972.
+
+\bibitem{mitchell1996foundations}
+John~C Mitchell.
+\newblock {\em Foundations for programming languages}, volume~1.
+\newblock MIT press Cambridge, 1996.
+
+\bibitem{hol}
+{M.J.C. Gordon} and {T.F. Melham}.
+\newblock {\em Introduction to {HOL}: {A} Theorem Proving Environment for
+  Higher Order Logic}.
+\newblock Cambridge University Press, 1993.
+
+\bibitem{pvs2}
+C{\'e}sar~A Munoz and Gilles Dowek.
+\newblock Hybrid verification of an air traffic operational concept.
+\newblock {\em lateral}, 5000(4000):3000, 2005.
+
+\bibitem{narboux-tarski}
+Julien Narboux.
+\newblock Mechanical theorem proving in tarski’s geometry.
+\newblock In {\em Automated Deduction in Geometry}, pages 139--156. Springer,
+  2007.
+
+\bibitem{narboux}
+Julien Narboux.
+\newblock Mechanical theorem proving in tarski’s geometry.
+\newblock In {\em Automated Deduction in Geometry}, pages 139--156. Springer,
+  2007.
+
+\bibitem{narboux2015towards}
+Julien Narboux and David Braun.
+\newblock Towards a certified version of the encyclopedia of triangle centers.
+\newblock 2015.
+
+\bibitem{needham}
+Tristan Needham.
+\newblock {\em Visual complex analysis}.
+\newblock Oxford University Press, 1998.
+
+\bibitem{Isabelle}
+Tobias Nipkow, Lawrence~C Paulson, and Markus Wenzel.
+\newblock {\em Isabelle/HOL: a proof assistant for higher-order logic}, volume
+  2283.
+\newblock Springer Science \& Business Media, 2002.
+
+\bibitem{martinlof2}
+B.~Nordstr{\"o}m, K.~Petersson, and J.~Smith.
+\newblock {\em Programming in {M}artin-{L}{\"o}f's Type Theory: An
+  Introduction}.
+\newblock Oxford University Press, 1990.
+
+\bibitem{agda6}
+Ulf Norell.
+\newblock {\em Towards a practical programming language based on dependent type
+  theory}, volume~32.
+\newblock Citeseer, 2007.
+
+\bibitem{pvs}
+Sam Owre, John Rushby, N~Shankar, et~al.
+\newblock Pvs specification and verification system.
+\newblock {\em URL: pvs. csl. sri. com}, 2001.
+
+\bibitem{palmgren2009semantics}
+Erik Palmgren.
+\newblock Semantics of intuitionistic propositional logic.
+\newblock {\em Lecture Notes for Applied Logic}, 2009.
+
+\bibitem{isabellepaulson1}
+L.~C. Paulson.
+\newblock Natural deduction as higher-order resolution.
+\newblock {\em Journal of Logic Programming}, 3:237--258, 1988.
+
+\bibitem{isabellepaulson2}
+Lawrence~C. Paulson.
+\newblock The foundation of a generic theorem prover.
+\newblock {\em Journal of Automated Reasoning}, 5:363--397, 1989.
+
+\bibitem{lcfpaulson}
+Lawrence~C Paulson.
+\newblock {\em Logic and computation: interactive proof with Cambridge LCF},
+  volume~2.
+\newblock Cambridge University Press, 1990.
+
+\bibitem{coqly}
+Tuan-Minh Pham, Yves Bertot, and Julien Narboux.
+\newblock A coq-based library for interactive and automated theorem proving in
+  plane geometry.
+\newblock In {\em Computational Science and Its Applications-ICCSA 2011}, pages
+  368--383. Springer, 2011.
+
+\bibitem{pottier2010connecting}
+Loic Pottier.
+\newblock Connecting gr$\backslash$" obner bases programs with coq to do proofs
+  in algebra, geometry and arithmetics.
+\newblock {\em arXiv preprint arXiv:1007.3615}, 2010.
+
+\bibitem{grobner_coq}
+Loic Pottier.
+\newblock Connecting gr$\backslash$" obner bases programs with coq to do proofs
+  in algebra, geometry and arithmetics.
+\newblock {\em arXiv preprint arXiv:1007.3615}, 2010.
+
+\bibitem{quaife1992automated}
+Art Quaife.
+\newblock {\em Automated development of fundamental mathematical theories}.
+\newblock JSTOR, 1992.
+
+\bibitem{acl2}
+David~L. Rager, Warren A.~Hunt Jr., and Matt Kaufmann.
+\newblock A parallelized theorem prover for a logic with parallel execution.
+\newblock In Sandrine Blazy, Christine Paulin-Mohring, and David Pichardie,
+  editors, {\em Interactive Theorem Proving - 4th International Conference,
+  {ITP} 2013, Rennes, France, July 22-26, 2013. Proceedings}, volume 7998 of
+  {\em Lecture Notes in Computer Science}, pages 435--450. Springer, 2013.
+
+\bibitem{william}
+William Richter.
+\newblock A minimal version of hilbert’s axioms for plane geometry.
+
+\bibitem{ritt1950differential}
+Joseph~Fels Ritt.
+\newblock {\em Differential algebra}, volume~33.
+\newblock American Mathematical Soc., 1950.
+
+\bibitem{tarski}
+Wolfram Schwabh{\"a}user, Wanda Szmielew, and Alfred Tarski.
+\newblock {\em Metamathematische methoden in der geometrie}.
+\newblock Springer-Verlag, 2013.
+
+\bibitem{schwerdtfeger}
+Hans Schwerdtfeger.
+\newblock {\em Geometry of complex numbers: circle geometry, Moebius
+  transformation, non-euclidean geometry}.
+\newblock Courier Corporation, 1979.
+
+\bibitem{scott2008mechanising}
+Phil Scott.
+\newblock Mechanising hilbert’s foundations of geometry in isabelle.
+\newblock {\em Master's thesis, University of Edinburgh}, 2008.
+
+\bibitem{sen1987mechanical}
+WANG DONG-MING~HU SEN.
+\newblock A mechanical proving system for constructible theorems in elementary
+  geometry.
+\newblock 1987.
+
+\bibitem{godel}
+Natarajan Shankar.
+\newblock {\em Metamathematics, machines and G{\"o}del's proof}.
+\newblock Number~38. Cambridge University Press, 1997.
+
+\bibitem{shao2016challenging}
+Changpeng Shao, Hongbo Li, and Lei Huang.
+\newblock Challenging theorem provers with mathematical olympiad problems in
+  solid geometry.
+\newblock {\em Mathematics in Computer Science}, 10(1):75--96, 2016.
+
+\bibitem{sorensen2006lectures}
+Morten~Heine S{\o}rensen and Pawel Urzyczyn.
+\newblock {\em Lectures on the Curry-Howard isomorphism}, volume 149.
+\newblock Elsevier, 2006.
+
+\bibitem{sperber2007revised6}
+Michael Sperber, R~Kent Dybvig, Matthew Flatt, Anton van Straaten, Richard
+  Kelsey, William Clinger, and Jonathan Rees.
+\newblock Revised6 report on the algorithmic language scheme (libraries), 2007.
+
+\bibitem{stifter1993geometry}
+Sabine Stifter.
+\newblock Geometry theorem proving in vector spaces by means of gr{\"o}bner
+  bases.
+\newblock In {\em Proceedings of the 1993 international symposium on Symbolic
+  and algebraic computation}, pages 301--310. ACM, 1993.
+
+\bibitem{tarskiGrothendieck}
+Andrzej Trybulec.
+\newblock Tarski grothendieck set theory.
+\newblock {\em Journal of Formalized Mathematics}, 1, 1989.
+
+\bibitem{mizar}
+Andrzej Trybulec and Howard Blair.
+\newblock Computer assisted reasoning with {MIZAR}.
+\newblock In Aravind Joshi, editor, {\em Proceedings of the 9th International
+  Joint Conference on Artificial Intelligence}, pages 26--28, Los Angeles, CA,
+  August 1985. Morgan Kaufmann.
+
+\bibitem{dhurdjevic2015automated}
+Sana~Stojanovi{\'c} {\DH}ur{\dj}evi{\'c}, Julien Narboux, and Predrag
+  Jani{\v{c}}i{\'c}.
+\newblock Automated generation of machine verifiable and readable proofs: A
+  case study of tarski’s geometry.
+\newblock {\em Annals of Mathematics and Artificial Intelligence},
+  74(3-4):249--269, 2015.
+
+\bibitem{vonPlato}
+Jan von Plato.
+\newblock The axioms of constructive geometry.
+\newblock {\em Annals of pure and applied logic}, 76(2):169--200, 1995.
+
+\bibitem{wang1995elimination}
+Dongming Wang.
+\newblock Elimination procedures for mechanical theorem proving in geometry.
+\newblock {\em Annals of Mathematics and Artificial Intelligence},
+  13(1-2):1--24, 1995.
+
+\bibitem{wang1998decomposing}
+Dongming Wang.
+\newblock Decomposing polynomial systems into simple systems.
+\newblock {\em Journal of Symbolic Computation}, 25(3):295--314, 1998.
+
+\bibitem{wang2002geother}
+Dongming Wang.
+\newblock Geother 1.1: Handling and proving geometric theorems automatically.
+\newblock In {\em Automated Deduction in Geometry}, pages 194--215. Springer,
+  2002.
+
+\bibitem{wen1991mechanical}
+Wu~Wen-Tsun.
+\newblock Mechanical theorem proving of differential geometries and some of its
+  applications in mechanics.
+\newblock {\em Journal of Automated Reasoning}, 7(2):171--191, 1991.
+
+\bibitem{Wu1992}
+Wu~Wen-Tsun.
+\newblock On a finiteness theorem about optimization problems.
+\newblock Technical report, 1992.
+
+\bibitem{isar}
+Markus Wenzel et~al.
+\newblock {\em Isabelle/Isar—a versatile environment for human-readable
+  formal proof documents}.
+\newblock PhD thesis, PhD thesis, Institut f{\"u}r Informatik, Technische
+  Universit{\"a}t M{\"u}nchen, 2002. http://tumb1. biblio. tu-muenchen.
+  de/publ/diss/in/2002/wenzel. html, 2002.
+
+\bibitem{mizarhollight}
+Freek Wiedijk.
+\newblock Mizar light for hol light.
+\newblock In {\em Theorem Proving in Higher Order Logics}, pages 378--393.
+  Springer, 2001.
+
+\bibitem{wilson2005combining}
+Sean Wilson and Jacques~D Fleuriot.
+\newblock Combining dynamic geometry, automated geometry theorem proving and
+  diagrammatic proofs.
+\newblock In {\em Workshop on User Interfaces for Theorem Provers (UITP)},
+  2005.
+
+\bibitem{wolfram2008mathematica}
+Inc Wolfram~Research.
+\newblock Mathematica, 2008.
+
+\bibitem{wu}
+Wen-ts{\"u}n Wu.
+\newblock On the decision problem and the mechanization of theorem-proving in
+  elementary geometry.
+\newblock {\em Scientia Sinica}, 21(2):159--172, 1978.
+
+\bibitem{wu2007mathematics}
+Wenjun Wu and Xiaoshan Gao.
+\newblock Mathematics mechanization and applications after thirty years.
+\newblock {\em Frontiers of Computer Science in China}, 1(1):1--8, 2007.
+
+\bibitem{yang1998automated}
+L~Yang, X~Gao, S~Chou, and Z~Zhang.
+\newblock Automated proving and discovering of theorems in non-euclidean
+  geometries.
+\newblock {\em Proceedings of Automated Deduction in Geometry (ADG98), Lecture
+  Notes in Artificial Intelligence}, 1360:171--188, 1998.
+
+\bibitem{ye2008introduction}
+Zheng Ye, Shang-Ching Chou, and Xiao-Shan Gao.
+\newblock An introduction to java geometry expert.
+\newblock In {\em Automated Deduction in Geometry}, pages 189--195. Springer,
+  2008.
+
+\end{thebibliography}

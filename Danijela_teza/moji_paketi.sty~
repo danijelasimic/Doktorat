@@ -1,0 +1,104 @@
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{pgf}
+\usepackage{wrapfig}
+\usepackage{gclc}
+\usepackage{hyphenat}
+
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+
+ %za logiku
+\usepackage{bussproofs}
+\usepackage{latexsym}
+\usepackage{stix}
+
+\newcommand{\agbett}[3]{\ensuremath{\mathcal{B}_T^{\mathit{ag}}\ #1\ #2\ #3}}
+\newcommand{\agbeth}[3]{\ensuremath{\mathcal{B}_H^{\mathit{ag}}\ #1\ #2\ #3}}
+\newcommand{\agcongr}[4]{\ensuremath{#1#2 \cong^{ag} #3#4}}
+\newcommand{\aginh}[2]{\ensuremath{#1 \in^{ag}_H #2}}
+\newcommand{\agtransp}[2]{\ensuremath{transp^{ag}\ #1\ #2}}
+\newcommand{\agtransl}[2]{\ensuremath{trans^{ag}_l\ #1\ #2}}
+\newcommand{\agrotp}[2]{\ensuremath{rotp^{ag}\ #1\ #2}}
+\newcommand{\agsymp}[1]{\ensuremath{symp^{ag}\ #1}}
+\newcommand{\agrotl}[2]{\ensuremath{rotl^{ag}\ #1\ #2}}
+\newcommand{\agsqdist}[2]{\ensuremath{d^2_{ag}\ #1\ #2}}
+\newcommand{\ag}[2]{\ensuremath{^{ag}\ #1\ #2}}
+
+
+\newcommand{\bett}[3]{\ensuremath{\mathcal{B}_t(#1, #2, #3)}}
+\newcommand{\colint}[3]{\ensuremath{\mathcal{C}_t(#1, #2, #3)}}
+\newcommand{\congrt}[4]{\ensuremath{#1#2 \cong_t #3#4}}
+
+\newcommand{\inh}[2]{\ensuremath{#1 \in_h #2}}
+\renewcommand{\beth}[3]{\ensuremath{\mathcal{B}_h(#1, #2, #3)}}
+\newcommand{\colinh}[3]{\ensuremath{\mathcal{C}_h(#1, #2, #3)}}
+\newcommand{\congrh}[4]{\ensuremath{#1#2 \cong_h #3#4}}
+
+\newcommand{\vect}[1]{\vec{#1}}
+
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{wasysym}
+\usepackage{mathtools}
+
+\newcommand{\lbrakk}{\llbracket}
+\newcommand{\rbrakk}{\rrbracket}
+\newcommand{\cnj}[1]{\overline{#1}}
+\renewcommand{\C}[0]{\ensuremath{\mathbb{C}}}
+\newcommand{\extC}[0]{\ensuremath{\overline{\C}}}
+\newcommand{\Repnzv}[1]{\ensuremath{\lfloor#1\rfloor_{C2}}}
+\newcommand{\Absnzv}[1]{\ensuremath{\lceil#1\rceil^{C2}}}
+\newcommand{\stpr}[1]{sp\ #1}
+\newcommand{\Reprs}[1]{\ensuremath{\lfloor#1\rfloor_{R3}}}
+\newcommand{\Absrs}[1]{\ensuremath{\lceil#1\rceil^{R3}}}
+\newcommand{\Reprm}[1]{\ensuremath{\lfloor#1\rfloor_{M}}}
+\newcommand{\Absrm}[1]{\ensuremath{\lceil#1\rceil^{M}}}
+\newcommand{\Repcm}[1]{\ensuremath{\lfloor#1\rfloor_{H}}}
+\newcommand{\Abscm}[1]{\ensuremath{\lceil#1\rceil^{H}}}
+\newcommand{\Reppl}[1]{\ensuremath{\lfloor#1\rfloor_{R4}}}
+\newcommand{\Abspl}[1]{\ensuremath{\lceil#1\rceil^{R4}}}
+\newcommand{\approxhc}{\ensuremath{\approx_{C2}}}
+\newcommand{\approxrm}{\ensuremath{\approx_{M}}}
+\newcommand{\approxcm}{\ensuremath{\approx_{cm}}}
+\newcommand{\approxocm}{\ensuremath{\approx_{ocm}}}
+\newcommand{\approxp}{\ensuremath{\approx_{R4}}}
+\newcommand{\ofocircline}[1]{{#1}^{\ocircle}}
+\newcommand{\ofcircline}[1]{{#1}^{\circlearrowleft}}
+\newcommand{\oppocircline}[1]{{#1}^{\leftrightarrow}}
+
+\newcommand{\RepRt}[1]{\ensuremath{\lfloor#1\rfloor_{R3}}}
+\newcommand{\AbsRt}[1]{\ensuremath{\lceil#1\rceil^{R3}}}
+
+\makeatletter
+\newsavebox{\@brx}
+\newcommand{\llangle}[1][]{\savebox{\@brx}{\(\m@th{#1\langle}\)}%
+  \mathopen{\copy\@brx\kern-0.5\wd\@brx\usebox{\@brx}}}
+\newcommand{\rrangle}[1][]{\savebox{\@brx}{\(\m@th{#1\rangle}\)}%
+  \mathclose{\copy\@brx\kern-0.5\wd\@brx\usebox{\@brx}}}
+\makeatother
+
+\newtheorem{primer}{Пример}[section]
+\theoremstyle{plain} \newtheorem{theorem}{Теорема}[section]
+\theoremstyle{definition} \newtheorem{definition}{Дефиниција}[section]
+
+
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!gasim ove dve jer za sada nista ne rade. Ispraviti kasnije
+\renewcommand{\tt}{\fontfamily{lmtt}\selectfont}
+\renewcommand{\verb}{}
+
+\newcommand{\BetaRed}{\ensuremath{\rightarrow_{\beta}}}
+\newcommand{\MultBetaRed}{\ensuremath{\twoheadrightarrow_{\beta}}}
+
+
+

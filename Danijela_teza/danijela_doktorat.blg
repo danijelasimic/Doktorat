@@ -1,0 +1,64 @@
+This is BibTeX, Version 0.99d (TeX Live 2015/Debian)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: danijela_doktorat.aux
+The style file: plain.bst
+Database file #1: danijela_doktorat.bib
+Warning--empty school in barras1999auto
+Warning--empty journal in boutry2015parallel
+Warning--empty journal in boutry2015reflexive
+Warning--empty journal in braun2015synthetic
+Warning--there's a number but no series in church1941calculi
+Warning--empty booktitle in automath
+Warning--empty journal in makarios2012
+Warning--empty journal in maricsurvey
+Warning--empty year in maricsurvey
+Warning--empty publisher in mccharen2000problems
+Warning--empty journal in milewski2001fundamental
+Warning--can't use both volume and number fields in lcf1
+Warning--empty journal in narboux2015towards
+Warning--empty journal in sen1987mechanical
+Warning--there's a number but no series in godel
+Warning--empty journal in sternagel2013executable
+Warning--empty institution in Wu1992
+You've used 174 entries,
+            2118 wiz_defined-function locations,
+            1320 strings with 27576 characters,
+and the built_in function-call counts, 57349 in all, are:
+= -- 5773
+> -- 2368
+< -- 68
++ -- 988
+- -- 769
+* -- 3589
+:= -- 9305
+add.period$ -- 559
+call.type$ -- 174
+change.case$ -- 863
+chr.to.int$ -- 0
+cite$ -- 191
+duplicate$ -- 2434
+empty$ -- 4711
+format.name$ -- 769
+if$ -- 12302
+int.to.chr$ -- 0
+int.to.str$ -- 174
+missing$ -- 183
+newline$ -- 863
+num.names$ -- 352
+pop$ -- 1093
+preamble$ -- 1
+purify$ -- 723
+quote$ -- 0
+skip$ -- 1721
+stack$ -- 0
+substring$ -- 3401
+swap$ -- 603
+text.length$ -- 68
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 638
+warning$ -- 17
+while$ -- 587
+width$ -- 177
+write$ -- 1885
+(There were 17 warnings)

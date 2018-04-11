@@ -1,0 +1,129 @@
+\begin{tikzpicture}
+\clip (0,0) rectangle (14.000000,6.500000);
+{\footnotesize
+
+% Drawing segment A B
+\draw [line width=0.016cm] (1.500000,0.540000) -- (1.500000,3.960000);%
+
+% Drawing segment B D
+\draw [line width=0.016cm] (1.540000,4.000000) -- (4.960000,4.000000);%
+
+% Drawing segment A C
+\draw [line width=0.016cm] (1.540000,0.500000) -- (4.960000,0.500000);%
+
+% Drawing segment D C
+\draw [line width=0.016cm] (5.000000,3.960000) -- (5.000000,0.540000);%
+
+% Drawing segment C G
+\draw [line width=0.016cm] (5.024000,0.532000) -- (6.476000,2.468000);%
+
+% Drawing segment G F
+\draw [line width=0.016cm] (6.500000,2.540000) -- (6.500000,5.960000);%
+
+% Drawing segment F D
+\draw [line width=0.016cm] (6.476000,5.968000) -- (5.024000,4.032000);%
+
+% Drawing segment B E
+\draw [line width=0.016cm] (1.524000,4.032000) -- (2.976000,5.968000);%
+
+% Drawing segment E F
+\draw [line width=0.016cm] (3.040000,6.000000) -- (6.460000,6.000000);%
+
+% Drawing segment A H
+\draw [line width=0.016cm] (1.524000,0.532000) -- (1.590000,0.620000);%
+\draw [line width=0.016cm] (1.635000,0.680000) -- (1.725000,0.800000);%
+\draw [line width=0.016cm] (1.770000,0.860000) -- (1.860000,0.980000);%
+\draw [line width=0.016cm] (1.905000,1.040000) -- (1.995000,1.160000);%
+\draw [line width=0.016cm] (2.040000,1.220000) -- (2.130000,1.340000);%
+\draw [line width=0.016cm] (2.175000,1.400000) -- (2.265000,1.520000);%
+\draw [line width=0.016cm] (2.310000,1.580000) -- (2.400000,1.700000);%
+\draw [line width=0.016cm] (2.445000,1.760000) -- (2.535000,1.880000);%
+\draw [line width=0.016cm] (2.580000,1.940000) -- (2.670000,2.060000);%
+\draw [line width=0.016cm] (2.715000,2.120000) -- (2.805000,2.240000);%
+\draw [line width=0.016cm] (2.850000,2.300000) -- (2.940000,2.420000);%
+
+% Drawing segment H G
+\draw [line width=0.016cm] (3.040000,2.500000) -- (3.150000,2.500000);%
+\draw [line width=0.016cm] (3.225000,2.500000) -- (3.375000,2.500000);%
+\draw [line width=0.016cm] (3.450000,2.500000) -- (3.600000,2.500000);%
+\draw [line width=0.016cm] (3.675000,2.500000) -- (3.825000,2.500000);%
+\draw [line width=0.016cm] (3.900000,2.500000) -- (4.050000,2.500000);%
+\draw [line width=0.016cm] (4.125000,2.500000) -- (4.275000,2.500000);%
+\draw [line width=0.016cm] (4.350000,2.500000) -- (4.500000,2.500000);%
+\draw [line width=0.016cm] (4.575000,2.500000) -- (4.725000,2.500000);%
+\draw [line width=0.016cm] (4.800000,2.500000) -- (4.950000,2.500000);%
+\draw [line width=0.016cm] (5.025000,2.500000) -- (5.175000,2.500000);%
+\draw [line width=0.016cm] (5.250000,2.500000) -- (5.400000,2.500000);%
+\draw [line width=0.016cm] (5.475000,2.500000) -- (5.625000,2.500000);%
+\draw [line width=0.016cm] (5.700000,2.500000) -- (5.850000,2.500000);%
+\draw [line width=0.016cm] (5.925000,2.500000) -- (6.075000,2.500000);%
+\draw [line width=0.016cm] (6.150000,2.500000) -- (6.300000,2.500000);%
+\draw [line width=0.016cm] (6.375000,2.500000) -- (6.460000,2.500000);%
+
+% Drawing segment H E
+\draw [line width=0.016cm] (3.000000,2.540000) -- (3.000000,2.650000);%
+\draw [line width=0.016cm] (3.000000,2.725000) -- (3.000000,2.875000);%
+\draw [line width=0.016cm] (3.000000,2.950000) -- (3.000000,3.100000);%
+\draw [line width=0.016cm] (3.000000,3.175000) -- (3.000000,3.325000);%
+\draw [line width=0.016cm] (3.000000,3.400000) -- (3.000000,3.550000);%
+\draw [line width=0.016cm] (3.000000,3.625000) -- (3.000000,3.775000);%
+\draw [line width=0.016cm] (3.000000,3.850000) -- (3.000000,4.000000);%
+\draw [line width=0.016cm] (3.000000,4.075000) -- (3.000000,4.225000);%
+\draw [line width=0.016cm] (3.000000,4.300000) -- (3.000000,4.450000);%
+\draw [line width=0.016cm] (3.000000,4.525000) -- (3.000000,4.675000);%
+\draw [line width=0.016cm] (3.000000,4.750000) -- (3.000000,4.900000);%
+\draw [line width=0.016cm] (3.000000,4.975000) -- (3.000000,5.125000);%
+\draw [line width=0.016cm] (3.000000,5.200000) -- (3.000000,5.350000);%
+\draw [line width=0.016cm] (3.000000,5.425000) -- (3.000000,5.575000);%
+\draw [line width=0.016cm] (3.000000,5.650000) -- (3.000000,5.800000);%
+\draw [line width=0.016cm] (3.000000,5.875000) -- (3.000000,5.960000);%
+
+% Marking point A by circle
+\draw [line width=0.016cm] (1.500000,0.500000) circle (0.040000);%
+
+% Marking point B by circle
+\draw [line width=0.016cm] (1.500000,4.000000) circle (0.040000);%
+
+% Marking point C by circle
+\draw [line width=0.016cm] (5.000000,0.500000) circle (0.040000);%
+
+% Marking point D by circle
+\draw [line width=0.016cm] (5.000000,4.000000) circle (0.040000);%
+
+% Marking point E by circle
+\draw [line width=0.016cm] (3.000000,6.000000) circle (0.040000);%
+
+% Marking point F by circle
+\draw [line width=0.016cm] (6.500000,6.000000) circle (0.040000);%
+
+% Marking point G by circle
+\draw [line width=0.016cm] (6.500000,2.500000) circle (0.040000);%
+
+% Marking point H by circle
+\draw [line width=0.016cm] (3.000000,2.500000) circle (0.040000);%
+
+% Printing text at point A
+\draw (1.500000,0.500000) node [anchor=north] { $\text{ISK}$ };%
+
+% Printing text at point B
+\draw (1.500000,4.000000) node [anchor=east] { $\text{ISK2}$ };%
+
+% Printing text at point C
+\draw (5.000000,0.500000) node [anchor=north] { $\text{PRE}$ };%
+
+% Printing text at point D
+\draw (5.000000,4.000000) node [anchor=west] { $\text{PRE2}$ };%
+
+% Printing text at point E
+\draw (3.000000,6.000000) node [anchor=east] { $\text{ISK}\omega$ };%
+
+% Printing text at point F
+\draw (6.500000,6.000000) node [anchor=west] { $\text{PRE}\omega$ };%
+
+% Printing text at point G
+\draw (6.500000,2.500000) node [anchor=west] { $\text{PRE}\underline{\omega}$ };%
+
+% Printing text at point H
+\draw (3.000000,2.500000) node [anchor=east] { $\text{ISK}\underline{\omega}$ };%
+}
+\end{tikzpicture}

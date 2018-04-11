@@ -1,0 +1,680 @@
+
+
+
+
+
+
+
+
+
+
+
+
+Returning to the proof that our Cartesian plane satisfy the full
+Pasch's axiom, first several degenerate cases need to be
+considered. First group of degenerate cases arise when some points in
+the construction are equal. For example, $\bett{A}{P}{C}$ allows that
+$A=P=C$, that $A=P\neq C$, that $A\neq P=C$ and that $A \neq P \neq
+C$. A direct approach would be to analyze all these cases
+separately. However, a better approach is to carefully analyze the
+conjecture and identify which cases are substantially different. It
+turns out that only two different cases are relevant. If $P=C$, then
+$Q$ is the point sought. If $Q=C$, then $P$ is the point sought. Next
+group of degenerate cases arise when all points are collinear. In this
+case, either $\bett{A}{B}{C}$ or $\bett{B}{A}{C}$ or $\bett{B}{C}{A}$
+holds. In the first case $B$ is the point sought, in the second case
+it is the point $A$, and in the third case it is the point
+$P$.\footnote{ Note that all degenerate cases that arise in the
+  Pasch's axioms were proved directly by using these elementary
+  properties and that coordinate computations did not need to be used
+  in those cases. This suggests that degenerate cases of Pasch's axiom
+  are equivalent to the conjunction of the given properties. Further,
+  this suggests that if Tarski's axiomatics was changed so that it
+  included these elementary properties, then the Pasch's axiom could
+  be weakened so that it includes only the central case of
+  non-collinear, distinct points.}
+
+Finally, the central case remains. In that case, algebraic
+calculations are used to calculate the coordinates of the point $X$
+and prove the conjecture. To simplify the proof, isometries are used,
+as described in Section \ref{sec:iso}. The configuration is
+transformed so that $A$ becomes the origin $(0, 0)$, and so that $P =
+(0, y_P)$ and $C = (0, y_C)$ lie on the positive part of the $y$-axis.
+Let $B=(x_B, y_B)$, $Q=(x_Q, y_Q)$ and $X = (x_X, y_X)$. Since
+$\bett{A}{P}{C}$ holds, there is a real number $k_3$, $0 \le k_3 \le
+1$, such that $y_P = k_3\cdot y_C$.  Similarly, since $\bett{B}{Q}{C}$
+holds, there is a real number $k_4$, $0 \le k_4 \le 1$, such that
+$(x_B - x_A) = k_2 \cdot (x_Y - x_A)$, and $x_Q - x_B = -k_4*x_B$ and
+$y_Q - y_B = k_4*(y_C - y_B)$. Then, we can define a real number $k_1
+= \frac{k_3\cdot (1 - k_4)}{k_4 + k_3 - k_3\cdot k_4}.$ $A \neq P \neq
+C$ and points are not collinear, then, using straightforward algebraic
+calculations, it can be shown that $0 \le k1 \le 1$, and that $ x_X =
+k_1 \cdot x_B$, and $y_X - y_P = k_1\cdot (y_B - y_P)$, and therefore
+$\bett{P}{X}{B}$ holds. Similarly, we can define a real number $k_2 =
+\frac{k_4\cdot (1 - k_3)}{k_4 + k_3 - k_3\cdot k_4}$ and show that $0
+\le k_2 \le 1$ and that following holds: $x_X - x_Q = -k_2\cdot x_Q$
+and $y_X - y_Q = - k_2\cdot y_Q$ and thus $\bett{Q}{X}{A}$ holds.
+>From these two conclusion we have determined point X.
+
+
+
+
+\subsection{Axioms of Congruence and Betweenness.}
+\paragraph{Upper dimension axiom.}
+Three points equidistant from two distinct points form a line. Hence
+any model of these axioms must have dimension less than 3.
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+$\congrt{A}{P}{A}{Q} \,\wedge\, \congrt{B}{P}{B}{Q} \,\wedge\, \congrt{C}{P}{C}{Q} \,\wedge\,  P \neq Q \ \longrightarrow \colint{A}{B}{C}$
+\end{tabbing}
+}
+
+\begin{center}
+\input{ax_t_10.tkz}
+\end{center}
+
+
+
+\paragraph{Segment construction axiom.}
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+$\exists E.\ \bett{A}{B}{E}\ \wedge\ \congrt{B}{E}{C}{D}$
+\end{tabbing}
+}
+
+The proof that our Cartesian plane models this axiom is simple and
+starts by transforming the points so that $A$ becomes the origin and
+that $B$ lies on the positive part of the $y$-axis. Then $A = (0, 0)$
+and $B = (0, b)$, $b \ge 0$. Let $d = \sqrt{\agsqdist{C}{D}}$. Then $E
+= (0, b + d)$.
+
+\paragraph{Five segment axiom.}
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=assumes\ \=\kill
+$\congrt{A}{B}{A'}{B'} \,\wedge\, \congrt{B}{C}{B'}{C'}  \,\wedge\,  \congrt{A}{D}{A'}{D'}  \,\wedge\,  \congrt{B}{D}{B'}{D'} \,\wedge\,$\\
+\>$\bett{A}{B}{C} \,\wedge\, \bett{A'}{B'}{C'} \,\wedge\, A \neq B \longrightarrow  \congrt{C}{D}{C'}{D'}$
+\end{tabbing}
+}
+
+Proving that our model satisfies this axiom was rather
+straightforward, but it required complex calculations. To simplify the
+proofs, points $A$, $B$ and $C$ were transformed to the positive part
+of the $y$-axis. Since calculations involved square roots, we did not
+manage to use much automatisation and many small steps needed to be
+spelled out manually.
+
+\paragraph{The axiom of Euclid.}
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=assumes\ \=\kill
+$\bett{A}{D}{T} \,\wedge\, \bett{B}{D}{C} \,\wedge\, A \neq D \ \longrightarrow\ $\\
+\>$(\exists X Y.\ (\bett{A}{B}{X}\ \wedge\ \bett{A}{C}{Y}\ \wedge\ \bett{X}{T}{Y}))$
+\end{tabbing}
+}
+
+The corresponding picture when all points are distinct is:
+
+\begin{center}
+\input{ax_t_6.tkz}
+\end{center}
+
+% ------------------------------------------------------------------------------
+\section{Hilbert's geometry}
+\label{sec:hilbert}
+% ------------------------------------------------------------------------------
+
+Our goal in this section is to prove that our definitions of the
+Cartesian plane satisfy the axioms of Hilbert's geometry. Hilbert's
+plane geometry considers points, lines, betweenness (denoted by
+$\beth{A}{B}{C}$) and congruence (denoted by $\congrh{A}{B}{C}$) as
+basic objects.
+
+In Hilbert original axiomatization \cite{hilbert} some assumptions are
+implied from the context. For example, if it is said \emph{,,there
+  exist two points''}, it always means two distinct points. Without
+this assumption some statements do not hold (e.g.~betweenness does not
+hold if the points are equal).
+
+\subsection{Axioms of Incidence}
+First two axioms are formalized by a single statement.
+{\tt
+\begin{tabbing}
+$A \neq B \longrightarrow \exists!\ l.\ \inh{A}{l} \,\wedge\, \inh{B}{l}$
+\end{tabbing}
+}
+
+The final axioms of this groups is formalized within two separate statements.
+{\tt
+\begin{tabbing}
+$\exists A B.\ A \neq B \,\wedge\,\inh{A}{l} \,\wedge\, \inh{B}{l}$\\
+$\exists A B C.\ \neg\ \colinh{A}{B}{C}$
+\end{tabbing}
+}
+\noindent The collinearity relation $\mathcal{C}_h$ (used in the previous
+statement) is defined as
+$$\colinh{A}{B}{C} \longleftrightarrow \exists
+l.\ \inh{A}{l}\ \wedge\ \inh{B}{l}\ \wedge \ \inh{C}{l}.$$
+
+Of course, we want to show that our Cartesian plane definition
+satisfies these axioms. For example, this means that we need to show
+that
+
+\vspace{-3mm}
+{\tt
+\begin{tabbing}
+$A \neq B \longrightarrow \exists l.\ \aginh{A}{l} \wedge
+\aginh{B}{l}.$
+\end{tabbing}
+}
+
+Proofs of all these lemmas are trivial and mostly done by unfolding
+the definitions and then using automation (using the Gr\"obner bases
+methods).
+
+
+\subsection{Axioms of Order}
+Axioms of order describe properties of the (exclusive) betweenness relation.
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=assumes\ \=\kill
+$\beth{A}{B}{C} \longrightarrow A \neq B\,\wedge\,A \neq C\,\wedge\,B \neq C\,\wedge\,\colinh{A}{B}{C}\,\wedge\,\beth{C}{B}{A}$\\
+$A \neq C \longrightarrow \exists B.\ \beth{A}{C}{B}$\\
+$\inh{A}{l}\,\wedge\,\inh{B}{l}\,\wedge\, \inh{C}{l}\,\wedge\,A \neq B\,\wedge\,B \neq C\,\wedge\,A \neq C \longrightarrow$\\
+\> $(\beth{A}{B}{C}\ \wedge\ \neg \beth{B}{C}{A}\ \wedge\ \neg \beth{C}{A}{B}) \ \vee$ \\
+\> $(\neg\beth{A}{B}{C}\ \wedge\ \beth{B}{C}{A}\ \wedge\  \neg \beth{C}{A}{B}) \ \vee$\\
+\>$(\neg\beth{A}{B}{C}\ \wedge\ \neg \beth{B}{C}{A}\ \wedge\ \beth{C}{A}{B})$
+\end{tabbing}
+}
+
+
+The proof that the relations $\agcongr{}{}{}$, $\aginh{}{}{}$, and
+$\agbeth{}{}{}$ satisfy these axioms are simple and again have been
+done mainly by unfolding the definitions and using automation.
+
+\paragraph{Axiom of Pasch.}
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=assumes\ \=\kill
+$A \neq B\,\wedge\,B \neq C\,\wedge\,C \neq A\,\wedge\,\beth{A}{P}{B}\,\wedge$\\
+$\,\inh{P}{l}\,\wedge\,\neg \inh{C}{l}\,\wedge\,\neg \inh{A}{l}\,\wedge\,\neg \inh{B}{l}h\ \longrightarrow$\\
+\>$\exists Q.\ (\beth{A}{Q}{C}\  \wedge\ \inh{Q}{l})\ \vee\
+               (\beth{B}{Q}{C}\  \wedge\  \inh{Q}{l})$
+\end{tabbing}
+}
+
+\begin{center}
+\input{ax_h_Pasch.tkz}
+\end{center}
+
+In the original Pasch axiom there is one more assumption -- points $A$,
+$B$ and $C$ are not collinear, so the axiom is formulated only for the
+central, non-degenerate case. However, in our model the statement
+holds trivially if they are, so we have shown that our model satisfies
+both the central and the degenerate case of collinear points. Note
+that, due to the properties of the Hilbert's between relation, the
+assumptions about the distinctness of points cannot be omitted.
+
+The proof uses the standard technique. First, isometric
+transformations are used to translate points to the $y$-axis, so that
+$A = (0, 0)$, $B = (x_B, 0)$ and $P = (x_P, 0)$. Let $C = (x_C, y_C)$
+and $\mathit{Rep\_line\_coeffs}\ l = (l_A, l_B, l_C)$. We distinguish two
+major cases, depending in which of the given segments requested point
+lies. Using the property $\beth{A}{P}{B}$ it is shown that $l_A\cdot
+y_B \neq 0$ and then, two coefficient $k_1 = \frac{-l_C}{l_A\cdot
+  y_B}$ and $k_2 = \frac{l_A\cdot y_B + l_C}{l_A\cdot y_B}$ are
+defined. Next, it is shown that it holds $0 < k_1 < 1$ or $0 < k_2 <
+1$. Using $0 < k_1 < 1$, the point $Q = (x_Q, y_Q)$ is determined by
+$x_Q = k_1\cdot x_C$ and $y_Q = k_1\cdot y_C$, thus $\beth{A}{Q}{C}$
+holds. In the other case, when the second property holds, the point
+$Q=(x_q, y_q)$ is determined by $x_Q = k_2\cdot (x_C - x_B) + x_B$ and
+$y_Q = k_2\cdot y_C$, thus $\bett{B}{Q}{C}$ holds.
+
+\subsection{Axioms of Congruence}
+The first axiom gives the possibility of constructing congruent
+segments on given lines. In Hilbert's Grundlagen \cite{hilbert} it is
+formulated as follows: \emph{If $A$, $B$ are two points on a line $a$, and
+  $A'$ is a point on the same or another line $a'$ then it is always
+  possible to find a point $B'$ on a given side of the line $a'$ through
+  $A'$ such that the segment $AB$ is congruent to the segment $A'B'$.}
+However, in our formalization part \emph{on a given side} is changed
+and two points are obtained (however, that is implicitly stated in the
+original axiom).
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=assumes\ \=\kill
+$A \neq B\,\wedge\,\inh{A}{l}\,\wedge\,\inh{B}{l}\,\wedge\,\inh{A'}{l'}\ \longrightarrow$\\
+\> $\exists B'\, C'.\ \inh{B'}{l'}\,\wedge\,\inh{C'}{l'}\,\wedge\,\beth{C'}{A'}{B'}\,\wedge\,\congrh{A}{B}{A'}{B'}\,\wedge\,\congrh{A}{B}{A'}{C'}$
+\end{tabbing}
+}
+
+The proof that this axiom holds in our Cartesian model, starts with
+isometric transformation so that $A'$ becomes $(0, 0)$ and $l'$
+becomes the x-axes. Then, it is rather simple to find the two points
+on the x-axis by determining their coordinates using condition that
+$\agsqdist{}{}$ between them and the point $A'$ is same as the
+$\agsqdist{A}{B}$.
+
+
+The following two axioms are proved straightforward by unfolding the
+corresponding definitions, and automatically performing algebraic
+calculations and the Gr\"obner bases method.
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=assumes\ \=\kill
+$\congrh{A}{B}{A'}{B'}\,\wedge\,\congrh{A}{B}{A''}{B''}\ \longrightarrow\ \congrh{A'}{B'}{A''}{B''}$\\
+$\beth{A}{B}{C}\,\wedge\,\beth{A'}{B'}{C'}\,\wedge\,\congrh{A}{B}{A'}{B'}\,\wedge\,\congrh{B}{C}{B'}{C'} \ \longrightarrow\ \congrh{A}{C}{A'}{C'}$
+\end{tabbing}
+}
+
+Next three axioms in the Hilbert's axiomatization are concerning the
+notion of angles, and we have not yet considered angles in our
+formalization.
+
+
+\subsection{Axiom of Parallels}
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=assumes\ \=\kill
+$\neg \inh{P}{l} \ \longrightarrow\ \exists!\,l'.\ \inh{P}{l'}\ \wedge\ \neg (\exists\ P_1.\ \inh{P_1}{l}\ \wedge\  \inh{P_1}{l'})$
+\end{tabbing}
+}
+
+The proof of this axiom consists of two parts. First, it is shown that
+such line exists and second, that it is unique.  Showing the existence
+is done by finding coefficients of the line sought.  Let $P = (x_P,
+y_P)$ and $\mathit{Rep\_line\_coeffs} l = (l_A, l_B, l_C)$.  Then
+coefficients of the requested line are $(l_A, l_B, -l_A\cdot x_P -
+l_B\cdot y_P)$. In the second part, the proof starts from the
+assumption that there exist two lines that satisfy the condition
+$\inh{P}{l'}\ \wedge\ \neg (\exists\ P_1.\ \inh{P_1}{l}\ \wedge\  \inh{P_1}{l'})$. In
+the proof it is shown that their coefficients are proportional and
+thus the lines are equal.
+
+\subsection{Axioms of Continuity}
+
+\paragraph{Axiom of Archimedes.}
+Let $A_1$ be any point upon a straight line between the arbitrarily
+chosen points A and B.  Choose the points $A_2, A_3, A_4, \ldots$ so
+that $A_1$ lies between A and $A_2$, $A_2$ between $A_1$ and $A_3$,
+$A_3$ between $A_2$ and $A_4$ etc. Moreover, let the segments $AA_1,
+A_1A_2, A_2A_3, A_3A_4, \ldots$ be equal to one another. Then, among
+this series of points, there always exists a point $A_n$ such that B
+lies between A and $A_n$.
+
+It is rather difficult to represent series of points in a manner as
+stated in the axiom and our solution was to use list. First, we
+define a list such that each four consecutive points are congruent
+and betweenness relation holds for each three consecutive points.
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=assumes\ \=\kill
+definition \\
+\> congruentl $l \longrightarrow length\ l \ge 3\ \wedge$\\
+\>\>  $\forall i.\ 0 \le i\ \wedge\ i+2 < length\ l \longrightarrow$ \\
+\>\>  $\congrh{(l\ !\ i)}{(l\ !\ (i+1))}{(l\ !\ (i+1))}{(l\ !\ (i+2))}\ \wedge $\\
+\>\>  $\beth{(l\ !\ i)}{(l\ !\ (i+1))}{(l\ !\ (i+2))}$
+\end{tabbing}
+}
+
+Having this, the axiom can be bit transformed, but still with the same
+meaning, and it states that there exists a list of points with
+properties mentioned above such that for at least one point A' of the
+list, $\bett{A}{B}{A'}$ holds. In Isabelle/HOL this is formalized as:
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+$\beth{A}{A_1}{B}\ \longrightarrow$\\
+\> $(\exists l.\ congruentl (A\ \#\ A1\ \#\ l)\ \wedge\ (\exists i.\ \beth{A}{B}{(l\ !\ i)}))$
+\end{tabbing}
+}
+
+The main idea of the proof is in the statements $\agsqdist{A}{A'} >
+\agsqdist{A}{B}$ and $\agsqdist{A}{A'} = t\cdot
+\agsqdist{A}{A_1}$. So, in the first part of the proof we find such
+$t$ that $t\cdot \agsqdist{A}{A_1} > \agsqdist{A}{B}$ holds. This is
+achieved by applying Archimedes' rule for real numbers. Next, it is
+proved that there exists a list $l$ such that \verb|congruentl| $l$
+holds, that it is longer then $t$, and that it's first two elements
+are $A$ and $A_1$. This is done by induction on the parameter $t$. The
+basis of induction, when $t = 0$ trivially holds. In the induction
+step, the list is extended by one point such that it is congruent with
+the last three elements of the list and that between relation holds
+for the last two elements and added point. Using these conditions,
+coordinates of the new point are easily determined by algebraic
+calculations. Once constructed, the list satisfies the conditions of
+the axiom, what is easily showed in the final steps of the proof. The
+proof uses some additional lemmas which are mostly used to describe
+properties of the list that satisfies condition \verb|congruentl| $l$.
+
+% ------------------------------------------------------------------------------
+\section{Related work}
+\label{sec:related}
+% ------------------------------------------------------------------------------
+
+There are a number of formalizations of fragments of various
+geometries within proof assistants.
+
+Formalizing Tarski geometry using Coq proof assistant was done by
+Narboux \cite{narboux}.  Many geometric properties are derived,
+different versions of Pasch axiom, betweenness and congruence
+properties.The paper is concluded with the proof of existence of
+midpoint of a segment.
+
+Another formalization using Coq was done for projective plane geometry
+by Magaud, Narboux and Schreck \cite{projective-coq1,projective-coq2}.
+Some basic properties are derived, and the principle of duality
+for projective geometry.  Finely the consistency of the axioms are
+proved in three models, both finite and infinite. In the end authors
+discuss the degenerate cases and choose ranks and flats to deal with
+them.
+
+First attempt to formalize first groups of Hilbert's axioms and their
+consequences within a proof assistant was done by Dehliger, Dufourd
+and Schreck in intuitionistic manner in Coq \cite{hilbert-coq}. The
+next attempt in Isabelle/Isar was done by Meikle and Fleuriot
+\cite{hilbert-isabelle}. The authors argue the common believed
+assumption that Hilbert's proofs are less intuitive and more
+rigorous. Important conclusion is that Hilbert uses many assumptions
+that in formalization checked by a computer could not be made and
+therefore had to be formally justified.
+
+Guilhot connects Dynamic Geometry Software (DGS) and formal theorem
+proving using Coq proof assistant in order to ease studying the
+Euclidean geometry for high school students \cite{guilhot}. Pham,
+Bertot and Narboux suggest a few improvements \cite{coqly}. The first
+is to eliminate redundant axioms using a vector approach. They
+introduced four axioms to describe vectors and tree more to define
+Euclidean plane, and they introduced definitions to describe geometric
+concepts. Using this, geometric properties are easily proved. The
+second improvement is use of area method for automated theorem
+proving. In order to formally justify usage of the area method,
+Cartesian plane is constructed using geometric properties previously
+proved.
+
+Avigad describes the axiomatization of Euclidean geometry
+\cite{avigad}. Authors start from the claim that Euclidean geometry
+describes more naturally geometry statements than some axiomatizations
+of geometry done recently and it's diagrammatic approach is not so
+full of weaknesses as some might think. In order to prove this, the
+system E is introduced in which basic objects such as point, line,
+circle are described as literals and axioms are used to describe
+diagram properties from which conclusions could be made. The authors
+also illustrate the logical framework in which proofs can be
+constructed. In the work are presented some proofs of geometric
+properties as well as equivalence between Tarski's system for
+ruler-and-compass and E. The degenerate cases are avoided by making
+assumptions and thus only proving general case.
+
+In \cite{william} is proposed the minimal set of Hilbert axioms and
+set theory is used to model it. The main properties and theorems are
+carried out within this model.
+
+In many of these formalizations discussion about degenerate cases is
+omitted. Although, usually the general case expresses important
+geometry property, observing degenerate cases usually leads to
+conclusion about some basic properties such as transitivity or
+symmetry, and thus makes them equally important.
+
+Beside formalization of geometries many authors tried to formalize
+automated proving in geometry.
+
+Gr\'egoire, Pottier and Th\'ery combine a modified version of
+Buchberger’s algorithm and some reflexive techniques to get an
+effective procedure that automatically produces formal proofs of
+theorems in geometry \cite{grobnercoq}.
+
+G\'enevaux, Narboux and Schreck formalize Wu's simple method in Coq
+\cite{wucoq}. Their approach is based on verification of certificates
+generated by an implementation in Ocaml of a simple version of Wu's
+method.
+
+Fuchs and Th{\'e}ry formalize Grassmann-Cayley algebra in Coq proof
+assistant \cite{grassman}. The second part, more interesting in the
+context of this paper, presents application of the algebra on the
+geometry of incidence. Points, lines and there relationships are
+defined in form of algebra operations. Using this, theorems of Pappus
+and Desargues are interactively proved in Coq. Finally the authors
+describe the automatisation in Coq of theorem proving in geometry
+using this algebra. The drawback of this work is that only those
+statements where goal is to prove that some points are collinear can
+automatically be proved and that only non-degenerate cases are
+considered.
+
+Pottier presents programs for calculating Grobner basis, F4, GB and
+gbcoq and compares them \cite{grobner_coq}.  A solution with
+certificates is proposed and this shortens the time for computation
+such that gbcoq, although made in Coq, becomes competitive with two
+others. Application of Gr\"obner basis on algebra, geometry and
+arithmetic are represented through three examples.
+
+
+
+% ------------------------------------------------------------------------------
+\section{Conclusions and Further Work}
+\label{sec:concl}
+% ------------------------------------------------------------------------------
+
+In this paper, we have developed a formalization of Cartesian plane
+geometry within Isabelle/HOL. Several different definitions of the
+Cartesian plane were given, but it was shown that they are all
+equivalent. The definitions were taken from the standard
+textbooks. However, to express them in a formal setting of a proof
+assistant, much more rigour was necessary. For example, when
+expressing lines by equations, some textbooks mention that equations
+represent the line if their coefficients are ``proportional'', while
+some other fail even to mention this. The texts usually do not mention
+constructions like equivalence relations and equivalence classes that
+underlie our formal definitions.
+
+We have formally shown that the Cartesian plane satisfies all Tarski's
+axioms and most of the Hilbert's axioms (including the continuity
+axiom). Proving that our Cartesian plane model satisfies all the
+axioms of the Hilbert's system is left for further work (as we found
+the formulation of the completeness axiom and the axioms involving the
+derived notion of angles problematic).
+
+Our experience shows that proving that our model satisfies simple
+Hilbert's axioms was easier than showing that it satisfies Tarski's
+axioms. This is mostly due to the definition of the betweenness
+relation. Namely, Tarski's axiom allows points connected by the
+betweenness relation to be equal. This gives rise to many degenerate
+cases that need to be considered separately, what complicates
+reasoning and proofs. However, Hilbert's axioms are formulated using
+derived notions (e.g., angles) what posed problems for our
+formalization.
+
+The fact that analytic geometry models geometric axioms is usually
+taken for granted, as a rather simple fact. However, our experience
+shows that, although conceptually simple, the proof of this fact
+requires complex computations and is very demanding for
+formalization. It turned out that the most significant technique used
+to simplify the proof was ``without loss of generality reasoning'' and
+using isometry transformations. For example, we have tried to prove
+the central case of the Pasch's axiom, without applying isometry
+transformations first. Although it should be possible do a proof like
+that, the arising calculations were so difficult that we did not
+manage to finish such a proof. After applying isometry
+transformations, calculations remained non-trivial, but still, we
+managed to finish this proof (however, many manual interventions had
+to be used because even powerful tactics relying on the Gr\"obner
+bases did not manage to do all the algebraic simplifications
+automatically). From this experiment on Pasch's axiom, we learned the
+significance of isometry transformations and we did not even try to
+prove other lemmas directly.
+
+Our formalization of the analytic geometry relies on the axioms of
+real numbers and properties of reals are used throughout our
+proofs. Many properties would hold for any numeric field (and
+Gr\"obner bases tactics used in our proofs would also work in that
+case). However, for showing the continuity axioms, we used the
+supremum property, not holding in an arbitrary field. In our further
+work, we would like to build analytic geometries without using the
+axioms of real numbers, i.e., define analytic geometries within
+Tarski's or Hilbert's axiomatic system. Together with the current
+work, this would help analyzing some model theoretic properties of
+geometries. For example, we want to show the categoricity of both
+Tarski's and Hilbert's axiomatic system (and prove that all models are
+isomorphic and equivalent to the Cartesian plane).
+
+Our present and further work also includes formalizing analytic models
+of non-Euclidean geometries. For example, we have given formal
+definitions of the Poincar\'e disk (were points are points in the unit
+disk and lines are circle segments perpendicular to the unit circle)
+using the Complex numbers available in Isabelle/HOL and currently we
+are showing that these definitions satisfy all axioms except the
+parallel axiom.
+
+Finally, we want to connect our formal developments to the
+implementation of algebraic methods for automated deduction in
+geometry, making formally verified yet efficient theorem provers for
+geometry.
+
+% ------------------------------------------------------------------------------
+% Bibliography
+% ------------------------------------------------------------------------------
+%\bibliography{article}{}
+%\bibliographystyle{plain}
+
+\begin{thebibliography}{10}
+
+\bibitem{avigad}
+Jeremy Avigad, Edward Dean, and John Mumma.
+\newblock A formal system for {E}uclid's \emph{{E}lements}.
+\newblock {\em Review of Symbolic Logic}, 2(4):700--768, 2009.
+
+\bibitem{locales}
+Clemens Ballarin.
+\newblock Interpretation of locales in isabelle: Theories and proof contexts.
+\newblock In {\em MKM}, LNCS 4108, pp.~31--43. Springer, 2006.
+
+\bibitem{buchberger}
+Bruno Buchberger.
+\newblock Bruno Buchberger's PHD thesis 1965: An algorithm for finding the
+  basis elements of the residue class ring of a zero dimensional polynomial
+  ideal.
+\newblock {\em J. Symb. Comput.}, 41(3-4):475--511, 2006.
+
+
+\bibitem{hilbert-coq}
+Christophe Dehlinger, Jean-François Dufourd and Pascal Schreck.
+\newblock Higher-Order Intuitionistic Formalization and Proofs in Hilbert’s Elementary Geometry.
+\newblock In {\em Automated Deduction in Geometry}, ADG'01, LNCS 2061, Springer. 2001.
+
+
+
+\bibitem{grassman}
+Laurent Fuchs and Laurent Th{\'e}ry.
+\newblock A formalization of Grassmann-Cayley algebra in COQ and its
+  application to theorem proving in projective geometry.
+\newblock In {\em Automated Deduction in Geometry}, ADG'10, pp.~51--67. Springer. 2011.
+
+\bibitem{wucoq}
+Jean-David G{\'e}nevaux, Julien Narboux, and Pascal Schreck.
+\newblock Formalization of Wu's simple method in COQ.
+\newblock In {\em CPP}, LNCS 7086, pp.~71--86. Springer, 2011.
+
+\bibitem{grobnercoq}
+Benjamin Gr{\'e}goire, Lo\"{\i}c Pottier, and Laurent Th{\'e}ry.
+\newblock Proof certificates for algebra and their application to automatic
+  geometry theorem proving.
+\newblock In {\em Automated Deduction in Geometry}, LNCS 6301, pp.~42--59. Springer, 2011.
+
+\bibitem{guilhot}
+F.~Guilhot.
+\newblock Formalisation en COQ et visualisation d’un cours de g\'eom\'etrie
+  pour le lyc\'e.
+\newblock {\em TSI 24, 1113–1138}, 2005.
+
+
+\bibitem{wlog}
+John Harrison.
+\newblock Without loss of generality.
+\newblock In {\em TPHOLs}, LNCS 5674, pp.~43--59. Springer, 2009.
+
+\bibitem{hilbert}
+David Hilbert.
+\newblock {\em Grundlagen der Geometrie}.
+\newblock Leipzig, B.G. Teubner, 1903.
+
+\bibitem{isabelle-quotient}
+Cezary Kaliszyk and Christian Urban.
+\newblock Quotients revisited for Isabelle/HOL.
+\newblock In {\em SAC}, pp.~1639--1644. ACM, 2011.
+
+\bibitem{kapur}
+Deepak Kapur.
+\newblock Using Gr\"obner bases to reason about geometry problems.
+\newblock {\em Journal of Symbolic Computation}, 2(4), 1986.
+
+\bibitem{projective-coq1}
+Nicolas Magaud, Julien Narboux, and Pascal Schreck.
+\newblock Formalizing projective plane geometry in coq.
+\newblock In {\em Automated Deduction in Geometry} 2008., pages 141--162.
+
+\bibitem{projective-coq2}
+Nicolas Magaud, Julien Narboux, and Pascal Schreck.
+\newblock A case study in formalizing projective geometry in COQ: Desargues
+  theorem.
+\newblock {\em Comput. Geom.}, 45(8):406--424, 2012.
+
+\bibitem{thedu}
+Filip Mari\'c, Ivan Petrovi\'c, Danijela Petrovi\'c, and Predrag Jani\v{c}i\'c.
+\newblock Formalization and implementation of algebraic methods in geometry.
+\newblock In {\em THEDU'11}, {\em Electronic Proceedings in Theoretical Computer Science} 79, pp.~63--81. 2012.
+
+\bibitem{hilbert-isabelle}
+Laura~I. Meikle and Jacques~D. Fleuriot.
+\newblock Formalizing Hilbert's Grundlagen in Isabelle/Isar.
+\newblock In {\em TPHOLs}, LNCS 2758, pp.~319--334. Springer, 2003.
+
+\bibitem{narboux}
+Julien Narboux.
+\newblock Mechanical theorem proving in Tarski's geometry.
+\newblock In {\em Automated Deduction in Geometry}, LNCS 4869, pp.~139--156. Springer, 2006.
+
+\bibitem{Isabelle}
+Tobias Nipkow, Lawrence~C. Paulson, and Markus Wenzel.
+\newblock {\em Isabelle/HOL - A Proof Assistant for Higher-Order Logic}, LNCS 2283.
+\newblock Springer, 2002.
+
+\bibitem{coqly}
+Tuan-Minh Pham, Yves Bertot, and Julien Narboux.
+\newblock A COQ-based library for interactive and automated theorem proving in
+  plane geometry.
+\newblock In {\em ICCSA (4)}, LNCS 6785, pp.~368--383. Springer, 2011.
+
+\bibitem{grobner_coq}
+Lo\"{\i}c Pottier.
+\newblock Connecting Gr{\"o}bner bases programs with COQ to do proofs in
+  algebra, geometry and arithmetics.
+\newblock {\em CoRR}, abs/1007.3615, 2010.
+
+\bibitem{william}
+William Richter.
+\newblock A minimal version of Hilbert's axioms for plane geometry.
+\newblock \url{www.math.northwestern.edu/~richter/hilbert.pdf}
+
+\bibitem{tarski}
+W.~Schwabhäuser, W.~Szmielew, and A.~Tarski.
+\newblock {\em Metamathematische Methoden in der Geometrie}.
+\newblock Springer-Verlag, 1983.
+
+\bibitem{wu}
+Wen-Ts\"un Wu.
+\newblock On the decision problem and the mechanization of theorem proving in
+  elementary geometry.
+\newblock {\em Scientia Sinica}, 21, 1978.
+\end{thebibliography}
+
+
+\end{document}

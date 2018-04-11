@@ -1,0 +1,30 @@
+dim 100 70
+
+ang_picture 0 0 100 70
+
+ang_origin 5 5 
+
+ang_unit 5
+
+ang_point A 7 9
+ang_point B 7 7
+ang_point C 7 1
+ang_point P 2 3
+ang_point Q 12 3
+
+line a A B
+
+drawline a
+
+drawsegment A P
+drawsegment A Q
+drawsegment B P
+drawsegment B Q
+drawsegment C P
+drawsegment C Q
+
+cmark_lt A
+cmark_lt B
+cmark_lb C
+cmark_l P
+cmark_r Q

@@ -1,0 +1,553 @@
+\ProvidesFile{serbian.lbx}
+[\abx@lbxid]
+
+\DeclareRedundantLanguages{serbian}{serbian}
+
+\DeclareBibliographyExtras{%
+  \protected\def\bibrangedash{%
+    \textendash\penalty\hyphenpenalty}% breakable dash
+  \protected\def\bibdatedash{\bibrangedash}%
+  \def\finalandcomma{\addcomma}%
+  \def\finalandsemicolon{\addsemicolon}%
+  \protected\def\mkbibordinal#1{%
+    \begingroup
+    \@tempcnta0#1\relax\number\@tempcnta
+    \@whilenum\@tempcnta>100\do{\advance\@tempcnta-100\relax}%
+    \ifnum\@tempcnta>20
+      \@whilenum\@tempcnta>9\do{\advance\@tempcnta-10\relax}%
+    \fi
+    \ifcase\@tempcnta th\or st\or nd\or rd\else th\fi
+    \endgroup}%
+  \protected\def\mkbibmascord{\mkbibordinal}%
+  \protected\def\mkbibfemord{\mkbibordinal}%
+  \protected\def\mkbibneutord{\mkbibordinal}%
+  \protected\def\mkbibdatelong#1#2#3{%
+    \iffieldundef{#2}
+      {}
+      {\mkbibmonth{\thefield{#2}}%
+       \iffieldundef{#3}
+         {\iffieldundef{#1}{}{\space}}
+	 {\nobreakspace}}%
+    \iffieldundef{#3}
+      {}
+      {\stripzeros{\thefield{#3}}%
+       \iffieldundef{#1}{}{,\space}}%
+     \iffieldbibstring{#1}
+       {\bibstring{\thefield{#1}}}
+       {\stripzeros{\thefield{#1}}}}%
+  \protected\def\mkbibdateshort#1#2#3{%
+    \iffieldundef{#2}
+      {}
+      {\mkdatezeros{\thefield{#2}}%
+       \iffieldundef{#3}
+         {\iffieldundef{#1}{}{/}}
+         {/}}%
+    \iffieldundef{#3}
+      {}
+      {\mkdatezeros{\thefield{#3}}%
+       \iffieldundef{#1}{}{/}}%
+     \iffieldbibstring{#1}
+       {\bibstring{\thefield{#1}}}
+       {\mkdatezeros{\thefield{#1}}}}%
+  \savecommand\mkbibrangecomp
+  \savecommand\mkbibrangecompextra
+  \savecommand\mkbibrangeterse
+  \savecommand\mkbibrangeterseextra
+  \protected\def\mkbibrangecomp{%
+    \lbx@us@mkbibrangetrunc@long{long}}%
+  \protected\def\mkbibrangeterse{%
+    \lbx@us@mkbibrangetrunc@short{short}}%
+  \protected\def\mkbibrangecompextra{%
+    \lbx@us@mkbibrangetruncextra@long{long}}%
+  \protected\def\mkbibrangeterseextra{%
+    \lbx@us@mkbibrangetruncextra@short{short}}%
+}
+
+\UndeclareBibliographyExtras{%
+  \restorecommand\mkbibrangecomp
+  \restorecommand\mkbibrangecompextra
+  \restorecommand\mkbibrangeterse
+  \restorecommand\mkbibrangeterseextra
+}
+
+\DeclareBibliographyStrings{%
+  bibliography     = {{Литература}{Литература}},
+  references       = {{Референце}{Референце}},
+  shorthands       = {{Листа скраћеница}{Скраћенице}},
+  editor           = {{уредник}{ур\adddot}},
+  editors          = {{уредници}{ур\adddot}},
+  compiler         = {{приредио}{приредио\adddot}},
+  compilers        = {{приредили}{приредили\adddot}},
+  redactor         = {{редактор}{ред\adddot}},
+  redactors        = {{редактори}{ред\adddot}},
+  reviser          = {{коректор}{кор\adddot}},
+  revisers         = {{коректори}{кор\adddot}},
+  founder          = {{оснивач}{осн\adddot}},
+  founders         = {{оснивачи}{осн\adddot}},
+  continuator      = {{настављач}{наст\adddot}},% FIXME: unsure
+  continuators     = {{настављачи}{наст\adddot}},% FIXME: unsure
+  collaborator     = {{сарадник}{сар\adddot}},% FIXME: unsure
+  collaborators    = {{сарадници}{сар\adddot}},% FIXME: unsure
+  translator       = {{преводилац}{прев\adddot}},
+  translators      = {{преводиоци}{прев\adddot}},
+  commentator      = {{коментатор}{ком\adddot}},
+  commentators     = {{коментатори}{ком\adddot}},
+  annotator        = {{анотатор}{анот\adddot}},
+  annotators       = {{анотатори}{анот\adddot}},
+  commentary       = {{коментар}{ком\adddot}},
+  annotations      = {{анотације}{анот\adddot}},
+  introduction     = {{увод}{ув\adddot}},
+  foreword         = {{предговор}{предг\adddot}},
+  afterword        = {{поговор}{погов\adddot}},
+  editortr         = {{уредник и преводилац}%
+                      {ур\adddotspace и прев\adddot}},
+  editorstr        = {{уредници и преводиоци}%
+                      {ур\adddotspace и прев\adddot}},
+  editorco         = {{уредник и коментатор}%
+                      {ур\adddotspace и ком\adddot}},
+  editorsco        = {{уредници и коментатори}%
+                      {ур\adddotspace и ком\adddot}},
+  editoran         = {{уредник и анотатор}%
+                      {ур\adddotspace и анот\adddot}},
+  editorsan        = {{уредници и анотатори}%
+                      {ур\adddotspace и анот\adddot}},
+  editorin         = {{уредник и уводничар}%
+                      {ур\adddotspace и ув\adddot}},
+  editorsin        = {{уредници и уводничари}%
+                      {ур\adddotspace и ув\adddot}},
+  editorfo         = {{уредник и писац предговора}%
+                      {ур\adddotspace и предгов\adddot}},
+  editorsfo        = {{уредници и писац предговора}%
+                      {ур\adddotspace и предгов\adddot}},
+  editoraf         = {{уредник и писац поговора}%
+                      {ур\adddotspace и погов\adddot}},
+  editorsaf        = {{уредници и писци поговора}%
+                      {ур\adddotspace и погов\adddot}},
+  editortrco       = {{уредник, преводилац\finalandcomma\ и коментатор}%
+                      {ур.,\addabbrvspace прев\adddot\finalandcomma\ и ком\adddot}},
+  editorstrco      = {{уредници, преводиоци\finalandcomma\ и коментатори}%
+                      {ур.,\addabbrvspace прев\adddot\finalandcomma\ и ком\adddot}},
+  editortran       = {{уредник, преводилац\finalandcomma\ и анотатор}%
+                      {ур.,\addabbrvspace прев\adddot\finalandcomma\ и анот\adddot}},
+  editorstran      = {{уредници, преводиоци\finalandcomma\ и анотатори}%
+                      {ур.,\addabbrvspace прев\adddot\finalandcomma\ и анот\adddot}},
+  editortrin       = {{уредник, преводилац\finalandcomma\ и уводничар}%
+                      {ур.,\addabbrvspace прев\adddot\finalandcomma\ и ув\adddot}},
+  editorstrin      = {{уредници, преводиоци\finalandcomma\ и уводничари}%
+                      {ур.,\addabbrvspace прев\adddot\finalandcomma\ и ув\adddot}},
+  editortrfo       = {{уредник, преводилац\finalandcomma\ и писац предговора}%
+                      {ур.,\addabbrvspace прев\adddot\finalandcomma\ и предгов\adddot}},
+  editorstrfo      = {{уредници, преводиоци\finalandcomma\ и писац предговора}%
+                      {ур.,\addabbrvspace прев\adddot\finalandcomma\ и предгов\adddot}},
+  editortraf       = {{уредник, преводилац\finalandcomma\ и писац поговора}%
+                      {ур.,\addabbrvspace прев\adddot\finalandcomma\ и погов\adddot}},
+  editorstraf      = {{уредници, преводиоци\finalandcomma\ и писац поговора}%
+                      {ур.,\addabbrvspace прев\adddot\finalandcomma\ и погов\adddot}},
+  editorcoin       = {{уредник, коментатор\finalandcomma\ и уводничар}%
+                      {ур.,\addabbrvspace ком\adddot\finalandcomma\ и ув\adddot}},
+  editorscoin      = {{уредници, коментатори\finalandcomma\ и уводничар}%
+                      {ур.,\addabbrvspace ком\adddot\finalandcomma\ и ув\adddot}},
+  editorcofo       = {{уредник, коментатор\finalandcomma\ и писац предговора}%
+                      {ур.,\addabbrvspace ком\adddot\finalandcomma\ и предгов\adddot}},
+  editorscofo      = {{уредници, коментатори\finalandcomma\ и писац предговора}%
+                      {ур.,\addabbrvspace ком\adddot\finalandcomma\ и предгов\adddot}},
+  editorcoaf       = {{уредник, коментатор\finalandcomma\ и писац поговора}%
+                      {ур.,\addabbrvspace ком\adddot\finalandcomma\ и погов\adddot}},
+  editorscoaf      = {{уредници, коментатори\finalandcomma\ и писци поговора}%
+                      {ур.,\addabbrvspace ком\adddot\finalandcomma\ и погов\adddot}},
+  editoranin       = {{уредник, анотатор\finalandcomma\ и уводничар}%
+                      {ур.,\addabbrvspace анот\adddot\finalandcomma\ и ув\adddot}},
+  editorsanin      = {{уредници, анотатори\finalandcomma\ и уводничар}%
+                      {ур.,\addabbrvspace анот\adddot\finalandcomma\ и ув\adddot}},
+  editoranfo       = {{уредник, анотатор\finalandcomma\ и писац предговора}%
+                      {ур.,\addabbrvspace анот\adddot\finalandcomma\ и предгов\adddot}},
+  editorsanfo      = {{уредници, анотатори\finalandcomma\ и писац предговора}%
+                      {ур.,\addabbrvspace анот\adddot\finalandcomma\ и предгов\adddot}},
+  editoranaf       = {{уредник, анотатор\finalandcomma\ и писац поговора}%
+                      {ур.,\addabbrvspace анот\adddot\finalandcomma\ и погов\adddot}},
+  editorsanaf      = {{уредници, анотатори\finalandcomma\ и писац поговора}%
+                      {ур.,\addabbrvspace анот\adddot\finalandcomma\ и погов\adddot}},
+  editortrcoin     = {{уредник, преводилац, коментатор\finalandcomma\ и уводничар}%
+                      {ур.,\addabbrvspace прев., ком\adddot\finalandcomma\ и ув\adddot}},
+  editorstrcoin    = {{уредници, преводиоци, коментатори\finalandcomma\ и уводничари}%
+                      {ур.,\addabbrvspace прев., ком\adddot\finalandcomma\ и ув\adddot}},
+  editortrcofo     = {{уредник, преводилац, коментатор\finalandcomma\ и писац предговора}%
+                      {ур.,\addabbrvspace прев., ком\adddot\finalandcomma\ и предгов\adddot}},
+  editorstrcofo    = {{уредници, преводиоци, коментатори\finalandcomma\ и писац предговора}%
+                      {ур.,\addabbrvspace прев., ком\adddot\finalandcomma\ и предгов\adddot}},
+  editortrcoaf     = {{уредник, преводилац, коментатор\finalandcomma\ и писац поговора}%
+                      {ур.,\addabbrvspace прев., ком\adddot\finalandcomma\ и погов\adddot}},
+  editorstrcoaf    = {{уредници, преводиоци, коментатори\finalandcomma\ и писци поговора}%
+                      {ур.,\addabbrvspace прев., ком\adddot\finalandcomma\ и погов\adddot}},
+  editortranin     = {{уредник, преводилац, анотатор\finalandcomma\ и уводничар}%
+                      {ур.,\addabbrvspace прев., анот\adddot\finalandcomma\ и ув\adddot}},
+  editorstranin    = {{уредници, преводиоци, анотатори\finalandcomma\ и уводничар}%
+                      {ур.,\addabbrvspace прев., анот\adddot\finalandcomma\ и ув\adddot}},
+  editortranfo     = {{уредник, преводилац, анотатор\finalandcomma\ и писац предговора}%
+                      {ур.,\addabbrvspace прев., анот\adddot\finalandcomma\ и предгов\adddot}},
+  editorstranfo    = {{уредници, преводиоци, анотатори\finalandcomma\ и писац предговора}%
+                      {ур.,\addabbrvspace прев., анот\adddot\finalandcomma\ и предгов\adddot}},
+  editortranaf     = {{уредник, преводилац, анотатор\finalandcomma\ и писац поговора}%
+                      {ур.,\addabbrvspace прев., анот\adddot\finalandcomma\ и погов\adddot}},
+  editorstranaf    = {{уредници, преводиоци, анотатори\finalandcomma\ и писци поговора}%
+                      {ур.,\addabbrvspace прев., анот\adddot\finalandcomma\ и погов\adddot}},
+  translatorco     = {{преводилац и коментатор}%
+                      {прев\adddot\ и ком\adddot}},
+  translatorsco    = {{преводиоци и коментатори}%
+                      {прев\adddot\ и ком\adddot}},
+  translatoran     = {{преводилац и анотатор}%
+                      {прев\adddot\ и анот\adddot}},
+  translatorsan    = {{преводиоци и анотатори}%
+                      {прев\adddot\ и анот\adddot}},
+  translatorin     = {{превод и увод}%
+                      {прев\adddot\ и ув\adddot}},
+  translatorsin    = {{превод и увод}%
+                      {прев\adddot\ и ув\adddot}},
+  translatorfo     = {{превод и предговор}%
+                      {прев\adddot\ и предгов\adddot}},
+  translatorsfo    = {{превод и предговор}%
+                      {прев\adddot\ и предгов\adddot}},
+  translatoraf     = {{превод и поговор}%
+                      {прев\adddot\ и погов\adddot}},
+  translatorsaf    = {{превод и поговор}%
+                      {прев\adddot\ и погов\adddot}},
+  translatorcoin   = {{превод, коментар\finalandcomma\ и увод}%
+                      {прев., ком\adddot\finalandcomma\ и ув\adddot}},
+  translatorscoin  = {{превод, коментар\finalandcomma\ и увод}%
+                      {прев., ком\adddot\finalandcomma\ и ув\adddot}},
+  translatorcofo   = {{превод, коментар\finalandcomma\ и предговор}%
+                      {прев., ком\adddot\finalandcomma\ и предгов\adddot}},
+  translatorscofo  = {{превод, коментар\finalandcomma\ и предговор}%
+                      {прев., ком\adddot\finalandcomma\ и предгов\adddot}},
+  translatorcoaf   = {{превод, коментар\finalandcomma\ и поговор}%
+                      {прев., ком\adddot\finalandcomma\ и погов\adddot}},
+  translatorscoaf  = {{превод, коментар\finalandcomma\ и поговор}%
+                      {прев., ком\adddot\finalandcomma\ и погов\adddot}},
+  translatoranin   = {{превод, анотације\finalandcomma\ и introduction}%
+                      {прев., анот\adddot\finalandcomma\ и ув\adddot}},
+  translatorsanin  = {{превод, анотације\finalandcomma\ и introduction}%
+                      {прев., анот\adddot\finalandcomma\ и ув\adddot}},
+  translatoranfo   = {{превод, анотације\finalandcomma\ и предговор}%
+                      {прев., анот\adddot\finalandcomma\ и предгов\adddot}},
+  translatorsanfo  = {{превод, анотације\finalandcomma\ и предговор}%
+                      {прев., анот\adddot\finalandcomma\ и предгов\adddot}},
+  translatoranaf   = {{превод, анотације\finalandcomma\ и поговор}%
+                      {прев., анот\adddot\finalandcomma\ и погов\adddot}},
+  translatorsanaf  = {{превод, анотације\finalandcomma\ и поговор}%
+                      {прев., анот\adddot\finalandcomma\ и погов\adddot}},
+  byauthor         = {{}{}},
+  byeditor         = {{уредио}{ур\adddot}},
+  bycompiler       = {{одабрао}{odabrao}},
+  byredactor       = {{редактор}{ред.}},
+  byreviser        = {{коректор}{кор.}},
+  byreviewer       = {{рецензент}{рец.}},
+  byfounder        = {{основао}{основао}},
+  bycontinuator    = {{наставио}{наставио}},
+  bycollaborator   = {{у сарадњи са}{у сарадњи са}},% FIXME: unsure
+  bytranslator     = {{превео}{превео}},
+  bycommentator    = {{коментарисао}{коментарисао}},
+  byannotator      = {{анотирао}{анотирао}},
+  withcommentator  = {{коментари}{коментари}},
+  withannotator    = {{анотације}{анотације}},
+  withintroduction = {{увод}{увод}},
+  withforeword     = {{предговор}{предговор}},
+  withafterword    = {{поговор}{поговор}},
+  byeditortr       = {{уредио и превео}%
+                      {ур\adddotspace и прев\adddot}},
+  byeditorco       = {{уредио и коментарисао}%
+                      {ур\adddotspace и ком\adddot}},
+  byeditoran       = {{уредио и анотирао}%
+                      {ур\adddotspace и анот\adddot}},
+  byeditorin       = {{уредио и написао увод}%
+                      {ур.\addabbrvspace и написао увод}},
+  byeditorfo       = {{уредио и написао предговор}%
+                      {ур.,\addabbrvspace и написао предговор}},
+  byeditoraf       = {{уредио и написао поговор}%
+                      {ур.,\addabbrvspace и написао погов\adddot}},
+  byeditortrco     = {{уредио, превео \lbx@lfromlang\finalandcomma\ и коментарисао}%
+                      {ур.,\addabbrvspace прев\adddot\ \lbx@sfromlang\finalandcomma\ и ком\adddot}},
+  byeditortran     = {{уредио, превео \lbx@lfromlang\finalandcomma\ и анотирао}%
+                      {ур.,\addabbrvspace прев\adddot\ \lbx@sfromlang\finalandcomma\ и анот\adddot}},
+  byeditortrin     = {{уредио, превео \lbx@lfromlang и написао увод}%
+                      {ур\adddotspace и прев\adddot\ \lbx@sfromlang и написао ув.}},
+  byeditortrfo     = {{уредио,  превео \lbx@lfromlang и написао предговор}%
+                      {ур\adddotspace и прев\adddot\ \lbx@sfromlang и написао предг.}},
+  byeditortraf     = {{уредио, превео \lbx@lfromlang и написао поговор}%
+                      {ур\adddotspace и прев\adddot\ \lbx@sfromlang и написао погов.}},
+  byeditorcoin     = {{уредио и коментарисао и написао увод}%
+                      {ур\adddotspace и ком., и написао увод}},
+  byeditorcofo     = {{уредио и коментарисао и написао предговор}%
+                      {ур\adddotspace и ком. и предгов.}},
+  byeditorcoaf     = {{уредио и коментарисао и написао поговор}%
+                      {ур\adddotspace и ком. и погов.}},
+  byeditoranin     = {{уредио и анотираои написао увод}%
+                      {ур\adddotspace и анот., и написао увод}},
+  byeditoranfo     = {{уредио и анотирао и написао предговор}%
+                      {ур\adddotspace и анот. и предгов.}},
+  byeditoranaf     = {{уредио и анотирао и написао поговор}%
+                      {ур\adddotspace и анот. и погов.}},
+  byeditortrcoin   = {{уредио, превео \lbx@lfromlang\finalandcomma\ и коментарисао и написао увод}%
+                      {ур.,\addabbrvspace прев\adddot\ \lbx@sfromlang\finalandcomma\ и ком., и написао увод}},
+  byeditortrcofo   = {{уредио, превео \lbx@lfromlang\finalandcomma\ и коментарисао и написао предговор}%
+                      {ур.,\addabbrvspace прев\adddot\ \lbx@sfromlang\finalandcomma\ и ком. и предгов.}},
+  byeditortrcoaf   = {{уредио, превео \lbx@lfromlang\finalandcomma\ и коментарисао и написао поговор}%
+                      {ур.,\addabbrvspace прев\adddot\ \lbx@sfromlang\finalandcomma\ и ком. и погов.}},
+  byeditortranin   = {{уредио, превео \lbx@lfromlang\finalandcomma\ и анотирао и написао увод}%
+                      {ур.,\addabbrvspace прев\adddot\ \lbx@sfromlang\finalandcomma\ и анот, и написао увод}},
+  byeditortranfo   = {{уредио, превео \lbx@lfromlang\finalandcomma\ и анотирао и написао предговор}%
+                      {ур.,\addabbrvspace прев\adddot\ \lbx@sfromlang\finalandcomma\ и анот и предгов.}},
+  byeditortranaf   = {{уредио, превео \lbx@lfromlang\finalandcomma\ и анотирао и написао поговор}%
+                      {ур.,\addabbrvspace прев\adddot\ \lbx@sfromlang\finalandcomma\ и анот и погов.}},
+  bytranslatorco   = {{превео и коментарисао}%
+                      {прев\adddot и ком\adddot}},
+  bytranslatoran   = {{превео \lbx@lfromlang\ и анотирао}%
+                      {прев\adddot\ \lbx@sfromlang\ и анот\adddot}},
+  bytranslatorin   = {{превео \lbx@lfromlang и написао увод}%
+                      {прев\adddot\ \lbx@sfromlang, и написао увод}},
+  bytranslatorfo   = {{превео \lbx@lfromlang и написао предговор}%
+                      {прев\adddot\ \lbx@sfromlang и предгов.}},
+  bytranslatoraf   = {{превео \lbx@lfromlang и написао поговор}%
+                      {прев\adddot\ \lbx@sfromlang и погов.}},
+  bytranslatorcoin = {{превео \lbx@lfromlang\ и коментарисао и написао увод}%
+                      {прев\adddot\ \lbx@sfromlang\ и ком., и написао увод}},
+  bytranslatorcofo = {{превео \lbx@lfromlang\ и коментарисао и написао предговор}%
+                      {прев\adddot\ \lbx@sfromlang\ и ком. и предгов.}},
+  bytranslatorcoaf = {{превео \lbx@lfromlang\ и коментарисао и написао поговор}%
+                      {прев\adddot\ \lbx@sfromlang\ и ком. и погов.}},
+  bytranslatoranin = {{превео \lbx@lfromlang\ и анотирао и написао увод}%
+                      {прев\adddot\ \lbx@sfromlang\ и анот., и написао увод}},
+  bytranslatoranfo = {{превео \lbx@lfromlang\ и анотирао и написао предговор}%
+                      {прев\adddot\ \lbx@sfromlang\ и анот. и предгов.}},
+  bytranslatoranaf = {{превео \lbx@lfromlang\ и анотирао и написао поговор}%
+                      {прев\adddot\ \lbx@sfromlang\ и анот. и погов.}},
+  and              = {{и}{и}},
+  andothers        = {{и други}{и\addabbrvspace др\adddot}},
+  andmore          = {{и други}{и\addabbrvspace др\adddot}},
+  volume           = {{свеска}{св\adddot}},
+  volumes          = {{свеске}{св\adddot}},
+  involumes        = {{у}{у}},
+  jourvol          = {{свеска}{св\adddot}},
+  jourser          = {{серија}{сер\adddot}},
+  book             = {{књига}{књ.}},
+  part             = {{део}{део}},
+  issue            = {{издање}{издање}},
+  newseries        = {{нова серија}{нова серија}},
+  oldseries        = {{стара серија}{стара серија}},
+  edition          = {{издање}{издање}},
+  reprint          = {{репринт}{репр\adddot}},
+  reprintof        = {{репринт}{репр\adddotspace of}},
+  reprintas        = {{репринт као}{репр\adddotspace као}},
+  reprintfrom      = {{репринт из}{реп\adddotspace из}},
+  reviewof         = {{review of}{rev\adddotspace of}},
+  translationof    = {{превод}{превод}},
+  translationas    = {{преведено као}{прев\adddotspace као}},
+  translationfrom  = {{преведено од}{прев\adddotspace од}},
+  origpubas        = {{оригинално издато као}{ориг\adddotspace изд\adddotspace као}},
+  origpubin        = {{оригинално издато у}{ориг\adddotspace изд\adddotspace у}},
+  astitle          = {{као}{као}},
+  bypublisher      = {{}{}},
+  page             = {{страна}{стр\adddot}},
+  pages            = {{стране}{стр\adddot}},
+  column           = {{колумна}{кол\adddot}},
+  columns          = {{колумна}{кол\adddot}},
+  line             = {{линија}{л\adddot}},
+  lines            = {{линија}{лл\adddot}},
+  nodate           = {{без датума}{без датума}},
+  verse            = {{строфа}{с\adddot}},
+  verses           = {{строфе}{сс\adddot}},
+  section          = {{секција}{\S}},
+  sections         = {{секције}{\S\S}},
+  paragraph        = {{пасус}{пас\adddot}},
+  paragraphs       = {{пасуси}{пас\adddot}},
+  in               = {{у}{у}},
+  inseries         = {{у}{у}},
+  ofseries         = {{}{}},
+  number           = {{број}{бр\adddot}},
+  chapter          = {{глава}{глава}},
+  mathesis         = {{Мастер теза}{Мастер теза}},
+  phdthesis        = {{Докторска теза}{Докторска теза}},
+  candthesis       = {{Кандидатска теза}{Cand\adddotspace thesis}},
+  resreport        = {{истраживачки извештај}{истраживачки изв\adddot}},
+  techreport       = {{технички извештај}{техн\adddotspace изв\adddot}},
+  software         = {{рачунарски софтвер}{рач\adddotspace софтвер}},
+  datacd           = {{CD-ROM}{CD-ROM}},
+  audiocd          = {{аудио CD}{аудио CD}},
+  version          = {{верзија}{верзија}},
+  url              = {{адреса}{адреса}},
+  urlfrom          = {{доступно на}{доступно на}},
+  urlseen          = {{посећено}{посећено}},
+  inpreparation    = {{у припреми}{у припреми}},
+  submitted        = {{послато}{послато}},
+  forthcoming      = {{долазеће}{долазеће}},
+  inpress          = {{у штампи}{у штампи}},
+  prepublished     = {{pre-published}{pre-published}},
+  citedas          = {{цитирано као}{цит\adddotspace као}},
+  thiscite         = {{посебно}{посебно}},
+  seenote          = {{види}{види}},
+  quotedin         = {{цитирано у}{цит\adddotspace у}},
+  idem             = {{idem}{idem}},
+  idemsm           = {{idem}{idem}},
+  idemsf           = {{eadem}{eadem}},
+  idemsn           = {{idem}{idem}},
+  idempm           = {{eidem}{eidem}},
+  idempf           = {{eaedem}{eaedem}},
+  idempn           = {{eadem}{eadem}},
+  idempp           = {{eidem}{eidem}},
+  ibidem           = {{ibidem}{ibid\adddot}},
+  opcit            = {{op\adddotspace cit\adddot}{op\adddotspace cit\adddot}},
+  loccit           = {{loc\adddotspace cit\adddot}{loc\adddotspace cit\adddot}},
+  confer           = {{cf\adddot}{cf\adddot}},
+  sequens          = {{sq\adddot}{sq\adddot}},
+  sequentes        = {{sqq\adddot}{sqq\adddot}},
+  passim           = {{passim}{pass\adddot}},
+  see              = {{види}{види}},
+  seealso          = {{види и}{види}},
+  backrefpage      = {{цитирано на страни}{цит\adddotspace на стр\adddot}},
+  backrefpages     = {{цитирано на странама}{цит\adddotspace на стр\adddot}},
+  january          = {{Јануар}{Јан\adddot}},
+  february         = {{Фебруар}{Феб\adddot}},
+  march            = {{Март}{Мар\adddot}},
+  april            = {{Април}{Апр\adddot}},
+  may              = {{Мај}{Мај}},
+  june             = {{Јун}{Јун}},
+  july             = {{Јул}{Јул}},
+  august           = {{Август}{Авг\adddot}},
+  september        = {{Септембар}{Септ\adddot}},
+  october          = {{Октобар}{Окт\adddot}},
+  november         = {{Новембар}{Нов\adddot}},
+  december         = {{Децембар}{Дец\adddot}},
+  langamerican     = {{амерички}{амерички}},
+  langbrazilian    = {{бразилкси}{бразилски}},
+  langcatalan      = {{каталански}{каталански}},
+  langcroatian     = {{хврватски}{хрватски}},
+  langczech        = {{чешки}{чешки}},
+  langdanish       = {{Danish}{дански}},
+  langdutch        = {{холандски}{холандски}},
+  langenglish      = {{енглески}{енглески}},
+  langfinnish      = {{фински}{фински}},
+  langfrench       = {{француски}{француски}},
+  langgerman       = {{немачки}{немачки}},
+  langgreek        = {{грчки}{грчки}},
+  langitalian      = {{италијански}{италијански}},
+  langlatin        = {{латински}{латински}},
+  langnorwegian    = {{норвешки}{норвешки}},
+  langpolish       = {{пољски}{пољски}},
+  langportuguese   = {{португалски}{португалски}},
+  langrussian      = {{Russian}{руски}},
+  langslovene      = {{Slovene}{словенски}},
+  langspanish      = {{шпански}{шпански}},
+  langswedish      = {{шведски}{шведски}},
+  fromamerican     = {{from the American}{from the American}},
+  frombrazilian    = {{from the Brazilian}{from the Brazilian}},
+  fromcatalan      = {{from the Catalan}{from the Catalan}},
+  fromcroatian     = {{from the Croatian}{from the Croatian}},
+  fromczech        = {{from the Czech}{from the Czech}},
+  fromdanish       = {{from the Danish}{from the Danish}},
+  fromdutch        = {{from the Dutch}{from the Dutch}},
+  fromenglish      = {{from the English}{from the English}},
+  fromfinnish      = {{from the Finnish}{from the Finnish}},
+  fromfrench       = {{from the French}{from the French}},
+  fromgerman       = {{from the German}{from the German}},
+  fromgreek        = {{from the Greek}{from the Greek}},
+  fromitalian      = {{from the Italian}{from the Italian}},
+  fromlatin        = {{from the Latin}{from the Latin}},
+  fromnorwegian    = {{from the Norwegian}{from the Norwegian}},
+  frompolish       = {{from the Polish}{from the Polish}},
+  fromportuguese   = {{from the Portuguese}{from the Portuguese}},
+  fromrussian      = {{from the Russian}{from the Russian}},
+  fromslovene      = {{from the Slovene}{from the Slovene}},
+  fromspanish      = {{from the Spanish}{from the Spanish}},
+  fromswedish      = {{from the Swedish}{from the Swedish}},
+  countryde        = {{Немачка}{DE}},
+  countryeu        = {{Европска унија}{EU}},
+  countryep        = {{Европска унија}{EP}},
+  countryfr        = {{Француска}{FR}},
+  countryuk        = {{Велика Британија}{GB}},
+  countryus        = {{Сједињене Америчке Државе}{US}},
+  patent           = {{патент}{пат\adddot}},
+  patentde         = {{German patent}{German pat\adddot}},
+  patenteu         = {{European patent}{European pat\adddot}},
+  patentfr         = {{French patent}{French pat\adddot}},
+  patentuk         = {{British patent}{British pat\adddot}},
+  patentus         = {{U.S\adddotspace patent}{U.S\adddotspace pat\adddot}},
+  patreq           = {{patent request}{pat\adddot\ req\adddot}},
+  patreqde         = {{German patent request}{German pat\adddot\ req\adddot}},
+  patreqeu         = {{European patent request}{European pat\adddot\ req\adddot}},
+  patreqfr         = {{French patent request}{French pat\adddot\ req\adddot}},
+  patrequk         = {{British patent request}{British pat\adddot\ req\adddot}},
+  patrequs         = {{U.S\adddotspace patent request}{U.S\adddotspace pat\adddot\ req\adddot}},
+  file             = {{датотека}{датотека}},
+  library          = {{библиотека}{библиотека}},
+  abstract         = {{апстракт}{апстракт}},
+  annotation       = {{анотације}{анотације}},
+}
+
+\protected\gdef\lbx@us@mkbibrangetrunc@long#1#2{%
+  \iffieldundef{#2year}
+    {}
+    {\printtext[#2date]{%
+       \iffieldsequal{#2year}{#2endyear}
+	 {\csuse{mkbibdate#1}{}{#2month}{#2day}}
+	 {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
+       \iffieldundef{#2endyear}
+	 {}
+	 {\iffieldequalstr{#2endyear}{}
+            {\mbox{\bibdatedash}}
+	    {\bibdatedash
+	     \iffieldsequal{#2year}{#2endyear}
+	       {\iffieldsequal{#2month}{#2endmonth}
+        	  {\csuse{mkbibdate#1}{#2endyear}{}{#2endday}}
+		  {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}
+	       {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}}}}}
+
+\protected\gdef\lbx@us@mkbibrangetrunc@short#1#2{%
+  \iffieldundef{#2year}
+    {}
+    {\printtext[#2date]{%
+       \iffieldsequal{#2year}{#2endyear}
+         {\csuse{mkbibdate#1}{}{#2month}{#2day}}
+         {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
+       \iffieldundef{#2endyear}
+         {}
+         {\iffieldequalstr{#2endyear}{}
+            {\mbox{\bibdatedash}}
+            {\bibdatedash
+             \csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}}}}
+
+\protected\gdef\lbx@us@mkbibrangetruncextra@long#1#2{%
+  \iffieldundef{#2year}
+    {}
+    {\printtext[#2date]{%
+       \iffieldsequal{#2year}{#2endyear}
+         {\csuse{mkbibdate#1}{}{#2month}{#2day}}
+         {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
+       \iffieldundef{#2endyear}
+         {\printfield{extrayear}}
+         {\iffieldequalstr{#2endyear}{}
+            {\printfield{extrayear}%
+             \mbox{\bibdatedash}}
+            {\bibdatedash
+             \iffieldsequal{#2year}{#2endyear}
+               {\iffieldsequal{#2month}{#2endmonth}
+                  {\csuse{mkbibdate#1}{#2endyear}{}{#2endday}}
+                  {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}}
+               {\csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}}%
+             \printfield{extrayear}}}}}}
+
+\protected\gdef\lbx@us@mkbibrangetruncextra@short#1#2{%
+  \iffieldundef{#2year}
+    {}
+    {\printtext[#2date]{%
+       \iffieldsequal{#2year}{#2endyear}
+         {\csuse{mkbibdate#1}{}{#2month}{#2day}}
+         {\csuse{mkbibdate#1}{#2year}{#2month}{#2day}}%
+       \iffieldundef{#2endyear}
+         {\printfield{extrayear}}
+         {\iffieldequalstr{#2endyear}{}
+            {\printfield{extrayear}%
+          \mbox{\bibdatedash}}
+         {\bibdatedash
+          \csuse{mkbibdate#1}{#2endyear}{#2endmonth}{#2endday}%
+       \printfield{extrayear}}}}}}
+
+\endinput

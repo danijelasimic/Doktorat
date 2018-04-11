@@ -1,0 +1,338 @@
+% Format teze zasnovan je na paketu memoir
+% http://tug.ctan.org/macros/latex/contrib/memoir/memman.pdf ili
+% http://texdoc.net/texmf-dist/doc/latex/memoir/memman.pdf
+% Podešava se veličina papira, veličina slova i jednostrano štampanje
+% Ne menjati ove parametre
+\documentclass[a4paper,12pt,oneside]{memoir}
+
+% Paket koji definiše sve specifičnosti doktorata Matematičkog fakulteta
+\usepackage{matfdoktorat}
+\usepackage{presek_reci}
+
+
+% Datoteka sa literaturom u BibTex tj. BibLaTeX/Biber formatu
+\bib{danijela_doktorat}
+
+% Ime doktoranda na srpskom jeziku (u odabranom pismu)
+\autor{Данијела Симић}
+% Ime doktoranda na engleskom jeziku
+\author{Danijela Simic}
+% Naslov teze na srpskom jeziku (u odabranom pismu)
+\naslov{Формализација различитих модела геометрије и примене у верификацији аутоматских доказивача теорема}
+% Naslov teze na engleskom jeziku
+\title{Formalization of various geometry models and applications in verification of automated theorem provers}
+% Godina u kojoj je teza predana komisiji
+\godina{2017}
+% Ime i afilijacija mentora (u odabranom pismu)
+\mentor{др Филип \textsc{Марић}, ванредни професор\\ Универзитет у Београду, Математички факултет}
+% Ime i afilijacija prvog člana komisije (u odabranom pismu)
+\komisijaA{др Предраг \textsc{Јаничић}, редовни професор\\ Универзитет у Београду, Математички факултет}
+% Ime i afilijacija drugog člana komisije (u odabranom pismu)
+\komisijaB{др Срђан \textsc{Вукмировић}, ванредни професор\\ Универзитет у Београду, Математички факултет}
+% Ime i afilijacija trećeg člana komisije (opciono)
+\komisijaC{др Петар \textsc{Максимовић}, Research Fellow \\ Imperial College London \\ Научни сарадник, Математички институт САНУ}
+% Ime i afilijacija četvrtog člana komisije (opciono)
+% \komisijaD{}
+% Datum odbrane (obrisati ili iskomentarisati narednu liniju ako datum odbrane nije poznat)
+%\datumodbrane{15. јануар 2016.}
+
+% Apstrakt na srpskom jeziku (u odabranom pismu)
+\apstr{% 
+
+У овој тези представљена је интерактивна формализација модела разних
+геометрија и алгебарских метода аутоматског доказивања геометријских
+теорема.
+ 
+Представљен је наш рад на формализацији аналитичке (Декартове)
+планарне геометрије у оквиру асистента за доказивање теорема
+\emph{Isabelle/HOL}. Дајемо неколико еквивалентних дефиниција
+Декартове координатне равни и доказујемо да је она модел синтетичких
+планарних геометрија (коришћењем аксиоматског система Тарског и
+аксиоматског система Хилберта). Такође, дискутујемо о неколико техника
+којима се поједностављују и аутоматизују докази. Како је један од
+наших циљева да подржимо коришћење асистената за доказивање теорема у
+математичком образовању, наше излагањe ће бити блиско стандардним
+дефиницијама у уџбеницима, али потпуно формално и машински
+провериво. Ова формализација представља део потребне инфраструктуре за
+имплементацију процедура одлучивања базираних на аналитичкој
+геометрији у оквиру асистената за доказивање теорема.
+
+Додатно, формално разматрамо и геометрију комплексне равни. Блиска
+повезаност између комплексних бројева и геометрије је добро позната и
+пажљиво је изучавана још вековима уназад. Основни објекти који су
+изучавани су комплексна раван (обично проширена једном бесконачном
+тачком), њени објекти (тачке, праве и кругови), и група трансформација
+која на њих делује (на пример, инверзије и Мебијусове
+трансформације). У овој тези, ми формално посматрамо геометрију
+комплексних бројева и представљамо потпуно механички верификовану
+теорију у оквиру асистента за доказивање теорема
+\emph{Isabelle/HOL}. Дискутујемо о различитим приступима формализацији
+и главним предностима приступа који је више алгебарски
+оријентисан. Поред примена у формализацији математике и у образовању,
+овај рад је основа за формалну анализу нееуклидских геометрија и
+њихове међусобне повезаности. Такође, представљамо и формализацију
+дела аксиоматског система Тарског у оквиру Поенкареовог диск модела у
+систему \emph{Isabelle/HOL}.
+
+Треће, анализирамо везу између геометрије и полинома, као и примене
+која ова веза даје. У еуклидској геометрији објекти и релације међу
+њима могу се изразити полиномијалним једнакостима. Додатно, било која
+геометријска конструкција може се изразити скупом полиномијалних
+једнакости, а геометријска тврђења се могу доказати коришћењем
+алгебарских метода (на пример, метод Гребнерових база или Вуовом
+методом) над скупом полинома. Дајемо опис алгоритма у систему
+\emph{Isabelle/HOL} који као улазни податак прихвата геометријску
+конструкцију записану коришћењем термова, а враћа одговарајући скуп
+полинома. Наш даљи рад ће бити примена методе Гребнерових база у
+оквиру система \emph{Isabelle/HOL} над генерисаним полиномима у намери
+да се докаже исправност дате конструкције. Додатно, истражујемо како
+се конструкције у тродимензионалном простору могу приказати коришћењем
+полинома. Истражујемо два различита приступа у извођењу ових полинома
+и онда поредимо ефикасност алгебарских метода у зависности од
+коришћеног приступа. Представљамо потпуно аутоматски систем за
+превођење геометријских конструкција из стереометрије у скуп
+полинома. Наш даљи рад ће бити да повежемо представљени систем са
+динамичким геометријским софтвером и на тај начин да омогућимо
+студентима лакше коришћење овог аутоматизованог система за доказивање
+у стереометрији.}
+
+% искоментарисати енглески
+% Apstrakt na engleskom jeziku
+\abstr{
+
+In this thesis is presented interactive formalization of various
+models of geometry and algebraic methods for automated proving
+geometry theorems.
+
+We present our current work on formalizing analytic (Cartesian) plane
+geometries within the proof assistant Isabelle/HOL. We give several
+equivalent definitions of the Cartesian plane and show that it models
+synthetic plane geometries (using both Tarski's and Hilbert's axiom
+systems). We also discuss several techniques used to simplify and
+automate the proofs. As one of our aims is to advocate the use of
+proof assistants in mathematical education, our exposure tries to
+remain simple and close to standard textbook definitions, but
+completely formal and mechanically verifiable. This formalization
+presents the develop of the necessary infrastructure for implementing
+decision procedures based on analytic geometry within proof
+assistants.
+
+
+Furthermore, we investigate complex numbers. Deep connections between
+complex numbers and geometry had been well known and carefully studied
+centuries ago. Fundamental objects that are investigated are the
+complex plane (usually extended by a single infinite point), its
+objects (points, lines and circles), and groups of transformations
+that act on them (e.g., inversions and M\"obius transformations). In
+this thesis we treat the geometry of complex numbers formally and
+present a fully mechanically verified development within the theorem
+prover Isabelle/HOL. We discuss different approaches to formalization
+and discuss major advantages of the more algebraically oriented
+approach. Apart from applications in formalizing mathematics and in
+education, this work serves as a ground for formally investigating
+various non-Euclidean geometries and their intimate connections. We
+also present a formalization of part of Tarski axiom system withing
+Poincare disk model in Isabelle/HOL.
+
+Further on, we analyze connections between geometry and polynomials
+and the use of these connections. In Euclidean geometry, objects and
+relations between them can be expressed as polynomials.  Further, any
+geometry construction can be expressed by set of polynomials and
+geometry statements can be proved by using algebraic methods (e.g. the
+Gr\"obner bases method or Wu's method) over that set of
+polynomials. We describe an implementation of an algorithm in
+Isabelle/HOL that accepts a term representation of a geometry
+construction and returns its corresponding set of polynomials. Our
+further work will be to use the method of Gr\"obner bases within the
+Isabelle system on the generated polynomials, in order to prove
+correctness of the given construction.  Furthermore, we investigate
+how spatial geometry constructions can be presented using
+polynomials. We investigate two different approaches in deriving those
+polynomials and then compare efficiency of algebraic provers depending
+on the approach used. We present a fully automated system for
+transforming geometry constructions into set of polynomials. Our
+further work would be to relate these geometry provers with dynamic
+geometry software and thus make easier for students to use it.  }
+
+% Ključne reči na srpskom jeziku (u odabranom pismu)
+\kljucnereci{асистент за доказивање теорема, геометрија, интерактивно
+  доказивање у геометрији, аутоматско доказивање у геометрији,
+  хиперболичка геометрија, стереометрија, аксиоматски систем Тарског,
+  аксиоматски систем Хилберта, Декартов координатни систем}
+
+% Ključne reči na engleskom jeziku
+\keywords{proof assistants, geometry, interactive proving in geometry,
+  automated proving in geometry, hyperbolic geometry, spatial geometry,
+  Tarski axiom system, Hilbert axiom system, Cartesian coordinate
+  system}
+
+% Šira i uža oblast teze na srpskom jeziku (u odabranom pismu)
+\oblast{рачунарство}
+\uzaoblast{аутоматско резоновање}
+
+% Šira i uža oblast teze na engleskom jeziku
+\area{computer science}
+\subarea{automated reasoning}
+
+% Univerzalna decimalna klasifikacija (UDK tj. UDC)
+% https://en.wikipedia.org/wiki/Universal_Decimal_Classification
+\udk{004.832.3:514(043.3)}
+
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ukljucujem sta meni treba
+\usepackage{moji_paketi}
+
+\begin{document}
+% ==============================================================================
+% Uvodni deo teze
+\frontmatter
+% ==============================================================================
+% Naslovna strana
+\naslovna
+% Naslovna strana na engleskom jeziku
+\naslovnaen
+% Strana sa podacima o mentoru i članovima komisije
+\komisija
+% Strana sa posvetom (u odabranom pismu)
+\posveta{родитељима, Милијани и Драгану Петровићу}
+
+\newpage
+
+\begin{Huge}
+\emph{Захвалница}
+\end{Huge}
+
+\bigskip
+\bigskip
+
+
+Велику захвалност дугујем свом ментору, професору Филипу
+Марићу. Професоров велики ентузијазам, знање и безрезервна подршка су
+ми много помогли у току докторских студија и приликом рада на
+различитим истраживањима и пројектима. Он ме је упутио у диван свет
+интерактивног доказивања теорема и бројним саветима и сугестијама ме
+је мотивисао да што више научим и напредујем. Посебно истичем његове
+иновативне идеје и позитивност која је често утицала да са еланом и
+новом енергијом наставим да се бавим проблемима на које сам у раду
+наишла. Захваљујући њему сам објавила радове у часописима и
+конференцијама и завршила ову тезу, a без његове помоћи и подршке тога
+не би било.
+
+Захваљујем се и професору Предрагу Јаничићу, он ме је упутио у свет
+геометрије и аутоматског доказивања у геометрији. Многим саветима и
+сугестијама је утицао да финална верзија тезе буде квалитетнија и
+потпунија. Захваљујући њему упознала сам и многе истраживаче из других
+земаља и тако ми је створена могућност да размењујем искуства и да
+учествујем у пројектима и ван граница наше земље. Напоменула бих и да
+са професором сарађујем у настави и да је вишегодишње заједничко
+држање курсева било једно лепо и пријатно искуство.
+
+Захваљујем се и професорима Срђану Вукмировићу и Петру Максимовићу на
+пажљивом читању тезе. Њихови коментари су значајно унапредили текст
+тезе, али су дали и нови поглед на проблеме којима се бавим и пружили
+су ми нове идеје како да истраживање наставим.
+
+Захваљујем се и свим члановима катедре, професорима и асистентима. Сви
+су били заиста дивни сарадници и од првих дана рада ми значајно
+помогли да напредујем као наставник и као истраживач. Дали су ми
+бројне савете, одменили када је било потребно или улепшали дан на
+послу. Могу рећи да сам заиста срећна што радим у тако динамичном,
+позитивном и колегијалном колективу.
+
+Посебну захвалност дугујем својим родитељима којима ову тезу
+посвећујем. Они су ми били ослонац и подршка током целог
+живота. Захваљујући њиховој неизмерној љубави и упорности сам
+остварила многе циљеве на пословном и приватном плану. Од првог дана
+школовања су веровали у мене и бодрили ме, помагали и упућивали да
+увек тежим да више научим, сазнам и постигнем.
+
+Коначно, захваљујем се и свом супругу Михаилу. Био је велика подршка у
+раду на овој тези, одмењивао ме у разним пословима, подизао дух када
+бих посустала, више пута заједно са мном читао тезу и увек веровао да
+ћу успети. Његова љубав и позитивна енергија су ми учинили рад на тези
+лакшим и лепшим.
+\newpage
+
+
+% Strana sa podacima o disertaciji na srpskom jeziku
+\apstrakt
+% Strana sa podacima o disertaciji na engleskom jeziku
+\apstrakten
+% Sadržaj teze
+\tableofcontents*
+
+% ==============================================================================
+% Glavni deo teze
+\mainmatter
+% ==============================================================================
+
+%\input{prevod_adg}
+%\input{prevod_sci}
+
+\input{Glava_1_Uvod}
+\input{Glava_2_dokazivaci_teorema}
+\input{Glava_3_pregled_oblasti}
+\input{Glava_4_analiticka_geometrija}
+\input{Glava_5_hiperbolicka_geometrija}
+\input{Glava_6_stereometrija}
+\input{Glava_7_zakljuci}
+
+
+% ------------------------------------------------------------------------------
+% Literatura
+% ------------------------------------------------------------------------------
+\literatura
+
+% ==============================================================================
+% Završni deo teze i prilozi
+\backmatter
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+% Biografija doktoranda
+\begin{biografija}
+  \textbf{Данијела Симић} (рођена Петровић) рођена је
+  26.09.1986. године у Ваљеву. Основну школу "Жикица Јовановић Шпанац"
+  и "Ваљевску гимназију" завршила је као ђак генерације и носилац
+  Вукове дипломе.  Током средње и основне школе била је ученик многих
+  такмичења из математике, физике, програмирања и освојила је бројне
+  награде од којих су најважније трећа награда на савезном такмичењу
+  из физике у четвртој години средње школе, као и трећа награда на
+  републичком такмичењу из програмирања у четвртом разреду средње
+  школе.
+
+  Године 2005. уписала је Математички факултет, уневерзитета у
+  Београду, смер Рачунарство и Информатика. Студије је завршила
+  2009. године са просечном оценом 9.86. Била jе стипендиста
+  Министарства за науку и технологиjу. Докторске академске студиjе на
+  смеру Информатика уписала jе октобра 2009. године. Све испите
+  предвиђене планом студиjа положила jе са оценом 10. Учествовала је у
+  организациjи више научних скупова у земљи коjе jе организовала
+  \emph{Арго група} Математичког факултета, чиjи jе члан од
+  2010. године. До сада jе у два циклуса била учесник научних
+  проjеката коjе jе финансирало Министарство просвете, науке и
+  технолошког развоjа Владе Републике Србиjе.
+
+  Основна област интересовања јој је аутоматско резоновање, са
+  акцентом на аутоматско и интерактивно доказивање у геометрији. Имала
+  је излагања на неколико конференција и радионица у земљи и
+  иностранству.
+
+  Од октобра 2009. године била је запослена као сарадник у настави, а
+  од октобра 2011. године као асистент на Катедри за рачунарство и
+  информатику Математичког факултета Универзитета у Београду. Током
+  досадашњег рада на Математичком факултету држала је вежбе из 6
+  предмета.
+\end{biografija}
+% ------------------------------------------------------------------------------
+
+
+% Prilog 1: Izjava o autorstvu
+\includepdf{_Prilog1.pdf}
+% Prilog 2: Izjava o istovetnosti štampane i elektronske verzije doktorskog rada
+\includepdf{_Prilog2.pdf}
+% Prilog 3: Izjava o korišćenju
+\includepdf{_Prilog3.pdf}
+
+\end{document} 
+
+

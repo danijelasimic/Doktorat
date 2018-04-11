@@ -1,0 +1,11 @@
+\select@language {serbian}
+\select@language {serbian}
+\select@language {english}
+\select@language {serbian}
+\select@language {english}
+\select@language {serbian}
+\contentsline {chapter}{\chapternumberline {1}Увод}{1}{chapter.1}
+\contentsline {section}{\numberline {1.1}Примери коришћења класичних \LaTeX {} елемената}{2}{section.1.1}
+\contentsline {chapter}{\chapternumberline {2}Разрада}{5}{chapter.2}
+\contentsline {chapter}{\chapternumberline {3}Закључак}{8}{chapter.3}
+\contentsline {chapter}{Литература}{11}{section*.2}

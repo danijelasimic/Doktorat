@@ -1,0 +1,42 @@
+dim 140 65
+
+point A 15 5
+point B 15 40
+point C 50 5
+point D 50 40
+point E 30 60
+point F 65 60
+point G 65 25
+point H 30 25
+
+drawsegment A B
+drawsegment B D
+drawsegment A C
+drawsegment D C
+drawsegment C G
+drawsegment G F
+drawsegment F D
+drawsegment B E
+drawsegment E F
+
+drawdashsegment A H
+drawdashsegment H G
+drawdashsegment H E
+
+cmark A
+cmark B
+cmark C
+cmark D
+cmark E
+cmark F
+cmark G
+cmark H
+
+printat_b A {\lambda^{\to}}
+printat_l B {\lambda 2}
+printat_b C {\lambda P}
+printat_r D {\lambda P2}
+printat_l E {\lambda \omega}
+printat_r F {\lambda C}
+printat_r G {\lambda P \underline{\omega}}
+printat_l H {\lambda \underline{\omega}}

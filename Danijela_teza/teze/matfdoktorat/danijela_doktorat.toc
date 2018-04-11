@@ -1,0 +1,7 @@
+\select@language {serbian}
+\select@language {serbian}
+\select@language {english}
+\select@language {serbian}
+\select@language {english}
+\select@language {serbian}
+\contentsline {chapter}{\chapternumberline {1}Превод ADG-а}{1}{chapter.1}

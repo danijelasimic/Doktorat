@@ -1,0 +1,2811 @@
+\chapter{Интерактивни доказивачи теорема}
+\label{chapter::isabelle}
+
+У овом поглављу ћемо приказати технологију интерактивних доказивача
+теорема.
+
+\section{Неколико речи о $\lambda$--рачуну и Кари--Хауард изоморфизму}
+
+Кари--Хауард изоморфизам даје везу између система формалне логике која
+се може наћи у теорији доказа и рачуна теорије типова. На пример,
+исказна логика одговара једноставном $\lambda$--рачуну са типовима,
+логика првог реда одговара зависним типовима (енг.~\emph{dependent
+  types}), логика другог реда одговара полиморфним типовима
+итд. Изоморфизам има бројне аспекте: формуле одговарају типовима,
+докази одговарају термовима, нормализација доказа одговара редукцији
+термова.
+
+Крајем 1920.~године у Черчовом раду "Рачун ламбда--конверзије"
+(енг.~\emph{The calculi of lambda-conversion})
+\cite{church1941calculi} представљен је $\lambda$--рачун, систем чији
+је циљ био да опише особине функционалне апстракције, примене и
+супституције, односно да преброди ограничења која су имали Раселова
+теорија типова и Цермел--Френкелова теорија скупова. Систем је био
+без типова, без закона о изузимању трећег, али са неограниченом
+квантификациом и експлицитним формалним правилима
+$\lambda$--конверзије. Ипак, убрзо након објављивања показало се да je
+систем контрадикторан, односно да није логички конзистентан. Да би се
+елиминисала неконзистентност, систем је проширен типовима
+\cite{church1940formulation}. Показана је конфлуентност
+$\lambda$--система и показано је да нумеричке $\lambda$--дефинисане
+функције одговарају Тјуринговим израчунљивим функцијама, што је са
+другим сродним резултатима сугерисало чувену Черчову тезу која тврди
+да \emph{Класа интуитивно израчунљивих функција идентична је са класом
+  формално израчунљивих функција}. Током 1930--их $\lambda$--рачун је
+послужио за описивање израчунавања (алгоритама) и за доказ
+неодлучивости логике првог реда
+\cite{church1940formulation}. $\lambda$--рачун са типовима има мању
+моћ израчунавања од $\lambda$--рачуна, али је логички конзистентан, па
+је послужио као основа неких логика и неких програмских
+језика. Постоји много формализама $\lambda$--рачуна са типовима и ми
+ћемо овде укратко представити само неке најзначајније за ову тезу.
+
+У овом поглављу представићемо теоријске основе Кари--Хауард
+изоморфизма, неке основне особине и последице. Више информација се
+може пронаћи у \cite{barendregt2013lambda, sorensen2006lectures}.
+
+\subsection{$\lambda$--рачун}
+
+Черч и Кари су $\lambda$--рачун и системе комбинаторне логике први пут
+предложили 1930.~године. Систем који се састоји од $\lambda$--термова
+и $\beta$--редукције се показао веома корисним за формализацију
+интуитивног појма ефективне израчунљивости. Сви ови резултати су били
+инспирација за развијање \emph{теорије рекурзивних
+  функција}. $\lambda$--рачун се показао као важна алатка за дизајн,
+имплементацију и теорију више програмских језика.
+
+\subsubsection{$\lambda$--термови}
+
+\begin{definition}
+Нека је $V = \{v_0, v_1, \ldots \}$ скуп променљивих. Скуп $\Lambda$
+\emph{термова} је скуп ниски који се дефинише на следећи начин:
+$$\Lambda = V\ |\ (\Lambda \Lambda)\ |\ (\lambda V.\ \Lambda)$$
+\end{definition}
+
+\begin{description}
+\item{(i)} $x, y, z, \ldots$ (елементи $V$) означавају променљиве
+\item{(ii)} $M, N, L, \ldots$ означавају $\lambda$--термове
+\item{(iii)} Терм $\lambda x.\ M$ означава \emph{апстракцију} (над променљивом $x$)
+\item{(iv)} Терм облика $(M\ N)$ означава \emph{примену} ($M$ над $N$)
+\end{description}
+
+\begin{primer} Пример $\lambda$--термова:
+\begin{description}
+\item{(i)} $\lambda x. x\ y$ 
+\item{(ii)} $(\lambda x. x\ x)\ \lambda y. y\ y$
+\end{description}
+\end{primer}
+
+\begin{definition}
+За $\lambda$--терм $M \in \Lambda$ дефинишемо скуп $FV(M) \subseteq V$
+слободних променљивих $\lambda$--терма $M$ на следећи начин:
+\begin{align*}
+FV(x) &= \{x\}; \\
+FV(\lambda x. P) &= FV(P)\backslash\{x\}; \\
+FV(P\ Q) &= FV(P) \cup FV(Q).
+\end{align*}
+Ако је $FV(M) = \{ \}$, онда је $M$ \emph{затворен}.
+\end{definition}
+
+\begin{definition}
+За $\lambda$--термове $M, N \in \Lambda$ и променљиву $x \in V$
+\emph{замена} променљиве $x$ са $N$ у $M$, означено са $M[x := N]$ се
+дефинише на следећи начин:
+\begin{align*}
+x[x := N] &=\ N; \\
+y[x := N] &=\ y\ \text{ ако је }\ x \neq y; \\
+(P\ Q)[x := N] &=\ P[x := N]Q[x := N]; \\
+(\lambda y. P)[x := N] &=\ \lambda y. P[x := N]\ \text{ ако важи }\ x \neq y \text{ и }\ y \notin FV(N). 
+\end{align*}
+\end{definition}
+
+\subsubsection{Редукција}
+
+\begin{definition}
+Нека је $\rightarrow_{\beta}$ најмања релација над $\Lambda$ таква да
+$$(\lambda x. P)\ Q \rightarrow_{\beta} P[x := Q]$$
+којa задовољава следећа правила:
+\begin{center}
+\begin{tabbing}
+\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+\>\> $P \rightarrow_{\beta} P' \Rightarrow$ \= $\forall x \in V :$ \= $\lambda x. P \rightarrow_{\beta} \lambda x. P'$;\\ 
+\>\> $P \rightarrow_{\beta} P' \Rightarrow$ \> $\forall Z \in \Lambda :$ \> $P\ Z \rightarrow_{\beta} P'\ Z$; \\
+\>\> $P \rightarrow_{\beta} P' \Rightarrow$ \> $\forall Z \in \Lambda :$ \> $Z\ P \rightarrow_{\beta} Z\ P'$.
+\end{tabbing}
+\end{center}
+\end{definition}
+
+\begin{definition}
+Релација $\twoheadrightarrow_{\beta}$ ($\beta$--редукција у више
+корака) је транзитивно и рефлексивно затворење релације
+$\rightarrow_{\beta}$, односно, $\twoheadrightarrow_{\beta}$ је
+најмања релација која задовољава следећа правила:
+\begin{center}
+\begin{tabbing}
+\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+\>\> $P \twoheadrightarrow_{\beta} P' \twoheadrightarrow_{\beta} P'' \land P'$ \= $\Rightarrow P \twoheadrightarrow_{\beta} P''$ \\
+\>\> $P \rightarrow_{\beta} P'$ \> $\Rightarrow P \twoheadrightarrow_{\beta} P'$ \\
+\>\> $P \twoheadrightarrow_{\beta} P$.
+\end{tabbing}
+\end{center}
+\end{definition}
+
+\begin{primer}
+\begin{description}
+\item{(i)} $ (\lambda x. x\ x) \lambda z. z \BetaRed (x\ x)[x := \lambda z. z] = (\lambda z. z) \lambda y. y$
+\item{(ii)} $(\lambda z. z)\lambda y. y \BetaRed z [z := \lambda y. y] = \lambda y. y$
+\item{(iii)} $\lambda x. x\ x) \lambda z. z \MultBetaRed \lambda y. y$
+\end{description}
+\end{primer}
+
+\begin{definition}[конфлуентност] 
+Релација $\to$ је конфлуентна ако за свака три $\lambda$--терма $M_1,
+M_2, M_3 \in \Lambda$, ако $M_1 \to M_2$ и $M_1 \to M_3$ онда постоји
+$M_4 \in \Lambda$ такав да $M_2 \to M_4$ и $M_3 \to M_4$.
+\end{definition}
+
+\begin{theorem}[конфлуентност]\footnote{Доказ у \cite{barendregt2013lambda}.}  
+Релација $\MultBetaRed$ је конфлуентна.
+\end{theorem}
+
+
+Често се $\lambda$--терм $M_4$ назива \emph{нормалном формом}
+$\lambda$--терма $M_1$, а поступак налажења нормалне форме се назива
+\emph{нормализација}.
+
+\begin{definition}
+Релација $\to_{\eta}$ је најмања релација која задовољава следећа
+својства:
+\begin{enumerate}
+\item Ако $x \notin FV(M)$ онда $\lambda x.Mx \to_{\eta} M$
+\item Ако $P \to_{\eta} P'$ онда $\lambda x. P \to_{\eta} \lambda x. P'$
+\item Ако $P \to_{\eta} P'$ онда $PQ \to_{\eta} P'Q$ и $QP \to_{\eta} QP'$
+\end{enumerate}
+\end{definition}
+
+Релација $\eta$--редукција је такође конфлуентна.
+
+Релација $\beta$--редукција представља примену функције, а
+$\eta$--редукција служи да омогући проверу да су две функције једнаке
+ако и само ако имају једнаке вредности за све аргументе.
+
+\subsection{Интуиционистичка логика и природна дедукција}
+\label{section:natural_deduction}
+
+Природна дедукција је формални дедуктивни систем који је развио
+Гентцен 1930.~године \cite{gentzen1935untersuchungen,
+  gentzen1935untersuchungen1} чији циљ је био да формални докази буду
+слични резоновању у традиционалним математичким текстовима.
+
+Постоји систем природне дедукције за класичну логику и систем природне
+дедукције за интуиционистичку логику. Систем природне дедукције за
+класичну логику има једну аксиоматску схему, $A \lor \neg A$
+(искључење трећег), док систем за интуиционисичку логику нема аксиома.
+
+За сваки логички везник постоје правила која га уводе (правила
+$I$--типа) и правила која га елиминишу (правила $E$--типа). Додатно,
+постоји правило (правило $efq$, \emph{ex falso quodlibit}) које не
+елиминише нити уводи неки логички везник. Током извођења доказа у
+систему природне дедукције могу се користити недоказане претпоставке,
+али оне морају бити елиминисане пре краја извођења. Претпоставка се
+записује коришћењем $[\_]$. У табели \ref{tab:prirodna_ded1} су дата
+правила извођења система природне дедукције и за класичну и за
+интуиционистичку логику.
+
+\begin{small}
+\begin{table}[!ht]
+\begin{center}
+\AxiomC{$[A]^u$}
+\noLine
+\UnaryInfC{$\vdots$}
+\noLine
+\UnaryInfC{$\perp$}
+\RightLabel{$\neg I, u$}
+\UnaryInfC{$\neg A$}
+\DisplayProof
+\hskip 5cm
+\AxiomC{$A$}
+\AxiomC{$\neg A$}
+\RightLabel{$\neg E$}
+\BinaryInfC{$\perp$}
+\DisplayProof
+
+\vspace{0.5cm}
+
+\AxiomC{$A$}
+\AxiomC{$B$}
+\RightLabel{$\land I$}
+\BinaryInfC{$A \land B$}
+\DisplayProof
+\hskip 4cm
+\AxiomC{$A \land B$}
+\RightLabel{$\land E$}
+\UnaryInfC{$A$}
+\DisplayProof
+\hskip 0.8cm
+\AxiomC{$A \land B$}
+\RightLabel{$\land E$}
+\UnaryInfC{$B$}
+\DisplayProof
+
+\vspace{0.5cm}
+
+\AxiomC{$A$}
+\RightLabel{$\lor I$}
+\UnaryInfC{$A \lor B$}
+\DisplayProof
+\hskip 0.8cm
+\AxiomC{$B$}
+\RightLabel{$\lor I$}
+\UnaryInfC{$A \lor B$}
+\DisplayProof
+\hskip 3cm
+\AxiomC{$A \lor B$}
+  \AxiomC{$[A]^u$}
+  \noLine
+  \UnaryInfC{$\vdots$}
+  \noLine
+  \UnaryInfC{$C$}
+   \AxiomC{$[B]^v$}
+   \noLine
+   \UnaryInfC{$\vdots$}
+   \noLine
+   \UnaryInfC{$C$}
+\RightLabel{$\lor E, u, v$}
+\TrinaryInfC{C}
+\DisplayProof
+
+\vspace{0.5cm}
+
+\AxiomC{$[A]^u$}
+\noLine
+\UnaryInfC{$\vdots$}
+\noLine
+\UnaryInfC{$B$}
+\RightLabel{$\Rightarrow I, u$}
+\UnaryInfC{$A \Rightarrow B$}
+\DisplayProof
+\hskip 5cm
+\AxiomC{$A$}
+\AxiomC{$A \Rightarrow B$}
+\RightLabel{$\Rightarrow E$}
+\BinaryInfC{$B$}
+\DisplayProof
+
+\vspace{0.5cm}
+
+\AxiomC{$\perp$}
+\RightLabel{$e\ f\ q$}
+\UnaryInfC{$D$}
+\DisplayProof
+\end{center}
+\caption{Правила извођења система природне дедукције за класичну или
+  интуиционистичку исказну логику}\label{tab:prirodna_ded1}
+\end{table}
+\end{small}
+
+У систему природне дедукције доказ је стабло чијем је сваком чвору
+придружена формула. Формула $А$ је \emph{теорема} природне дедукције
+ако постоји доказ у чијем је корену $A$ и који нема неослобођених
+претпоставки и тада пишемо $\vdash A$ и кажемо да је формула $A$
+доказива у систему природне дедукције. Ако постоји доказ у чијем
+корену је формула $A$ и који има неослобођене претпоставке које
+припадају неком скупу $\Gamma$, онда кажемо да је формула $A$
+\emph{дедуктивна последица} скупа претпоставки $\Gamma$ и тада пишемо
+$\Gamma \vdash A$.
+
+Постоји много различитих ознака коришћених да прикажу правила и доказе
+природне дедукције. Ми ћемо овде представити нека правила природне
+дедукције за интуиционистичку исказну логику. Синтакса
+интуиционистичке исказне логике је слична као и синтакса класичне
+исказне логике. Скуп формула $\Phi$ можемо дефинисати индуктивно,
+коришћењем $V$, бесконачног скупа исказних променљивих:
+$$\Phi = \perp\ |\ V\ |\ (\Phi \rightarrow \Phi)\ |\ (\Phi \land \Phi)\ |\ (\Phi \lor \Phi)$$
+
+
+Интуиционистичка логика \cite{kripke1965semantical,
+  palmgren2009semantics} је ослабљена у односу на класичну логику пре
+свега изузимајући принцип о изузимању трећег. У светлу Кари--Хауард 
+изоморфизма хипотезе $A$, $B$,
+$C$, $\ldots$, се сматрају проблемима које треба решити, а њихови
+докази $a$, $b$, $c$, $\ldots$, методама који их
+решавају. Конструктивни доказ се може посматрати на следећи начин.
+\begin{description}
+\item{i)} Доказ за $A \land B$ је пар $(a, b)$ где је $a$ доказ за
+  $A$, а $b$ доказ за $B$.
+\item{ii)} Доказ за $A \to B$ је функција $f$ која за сваки доказ $a$
+  за $A$ даје доказ $f(a)$ за $B$.
+\item{iii)} Доказ за $A \lor B$ je доказ $a$ за $А$ или доказ $b$ за
+  $B$.
+\item{iv)} Не постоји доказ за $\perp$.
+\end{description}
+
+
+Уместо формула, чворови стабла извођења су секвенти облика $\Gamma
+\vdash F$ при чему је $\Gamma$ коначан скуп претпоставки.  У табели
+\ref{tab:prirodna_ded2} се могу видети правила извођења система
+природне дедукције за део интуционистичке исказне логике која су
+задата у таквом облику.
+
+\begin{table}[!ht]
+\AxiomC{$\alpha \in \Gamma$}
+\RightLabel{$A$x}
+\UnaryInfC{$\Gamma \vdash \alpha$}
+\DisplayProof
+\hskip 3cm
+\AxiomC{$\Gamma \vdash \perp$}
+\RightLabel{$\perp_E$}
+\UnaryInfC{$\Gamma \vdash A$}
+\DisplayProof
+\hskip 2cm
+\AxiomC{\ }
+\RightLabel{$\top_I$}
+\UnaryInfC{$\Gamma \vdash \top$}
+\DisplayProof
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma, \alpha \vdash \beta$}
+\RightLabel{$\rightarrow_I$}
+\UnaryInfC{$\Gamma \vdash \alpha \rightarrow \beta$}
+\DisplayProof
+\hskip 2.1cm
+\AxiomC{$\Gamma \vdash \alpha \rightarrow \beta$}
+\AxiomC{$\Gamma \vdash \alpha$}
+\RightLabel{$\rightarrow_E$}
+\BinaryInfC{$\Gamma \vdash \beta$}
+\DisplayProof
+\hskip 5cm
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma \vdash \alpha$}
+\AxiomC{$\Gamma \vdash \beta$}
+\RightLabel{$\land_I$}
+\BinaryInfC{$\Gamma \vdash \alpha \land \beta$}
+\DisplayProof
+\hskip 1.4cm
+\AxiomC{$\Gamma \vdash \alpha \land \beta$}
+\RightLabel{$\land_{E_1}$}
+\UnaryInfC{$\Gamma \vdash \alpha$}
+\DisplayProof
+\hskip 1.2cm
+\AxiomC{$\Gamma \vdash \alpha \land \beta$}
+\RightLabel{$\land_{E_2}$}
+\UnaryInfC{$\Gamma \vdash \beta$}
+\DisplayProof
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma \vdash \alpha$}
+\RightLabel{$\lor_{I_1}$}
+\UnaryInfC{$\Gamma \vdash \alpha \lor \beta$}
+\DisplayProof
+\hskip 1 cm
+\AxiomC{$\Gamma \vdash \beta$}
+\RightLabel{$\lor_{I_2}$}
+\UnaryInfC{$\Gamma \vdash \alpha \lor \beta$}
+\DisplayProof
+\hskip 1 cm
+\AxiomC{$\Gamma \vdash \alpha \lor \beta$}
+\AxiomC{$\Gamma, \alpha \vdash \gamma$}
+\AxiomC{$\Gamma, \beta \vdash \gamma$}
+\RightLabel{$\lor_E$}
+\TrinaryInfC{$\Gamma \vdash \gamma$}
+\DisplayProof
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma \vdash \alpha$}
+\AxiomC{$\Gamma \vdash \neg \alpha$}
+\RightLabel{$\neg_E$}
+\BinaryInfC{$\Gamma \vdash \bot$}
+\DisplayProof
+\hskip 1.2cm
+\AxiomC{$\Gamma, A \vdash \bot$}
+\RightLabel{$\neg_I$}
+\UnaryInfC{$\Gamma \vdash \neg A$}
+\DisplayProof
+\caption{Правила извођења система природне дедукције за интуиционистичку исказну логику}\label{tab:prirodna_ded2}
+\end{table}
+
+
+\subsection{Једноставан $\lambda$--рачун са типовима}
+
+$\lambda$--термови немају фиксни домен, али су Кари
+\cite{curry1934functionality} и Черч \cite{church1940formulation}
+увели и верзију система са типовима, независно један од другог. Зато
+постоје две верзије, $\lambda$--рачун са типовима 'а ла Кари и
+$\lambda$--рачун са типовима 'а ла Черч. Иако су ови системи
+различити, суштински представљају исте идеје и постоје исти
+закључци. Ипак, треба бити пажљив, јер нису у потпуности исти, али
+анализу тих разлика (због обима) нећемо дати у овој тези. У наставку
+ће $\lambda$--рачун са типовима бити представљен 'a ла Кари.
+
+Сваком терму се придружује неки тип. Тип терма зависи од типа
+променљивих које се у њему јављају. Ако су типови променљивих одређени
+контекстом $\Gamma$ тада је могуће одредити и тип терма. Правила
+одређивања типова се означавју релацијом $\vdash$. Ако $\Gamma \vdash
+M : \sigma$ онда кажемо да \emph{$\lambda$--терм $M$ има тип $\sigma$
+  у $\Gamma$}.
+
+\begin{definition} \ \ 
+\begin{description}
+\item{(i)} Нека скуп $U$ означава пребројиво бесконачан алфабет чији
+  чланови се зову \emph{типске променљиве}. Скуп \emph{једноставних
+    типова} $\Pi$ је скуп ниски који су дефинисани граматиком:
+    $$\Pi = U\ |\ (\Pi \rightarrow \Pi)$$ Обично користимо симболе
+  $\alpha, \beta, \ldots$ да означимо произвољне типске променљиве, а
+  $\tau, \sigma, \ldots$ да означимо произвољне типове. Неформално,
+  $\sigma \to \tau$ означава скуп функција које сликају $\sigma$ у
+  $\tau$. На пример, $\vdash \lambda x. x : \sigma \to \sigma$
+  неформално изражава да идентитет је функција која слика одређени
+  скуп у себе самог.
+
+\item{(ii)} \emph{Контекст} $C$ одређује типове променљивих и дефинише
+  се као скуп парова облика
+  $$\{x_1:\tau_1, \ldots, x_n : \tau_n\}$$
+  при чему $\tau_1, \ldots, \tau_n \in \Pi$, $x_1, \ldots, x_n \in V$
+  (променљиве за $\Lambda$) и важи $x_i \neq x_j$ за свако $i \neq j$.
+
+\item{(iii)} \emph{Домен} $\Gamma$ за контекст $\Gamma = \{x_1:\tau_1,
+  \ldots, x_n : \tau_n\}$ се дефинише са:
+  $$\text{dom}(\Gamma) = \{x_1, \ldots, x_n\}$$ Унију $\Gamma \cup
+  \Gamma'$ означавамо $\Gamma, \Gamma'$ ако важи $\text{dom}(\Gamma)
+  \cap \text{dom}(\Gamma') =\{\}$.
+
+\item{(iv)} \emph{Кодомен} контекста $\Gamma = \{x_1:\tau_1, \ldots,
+  x_n : \tau_n\}$ се дефинише са:
+  $$|\Gamma| = \{\tau \in \Pi\ |\ (x:\tau)\in \Gamma, \text{за неко}\ x\}$$
+
+\item{(v)} \emph{Релација} $\vdash$ над $C \times \Lambda \times \Pi$
+  је дефинисана типским правилима:
+
+\AxiomC{$x:\tau \in \Gamma$}
+\UnaryInfC{$\Gamma \vdash x:\tau$}
+\DisplayProof
+\hskip 1cm
+\AxiomC{$\Gamma, x : \tau \vdash M : \sigma$}
+\UnaryInfC{$\Gamma \vdash (\lambda x : \tau. M) (\tau \rightarrow \sigma)$}
+\DisplayProof
+\hskip 1cm
+\AxiomC{$\Gamma \vdash M : \tau \rightarrow \sigma$}
+\AxiomC{$\Gamma \vdash N : \tau$}
+\BinaryInfC{$\Gamma \vdash M\ N : \sigma$}
+\DisplayProof
+
+при томе за прво и друго правило важи $x \notin \text{dom}(\Gamma)$. 
+
+\item{(vi)} Једноставан $\lambda$--рачун са типовима
+  $\lambda^{\rightarrow}$ је тројка $(\Lambda, \Pi, \vdash)$. 
+\end{description}
+\end{definition}
+
+
+Једноставан $\lambda$-рачун је основа за програмске језике као што су
+\emph{Lisp} и \emph{Scheme}, a различите варијанте једноставног
+$\lambda$--рачуна са типовима су послужиле као основа за програмске
+језике \emph{Pascal}, \emph{ML} и \emph{Haskell}.
+
+\begin{theorem}[Редукција субјекта] \footnote{Доказ у \cite{barendregt2013lambda}.} 
+Ако $\Gamma \vdash M : \sigma$ и $M \BetaRed N$, онда $\Gamma \vdash
+N: \sigma$.
+\end{theorem}
+
+И у $\lambda$--рачуну са типовима $\beta$--редукција ($\to_{\beta}$)
+је конфлуентна.
+
+\begin{theorem}[Конфлуентност] \footnote{Доказ у \cite{barendregt2013lambda}.} 
+Претпоставимо да важи $\Gamma \vdash M : \sigma$. Ако $M \MultBetaRed
+N$ и $M \MultBetaRed N'$, онда постоји $L$ такав да $N \MultBetaRed L$
+и $N' \MultBetaRed L$ и $\Gamma \vdash L:\sigma$.
+\end{theorem}
+
+\begin{theorem}[Строга нормализација] \footnote{Доказ у \cite{barendregt2013lambda}.} 
+Ако важи $\vdash M : \sigma$, онда бесконачана редукција $M_1
+\to_{\beta} M_2 \to_{\beta} \ldots$ не постоји.
+\end{theorem}
+
+Редукција субјекта, конфлуенција и строга нормализација обезбеђују да
+се било која редукција типског $\lambda$--терма завршава у нормалној
+форми истог типа, при чему је нормална форма независна од редоследа
+примене правила. Ова својства су веома важна јер ако би
+$\lambda$--рачун са типовима посматрали као идеализовани програмски
+језик, онда би $\beta$--редукција била један корак у
+израчунавању. Свакако бисмо желели да се извршавање након неког броја
+корака заврши, а не да се одвија бесконачно, а то нам обезбеђује
+строга нормализација. Са друге стране, системи који задовољавају
+строгу нормализацију нису Тјуринг--комплетни тј.~у таквим системима
+није могуће записати све израчунљиве функције.
+
+\subsection{Кари--Хауард изоморфизам}
+
+Кари--Хауард изоморфизам представља запањујућу и важну аналогију
+између $\lambda$--рачуна и правила природне дедукције за исказну
+интуиционистичку логику. Било који доказ у импликацијском фрагменту
+исказне интуиционистичке логике (интуиционистичка логика само са
+везником имликација, означено са IPC($\to$)) одговара неком типском
+$\lambda$--терму и обратно.
+
+Ако је $V$ (скуп предикатских променљивих) једнак $U$ (скуп типских
+променљивих), онда су $\Phi$ (скуп исказних формула имлицитног
+фрагмента исказне интуиционистичке логике) и $\Pi$ (скуп једноставних
+типова) једнаки.
+
+\begin{theorem}[Кари--Хауард изоморфизам] \footnote{Доказ у \cite{barendregt2013lambda}.} \ \
+\begin{description}
+\item{(i)} Ако $\Gamma \vdash M:\varphi$ онда $|\Gamma| \vdash \varphi$.
+\item{(ii)} Ако $\Gamma \vdash \varphi$ онда постоји $M \in
+  \Lambda_{\Pi}$ такав да $\Delta \vdash M : \varphi$, при чему је
+  $\Delta = \{(x_\varphi:\varphi)\ |\ \varphi \in \Gamma\}$.
+\end{description}
+\end{theorem}
+
+Коришћење правила $Ax$ интуиционистичке исказне логике одговара
+променљивима у термовима, коришћење $\to_E$ правила одговара примени,
+а $\to_I$ правила одговара апстракцији, термови служе као линеарна
+рeпрезентација стабла доказа. Посматрајмо упоредо правила дата на
+табели \ref{tab:propositionalvscalculus}:
+
+\begin{table}[!h]
+\AxiomC{$x:\tau \in \Gamma$}
+\UnaryInfC{$\Gamma \vdash x:\tau$}
+\DisplayProof
+\hskip 4.5cm
+\AxiomC{$\alpha \in \Gamma$}
+\RightLabel{$A$x}
+\UnaryInfC{$\Gamma \vdash \alpha$}
+\DisplayProof
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma, x : \tau \vdash M : \sigma$}
+\UnaryInfC{$\Gamma \vdash (\lambda x : \tau. M) (\tau \rightarrow \sigma)$}
+\DisplayProof
+\hskip 2cm
+\AxiomC{$\Gamma, \alpha \vdash \beta$}
+\RightLabel{$\rightarrow_I$}
+\UnaryInfC{$\Gamma \vdash \alpha \rightarrow \beta$}
+\DisplayProof
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma \vdash M : \tau \rightarrow \sigma$}
+\AxiomC{$\Gamma \vdash N : \tau$}
+\BinaryInfC{$\Gamma \vdash M\ N : \sigma$}
+\DisplayProof
+\hskip 1cm
+\AxiomC{$\Gamma \vdash \alpha \rightarrow \beta$}
+\AxiomC{$\Gamma \vdash \alpha$}
+\RightLabel{$\rightarrow_E$}
+\BinaryInfC{$\Gamma \vdash \beta$}
+\DisplayProof
+\caption{Правила природне дедукције наспрам правила за $\lambda$--рачун}\label{tab:propositionalvscalculus}
+\end{table}
+
+Табела која приказује однос $\lambda$--рачуна са типовима и
+имплицитног фрагмента исказне интуиционистичке логике:
+
+\begin{tabular}{ll}
+\textbf{$\lambda^{\to}$} & \textbf{IPC($\to$)} \\
+\hline
+терм променљива & претпоставка \\ 
+терм & доказ (конструкција)\\
+типска променљива & исказна променљива\\
+тип & формула\\
+конструктор типа & везник\\
+да ли постоји терм датог типа? & \begin{tabular}[c]{@{}l@{}}да ли постоји доказ \\  (конструкција) дате претпоставке?\end{tabular} \\
+типски терм & конструкција дате претпоставке \\
+редукција ($\beta\eta$--редукција) & нормализација \\
+\end{tabular}
+
+\subsection{Провера типа}
+
+\begin{definition}\ \
+\begin{description}
+\item{(i)} Проблем \emph{провере типа} (енг.~\emph{type checking}) је
+  проблем одлучивања да ли важи $\Gamma \vdash M : \tau$ за дати
+  контекст $\Gamma$, терм $M$ и тип $\tau$.
+\item{(ii)} Проблем \emph{реконструкције типа} (енг.~\emph{type
+  reconstruction}) је проблем одлучивања да ли за дати терм $M$
+  постоји контекст $\Gamma$ и тип $\tau$ такав да важи $\Gamma \vdash
+  M : \tau$.
+\item{(iii)} Проблем \emph{празног типа} (енг.~\emph{type emptiness})
+  или \emph{настањености типа} (енг.~\emph{type inhabitation}) је
+  проблем одлучивања да ли за дати тип $\tau$ постоји затворен терм
+  $M$ такав да важи $\vdash M : \tau$.
+\end{description}
+\end{definition}
+
+На основу Кари--Хауард изоморфизма, $\sigma$ се може схватити као
+логичка формула, а $M$ као доказ. Зато проблем провере типа одговара
+проблему провере доказа, тј. интерактивном доказивању теорема, а
+проблем попуњености типа одговара провери да ли постоји барем један
+доказ, тј. аутоматском доказивању теорема. 
+
+Одлучивост ових проблема зависи од коришћене верзије
+$\lambda$--рачуна. Једноставан $\lambda$--рачун са типовима према
+Кари--Хауард изоморфизму одговара интуиционистичкој исказној логици.
+
+\begin{theorem} \footnote{Доказ у \cite{barendregt2013lambda}.} 
+Проблем празног типа за једноставан $\lambda$--рачун са типовима је
+еквивалентан проблему испитивања ваљаности у имплицитном фрагменту
+интуиционистичке исказне логике.
+\end{theorem}
+
+Зато се за једноставни $\lambda$--рачун са типовима могу доказати
+следећа тврђења.
+
+\begin{theorem} \footnote{Доказ у \cite{barendregt2013lambda}.} 
+Проблем провере типа у једноставном $\lambda$--рачуну са типовима је
+одлучив.
+\end{theorem}
+
+\begin{theorem} \footnote{Доказ у \cite{barendregt2013lambda}.} 
+Проблем празног типа у једноставном $\lambda$--рачуну са типовима је
+одлучив и $P$--комплетан.
+\end{theorem}
+
+\begin{theorem} \footnote{Доказ у \cite{barendregt2013lambda}.} 
+Проблем реконструкције типа за једноставан типски $\lambda$--рачун је
+$P$--комплетан.
+\end{theorem}
+
+
+Ова својства је интересантно повезати са Кари--Хауард
+изоморфизмом. Наиме, ако је неки исказ доказив у неком систему, онда
+ће у $\lambda$--рачуну одговарајући тип бити попуњен, а терм који
+настањује (енг.~\emph{inhabiting}) тај тип је заправо посматран као његов
+доказ. Зато нам је важна одлучивост проблема празног типа. Оно што је
+још интересантније, из угла програмског језика, терм који настањује
+тип се може посматрати као извршив програм.
+
+\subsection{Зависни типови и полиморфни $\lambda$--рачун}
+
+Посматрано са програмерске тачке, зависни типови (енг.~\emph{dependent
+  types}) су они типови који \emph{зависе} од вредности објекта. На
+пример, посматрајмо тип {\tt string(n)} који представља све бинарне
+ниске дужине {\tt n} \footnote{Пример из
+  \cite{mitchell1996foundations}.}. Овај тип зависи од избора {\tt
+  n:int}. Оператор {\tt string} прави тип над целим бројевима и
+одговара, преко Кари-Хауард изоморфизма, предикату над типом {\tt
+  int}. Такав предикат се зове \emph{конструктор типа} или само
+\emph{конструктор}. Потребно је класификовати конструкторе према
+њиховом домену и то доводи то појма \emph{род} (енг. kind): кажемо да
+је конструктор {\tt string} рода $int \Rightarrow *$, при чему је $*$
+род свих типова. Наравно, предикати не морају бити само бинарни, те
+род може укључивати и $\tau_1 \Rightarrow \ldots \Rightarrow \tau_n
+\Rightarrow *$. Претпоставимо, на пример, да {\tt string(n)} враћа
+ниске дужине {\tt n} који се састоје само из нула. Тип ове процедуре
+би био ($\forall n :$ {\tt int}){\tt string($n$)}.
+
+Уопштено, тип облика $(\forall x:\tau)\sigma$ је тип функције која се
+примењује на објекте типа $\tau$, а враћа објекте типа $\sigma[x :=
+  a]$ за сваки аргумент $a : \tau$. Ово понашање је заправо исто као и
+понашање $\tau \to \sigma$.
+
+\begin{definition}
+Ако $\Gamma \vdash \tau : *$, онда кажемо да је $\tau$ \emph{тип} у
+контексту $\Gamma$.
+\end{definition}
+
+У наредним поглављима ћемо представити три система који су проширења
+једноставног $\lambda$--рачуна са типовима, а потом ћемо дати везу
+између различитих система коришћењем $\lambda$--коцке. Ова проширења
+омогућавају увођење комплекснијих типова, односно ширу и специфичнију
+репрезентацију података, али истовремено нарушавају одлучивост
+проблема провере типа и настањености типа.
+
+\subsubsection{Систем $\lambda2$}
+
+Систем $\lambda2$ је проширење $\lambda$--рачуна за логику другог
+реда. Oвим системом уводи се полиморфизам, тј.~овим системом су
+омогућене две зависности, термови да зависе од термова (ово важи и у
+$\lambda$--рачуну) и термови да зависе од типова.
+
+\begin{definition} \ \
+\begin{description}
+\item{(i)} \emph{Тип} (другог реда) се дефинише:
+\begin{itemize}
+\item Типске променљиве су типови
+\item Ако су $\sigma$ и $\tau$ типови, онда је и $\sigma \to \tau$ тип
+\item Ako je $\sigma$ тип, а $\alpha$ типска променљива, онда $\forall \alpha \sigma$ је тип
+\end{itemize}
+
+\item{(ii)} Добро типизирани $\lambda$--термови су дефинисани
+  правилима за извођење типа који су дати у табели
+  \ref{tab:izvodjenje_tipa}. Сваки терм је или променљива, обична
+  примена или апстракција или је
+\begin{itemize}
+\item \emph{полиморфна апстракција}, записана као $\Lambda\alpha.M$,
+  при чему је $M$ терм, а $\alpha$ типска променљива или
+\item \emph{примена типа}, записана као $(M\tau)$, при чему је $M$
+  терм, а $\tau$ је тип.
+\end{itemize}
+\end{description}
+\end{definition}
+
+\begin{table}[!ht]
+$\Gamma, x : \tau \vdash x : \tau$
+
+\vspace{0.5cm}
+
+\AxiomC{$\Gamma N : \tau \to \sigma$}
+\AxiomC{$\Gamma \vdash M : \tau$}
+\BinaryInfC{$\Gamma \vdash N M : \sigma$}
+\DisplayProof
+\hskip 2.5cm
+\AxiomC{$\Gamma, x: \tau \vdash M : \sigma$}
+\UnaryInfC{$\Gamma \vdash \lambda x. M: \tau \to \sigma$}
+\DisplayProof
+
+\vspace{0.5cm}
+
+\AxiomC{$\Gamma \vdash M : \sigma$}
+\RightLabel{$\alpha \notin FV(\Gamma)$}
+\UnaryInfC{$\Gamma \vdash (\Lambda\alpha M) : \forall \alpha \sigma$}
+\DisplayProof
+\hskip 2cm
+\AxiomC{$\Gamma \vdash M: \forall \alpha \sigma$}
+\UnaryInfC{$\Gamma \vdash M\tau : \sigma[\alpha := \tau]$}
+\DisplayProof
+\caption{Правила за извођење типа}\label{tab:izvodjenje_tipa}
+\end{table}
+
+Неформално, за полиморфну апстракцију $\Lambda\alpha. M$, терм $M$
+можемо посматрати као полиморфна процедура са параметром типа
+$\alpha$.
+
+Пример да терм зависи од терма може бити следећи $\lambda m:A.F: A \to
+B$. У програмском језику C++ ова зависност се често може приметити,
+рецимо у аритметичким изразима {\tt a = b + 1}, a где терм {\tt a}
+зависи од терма {\tt b + 1}.
+
+Посматрајмо функцију идентитета, тј. функцију која за дати улаз враћа
+непромењени излаз. Над природним бројевима, {\tt nat} тип функције је
+$\lambda x: nat. x$, над буловским типом, тип функције је $\lambda x:
+bool. x$, a над типом $nat \to bool$ тип функције је $\lambda x: nat
+\to bool. x$. Значи, у зависности од типа можемо имати много функција
+идентитeта, али питање је како дефинисати општу функцију индентитета,
+односно, ако имамо произвољан тип $\alpha$ функција би била $f \equiv
+\lambda x: \alpha. x$. Наравно, сада не можемо да пишемо $f M$ јер
+овај терм није легалан, али можемо да мало изменимо дефиницију,
+односно да у систему $\lambda2$ дамо дефиницију: $\lambda \alpha:
+k. \lambda x : \alpha. x$, односно, $\alpha$ је неки тип из скупа свих
+типова рода $k$. Сада имамо терм који зависи од типа. Пример у језику
+C++ би могла да буде функција која је дефинисана над неким {\tt
+  template} типом.
+
+Систем $\lambda2$ преко Кари--Хауарад изоморфизма одговара исказној
+логици другог реда \cite{girard1972interpretation, girard1986system,
+  girard1989proofs}. Коришћењем овог својства може се доказати да важи:
+
+\begin{theorem} \footnote{Докази у \cite{barendregt2013lambda}.} 
+Провера типа, проблем настањености типа и проблем реконструкције типа
+су неодлучиви у систему $\lambda2$.
+\end{theorem}
+
+
+\subsubsection{Систем $\lambda\underline{\omega}$}
+
+Систем $\lambda\underline{\omega}$ је проширење у коме се може
+направити зависност "тип зависи од типа", на пример $ f \equiv \lambda
+\alpha:*. \alpha \to \alpha$. Пример у програмирању би био тип {\tt
+  vector<int>} који зависи од типа {\tt vector} који је заправо
+дефинисани {\tt template}.  Питање је шта је $f$, јер није терм, није
+ни тип. Зато се уводи $\mathcal{K} = *\ |\ \mathcal{K} \to
+\mathcal{K}$, тј. $\mathcal{K} = \{*, *\to*, *\to*\to*, \ldots\}$.
+Уводи се и ознака $\square$, при чему $k : \square$ означава да је $k$
+добро формирани род, односно да $k \in \mathcal{K}$, а при томе само
+$\square$ није део језика. Видимо да $\vdash (\lambda \alpha:*. \alpha
+\to \alpha) : (* \to *)$, односно $f$ је конструктор рода $* \to *$.
+
+\begin{definition}
+Нека је $V$ скуп променљивих, a $C = \{*, \square\}$ скуп
+константи. Типови и термови $\mathcal{T}$ у систему $\lambda\underline{\omega}$
+дефинишу се на следећи начин:
+$$T = V\ |\ C\ |\ \mathcal{T}\mathcal{T}\ |\ \lambda
+V:\mathcal{T}.\mathcal{T}\ |\ \mathcal{T} \to \mathcal{T}$$ Релација
+$\vdash$ (тј. $\vdash_{\lambda\underline{\omega}}$, $\Gamma \vdash_{\lambda\underline{\omega}}
+M\ :\ A$) се дефинише правилима датим у табели
+\ref{tab:izvodjenje_za_lambda_omega}, при чему променљива $s$ може
+узети било коју вредност из скупа $\{*, \square\}$.
+\end{definition}
+
+\begin{table}[H]
+$\vdash * : \square$
+
+\vspace{0.5cm}
+
+\AxiomC{$\Gamma \vdash A : s$}
+\RightLabel{$x \notin dom(\Gamma)$}
+\UnaryInfC{$\Gamma, x : A \vdash x : A$}
+\DisplayProof
+\hskip 2.5cm
+\AxiomC{$\Gamma \vdash A : B$}
+\AxiomC{$\Gamma \vdash C : s$}
+\RightLabel{$x \notin dom(\Gamma)$}
+\BinaryInfC{$\Gamma, x:C \vdash A : B$}
+\DisplayProof
+
+\vspace{0.5cm}
+
+\AxiomC{$\Gamma \vdash A : s$}
+\AxiomC{$\Gamma \vdash B : s$}
+\BinaryInfC{$\Gamma \vdash (A \to B) : s$}
+\DisplayProof
+\hskip 2.5cm
+\AxiomC{$\Gamma \vdash F : (A \to B)$}
+\AxiomC{$\Gamma \vdash a : A$}
+\BinaryInfC{$\Gamma \vdash Fa : B$}
+\DisplayProof
+
+\vspace{0.5cm}
+
+\AxiomC{$\Gamma, x:A \vdash b:B$}
+\AxiomC{$\Gamma \vdash (A \to B) : s$}
+\BinaryInfC{$\Gamma \vdash (\lambda x:A.b) : (A \to B)$}
+\DisplayProof
+\hskip 1.5cm
+\AxiomC{$\Gamma \vdash A : B$}
+\AxiomC{$\Gamma \vdash B' : s$}
+\AxiomC{$B \MultBetaRed B'$}
+\TrinaryInfC{$\Gamma \vdash A : B'$}
+\DisplayProof
+\caption{Правила извођењa}\label{tab:izvodjenje_za_lambda_omega}
+\end{table}
+
+
+\subsubsection{Систем $\lambda P$}
+
+Систем $\lambda P$ зависних типова је проширење једноставног
+$\lambda$--рачуна са типовима. Са овим системом могуће је креирати
+зависност "тип зависи од терма". Пример би био $A^{m \times n}$, тип
+свих матрица димензије $m \times n$, при чему овај тип зависи од
+бројева $m$ и $n$.
+
+\begin{definition}
+Нека је $V$ скуп променљивих, $C = \{*, \square\}$ скуп константи, а
+типови и термови $\mathcal{T}$ у систему $\lambda\underline{\omega}$
+дефинишу се на следећи начин:
+$$T = V\ |\ C\ |\ \mathcal{T}\mathcal{T}\ |\ \lambda
+V:\mathcal{T}.\mathcal{T}\ |\ \Pi V:\mathcal{T}.\mathcal{T}$$ При томе,
+$\Pi$ представља декартовски производ. Релација $\vdash$
+(тј. $\vdash_{\lambda P}$) се дефинише правилима из табеле
+\ref{tab:izvodjenje_za_lambda_P}, при чему променљива $s$ може бити
+било која вредност из скупа $\{*, \square\}$.
+\end{definition}
+
+\begin{table}[!ht]
+$\vdash * : \square$ 
+
+\vspace{0.5cm}
+
+\AxiomC{$\Gamma \vdash A : s$}
+\RightLabel{$x \notin dom(\Gamma)$}
+\UnaryInfC{$\Gamma, x:A \vdash x : A$}
+\DisplayProof
+\hskip 2.5cm
+\AxiomC{$\Gamma \vdash A : B$}
+\AxiomC{$\Gamma C : s$}
+\RightLabel{$x \notin dom(\Gamma)$}
+\BinaryInfC{$\Gamma, x: C \vdash A : B$}
+\DisplayProof
+
+\vspace{0.5cm}
+
+\AxiomC{$\Gamma \vdash A : *$}
+\AxiomC{$\Gamma, x : A \vdash B : s$}
+\BinaryInfC{$\Gamma \vdash (\Pi: A.B) : s$}
+\DisplayProof
+\hskip 2.5cm
+\AxiomC{$\Gamma \vdash F : (\Pi x : A.B)$}
+\AxiomC{$\Gamma \vdash a : A$}
+\BinaryInfC{$\Gamma \vdash Fa : B [x := a]$}
+\DisplayProof
+
+\hskip 2.5cm
+
+\AxiomC{$\Gamma, x:A \vdash b : B$}
+\AxiomC{$\Gamma \vdash (\Pi x: A.B) : s$}
+\BinaryInfC{$\Gamma \vdash (\lambda x: A.b) : (\Pi x: A. B)$}
+\DisplayProof
+\hskip 1.5cm
+\AxiomC{$\Gamma \vdash A : B$}
+\AxiomC{$\Gamma \vdash B' : s$}
+\AxiomC{$B \MultBetaRed B'$}
+\TrinaryInfC{$\Gamma \vdash A : B'$}
+\DisplayProof
+\caption{Правила извођењa}\label{tab:izvodjenje_za_lambda_P}
+\end{table} 
+
+Систем $\lambda P$ преко Кари--Хауард изоморфизма одговара
+предикатској логици првог реда.
+
+\begin{theorem} \footnote{Докази у \cite{barendregt2013lambda}.} 
+Проблем настањености типа у $\lambda P$ је неодлучив. Проблем
+реконструкције типа је одлучив. Проблем провере типа је неодлучив.
+\end{theorem}
+
+
+
+\subsection{$\lambda$--коцка}
+
+Већ смо видели да је у различитим системима могуће направити различите
+зависности.
+
+У систему $\lambda^{\to}$ можемо имати терм 
+$$\vdash \lambda x: \sigma. x: \sigma \to \sigma.$$ За дати терм $M$
+можемо формирати нови терм $\lambda x : \sigma. M$ који очекује терм
+као аргумент, другим речима овај \emph{терм зависи од терма}.
+
+У систему $\lambda2$ можемо имати терм 
+$$\vdash \Lambda\alpha:*.\lambda x\alpha.x: \forall\alpha. \alpha \to
+\alpha.$$ За дати терм $M$, можемо формирати нови терм $\Lambda
+\alpha: *.M$ који очекује тип $\sigma$ као аргумент, другим речима
+\emph{терм зависи од типа}.
+
+Коначно, у систему $\lambda P$ можемо имати израз 
+$$\alpha:* \vdash \lambda x:\alpha. \alpha : \alpha \Rightarrow *$$
+што изражава да конструктор очекује терм типа $\alpha$, а конструише
+члан $*$. Ако применимо овај израз на терм $\alpha$, онда добијамо тип
+$\alpha:*, y:\alpha \vdash (\lambda x: \alpha. \alpha)y : *$. Односно,
+за дати тип $\alpha$ можемо формирати конструктор $\lambda x:
+\alpha. \alpha$ који очеекује терм типа $\alpha$ као аргумент, другим
+речима \emph{конструктор типа зависи од терма}.
+
+Можемо направити и да \emph{тип зависи од типа}, израз облика $\lambda
+\alpha:*. \alpha \to \alpha$. Систем у коме је то могуће је
+$\lambda\underline{\omega}$.
+
+Слично, постоје и други системи који имају исте или друге зависности и
+све их повезује $\lambda$--коцка, видети слику
+\ref{tab:lambdakocka}. 
+
+\begin{figure}[!ht]
+\begin{center}
+\input{lambdacube.tkz}
+\end{center}
+\caption{Графички приказ $\lambda$--коцке}\label{tab:lambdakocka}
+\end{figure}
+
+Правила извођења за $\lambda$--коцку су дата на табели
+\ref{tab:lambdakockapravila}. Као што се може видети $\lambda$--коцка
+има 8 темена и свако теме се може добити тако што се изабере различит
+скуп правила, тј. $s \in \mathcal{R}_1 = \{*, \square \}$, a $(s1, s2)
+\in \mathcal{R}_2 = \{(*, *), (*, \square), (\square, *), (\square,
+\square) \}$:
+
+
+\begin{table}[!ht]
+\AxiomC{\ } \RightLabel{аксиома} \UnaryInfC{$\vdash * : \square$}
+\DisplayProof
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma \vdash A : s$}
+\RightLabel{старт}
+\UnaryInfC{$\Gamma, x : A \vdash x : A$}
+\DisplayProof
+\hskip 4cm
+\AxiomC{$\Gamma \vdash A : B$}
+\AxiomC{$\Gamma \vdash C : s$}
+\RightLabel{слабљење}
+\BinaryInfC{$\Gamma, x: C \vdash A : B$}
+\DisplayProof
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma \vdash F : (\Pi x: A. B)$}
+\AxiomC{$\Gamma \vdash \alpha : A$}
+\RightLabel{примена}
+\BinaryInfC{$\Gamma \vdash F a : B [x := a]$}
+\DisplayProof
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma, x : A \vdash b : B$}
+\AxiomC{$\Gamma \vdash (\Pi x: A. B) : s$}
+\RightLabel{апстракција}
+\BinaryInfC{$\Gamma \vdash \lambda x: A . b : \Pi x: A. B$}
+\DisplayProof
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma \vdash A:s_1$}
+\AxiomC{$\Gamma, x: A \vdash B : s_2$}
+\RightLabel{производ}
+\BinaryInfC{$\Gamma \vdash (\Pi x: A. B): s_2$}
+\DisplayProof
+
+\vspace{0.3cm}
+
+\AxiomC{$\Gamma \vdash A : B$}
+\AxiomC{$\Gamma \vdash B ' : s$}
+\RightLabel{конверзија}
+\BinaryInfC{$\Gamma \vdash A : B'$}
+\DisplayProof
+\caption{Правила закључивања $\lambda$--коцке}\label{tab:lambdakockapravila}
+\end{table}
+
+\newpage
+
+Избором различитих вредности скупова $\mathcal{R}_1$ и $\mathcal{R}_2$
+добијају се темена $\lambda$--коцке:
+
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+$\lambda^{\to}$ & $(*, *)$ & & & \\
+$\lambda2$ & $(*, *)$ & $(\square, *)$ & & \\
+$\lambda\underline{\omega}$ & $(*, *)$ & & $(\square, \square)$ & \\
+$\lambda\omega$ & $(*, *)$ & $(\square, *)$ & $(\square, \square)$ & \\
+$\lambda P$ & $(*, *)$ & & & $(*, \square)$ \\
+$\lambda P2$ & $(*, *)$ & $(\square, *)$ & & $(*, \square)$ \\
+$\lambda P\underline{\omega}$ & $(*, *)$ & & $(\square, \square)$ & $(*, \square)$ \\
+$\lambda P2\omega = \lambda C$ & $(*, *)$ & $(\square, *)$ & $(\square, \square)$ & $(*, \square)$ \\
+\hline
+\end{tabular}
+
+При томе, уједно се може приметити да на основу правила (и
+одговарајућег избора) се могу креирати одговарајуће зависности и то:
+
+\begin{center}
+$(*, *)$: термови зависе од термова \\
+$(*, \square)$: термови зависе од типова \\
+$(\square, *)$: типови зависе од термова \\
+$(\square, \square)$: типови зависе од типова 
+\end{center} 
+
+
+Сви елементи $\lambda$--коцке деле неке лепе особине, као што су
+строга нормализација и редукција субјекта. Сви системи имају одлучив
+проблем провере типа, док неки једноставнији системи (као што су
+$\lambda^{\to}$ и $\lambda2$) имају одлучиво извођење типа.
+
+У Кари--Хауард изоморфизму, $\lambda C$ одговара предикатској логици
+вишег реда. На пример, $\forall \equiv \lambda A: *. \lambda P: A \to
+*. \Pi a: A. Pa$ се може дефинисати и има улогу универзалног
+квантификатора --- узима тип и предикат тог типа и враћа предикат који
+одговара исказу да предикат важи за сваки елемент датог типа. 
+
+
+Систем $\lambda$--коцке има као везнике једино импликацију и
+универзални кватификатор. Могуће је направити проширења и увести нове
+типове тако да се формирају оператори који одговарају осталим
+везницима који постоје у интуиционистичкој логици. На пример, у
+систему који је направио Мартин--Леф \cite{martin1984intuitionistic},
+функцијском типу $\to$ одговара импликација, тип производа $A \times
+B$ одговара коњукцији, типови дисјунктне уније $A+B$ одговарају
+дисјункцији, зависни типови производа $\Pi$--типови одговарају
+универзалном квантитфикатору, а зависни типови суме $\sum$--типови
+одговарају егзистенцијалном квантификатору.
+
+Графички, на слици \ref{tab:lambdacube2} коришћењем логичке коцке,
+ћемо приказати логику која одговара (преко Кари--Хауард изоморфизма)
+$\lambda$--коцки.
+
+\begin{figure}[!hb]
+\begin{center}
+\input{lambdacube2.tkz}
+\end{center}
+\caption{Графички приказ логичке коцке}\label{tab:lambdacube2}
+\end{figure}
+
+Скраћенице које су коришћене на слици означавају:
+
+\begin{tabular}{|ll|}
+\hline
+ISK & Исказна логика \\
+ISK$\underline{\omega}$ & Слаба исказна логика вишег реда \\
+PRE & Предикатска логика \\
+PRE$\underline{\omega}$ & Слаба предикатска логика вишег реда \\
+ISK2 & Исказна логика другог реда\\
+ISK$\omega$ & Исказна логика вишег реда\\
+PRE2 & Предикатска логика другог реда\\
+PRE$\omega$ & Предикатска логика вишег реда\\
+\hline
+\end{tabular}
+
+
+% ------------------------------------------------------------------------------
+% istorija interaktivnih dokazivaca teorema
+% ------------------------------------------------------------------------------
+
+\section{Кратак историјски преглед и осврт на главне карактеристике различитих интерактивних доказивача теорема}
+
+\subsection{Главне карактеристике интерактивних доказивача теорема}
+
+Идеја иза интерактивног доказивања теорема је да се помоћу
+специјализованих софтверских алатки ("\emph{асистената за доказивање
+  теорема}") омогући корисницима да запишу довољно информација и
+смерница тако да систем може да потврди постојање формалног
+аксиоматског доказа. Заправо, корисник записује скице доказа, које
+систем проверава и истовремено рачунар аутоматски конструише комплетан
+доказ састављен од ситних корака. Асистенти за доказивање теорема се
+развијају преко 40 година и данас помоћу њих могу да се формализују
+велики делови разних математичких теорија. Интерактивне доказиваче
+теорема данас углавном користе обучени специјалисти који имају добро и
+математичко и програмерско знање. Поступак формализације је прилично
+тежак јер и када постоји математички доказ на папиру, потребно је
+додати још пуно детаља да би тај доказ био прихваћен од стране машине,
+тј. асистента за доказивање теорема.
+
+Улога доказа је двојака. Прво, он мора да \emph{убеди} читаоца да је
+тврђење коректно. Рачунар може много помоћи у овом делу јер је могуће
+написати програм који механички проверава исправност доказа. Потом,
+доказ мора и да \emph{објасни} зашто је нешто коректно. Савремени
+асистенти за доказивање теорема имају и ову другу улогу доказа јер је
+могуће доказ записати у облику који је читљив човеку. Можемо рећи да
+је главна замерка интерактивним доказивачима теорема што они замарају
+читаоца са превише детаља у доказу. Ипак, некада су управо ти детаљи
+веома битни. Додатно, често се аутоматизацијом успешно "крију" ситни,
+неинтересантни кораци.
+
+\subsubsection{Приступи у конструкцији доказивача теорема}
+
+Постоји много приступа како се механичка провера доказа може учинити
+сигурном и већина ових приступа се симултано користи у интерактивним
+доказивачима теорема. Овде ћемо навести четири основна приступа, а
+више информација се може погледати у \cite{geuvers2009proof}.
+\begin{itemize}
+\item \textbf{Независан опис логике.} Потребно је да опис логичког
+  система и његових математичких својстава (као што су механизми за
+  дефинисање функција и типова података) буде независан од самог
+  асистента за доказивање теорема. То значи да верујемо логици. Ово је
+  основно својство које интерактивни доказивачи теорема морају да
+  задовоље и већина других својстава заправо подразумевају постајање
+  овог приступа.
+\item \textbf{Мало језгро.} Неки системи за доказивање теорема имају
+  веома мало језгро са правилима која су таква да их корисник може
+  верификовати ручном провером кода. Правила најчешће директно
+  одговарају правилима одговарајућег логичког система. Сва друга
+  правила у доказима су дефинисана на основу језгра, па је сваки корак
+  доказа заправо скуп основних правила доказивања који се налазе у
+  језгру. У овом случају потребно је да се верује \emph{само} језгру.
+\item \textbf{Верификација система за проверу доказа.} Асистент за
+  доказивање теорема је заправо само још један програм па је потребно
+  и њега проверити, тј. формално верификовати, а то заправо значи да
+  га треба записати у терминима логике и показати да је неко тврђење
+  могуће показати у њему ако и само ако је то тврђење могуће извести
+  коришћењем правила логике. Често, провера система се ради тако што
+  се докаже да су све тактике (делови програма који праве кораке у
+  доказима) које се користе у доказима исправне у логици и да за свако
+  правило закључивања у логици (елементарно, основно правило) постоји
+  тактика. Уколико програм већ има мало језгро онда је провера система
+  олакшана јер је потребно верификовати само то језгро.
+\item \textbf{Де Брујинов критеријум.} (енг.~\emph{De Bruijn
+  criterion.})  Интерактивни доказивач теорема конструише формалан
+  доказ (\emph{објекат доказа}), који је комплексан скуп података који
+  потом проверава независни верификатор. То значи да исправност
+  читавог система заправо зависи од тог независног верификатора (који
+  је најчешће прилично једноставан). Многи асистенти за доказивање
+  теорема генеришу и експлицитно чувају објекте--доказе. Као што смо
+  видели, занимљива последица изоморфизма је да \emph{провера доказа
+    одговара провери типа}. Тиме у основи Де Брујиновог критеријума је
+  Кари--Хауард изоморфизам о ком је било речи раније. Де Брујин
+  (хол.~\emph{de Bruijn}) је искористио ову идеју за проверу, односно
+  да се провера доказа заправо изврши алгоритмом за проверу типа.
+\end{itemize}
+
+\subsubsection{Тактике}
+
+Асистенти за доказивање теорема користе доказивање уназад, односно
+кориснику приказују тврђење у облику циља који је потребно
+направити. Корисник на те циљеве примењује \emph{тактике}, аутоматске
+алатке чији је циљ да докажу или упросте тврђење (сведу га на низ
+једноставнијих подциљева). Тактике морају да врате и оправдање како се
+од добијених подциљева изводи полазни циљ применом логичких правила и
+та оправдања се користе приликом провере крајњег доказа. Корисник може
+додавати тактике и проширивати могућности постојећих тактика. Такође,
+тактике могу звати друге тактике.
+
+Приликом доказивања, тактика проверава стање доказа (скуп тренутних
+подциљева) и обавештава да није могуће применити тактику на тренутно
+стање или мења тренутно стање доказа. Односно, за дато стање тактика
+може имати три могућа излаза:
+\begin{description}
+\item{-} успех: циљ је доказан,
+\item{-} промена: тактика је направила неку промену тренутног стања и
+\item{-} неуспех: тактика не може да докаже циљ и не може да направи
+  промену тренутног стања доказа.
+\end{description}
+
+
+\subsubsection{Декларативни наспрам процедуралног језика}
+
+Језик којим се записују докази у асистенту за доказивање теорема може
+бити \textbf{декларативни} или \textbf{процедурални}. 
+
+Поставља питање чему доказ служи --- да ли желимо да човек чита тај
+доказ, да га разуме и мења или то треба да буде само скуп инструкција
+намењен за извршавање на рачунару. Заправо, улога доказа је двојака,
+да \emph{оправда} тврђење и да \emph{објасни} зашто тврђење важи.
+
+Доказ записан у процедуранлом стилу је "нечитљив" јер корисник не може
+да види кораке у доказивању и овај доказ једино има смисла када се он
+извршава у одговарајућем доказивачу теорема. Процедурални језик је
+дизајниран са намером да \emph{оправда тврђење}, уз њих често иде
+моћна аутоматизација доказивања и често су докази концизни и кратки.
+
+У декларативном стилу доказ се записује тако да се могу уочити кораци
+у доказивању без извршавања у доказивачу теорема и математичари лако
+могу да уоче какво је резоновање коришћено у доказу. Декларативни
+језици конструисани су са намером да \emph{објасне} тврђења. Ипак
+декларативни докази су често значајно дужи. Иако је ово важно за онога
+ко чита доказ, онај ко пише доказ има значајно више посла. 
+
+Можемо упоредити два приступа на примеру доказа Пирсовог закона
+(једноставна исказна таутологија). Докази су записани у систему
+\emph{Isabelle/HOL}, при чему је леви доказ дат у декларативном стилу,
+а десни доказ у процедуралном стилу. Како ћемо касније детаљније
+објашњавати \emph{Isabelle}, сада нећемо улазити у објашњавање
+синтаксе, већ ћемо се пре свега концентрисати на разлике између
+процедералног и декларативног стила.
+
+\begin{small}
+\selectlanguage{english}
+{\tt
+\begin{tabbing}
+\textbf{lem}\=\textbf{ma}\= "$((A \longrightarrow B) \longrightarrow A) \longrightarrow A$"  \hspace{1.5cm}  \= \textbf{lemma} "$((A \longrightarrow B) \longrightarrow A) \longrightarrow A$" \\
+\textbf{proof}                                                                                           \>\>\> \textbf{apply} (rule impI)+  \\
+\> \textbf{assume} "$(A \longrightarrow B) \longrightarrow A$"                                           \>\>   \textbf{apply} (rule classical)  \\
+\> \textbf{show} "$A$"                                                                                   \>\>   \textbf{apply} (erule impE) \\
+\> \textbf{proof}(rule classical)                                                                        \>\>   \textbf{apply} (rule impI)  \\
+\>\>   \textbf{assume} "$\neg A$"                                                                        \>     \textbf{apply} (erule notE, assumption)+  \\
+\>\>   \textbf{have} "$(A \longrightarrow B)$"                                                           \>     \textbf{done} \\
+\>\>   \textbf{pro}\=\textbf{of}  \\
+\>\>\> \textbf{assume} "$A$"  \\
+\>\>\> \textbf{with} `$\neg A$` \textbf{show} "$B$" \\
+\>\>\> \textbf{by} contradiction \\
+\>\>   \textbf{qed}  \\
+\>\>   \textbf{with} `$(A \longrightarrow B) \longrightarrow A$` \textbf{show} $A$ .. \\
+\>  \textbf{qed} \\
+\textbf{qed}
+\end{tabbing}
+}
+\selectlanguage{serbian}
+\end{small}
+
+У десном доказу, сваки корак доказа представља примену неког правила
+природне дедукције. Ипак, овако записано, није могуће видети стање
+доказа и тек када се покрене доказивач може се видети ефекат примене
+правила на дату формулу. На пример, након примене {\tt impE} правила
+стање доказа је: \\
+{\tt
+goal (2 subgoals): \\
+ 1. $\neg A \Longrightarrow A \longrightarrow B$ \\
+ 2. $\lbrakk \neg A; A \rbrakk \Longrightarrow A$
+}
+
+Са друге стране, код левог, декларативног доказа можемо видети
+експлицитне међукораке у доказу. Иако је овакав доказ дужи, он се може
+анализирати и разумети без покретања у неком доказивачу
+теорема. Заправо, и у овом доказу се примењују правила природне
+дедукције. Команда {\tt proof} у овом примеру одмах примени правило за
+импликацију, те тако можемо претпоставити ({\tt assume}) леву страну,
+а желимо да докажемо десну страну. Доказ се обично завршава позивом
+неке аутоматске тактике, ми смо овде користили {\tt contradiction} (да
+би показали контрадикцију) и конструкт \selectlanguage{english}"{\tt
+  ..}"\selectlanguage{serbian} (аутоматски пролази одговарајуће правило
+природне дедукције и решава циљ).
+
+\subsubsection{Доказивање унапред и доказивање уназад}
+
+Доказивачи могу имати и различите приступе при доказивању, односно,
+постоји доказивање унапред и доказивање уназад.
+
+Приликом \emph{доказивања унапред} (енг.~\emph{forward proof})
+корисник се труди да од задатих хипотеза изведе нове хипотезе, тако да
+на крају изведе и циљни закључак. Рецимо, ако су дате хипотезе $H =
+[H_1, \ldots, H_n]$, a треба показати циљ $G$, корисник у сваком
+кораку изводи из хипотеза нову хипотезу $\Phi(H)$ и додаје у скуп
+хипотеза, односно ново стање је $H = [H_1, \ldots, H_n, \Phi_1(H),
+  \Phi_2(H), \ldots]$. Успехом се сматра када се циљ нађе међу
+хипотезама, односно када је $H = [H_1, \ldots, H_n, \Phi_1(H),
+  \Phi_2(H), \ldots, G, \ldots]$.
+
+Као што је било речи, код \emph{доказивања уназад}
+(енг.~\emph{backward proof}) корисник задаје теорему која треба да се
+покаже у форми циља, а потом примењује \emph{тактике} које
+трансформишу циљ у једноставније подциљеве. Подциљеви се лако доказују
+или се даље раздвајају на мање подциљеве који могу бити једноставно
+доказани. То значи да тактике генеришу листу подциљева. Поново,
+посматрајмо малопређашњи пример дате хипотезе $H = [H_1, \ldots,
+  H_n]$, a треба доказати циљ $G$. Из циља $G$ се најпре изводе
+подциљеви које је потребно доказати, рецимо $G_1, \ldots, G_k$, а онда
+је циљ доказати да за сваки од $k$ подциљева важи да се могу извести
+из хипотеза $H = [H_1, \ldots, H_n]$. Поред одређивања подциљева,
+тактике враћају функцију која оправдава и реконструише првобитни циљ
+након што су подциљеви доказани.
+
+За поређење ова два приступа представићемо једноставан пример чији
+доказ је писан у систему \emph{Isabelle/HOL}. При томе, леви доказ је
+пример доказивања унапред, а десни доказ је пример доказивања уназад.
+
+\begin{small}
+\selectlanguage{english}
+{\tt
+\begin{tabbing}
+\textbf{lem}\=\textbf{ma} $A \land B \longrightarrow B \land A$   \hspace{3cm} \=  \textbf{lem}\=\textbf{ma} $A \land B \longrightarrow B \land A$\\
+\textbf{proof}                                                                  \>\> \textbf{proof} \\
+\> \textbf{assume} $A \land B$                                                  \>\> \textbf{assume} $A \land B$ \\
+\> \textbf{from} $A \land B$ \textbf{have} $A$ ..                               \>\> \textbf{show} $B \land A$ \\
+\> \textbf{from} $A \land B$ \textbf{have} $B$ ..                               \>\> \textbf{pro}\=\textbf{of}\\
+\> \textbf{from} $A$ $B$ \textbf{have} $B \land A$ ..                           \>\>\> \textbf{show} $B$ \textbf{by} (rule conjunct2) fact\\
+\textbf{qed}                                                                    \>\>\>\> \textbf{show} $A$ \textbf{by} (rule conjunct1) fact\\
+                                                                                \>\>\> \textbf{qed} \\
+                                                                                \>\> \textbf{qed} \\
+\end{tabbing}
+}
+\selectlanguage{serbian}
+\end{small}
+
+
+У пракси се ова два приступа најчешће симултано примењују. Доказивачи
+чији докази су писани у декларативном стилу често комбинују доказивање
+унапред и уназад, док у процедуралном стилу фаворизују доказивање
+уназад.
+
+
+\subsection{Кратак историјски осврт}
+
+Занимљиво је напоменути да се око 1970.~године на више места
+истовремено створила идеја машински проверивих доказа и тада су
+настали први системи од којих су неки били веома утицајни на развој
+савремених доказивача теорема. Више о историјском прегледу
+интерактивних доказивача теорема се може пронаћи у радовима
+\cite{geuvers2009proof, maricsurvey, avigad2014formally,
+  gordon2000lcf}.
+
+\subsubsection{Рана историја}
+
+Један од најстаријих система за доказивање теорема је Де Брујинов
+\textbf{AutoMath} \cite{automath}, који се појавио крајем 1960. Он је
+имао малу моћ верификовања доказа јер је најзначајнија идеја у
+пројекту била развијање компактне, ефикасне нотације за опис
+математичког доказа. Идеја је била развити математички језик којим би
+се сва математика могла прецизно записати, али у смислу да
+лингвистичка тачност повлачи математичку тачност. Језик система је био
+такав да се оно што је записано у њему може проверити помоћу рачунара,
+али помоћ рачунара у конструисању доказа је била минимална. Систем је
+имао мало језгро и био је прилично једноставан. У систему
+\emph{AutoMath} се први пут јавила идеја да се доказ представи као
+објекат у неком формалном језику (Де Брујинов критеријум). Многи
+системи који су се касније развили заснивали су се на овој идеји ---
+\emph{LF} \cite{lf1993}, \emph{Lego} \cite{lego1992}, \emph{Alf}
+\cite{alf1994}, \emph{Agda} \cite{agda}, \emph{Coq} \cite{coq} и
+\emph{NuPrl} \cite{nuprl86}.  Додатно, треба нагласити да је
+\emph{AutoMath} био систем за проверу доказа, али не и асистент за
+доказивање теорема. Корисник би написао терм доказа и систем би
+проверио његов тип. То је другачије у односу на асистенте за
+доказивање теорема где корисник пише тактике које интерактивно наводе
+систем како да конструише терм доказа.  Још једна важна идеја која се
+појавила у пројекту \emph{AutoMath} је \textbf{логички оквир}. Де
+Брујин је инсистирао на идеји да систем само омогући основне
+математичке механизме супституције, креирања и развијања дефиниција и
+слично, а да корисник додаје логичка правила која жели.
+
+Следећа прекретница је Јутингова (енг.~\emph{Jutting}) докторска теза
+из 1977. године \cite{jutting}. Поред ограничења која су имали тадашњи
+рачунари и мањка софтверске подршке, он је коришћењем система
+\emph{AutoMath} успешно представио комплетну формализацију Ландоове
+(нем.~\emph{Landau}) књиге "Основе анализе"
+(нем.~\emph{"Grundlagen der Analysis"}) \cite{landau1960grundlagen},
+где је формализована конструкција реалних бројева преко Дедекиндових
+пресека и закључено да реални бројеви који су конструисани на такав
+начин формирају комплетно уређено поље.  Након тога, доказивачи
+теорема се мењају и у њих се уграђује додатна подршка за израчунавања.
+
+\subsubsection{Доказивачи засновани на модерној теорији типова}
+
+Још једна прекретница у развоју интерактивних доказавача теорема било
+је откриће Кари-Хауард изоморфизма који даје везу између природне
+дедукције и типизираног $\lambda$-рачуна. Ово откриће је служило као
+основа за \textbf{модерну теорију типова} која је основа многим
+савременим интерактивним доказивачима теорема. Поред једноставних
+типова, овај рачун је омогућио постојање зависних типова
+(енг.~\emph{dependent types}) (типова који зависе од вредности) и то
+је омогућило да се многе логичке претпоставке кодирају као формуле
+тако да се испитивање исправности формуле своди на испитивање типа у
+одговарајућој теорији. \textbf{Мартин Лоф} (шве.~\emph{Martin-L\"of})
+је проширио ове идеје и развио је конструктивну теорију типова, где су
+индуктивни типови и функције дефинисане коришћењем добро--засноване
+рекурзије основни појмови \cite{martinlof, martinlof2}. Током година,
+Мартин Лоф је развио више теорија. Прва је била имплементирана у
+асистенту за доказивање теорема \emph{NuPrl} \cite{nuprl86}, касније
+је развио системе \emph{ALF} \cite{alf1994} и \emph{Agda}
+  \cite{agda}, а већина његових идеја је нашла пут до савремених
+  асистената за доказивање теорема.
+
+Најуспешнији интерактивни доказивач теорема (награђен 2013.~године
+\emph{ACM} софтверском системском наградом) који се заснива на
+модерној теорији типова је \textbf{Coq} и њега су развијали (са многим
+сарадницима) Кокан (фр.~\emph{Coquand}) и Хует
+(фр.~\emph{Huet}). Парадигма докази-као-програми је једна од кључних
+одлика система \emph{Coq} \cite{letouzey2002new}. Као последица
+Кари--Хауард изоморфизма, конструктиван доказ је изоморфан
+функционалном програму, и зато у систему \emph{Coq} je из доказа
+могуће извести програме у реалном функционалном програмском језику (за
+сада доступни су излази у језицима \emph{Haskell}
+\cite{hudak1992report}, \emph{Objective Caml} \cite{leroy2014ocaml} и
+\emph{Scheme} \cite{sperber2007revised6}). Овај механизам је важан јер
+се на тај начин могу добити верификовани програми.
+
+Такође, могуће је програмирати функције као програме у оквиру система
+\emph{Coq} јер систем садржи (мали) функционални језик са апстрактним
+типовима података. Једна од најважнијих примена јесте могућност да се
+имплементира алгоритам за проверу типа који као улазне податке прима
+контекст и терм, а као излазни податак даје тип (ако тип који
+задовољава улазне податке постоји) или враћа неуспех ако тип не
+постоји. О вези између терма и типа смо говорили раније, у оквиру
+Кари--Хауард изоморфизма. Да би се додатно проверила поузданост
+система \emph{Coq}, у оквиру пројекта \emph{"Coq in Coq"}
+\cite{barras1999auto} урађена је верификација овог алгоритма за
+проверу типа у оквиру самог система \emph{Coq}. Верификовано је
+следеће тврђење:
+$$\Gamma \vdash M : \tau \Leftrightarrow TC(\Gamma, M) = \tau$$ при
+чему је $TC$ алгоритам за проверу типа, $\Gamma$ је контекст, $M$ је
+терм, а $\tau$ је тип. Ово није могуће доказати без претпоставке да су
+сви термови строго нормализовани, што следи из својства да су све
+функције које се могу дефинисати у систему \emph{Coq} тоталне, што на
+мета нивоу може се доказати за систем \emph{Coq}. Програм $TC$ је
+имплементиран у систему \emph{Coq}, али се може екстраховати и
+користити као проверавач типа за нове верзије система \emph{Coq}.
+
+
+Систем \emph{Coq} се и даље развија. Многе важне теорије су показане у
+систему \emph{Coq}: теорема о обојености графа са четири боје
+\cite{gonthier2008formal}, основна теорема алгебре
+\cite{geuvers2000constructive}, теорема о простим бројевима
+\cite{gonthier2013machine}, формално верификован компилатор
+\cite{leroy2009formally}.
+
+\textbf{PVS (Prototype Verification System)} \cite{pvs} се развија од
+1992.~године. Циљ система је да комбинује предности потпуно
+аутоматских доказивача теорема (које имају моћне процедуре за
+одлучивање, али малу изражајност) са предностима интерактивних
+доказивача теорема које имају много изражајнији језик и
+логику. Заснива се на теорији типова и има типизирану логику вишег
+реда. Логика система \emph{PVS} није независно задата и систем нема
+мало језгро или објекте који могу бити независно проверени. Зато се са
+времена на време деси да се пронађе нека неконзистетност у систему
+која се онда поправља. Цена аутоматског закључивања је да понекад
+доказ оде у нежељеном правцу. Користио се у неколико истраживања
+исправности софтвера који има индустријску примену, као што је, на
+пример, софтвер за аутоматско организовање реда летења
+\cite{pvs2}. Често служи као алатка за верификацију рачунарске алгебре
+и користи се у системима за верификацију кода.
+
+Неки од модерних система који су засновани на теорији типова су
+\emph{Matita} 5 \cite{matita}, \emph{Agda} 6 \cite{agda6} и
+\emph{Epigram} 7 \cite{epigram}.
+
+\subsubsection{Доказивачи засновани на \emph{LCF} приступу}
+
+Већина система за интерактивно доказивање теорема се заснива на
+архитектури коју је развио Милнер (енг.~\emph{Milner}) 1972.~године,
+\textbf{LCF проверавач доказа} \cite{lcf1}, који је заправо
+имплементација логике израчунљивих функција коју је развијао Скот
+(енг.~\emph{Scott}).  \emph{LCF} је скраћено од "Логика израчунљивих
+функција" (енг.~\emph{"Logic for Computable Functions"}). То је
+предикатска логика над термовима једноставног $\lambda$-рачуна са
+типовима.  \emph{LCF} је био погодан за резоновање о семантици
+програма и о израчунљивим функцијама над целим бројевима, листама и
+сличним доменима.
+
+Да би омогућио да се безбедно додају нове команде за доказ, али да се
+докази не чувају у меморији (већ само чињенице које су доказане),
+Милнер је унапредио и развио систем и то је данас познато као
+\textbf{LCF принцип}. Доказивач у \emph{LCF} стилу (који задовољава
+\emph{LCF} принцип) је заснован на малом, основном језгру кода, којем
+се верује, и у ком су имплементиране основне аксиоме логике и основна
+правила логике и који служи за извођење теорема применом тих основних
+правила аксиоматског система за логику за коју је доказивач у
+\emph{LCF} стилу имплементиран. Такав систем може садржати и нешто
+изражајније делове (а сви су изграђени над овим малим језгром) који
+омогућавају имплементацију комплекснијих процедура за доказе које се
+могу рашчланити заправо у много позива основних правила.  Исправност
+се гарантује тиме што само основна правила могу мењати стања у
+доказима јер све што систем ради зависи од основног језгра којем се
+верује. Оваква ограниченост се углавном постиже коришћењем
+функционалних програмских језика као што су \emph{ML}
+\cite{standardML} и \emph{OCaml} \cite{ocaml} и применом основних
+правила извођења као јединих могућих конструктора апстрактног типа.
+
+
+Да би био испуњен де Брујинов критеријум потребно је чувати објекте
+доказa, а то заузима много меморије.  Други проблем који је уочен је
+фиксан скуп доказ--команди (дата и изведена правила и процедуре за
+аутоматско доказивање) који није било могуће лако проширити. Милнер је
+дошао на идеју да се чувају само теореме, али не и њихови
+докази. Односно, кораци доказа би били изведени, али не би били
+памћени. Ипак, да би осигурао да се теореме могу добити само доказом,
+Милнер је дошао на идеју коришћења \emph{апстракног типа података}.
+Aпстрактан тип података за запис теорема, тј. апстрактан тип теорема,
+најчешће означаван са {\tt \textbf{thm}} (скраћеница од \emph{theorem}
+(срб.~теорема)) је такав да су једине константе овог типа
+(предефинисане вредности) аксиоме, а једине функције (операције) над
+овим типом су правила закључивања. Коришћењем апстрактног типа је
+постигнуто да систем има веома мало основно језгро -- тип {\tt thm} и
+његове конструкторе. Строга провера типа је осигурала да једине
+вредности које се могу креирати су оне које се могу добити из аксиома
+применом низа правила закључивања (интересантно је напоменути да не
+постоје литерали типа {\tt thm}). Овим приступом је избегнуто
+експлицитно памћење доказа--објеката, а задржан је исти ниво
+поузданости.
+
+Милнер је желео и да омогући да корисник прави своје, нове
+доказ--комаде. Зато је развио специјализовани програмски језик
+\textbf{ML} \cite{standardML}. Језик је строго типизиран да би могао
+да да подршку за механизам апстрактног типа који је потребан за
+осигуравање исправности теорема. Строга провера типа језика \emph{ML}
+осигурава да се ни једна теорема не може креирати а да није прошла
+(доказана) кроз мало фиксно језгро. То значи да су све теореме које
+постоје у систему вредности типа {\tt thm} и доказиве су у оквиру
+логике за коју је систем имплементиран (јер се добијају коришћењем
+правила извођења из аксиома). Многе доказ--команде су углавном већ
+доступне у систему, али корисник може додати своје. Ово повећава
+могућности доказивача али не нарушава исправност система. Коректност
+система не зависи од коректности доказ--команди које су имплементиране
+у језику \emph{ML} и које могу имати грешке већ корекност се заснива
+на чињеници да су добијене теореме вредности типа {\tt thm} (односно
+све се своди на мало, исправно језгро).
+
+Првобитно доказ је извођен тако што се кретало од главног циља, а онда
+се доказ делио на два подциља (коришћењем фиксног скупа команди за
+дељење у подциљеве, као што је, на пример, примена индукције) и ти
+подциљеви су разрешавани симплификатором или даљем дељењем на
+подциљеве. Овакав приступ одговара \emph{доказивању уназад}. Милнеров
+приступ је увео могућност \emph{доказивања унапред}, односно од
+апстрактног типа ка теореми. Било је потребно направити алате који би
+били оријентисани ка циљу, па је језик \emph{ML} направљен да буде
+функционалан. Стратегије за прављење подциљева (Милнер их је назвао
+\emph{тактике}) су биле програмиране као функције, a операције за
+комбинацију стратегија су програмиране као функције вишег реда којима
+се прослеђује стратегија и које враћају стратегију. Предвиђено је да
+се може десити ситуација да примена тактике не успе (на пример, када
+је тактика примењена на лош циљ) и зато је развијен механизам изузетка
+који сигнализира када је правило (односно) тактика лоше примењена. 
+
+
+Поред Милнера на овом приступу су радили Полсон (енг.~\emph{ Paulson})
+и Хует који су доста унапредили имплементацију и дизајн
+\cite{lcfpaulson}. Они су увели комплетну предикатску логику и додали
+обиман скуп тактика и имплементирали напредне алатке за доказивање
+(као што су симплификатор и презаписивање).
+
+Пратећи \emph{LCF} принцип, а имајући на уму верификацију хардвера,
+Гордон (енг.~\emph{Gordon}) је имплементирао \textbf{HOL}
+\cite{hol}. Систем је отвореног типа и много истраживача је допринело
+његовом развоју. Утицао је на развој других система, као што су
+\emph{Isabelle/HOL} и \emph{HOL Light}. \textbf{HOL Light}
+\cite{hollight1, hollight2} је развијао Харисон (енг.~\emph{Harrison})
+и он има једноставнију логичку основу него други \emph{HOL}
+системи. Додатно, има велику библиотеку математичких теорема
+(нпр.~аритметика, скупови, реална анализа итд.). Треба још напоменути
+да су идеје \emph{LCF} принципа примењене и у систему \emph{Coq}.
+
+Током 1980-их развијено је много специјализованих логика и за сваку од
+њих било је потребно имплементирати доказивач у \emph{LCF}
+стилу. Прављење доказивача испочетка за сваку нову логику постало је
+изазовно и захтевно. Зато, развили су се \textbf{генерички доказивачи}
+који имају \emph{мета-језик} и \emph{мета-логику} што омогућава
+формализацију у различитим објектним логикама. Правила доказивања су
+описана декларативно (а не као \emph{ML} програми).
+
+Полсон је 1986. године развио \textbf{Isabelle}
+\cite{isabellepaulson1, isabellepaulson2}, генерички доказивач теорема
+који је имплементирао многе теорије (нпр. интуиционистичка природна
+дедукција, теорија конструктивних типова, класична логика првог реда
+итд.). Данас је најраширенији \textbf{Isabelle/HOL} \cite{Isabelle},
+интерактивни доказивач теорема заснован на логици вишег реда.
+
+\subsubsection{Остали значајни доказивачи}
+
+\textbf{Mizar} \cite{mizar}, систем који је Трибулек
+(пољ.~\emph{Trybulec}) представио 1973.~године и који је још у
+употреби, користи аутоматске методе да провери формалне доказе
+написане у језику који је конструисан на такав начин да симулира
+неформалан математички жаргон.  \emph{Mizar} пројекат је најдуже у
+континуитету одржаван и развијан. Могло би се рећи да постоје два
+\emph{Mizar} пројекта: \emph{Mizar језик} чији је циљ да буде формални
+језик близак математичком језику и \emph{Mizar систем}, који је
+рачунарски програм који проверава математичку исправност текстуалних
+документа записаних у језику \emph{Mizar}. Овај систем се заснива на
+Тарски--Гротендик (енг.~\emph{Tarski--Grothendieck})
+\cite{tarskiGrothendieck} теорији скупова са класичном логиком, а
+докази се записују у стилу Јанковског (пољ.~\emph{Jankowski})
+\cite{Jaskowski}, што је данас познатије као Фич стил
+(енг.~\emph{Fitch-style}) \cite{Fitchstyle}. У почетку развоја
+пројекта нагласак је био више на едитовању и записивању математичких
+чланака него на проверавању доказа. Инсистирано је на креирању
+библиотеке формализоване математике која би заправо била један повезан
+скуп свих математичких знања и тренутно \emph{Mizar} пројекат има
+највећи репозиторијум формализоване математике. Ипак, због ефикасности
+не подржава велике развоје и чланци се шаљу "комитету библиотеке" која
+га може укључити у \emph{Mizar} библиотеку. Врло значајна идеја је
+запис текста на декларативном језику чији циљ је да приближи текст
+уобичајеном математичком језику. Ово додатно значи да језик има бројна
+специјална својства и конструкције које омогућавају уграђену
+аутоматизацију. Зато, систем нема мало језгро и не задовољава Де
+Брујиново својство.
+ 
+Језик \emph{Mizar} је инспирисао друге асистенте за доказивање теорема
+да развијају декларативни језик за доказе. Један од најзначајнијих је
+језик \textbf{Isar} \cite{isar} који је развио Венцел
+(нем.~\emph{Wenzel}). То је декларативни језик за \emph{Isabelle}
+интерактивни доказивач теорема и доста се користи од стране Isabelle
+корисника. Поред \emph{Isar}-а, Харисон је развио \emph{Mizar-мод} за
+\emph{HOL Light} \cite{mizarhollight}, а Коберне
+(фр.~\emph{Corbineau}) је развио \emph{C-zar} декларативни језик за
+\emph{Coq} \cite{corbineau}.
+
+\textbf{Nqthm} \cite{boyer-moore} доказивач теорема, који се и данас
+користи, био је представљен почетком 1970.~као потпуно аутоматски
+доказивач теорема, али се у међувремену идеја пројекта променила и
+наставило се са изградњом метода које омогућавају кориснику да тврђења
+доказује поступно тако што у корацима доказа записује потребне
+чињенице које аутоматски доказивач користи да би комплетно извео
+доказ. Овај систем је развијан у функционалном програмском језику
+\emph{Lisp} \cite{lisp}. За разлику од многих савремених система који
+користе логику вишег реда, логика у овом систему је логика првог реда
+без квантификатора са једнакошћу, прилично примитивном рекурзивном
+аритметиком што чини аутоматизацију прилично моћном, али изражајност
+је слаба. Идеја комбинације моћне аутоматизације са могућностима
+интерактивног доказивања је пронашла пут и до многих других доказивача
+теорема. Корисник интерактивно ради у систему тако што додаје нове
+леме које су заправо кораци у доказивању жељене теореме, систем потом
+покушава да докаже леме аутоматски, а онда покушава да докаже теорему
+коришћењем датих лема. Систем \emph{Nqthm} је еволуирао у \emph{ACL2}
+(\emph{A Computational Logic for Applicative Common Lisp})
+\cite{acl2}, интерактивни доказивач теорема који се доста користи у
+индустрији.
+
+\section{Важни резултати и пројекти у области интерактивног доказивања теорема}
+
+Најпре ћемо се осврнути на неколико радова из формализације математике
+који су важни и због своје улоге у формализацији геометрије (бројни
+резултати су коришћени као познате чињенице приликом формализације
+геометрије), али и због свеукупног значаја и утицаја на формализацију
+и интерактивно доказивање теорема.
+
+Формално су доказане Брауерова теорема фиксне тачке
+\cite{harrison2013hol}, основна теорема алгебре
+\cite{milewski2001fundamental, geuvers2000constructive}, Геделова
+теорема непотпуности \cite{godel}, многе теореме реалне анализа
+\cite{harrison2012theorem, cruz2002constructive}. У најзначајније
+постигнуте резултате до данас могу се убројати и формализација теореме
+о простим бројевима \cite{avigad2007PrimeNumber}, затим формални доказ
+о обојивости графа са четири боје \cite{fourColorTheorem}.
+
+Важно је поменути и актуелне пројекте великих размера чији циљ
+обухвата формализацију великих делова математике и у којима учествују
+многи научници. У оквиру пројекта чији руководилац је Гонтије
+(фра.~\emph{Gonthier}) је успешно формално доказана Фејт--Томпсонова
+(енг.~\emph{Feit--Thompson}) теорема (која се још и назива теорема
+непарног реда) \cite{oddOrder}. Формализација је рађена уз помоћ
+асистента за доказивање теорема \emph{Coq} и језика за доказе
+\emph{SSreflect} \cite{gonthierSSReflect}. Ова теорема је била веома
+важан корак у \emph{класификацији коначних једноставних
+  група}. Оригинални доказ на папиру је заузимао 225 страна, док
+формализација има 150000 линија кода, 4000 дефиниција и 13000 лема и
+теорема. Да би могли да формализују ову теорему, аутори су морали да
+формализују и бројна тврђења и својства линеарне алгебре, теорије
+коначних група, теорије Галоа. Наилазили су на бројне празнине и
+грешке, од којих неке није било лако исправити и допунити.
+
+Други важан пројекат је пројекат \emph{Flyspeck} \cite{flyspeck} који
+је покренуо Хејлс (енг.~\emph{Hales}) да би могао формално да докаже
+Кеплерову хипотезу: "Најгушће паковање једнаких сфера је паковање у
+тесерални кубични кристални систем". У оквиру овог пројекта формално
+је показано много математичких тврђења, направљена је велика база
+математичког знања која може да послужи у неким новим формализацијама.
+
+Поред фор\-ма\-ли\-за\-ци\-је математике, коришћењем асистената за
+доказивање теорема рађена је и \emph{верификација софтвера}. Значајан
+резултат је \emph{CompCert} \cite{compcert1, compcert2}, формално
+верификован компилатор за програмски језик \emph{C} и \emph{L4}
+\cite{l4microkernel1, l4microkernel2}, формално верификован оперативни
+систем.
+
+
+\subsection{Потенцијалне грешке у формално верификованим доказима}
+
+У раду из 2016. године (\cite{adams2015proof}) приказује се начин како
+би могла да се изврши \emph{ревизија формализације}. Наиме, аутори
+сматрају да иако формализација даје стриктан и прецизан приступ
+математици, и даље су могуће неке грешке. Једна од грешака која се
+често спомиње је да се формализовано тврђење разликује од тврђења за
+које је рађена формализација или од тврђења за које мислимо да је
+показано. Ова грешка може настати због лоших дефиниција које се могу
+провлачити кроз целу формализацију и тако утицати на крајњи исход
+формализације. Поред ових грешака, аутори истичу и неке недостатке
+најпопуларнијих доказивача теорема, а међу недостацима се посебно
+истиче комплексност система који се користи и који може бити место
+потенцијалним грешкама у самом доказивачу. Њихов приступ ревизији се
+своди на неколико корака, при чему није циљ проверавати сваку линију
+комплетне формализације, већ завршно стање формализације. Такође,
+предлажу да ако је формализација рађена у једном језику, да се
+ревизија ради у другом (или у више других) језика и дају пример
+неколико алатки које врше превођење из једног језика у други. Коначно,
+дају пример како је могуће извршити ревизију над делом \emph{Flyspeck}
+пројекта.
+
+
+% ------------------------------------------------------------------------------
+% uvod u opste stvari u izabelu -- zapis tvrdjenja, lema, definicija, plus sire objasnjenje sta je isabell
+% ------------------------------------------------------------------------------
+
+\section{Isabelle/HOL}
+
+\emph{Isabelle} \cite{isabellepaulson1, isabellepaulson2} је генерички
+асистент за доказивање теорема, има бројне специјализације за
+различите логике, а најразвијенија је за логику вишег реда,
+\emph{Isabelle/HOL} \cite{Isabelle}. Углавном је прилагођен
+свакодневној математичкој нотацији. На развој овог система је радило
+(и још увек ради) пуно научника, али најзначајнији аутори су Лари
+Полсон, Нипков (нем.~\emph{Nipkow}) и Венцел. Као што смо раније
+напоменули, на развој \emph{Isabelle/HOL} система је значајно утицао
+\emph{LCF} принцип. Систем \emph{Isabelle/HOL} је заснован на малом
+језгру на основу кога је све даље развијано.  Поступак формализације
+математичких теорија се састоји из дефиниција нових појмова (типови,
+константе, функције и др.), и доказивања тврђења која за њих важе
+(леме, теореме и др.). \emph{Isabelle/HOL} има обимну библиотеку
+теорија која се стално увећава. Велики број формализација из
+математике и рачунарства је доступан кроз Архив формалних доказа
+(енг.~\emph{Archive of Formal
+  Proofs})\footnote{\url{http://afp.sourceforge.net/}}. У овом раду ми
+смо користили неке од тих библиотека.
+
+Рад у систему \emph{Isabelle/HOL} подразумева креирање \emph{теорија}
+--- именоване колекције типова, објеката, функција, теорема и
+лема. Општи формат теорије {\tt T} је:
+
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{theory} T \\
+\textbf{imports} B$_1$ B$_2$ $\ldots$ B$_n$
+\textbf{begin} \\
+deklaracije, definicije, dokazi \\
+\textbf{end}
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+\noindent при чему су {\tt B$_1$ B$_2$ $\ldots$ B$_n$} неке већ
+постојеће теорије, а {\tt deklaracije, definicije i dokazi} су нови
+концепти које задаје корисник. Све што је дефинисано и доказано у {\tt
+  B$_1$ B$_2$ $\ldots$ B$_n$} је видљиво и у теорији {\tt T} и може се
+користити у дефинисању нових појмова и у доказима тврђења. Теореме и
+леме се користе да изразе својства и карактеристике дефинисаних
+објеката и функција. Након сваке теореме или леме се налази и њен
+доказ исправности. Доказе које задаје корисник систем аутоматски,
+формално верификује.
+
+\subsection{Типови, термови, променљиве}
+
+\emph{HOL} je типизирана логика. Типови су екстремно важни и систем
+\emph{Isabelle} инсистира да све формуле и термови морају бити добро
+типизирани, а у супротном ће обавестити да је дошло до грешке. У
+систему \emph{Isabelle/HOL} имамо неколико врста типова које ћемо овде
+укратко представити.
+
+
+\subsubsection{Основни типови}
+
+\emph{Isabelle/HOL} има предефинисане типове, као што су, на пример,
+тип {\tt bool} који означава тип за вредности тачно и нетачно, {\tt
+  nat} означава природне бројеве, тип {\tt int} означава целе бројеве,
+{\tt real} означава реалне бројеве, док тип {\tt complex} означава
+комплексне бројеве, а {\tt rat} рационалне бројеве.
+
+Тип природних бројева је изграђен коришћењем конструктора $0$ и {\tt
+  Suc}. Предефинисане су основне аритметичке операције (нпр. $+$, $-$,
+$*$, $/$, {\tt div}, {\tt mod}), као и релације $<$ и $\le$. Иначе,
+аритметичке операције су преоптерећене јер се могу примењивати и на
+друге типове, а не само за природне бројеве.
+
+Имагинарна јединица се обележава са $ii$.  Конверзија из реалног у
+комплексан број се означава са {\tt cor}, реални и имагинарни део
+комплексног броја са {\tt Re} и {\tt Im}, комплексни коњугат са {\tt
+  cnj}, модуо комплексног броја са $|\_|$, и аргумент комплексног
+броја са {\tt arg} (у систему \emph{Isabelle/HOL} он је увек у
+интервалу $(-\pi, \pi]$). Комплексна функција за знак {\tt sgn}
+  одређује комплексан број на јединичној кружници који има исти
+  аргумент као и дати ненула комплексан број (нпр. {\tt sgn} $z$ = $z
+  / |z|$). Ова функција је преоптерећена и такође се примењује и за
+  реалне бројеве (преоптерећење је математички оправдано у овом
+  случају јер важи {\tt sgn}\ (x + $ii$*0) = {\tt sgn}\ x).  Функција
+  {\tt cis} примењена на $\alpha$ израчунава {\tt cos}\ $\alpha$\ $+$
+  $ii*${\tt sin} $\alpha$.
+
+\subsubsection{Типске променљиве}
+
+Типске променљиве користимо када не знамо ког типа је нека
+вредност. Коришћењем ограничења које даје израз у коме се појављује
+вредност непознатог типа, \emph{Isabelle/HOL} решава израз за све
+вредности за које су та ограничења испуњена. Означавамо са апострофом
+и најчешће малим словом, на пример, {\tt 'a}, {\tt 'b} итд. Ове типске
+променљиве су посебно значајне јер се помоћу њих могу изградити
+полиморфни типови. На пример, тип {\tt 'a $\Rightarrow$ 'b} представља
+тип функције идентитета.
+
+\subsubsection{Конструктори типа}
+
+Постоји много конструктора типа, а нама су најинтересантнији
+конструктори за листе и скупове.
+
+Конструктор за листу је {\tt list}. Листа над типом {\tt 'a} се
+означава са {\tt 'a list}. Израз $x${\tt \#}$y$ означава листу са главом $x$,
+и репом $y$. Израз $x${\tt @}$y$ означава спајање две листе, $x$ и $y$.
+
+Скуп елемената типа {\tt 'a} се означава са {\tt 'a
+  set}. \emph{Isabelle/HOL} скуповна теорија је веома слична скуповној
+теорији у стандардној математици, са неколико мањих изузетака. Разлика
+скупова се означава са $X - Y$, а слика функције $f$ над скупом $X$ се
+записује са $f ` X$. Тип производа је означен са $\tau_1 \times
+\tau_2$ (где су $\tau_1$ и $\tau_2$ типови скупова).
+
+
+\subsubsection{Функцијски типови}
+
+Тип функције се означава као $\tau_1 \Rightarrow \tau_2$. Функције су
+углавном записане у Каријевом облику, а примена функције се углавном
+записује у префиксној форми, што је често случај код функционалног
+програмирања, као {\tt f $x$} (уместо $f(x)$, што је ближе стандардној
+математичкој нотацији).  \emph{Isabelle/HOL} подржава и скраћену
+нотацију $\llbracket \tau_1, \ldots, \tau_n \rrbracket \Rightarrow
+\tau$ је скраћеница за $\tau_1 \Rightarrow \ldots \Rightarrow \tau_n
+\Rightarrow \tau$ (\emph{Isabelle/HOL} посматра $\tau_1 \Rightarrow
+\tau_2 \Rightarrow \tau_3$ као $\tau_1 \Rightarrow (\tau_2 \Rightarrow
+\tau_3)$ и имајући то на уму ми у претходном изразу нисмо писали
+заграде).
+
+Предикат {\tt inj} означава да је функција инјективна, {\tt bij} да је
+бијекција, а {\tt continuous\_on} да је непрекидна на датом скупу
+(претпостављајући да је одговарајући тип метрички простор за неку дату
+функцију растојања).
+
+\subsubsection{Термови}
+
+Термови се праве по узору на термове $\lambda$--рачуна са мало
+проширеном синтаксом. 
+
+Применом функција на аргументе добијају се термови. Ако је {\tt f}
+функција типа $\tau_1 \Rightarrow \tau_2$, а {\tt t} терм типа
+$\tau_1$, онда је {\tt f t} терм типа $\tau_2$.
+
+За конструкцију термова могу да се користе користе
+\emph{let--конструкције}: {\tt \textbf{let} $x = t$ \textbf{in} $u$}
+што је еквивалетно са $u$ у коме су сва слободна појављивања променљиве
+$x$ замењена са $t$ (нпр. {\tt \textbf{let} $x=3$ \textbf{in} $3*x$}
+је еквивалентно са $3\cdot 3$). Могуће је направити и комплекснију
+\emph{let--конструкције}: {\tt \textbf{let} $x_1 = t_1$; $x_2 = t_2$;
+  $\ldots$ $x_n = t_n$ \textbf{in} u}.
+
+Такође, могуће је користити \emph{if--then--else изразе}: {\tt
+  \textbf{if} $b$ \textbf{then} $t_1$ \textbf{else} $t_2$} (нпр. {\tt
+  \textbf{if} $x > 0$ \textbf{then} $x$ \textbf{else} $-x$}). Тип за
+$b$ мора бити {\tt bool}, а $t_1$ и $t_2$ морају бити истог типа.
+
+Термови се могу градити и коришћењем \emph{case--израза}: {\tt
+  \textbf{case} $e$ \textbf{of} $c_1 \Rightarrow e_1$ | $c_2
+  \Rightarrow e_2$ | \ldots | $c_n \Rightarrow e_n$} што има вредност
+$e_i$ ако је $e$ једнак неком $c_i$.
+
+Подржано је и коришћење неких инфиксних функција (на пример, $+$).
+
+Термови су $\lambda$--изрази, те могу бити облика {\tt $\lambda x.$ f
+  $x$}. На пример, $\lambda x. x+5$ је функција са једним аргументом,
+$x$, а враћа $x+5$. 
+
+И поред подржаног механизма дедукције типова, некада је потребно
+експлицитно навести тип терма. Да би изразили да је неки терм $t$ типа
+$\tau$ пишемо $t :: \tau$.
+
+Логичке формуле су записане у логици вишег реда коришћењем стандардне
+нотације, везници су $\wedge$, $\vee$, $\neg$, $\longrightarrow$, а
+квантификатори су $\forall$ и $\exists$. Постоји и $\exists ! x. f$
+што означава да постоји тачно једно $x$ такво да задовољава $P$.
+
+\subsubsection{Променљиве}
+
+У систему \emph{Isabelle/HOL} постоје везане и слободне променљиве,
+али и схематске или непознате променљиве које се означавају са {\tt
+  ?$ime\_promenljive$}. Логички гледано, то су заправо слободне
+променљиве, али се може десити да буду иницијализоване од стране неког
+терма током процеса доказивања. 
+
+\subsubsection{Увођење нових типова}
+
+Нов тип се може увести на неколико различитих начина и овде ће бити
+укратко представљени. 
+
+Најједноставнији начин је да се користи команда {\tt
+  \textbf{type\_synonym}} која уводи ново име за већ постојеће типове.
+
+Алгебарске типове, као и рекурзивне типове података је могуће увести
+коришћењем кључне речи {\tt \textbf{datatype}}. Следи неколико
+једноставних примера.
+
+\begin{small}
+\selectlanguage{english}
+{\tt
+  \begin{tabbing}
+  (1) \= \textbf{datatype} \= accuracy \= =  True | False | Maybe \\
+  (2) \> \textbf{datatype} \> 'a option \> = None | Some 'a \\
+  (3) \> \textbf{datatype} \> nat \> = 0 | Suc nat \\
+  (4) \> \textbf{datatype} \> 'a Tree \> = NIL | Node "'a Tree" "'a" "'a Tree" \\
+  (5) \> \textbf{datatype} \> even\_nat \> = 0 | Suc odd\_nat \\
+      \> \textbf{and}      \> odd\_nat \> = Suc even\_nat 
+  \end{tabbing}
+}
+\selectlanguage{serbian}
+\end{small}
+
+ Прва два типа нису рекурзивна, при чему је тип {\tt accuracy}
+ једноставан, набројиви тип, а тип {\tt option} је полиморфни
+ тип. Други и трећи тип су једноставни рекурзивни типови којима се
+ дефинишу природни бројеви и стабло. Коначно, последња два типа ({\tt
+   even\_nat} и {\tt odd\_nat}) представљају примере узајамно
+ рекурзивних типова.  Након дефинисања типа добијају се функције које
+ називамо конструкторима тог типа (нпр. {\tt Node} је конструктор који
+ прима лево подрво, елемент у корену, десно подрво и враћа дрво
+ изграђено од тих елемената).
+
+Често се приликом рада са неким термовима типа који је дефинисан са
+{\tt \textbf{datatype}} користе \emph{case--изрази} јер се помоћу њих
+једноставно могу анализирати елементи тог типа. Приликом дефинисања
+функција за рад над неким типом дефинисаним са {\tt \textbf{datatype}}
+често се користи конструкција са {\tt \textbf{primrec}}.
+
+\begin{small}
+\selectlanguage{english}
+{\tt
+  \begin{tabbing}
+    \textbf{prim}\=\textbf{rec} left :: "'a Tree $\Rightarrow$ 'a Tree" \textbf{where} \\
+                 \>"left (Node l v r) = l"
+  \end{tabbing}
+}
+\selectlanguage{serbian}
+\end{small}
+
+Са {\tt \textbf{primrec}} су функције задате примитивном рекурзијом,
+односно са сваким рекурзивним позивом издваја се конструктор типа за
+један од аргумената. То имплицира да се рекурзија сигурно завршава и
+да је функција тотална. Постоје и други начини да се задају функције
+над рекурзивним типом, рецимо коришћењем {\tt \textbf{fun}} или {\tt
+  \textbf{function}}, али о томе ће бити више речи касније.
+
+Сваки нови тип је спецификован да буде изоморфан са неким непразним
+подскупом постојећег типа. На пример, тип се може увести као
+\selectlanguage{english} {\tt \textbf{typedef} three = "\{0::nat, 1,
+  2\}"} \selectlanguage{serbian}, а то генерише обавезу да се докаже
+да је тип непразан. Бијекција између новог апстрактног типа и његове
+репрезентације дата је са две функције: {\tt Rep\_three :: three
+  $\Longrightarrow$ nat}, и {\tt Abs\_three :: nat $\Longrightarrow$
+  three}, које задовољавају услове {\tt Rep\_three $x$ $\in$ $\{0, 1,
+  2\}$}, {\tt Rep\_three (Abs\_three $x$) = $x$}, and {\tt $y \in \{0,
+  1, 2\}$ $\Longrightarrow$ Abs\_three (Rep\_three $y$) = $y$}.
+
+
+\subsection{Записивање дефиниција, тврђења и корака у доказивању}
+
+\selectlanguage{english}
+ Дефиниције се задају коришћењем синтаксе {\tt \textbf{definition} $x$
+   \textbf{where} "$x$ = ..."}, где је $x$ константа која се дефинише.
+
+\begin{small}
+{\tt
+  \begin{tabbing}
+    \textbf{definition} is\_empty :: "'a Tree $\Rightarrow$ bool" (\textbf{infix} "$\approx$" 50) \textbf{where} \\
+    $[$simp$]$: "is\_empty $l$ $\longleftrightarrow$ $l$ = NIL" 
+  \end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Овом дефиницијом смо дефинисали функцију која испитује да ли је стабло
+празно. Дефиниција је на неки начин скраћеница -- ново име за
+постојеће концепте. Дефиниција не може бити рекурзивна. Уколико желимо
+да неку дефиницију додамо у правила за симплификацију пишемо {\tt
+  $[$simp$]$}. Може се користити команда {\tt \textbf{infix}} која
+омогућава да некој операцији доделимо инфиксну ознаку. Број означава
+приоритет тог инфиксног оператора и пракса је да уведени инфиксни
+оператори имају мањи приоритет него они већ постојећи, па се зато
+стављају велики бројеви. 
+
+Леме се задају коришћењем синтаксе 
+{\tt 
+\begin{tabbing}
+\textbf{lem}\=\textbf{ma} $name$\\
+  \>\textbf{fixes} $vars$  \\
+  \>\textbf{assumes} $assms$ \\
+  \>\textbf{shows} $concl$
+\end{tabbing}
+} 
+
+\noindent при чему је $name$ је име леме, $vars$ услови који важе,
+$assms$ претпоставка, а $concl$ је закључак тврђења. Ако нема
+претпоставки, кључна реч {\tt \textbf{shows}} може бити
+изостављена. Такође, користићемо синтаксу {\tt \textbf{lemma}
+  "$\bigwedge x_1, \ldots x_k.\ \lbrakk$$asm_1$; \ldots;
+  $asm_n$$\rbrakk$ $\Longrightarrow$ $concl$"} при чему су $asm_1$,
+\ldots, $asm_n$ претпоставке, $concl$ је закључак, а $x_1$, \ldots,
+$x_k$ су универзално квантификоване променљиве. Уместо {\tt
+  \textbf{lemma}} могуће је користити кључну реч {\tt
+  \textbf{theorem}} и нема никакве разлике јер је то у систему потпуно
+исто.
+
+Ми смо у овом раду интензивно користили језик \emph{Isar} који је део
+\emph{Isabelle/HOL} система и чија архитектура омогућава писање
+структурираних доказа (припада групи декларативних језика). То заправо
+значи да је са језиком Isar могуће писати "читљиве"
+доказе. \emph{Isar} је веома богат језик, и ми ћемо овде описати само
+оне конструкције које су коришћене у овом раду.  Тривијални докази се
+показују позивом неког аутоматског метода, тј.~тактике, навођењем иза
+кључне речи \textbf{\tt {by}}. Сложенији докази писани у \emph{Isar}
+стилу се задају између кључних речи {\tt \textbf{proof}} и {\tt
+  \textbf{qed}}. У самом доказу могу постојати фиксне променљиве
+(задате кључном речи {\tt \textbf{fix}}, претпоставке ({\tt
+  \textbf{assume}}), помоћна тврђења ({\tt \textbf{have}}) и на крају
+и сам закључак теореме задат са кључном речи {\tt \textbf{show}}. Са
+кључном речи {\tt \textbf{using}} или са кључном речи {\tt
+  \textbf{from}} се уводе чињенице које су потребне да би се тврђење
+доказало. Ове чињенице могу бити претпоставке, помоћна тврђења или
+друга тврђења која су раније већ доказана. На пример:
+
+\smallskip
+
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\textbf{lemma} num\_property:
+
+  \hspace{0.5cm} "$\forall$ ($x$::real). $(x - 1)\cdot(x + 1)$ $>$ $0$ $\longrightarrow x^2 > 1$"
+
+\textbf{ proof-}
+
+  \hspace{0.5cm} \textbf{fix} $x$::real 
+
+  \hspace{0.5cm} \textbf{assume} "$(x - 1)\cdot (x + 1)$ $>$ $0$"
+
+  \hspace{0.5cm} \textbf{have} "$(x - 1)\cdot(x + 1) = x^2 - 1$"
+
+  \hspace{1cm}   \textbf{by} (simp add: power2\_eq\_square field\_simps)
+
+  \hspace{0.5cm} \textbf{then show} "$x^2 > 1$"
+
+  \hspace{1cm} \textbf{using} `$(x - 1)\cdot(x + 1) > 0$`
+
+  \hspace{1cm} \textbf{by} simp
+
+\textbf{qed}
+}
+\end{small}
+\selectlanguage{serbian}
+
+\smallskip
+
+
+\subsection{Методи за доказивање}
+
+До сада смо више пута спомињали методе за доказивање, тактике,
+симплификацију итд, али нисмо улазили у детаље. У овом поглављу ћемо
+укратко објаснити могућности за доказивање у систему
+\emph{Isabelle/HOL} и објаснићемо њихову теоријску основу.
+
+\subsubsection{Природна дедукција}
+
+Основни метод за доказивање је природна дедукција о којој је било речи
+у поглављу \ref{section:natural_deduction}. \emph{Isabelle} користи
+одговарајућу колекцију правила природне дедукције да би доказ тражио
+аутоматски. Већ смо видели да за сваки везник, постоје правила која га
+уводе и правила која га елиминишу. Систем \emph{Isabelle} има основу у
+правилима природне дедукције, па многи алати користе терминологију
+увођења или елиминисања правила.
+
+Посматрајмо уопштено правило:
+
+\begin{table}[!h]
+\begin{center}
+\AxiomC{$P_1 \ P_2 \ldots \ P_n$}
+\LeftLabel{{\tt R} $= $}
+\UnaryInfC{$Q$}
+\DisplayProof
+\end{center}
+\end{table}
+
+Методе које можемо применити у доказивању коришћењем овог правила су:
+\begin{itemize}
+\item {\tt rule R} метода унификује $Q$ са тренутним циљем и уводи $n$
+  нових подциљева за доказивање инстанци $P_1, P_2, \ldots,
+  P_n$. Заправо, ово правило у математичким текстовима (за везник
+  $\land$) је
+\begin{center}
+\AxiomC{$A$}
+\AxiomC{$B$}
+\BinaryInfC{$A \land B$}
+\DisplayProof
+\end{center}
+
+\item {\tt erule R} метода унификује $Q$ са тренутним циљем, унификује
+  $P_1$ са неком претпоставком и уводи $n-1$ нови подциљ за доказивање
+  инстанци $P_2, \ldots, P_n$. 
+\begin{center}
+\AxiomC{$A \lor B$}
+  \AxiomC{$[A]$}
+  \noLine
+  \UnaryInfC{$\vdots$}
+  \noLine
+  \UnaryInfC{$C$}
+   \AxiomC{$[B]$}
+   \noLine
+   \UnaryInfC{$\vdots$}
+   \noLine
+   \UnaryInfC{$C$}
+\TrinaryInfC{C}
+\DisplayProof
+\end{center}
+
+\item {\tt drule R} метод унификује $P_1$ са неком претпоставком и одмах
+  га брише и уводи $n$ нових подциљева $P_2, \ldots, P_n$ и иницијални
+  циљ, али са додатом претпоставком $Q$.
+На пример, у математичким текстовима
+  ово правило за везник $\land$ је
+\begin{center}
+\AxiomC{$A \land B$}
+\UnaryInfC{$A$}
+\DisplayProof
+\end{center}
+
+\item {\tt frule R} метод се понаша као {\tt drule R} метод, али не
+  брише претпоставку коју је унификовао.
+\item {\tt rule\_tac $v_1 = t_1$ \textbf{and} $\ldots$ \textbf{and}
+  $v_m = t_m$ \textbf{in} R} метод је исти као и метод {\tt rule R},
+  али иницијализује променљиве као што је наведено у правилу.
+\end{itemize}
+
+\emph{Правила за увођење} служе да одреде када је могуће извести
+формулу која садржи одговарајући везник. 
+
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+ conjI:\ \ \ \ \ \= $\lbrakk ?P ; ?Q \rbrakk \Longrightarrow ?P \land ?Q$   \\
+ disjI1: \> $?P \Longrightarrow ?P \lor ?Q$ \\
+ disjI2: \> $?Q \Longrightarrow ?P \lor ?Q$ \\
+ disjCI: \> $(\neg ?Q \Longrightarrow ?P) \Longrightarrow ?P \lor ?Q$ \\
+ impI:   \> $(?P \Longrightarrow ?Q) \Longrightarrow ?P \longrightarrow ?Q$ \\
+ notI:   \> $(?P \Longrightarrow$ False $) \Longrightarrow \neg ?P$ \\
+ clasical: \> $(\neg ?P \Longrightarrow ?P) \Longrightarrow ?P$ \\
+ allI:      \> $(\bigwedge x. ?P x) \Longrightarrow \forall x. ?P x$ \\
+ exI:       \> $?P ?x \Longrightarrow \exists x. ?P x$
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Доказивање у систему \emph{Isabelle} иде уназад --- када применимо
+правило {\tt conjI} подциљ је већ у облику конјукције и правило чини
+да везник $\land$ нестане. Можемо приметити да се у правилу користе
+шематске променљиве што омогућава да буду замењене било којом
+формулом. Задавањем правила у методи {\tt rule} оно бива примењено на
+тренутно тврђење, што можемо видети у доњем примеру.
+
+\emph{Правила за елиминацију} служе да се ослободимо везника. Када
+примењујемо правила за елиминацију најбоље је користити метод {\tt
+  erule}. Правило {\tt rule} најчешће производи један подциљ више него
+што то чини {\tt erule}, а тај подциљ је углавном тривијалан.
+
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+ conjE:\ \ \ \ \ \ \ \ \ \= $\lbrakk ?P \land ?Q;\ \lbrakk ?P; ?Q \rbrakk \Longrightarrow ?R \rbrakk \Longrightarrow ?R$ \\
+ disjE: \> $\lbrakk ?P \lor ?Q; ?P \Longrightarrow ?R; ?Q \Longrightarrow ?R \rbrakk \Longrightarrow ?R$ \\
+ notE:  \> $\lbrakk \neg ?P ; P \rbrakk \Longrightarrow R$ \\
+ impE: \> $\lbrakk ?P \longrightarrow ?Q; ?P; ?Q \Longrightarrow ?R \rbrakk \Longrightarrow ?R$ \\
+ allE: \> $\lbrakk \forall x. ?P x; ?P ?x \Longrightarrow ?R \rbrakk \Longrightarrow ?R$ \\
+ exE:  \> $\lbrakk \exists x. ?P x ; \bigwedge x. ?P x \Longrightarrow ?Q \rbrakk \Longrightarrow ?Q$ \\
+ contrapos\_pp: \> $\lbrakk ?Q; \neg ?P \Longrightarrow \neg ?Q \rbrakk \Longrightarrow ?P$ \\
+ contrapos\_pn: \> $\lbrakk ?Q; ?P \Longrightarrow \neg ?Q \rbrakk \Longrightarrow \neg ?P$ \\
+ contrapos\_np: \> $\lbrakk \neg ?Q; \neg ?P \Longrightarrow ?Q \rbrakk \Longrightarrow ?P$ \\
+ contrapos\_nn: \> $\lbrakk \neg ?Q; ?P \Longrightarrow ?Q \rbrakk \Longrightarrow \neg ?P$ 
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Применом правила за деструкцију елиминише се неки везник. За њихово
+коришћење најбоље је користити метод {\tt drule}.
+
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+ conjunct1: \= $?P \land ?Q \Longrightarrow ?P$ \\
+ conjunct2: \> $?P \land ?Q \Longrightarrow ?Q$ \\
+ mp:        \> $\lbrakk ?P \longrightarrow ?Q; ?P \rbrakk \Longrightarrow ?Q$ 
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Посматраћемо пример који смо имали раније (Пирсов закон) и на коме
+можемо да видимо како примена правила утиче на процес доказивања.
+
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{lemma} "(($A$ $\longrightarrow$ $B$) $\longrightarrow$ $A$) $\longrightarrow$ $A$" \\
+\textbf{apply} (rule impI) \\
+\textbf{apply} (rule classical) \\
+\textbf{apply} (erule impE) \\
+\textbf{apply} (rule impI) \\
+\textbf{apply} (erule notE, assumption)+ \\
+\textbf{done}
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Примена правила {\tt impI} претвара циљ у нови циљ $(A \longrightarrow
+B) \longrightarrow A \Longrightarrow A$ што правилом {\tt classical}
+постаје циљ $\lbrakk (A \longrightarrow B) \longrightarrow A; \neg A
+\rbrakk \Longrightarrow A$. Применом методе {\tt erule impE} уводе се
+два нова подциља $\neg A \Longrightarrow A \longrightarrow B$ и
+$\lbrakk \neg A; A \rbrakk \Longrightarrow A$. Да би се ослободили
+везника $\longrightarrow$ у првом подциљу примењујемо правило {\tt
+  rule impI} и први подциљ постаје $\lbrakk \neg A; A \rbrakk
+\Longrightarrow B$. Коначно, примењујемо {\tt erule notE} на први
+подциљ и добијамо $ A \Longrightarrow A$ што разрешавамо са методом
+{\tt assumption}. Слично је и за други подциљ и са {\tt +} смо
+означили да се иста правила и методе примене на други подциљ. Овим је
+доказ готов.
+
+\emph{Isabelle} такође користи и супституцију у доказивању. Правило
+супституције дозвољава да се терм $s$ замени термом $t$ ако можемо да
+докажемо $t = s$.
+
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+ssubst: $\lbrakk ?t = ?s ; ?P ?s \rbrakk \Longrightarrow ?P ?t$
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+\subsubsection{Симплификација}
+
+Једно од главних аутоматских метода које се примењује је
+\emph{презаписивање термова}, односно узастопна примена једнакости
+које важе. Наравно, треба бити пажљив у коришћењу презаписивања јер
+може да траје бесконачно. Симплификација се покреће са {\tt
+  simp}. Метод {\tt simp} се може задати и са \emph{листом
+  модификатора}, односно са {\tt add} и {\tt del} који служе да
+додају, односно да избришу нека правила која користи метод {\tt
+  simp}. На пример, {\tt \textbf{apply} (simp add: is\_empty\_def)}
+додаје дефиницију у правила за упрошћавање (понекад се користи и {\tt
+  \textbf{unfolding} is\_empty\_def} уколико желимо само да развијемо
+дефиницију, а метод {\tt simp} уради и много више од тога).
+
+\subsubsection{Аутоматски методи {\tt blast} и {\tt auto}}
+
+Често је приликом доказивања потребно пронаћи одређени редослед за
+примену правила да би доказ могао успешно да се изведе и да се
+зауставља. Поред тога, докази могу бити јако дуги ако се примењује у
+сваком кораку једно по једно правило. Да би убрзали претрагу правила,
+као и редослед којим се она примењују примењујемо аутоматске методе,
+као што је метод {\tt blast}. Овим методом се комбинују сва горе
+наведена правила (правила за елиминацију, за деструкцију, правила за
+увођење, односно {\tt conjI}, $\ldots$, {\tt conjE}, $\ldots$, {\tt
+  contrapos\_pp}, $\ldots$, {\tt mp}, {\tt ssubst}) док се не нађе
+неки доказ. Рецимо, Пирсов закон који смо имали раније и који смо
+доказивали у више корака се може у року неколико милисекунди доказати
+методом {\tt blast}. Довољно је било да смо написали:
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{lemma} "(($A$ $\longrightarrow$ $B$) $\longrightarrow$ $A$) $\longrightarrow$ $A$" \\
+\textbf{by} blast
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Метод {\tt blast} такође може да ефикасано доказује многе теореме 
+теорије скупова. Наиме, овај
+метод се заснива на методи таблоа која је имплемeнтирана у језику
+\emph{ML}. Токође, метод се ослања на велику базу лема коју може да
+претражује и која омогућава резоновање о скуповима (у оквиру система
+\emph{Isabelle/HOL} развијена је Цермело--Френкел теорија скупова са
+аксиомом избора), функцијама и релацијама.
+
+Метод који комбинује класично резоновање са упрошћавањем је метод {\tt
+  auto}. Његов циљ је да докаже једноставне подциљеве и делове
+подциљева. Нажалост, може да произведе велики број подциљева јер док
+неке подциљеве доказује друге дели и тако производи нове подциљеве.
+
+Поред ових метода, постоје и бројни други, рецимо метод {\tt force},
+{\tt clarify}, {\tt smt} који покреће \emph{SMT} доказивач
+\cite{isabelleautomatic} итд. Такође, постоје још и бројна правила
+која нисмо навели, на пример, {\tt someI, someI2, order\_antisym}
+итд. Овде нећемо улазити у све детаље јер то није циљ овог рада, а
+више се може погледати у \cite{Isabelle}.
+
+\subsection{Дефинисање функција}
+
+Функције у систему emph{Isabelle/HOL} се могу задати коришћењем
+примитивне или генералне рекурзије. Дефиниције функција користе
+функционалност уграђеног пакета за функције \cite{functions} и ми ћемо
+овде представити неке основне могућности. Функција се задаје својим
+именом, типом и скупом дефинисаних рекурзивних једначина. Све
+променљиве леве стране једначине морају бити различите.
+
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+\textbf{fun} ins :: "'a $\Rightarrow$ 'a list $\Rightarrow$ 'a list" \\
+\textbf{where} \\
+\>\>      "ins $a$ ($x$\#$y$\#$xs$) = $x$ \# $a$ \# ins $a$ ($y$\#$xs$)" \\
+\> $|$ \> "ins $a$ $[v]$ = $[v, a]$" \\
+\> $|$ \> "ins $a$ $[]$ = $[]$"
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+\smallskip
+
+
+HOL је логика тоталних функција и заустављање функција је важан услов
+који спречава неконзистентност. На пример, из дефиницијe {\tt f($n$) =
+  f($n$) + $1$} може се доказати да је $0 = 1$ ако би скратили {\tt
+  f($n$)} са обе стране једнакости. Функција {\tt ins} се увек
+зауставља јер њени аргументи постају мањи са сваким рекурзивним
+позивом.  Када користимо {\tt \textbf{fun}}, \emph{Isabelle} покушава
+да докаже заустављање аутоматски. Али, понекад, у томе не успе и
+дефиниција бива одбијена.  У том случају, обично је најбоља идеја
+користити шири облик дефиниције са кључном речи {\tt
+  \textbf{function}}. Коришћењем овог ширег облика корисник може да
+види где је настао проблем у доказивању. Синтакса је:
+
+\smallskip
+
+\begin{small}
+{\tt 
+\textbf{function} fun\_name :: $T_1$ $\Longrightarrow$ $T_2$ $\Longrightarrow \ldots$ \textbf{where}
+equations
+
+$\vdots$
+
+ \textbf{by} pat\_completeness auto
+
+\textbf{termination by} lexicographic\_order
+}
+\end{small}
+\smallskip
+
+Дефиниција функције ствара неопходан услов којим се изражава
+комплетност и компатибилност и то се доказује (у овом примеру)
+коришћењем метода {\tt pat\_completeness} и {\tt auto}. Доказ
+заустављања почиње после дефиниције, након команде {\tt
+  \textbf{termination}}. Метод {\tt lexicographic\_order} је
+подразумевани метод. Ако овај метод не успе, доказ се изводи ручно. У
+логици вишег реда све функције су тоталне и то је управо разлог зашто
+мора бити доказано заустављање јер то даје оправдање да је задатом
+рекурзијом функција добро дефинисана.
+
+Када се докаже заустављање, систем \emph{Isabelle/HOL} обезбеђује
+прилагођено индуктивно правило за сваку дефинисану функцију. Име тог
+правила је \mbox{{\tt fun\_name.induct}}, а доказ некада можемо
+започети именом методе које користимо за доказивање, на пример:
+\\ {\tt \textbf{proof} (induct $v_1$ $v_2 \ldots$ rule:
+  fun\_name.induct)} \\ при чему су $v_1$, $v_2 \ldots$ променљиве
+које су задате у тврђењу ({\tt \textbf{theorem, lemma, have,}}
+$\ldots$) као параметри {\tt fun\_name}.
+
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{lem}\=\textbf{ma} "ins $a$ $x$ $@$ ins $a$ $y$ = ins $a$ ($x$ $@$ $y$)" \\
+\textbf{proof} (induct $x$ rule:ins.induct) \\
+\> \textbf{case} ($1$ $a$ $x$ $p$ $q$) \\
+\> \textbf{assume}"ins $a$ ($p$ \# $q$) $@$ ins $a$ $y$ = ins $a$ (($p$ \# $q$) $@$ $y$)" \\
+\> \textbf{th}\=\textbf{us} ?\textbf{case} \\
+\>\>  \textbf{by} simp \\
+\textbf{next} \\
+\>  \textbf{case} ($2$ $a$) \\
+\>  \textbf{show} ?\textbf{case} \\
+\>\>  \textbf{by} simp \\
+\textbf{next} \\
+\>  \textbf{case} ($3$ $a$ $v$) \\
+\>  \textbf{show} ?\textbf{case} \\
+\>\> \textbf{apply} (induct $y$ rule:ins.induct) \\
+\>\> \textbf{apply} simp+ \\
+\textbf{qed}
+\end{tabbing}
+}
+\selectlanguage{serbian}
+\end{small}
+
+Након извршења корака {\tt \textbf{proof} (induct $x$ rule:ins.induct)
+  \\} доказ се дели на три дела (подциља):
+
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+ 1. $\bigwedge$ \= $a$ $x$ $ya$ $xs$. \\
+       \> ins $a$ ($ya$ \# $xs$) $@$ ins $a$ $y$ = ins $a$ (($ya$ \# $xs$) $@$ $y$) $\Longrightarrow$ \\
+       \> ins $a$ ($x$ \# $ya$ \# $xs$) $@$ ins $a$ $y$ = ins $a$ (($x$ \# $ya$ \# $xs$) $@$ $y$) \\
+ 2. $\bigwedge$ $a$. ins $a$ $[]$ $@$ ins $a$ $y$ = ins $a$ ($[]$ $@$ $y$) \\
+ 3. $\bigwedge$ $a$ $v$. ins $a$ $[v]$ $@$ ins $a$ $y$ = ins $a$ ($[v]$ $@$ $y$)
+\end{tabbing}
+}
+\selectlanguage{serbian}
+\end{small}
+
+Са сваким {\tt \textbf{case}} кораком се доказује један од ових
+подциљева. Први подциљ је индуктивни корак, док су други и трећи
+подциљ база индукције. Можемо приметити да је за доказ трећег подциља
+коришћена индукција по другој листи (листи $y$), али како су кораци
+прилично једноставни није било потребе развијати доказ већ само
+позвати симплификатор.
+
+Понекад је потребно дефинисати парцијалну функцију. Ово није могуће у
+HOL, али могуће је наместити да се тотална функција понаша као
+парцијална. Поред функције, чије је име {\tt fun\_name} дефинише се и
+{\tt fun\_name\_dom} и он даје домен функције, односно вредности у
+којима функција сигурно зауставља. Индукциона правила домена
+омогућавају да се покаже да дата вредност лежи у домену функције ако
+сви аргументи у свим рекурзивним позивима такође леже у
+домену. Приликом доказивања индукције за такву функцију позива се
+правило \mbox{{\tt fun\_name.pinduct}} и при томе се индукција врши
+само за оне вредности које су дефинисане у домену, коришћењем {\tt
+  fun\_name\_dom}. Више о овоме може се наћи у \cite{functions}.
+
+% ------------------------------------------------------------------------------
+% lokali, kako funkcionisu, nasledjivanje u lokalima, kratko objasnjenje lokala koje koristimo u tekstu
+% ------------------------------------------------------------------------------
+
+\subsection{Систем модула}
+\label{locales_Isabelle}
+
+{\em Систем модула} (енг.~\emph{locales}) \cite{locales} су механизам
+за структурну спе\-ци\-фи\-ка\-ци\-ју и за модуларност у систему
+\emph{Isabelle}. Са модулима се уводи слој апстракције тако што се
+фиксира скуп параметара (функција и константи) и потом се задају
+претпоставке о овим параметрима. Ре\-зо\-но\-ва\-ње се ради
+апстрактно узимајући у обзир дате претпоставке, а ре\-зу\-лта\-ти се
+могу користити за сваку конкретну константу или функцију која
+задовољава претпоставке дате у мо\-ду\-лу (кажемо да оне
+интерпретирају модул). Синтакса за дефинисање модула је:
+
+\smallskip
+
+{\tt \textbf{locale} name}
+
+--- Са овим задајемо име модула. 
+
+\vspace{0.15cm}
+
+\hspace{0.5cm} {\tt \textbf{fixes} param\_name :: $T_1 \Longrightarrow T_2 \Longrightarrow \ldots$}
+
+\hspace{0.5cm} --- Параметар са синтаксом при чему су фиксирани
+параметри ра\-зли\-чи\-ти. Типови за параметре не морају бити
+иницијализовани. Ако ништа није на\-зна\-че\-но, узимајући у обзир
+претпоставке, елементи могу имати и општи тип.
+
+\vspace{0.15cm}
+
+\hspace{0.5cm} {\tt \textbf{assumes} ....}
+
+\hspace{0.5cm} --- Претпоставке.
+
+\smallskip
+
+{\tt \textbf{begin} }
+
+\hspace{0.5cm} {\em body} 
+ 
+{\tt \textbf{end}}
+
+\smallskip
+
+Имена у модулима су квалификована именом модула у коме су дефинисана,
+на пример {\tt H.f} означава функцију $f$ из теорије $H$. У оквиру
+контекста (између {\tt \textbf{body}} и {\tt \textbf{end}}) могу бити
+задате дефиниције и теореме. Пример за модуо којим се описује функција
+сортирања елемената листе је:
+
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{lo}\=\textbf{cale} Sort = \\
+  \> \textbf{fixes} sort :: "'a::linorder list $\Rightarrow$ 'a list" \\
+  \> \textbf{assumes} sorted: "sorted (sort $l$)" \\
+  \> \textbf{assumes} permutation: "sort $l$ <~~> $l$"
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Овим се дефинише да функција сортирања као улазни аргумент узима листу
+елемената који се могу поредити и враћа листу. При томе враћена листа
+мора бити сортирана ({\tt sorted}) и заправо представљати пермутацију
+полазне листе ({\tt permutation}). Oзнаком {\tt 'a::linorder} је
+ограничено да тип {\tt 'a} припада класи {\tt linorder}, тј. над том
+типу постоји линеарно уређење (више о класама видети у
+\cite{haftmann2006constructive}).
+
+Теореме и дефиниције задате у оквиру модела се могу користити и
+касније, у другим контекстима када важе претпоставке модула (као
+дефиниције или већ доказане теореме). Ово поновно коришћење теорема се
+зове интерпретација модула и постоји два начина како се то може учини,
+коришћењем команде {\tt \textbf{sublocale}} или {\tt
+  \textbf{interpretation}}.
+
+Команда {\tt \textbf{sublocale}} омогућава да се идентификује веза
+између модула и зависних модула. Декларација {\tt \textbf{sublocale}}
+$L_1 \ge L_2$ означава да се што је доказано у $L_2$ важи и у
+$L_1$. Додатно, дефиниција је динамична -- сваки нови закључак који се
+касније дода у $L_2$ ће исто да важи и у $L_1$. Ова релација је и
+транзитивна.
+
+Команда {\tt \textbf{interpretation}} означава интерпретацију модула у
+некој теорији. Ово је слично инстанцирању конкретног објекта неког
+објектно оријентисаног типа. Рецимо, хип сортирање би могло бити једна
+од интерпретација дефинисаног модула {\tt Sort}.
+
+
+
+
+Модули се често користе у верификацији софтвера јер омогућавају
+ме\-ха\-ни\-зам који се назива "упрошћавање програма"
+\cite{refinement}.
+
+Ми ћемо на више места користити модуле. Негде ћемо дефинисати своје
+модуле, а на неким местима ћемо користити модуле из постојећих
+\emph{Isabelle/HOL} библиотека.
+
+
+% ------------------------------------------------------------------------------
+% quotient type, kako funkcionise vise nivoa, primeri, notacija
+% ------------------------------------------------------------------------------
+\subsection{Количнички пакет}
+
+Други начин да се уведу нови типови, често коришћен и у математици,
+јесу количнички типови. Количнички типови су згодни за апстракцију
+типа: уместо да експлицитно доказујемо да функција задовољава релацију
+еквиваленције или да чува инваријанте, ова информација може бити
+енкодирана у самом типу функције. Као што смо раније видели,
+\emph{Isabelle} захтева рад са функцијама {\tt Rep} и {\tt Abs} које
+служе као веза између старог типа и новог апстрактног типа. Зато
+дефинисање функција над апстрактним типом може бити незгодно и често
+захтева доказивање бројних тврђења. Зато постоје разни механизми који
+аутоматизују рад са количничким типом.
+
+У \emph{Isabelle/HOL} постоји више пакета који омогућавају рад са
+количничким типом, и у нашој формализацији ми смо користили
+\emph{lifting/transfer} пакет \cite{lifting-transfer}.
+
+Први корак у дефинисању количничког типа је дефиниција релације
+еквиваленције $\approx$ над неким постојећим
+(ре\-пре\-зе\-нта\-ти\-вним) типом $\tau$. Количнички тип $\kappa$ се
+онда дефинише са {\tt \textbf{quotient\_type} $\kappa$ = $\tau$ /
+  $\approx$}. 
+
+Прво имамо неки основни тип {\tt 'a} и релацију еквиваленције {\tt R
+  :: 'a $\Rightarrow$ 'a $\Rightarrow$ bool}. Потом имамо апстрактни
+тип {\tt 'b} који је у коресподенцији један--на--један са класама
+еквиваленције релације {\tt R}. Наиме, функција апстракције {\tt Abs
+  :: 'a $\Rightarrow$ 'b} мапира сваку класу еквиваленције релације
+{\tt R} у тачно једну апстрактну вредност, а функција репрезентације
+{\tt Rep :: 'b $\Rightarrow$ 'a} претвара апстрактну вредност у
+произвољан елемент одговарајуће класе еквиваленције. За дати тип {\tt
+  'a} и релацију {\tt R}, команда {\tt \textbf{quotient\_type}} уводи
+нови тип и одговарајуће функције {\tt Abs} и {\tt Rep}.
+
+ Као пример узећемо релацију једнакости по модулу природних
+ бројева. Прво дефинишемо релацију.
+
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{def}\=\textbf{inition} moduo :: "nat $\Rightarrow$ nat $\Rightarrow$ bool" (\textbf{infix} "$\approx$" 50) \textbf{where} \\
+ \> "$a$ $\approx$ $b$ $\longleftrightarrow$ ($\exists$ $m$. $m$ $\neq$ ($0$::nat) $\land$ $a$ mod $m$ = $b$ mod $m$)"
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Да бисмо могли да дефинишемо количнички тип над овом релацијом
+потребно је доказати да је ова релација заправо релација
+еквиваленције. Зато доказујемо следеће леме:
+
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{lem}\=\textbf{ma} moduo\_eq\_refl: "$a$ $\approx$ $a$" \\
+
+\textbf{lemma} moduo\_eq\_sym: \\
+  \> \textbf{assumes} "$a$ $\approx$ $b$" \\
+  \> \textbf{shows} "$b$ $\approx$ $a$" \\
+
+\textbf{lemma} moduo\_eq\_trans: \\
+  \> \textbf{assumes} "$a$ $\approx$ $b$"  "$b$ $\approx$ $c$" \\
+  \> \textbf{shows} "$a$ $\approx$ $c$"
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Ове леме се тривијално доказују и у те детаље нећемо сада
+улазити. Потом дефинишемо количнички тип:
+
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{quo}\=\textbf{tient\_type } \\
+  \> moduo\_qt = nat / "moduo"
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Ова дефиниција изазива обавезу да се докаже да је коришћена релација
+релације еквиваленције. Добијамо подциљ облика: {\tt equivp op
+  $\approx$}, при чему {\tt equivp} означава да треба показати особину
+еквиваленције.
+
+И то се тривијално доказује коришћењем показаних лема на следећи начин:
+
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{apply} (rule equivpI, rule reflpI, simp add: moduo\_eq\_refl) \\
+\textbf{apply} (rule sympI, simp add: moduo\_eq\_sym) \\
+\textbf{apply} (rule transpI, blast intro: moduo\_eq\_trans) \\
+\textbf{done}
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+
+Функције над количничким типом се дефинишу у два корака. Прво,
+функција {\tt $f_{\tau}$ :: $\ldots$ $\tau$ $\ldots$} се дефинише над
+репрезентативним типом $\tau$. Потом се користи \emph{lifting} пакет
+да се функција "подигне" из базичног типа на апстрактан тип.  Функција
+се подиже на количнички тип коришћењем {\tt \textbf{lift\_definition}
+  $f_{\kappa}$ :: $\ldots$ $\kappa$ $\ldots$ \textbf{is}
+  $f_{\tau}$}. Ово ствара обавезу да се докаже да дефиниција не зависи
+од избора представника. Цео овај поступак посматрамо на једноставном
+примеру над апстрактним типом модула. Дефинисана функција над базичним
+типом над три аргумента је:
+
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{def}\=\textbf{inition} add\_moduo :: "nat $\Rightarrow$ nat $\Rightarrow$ nat $\Rightarrow$ nat" \textbf{where } \\
+  \> "add\_moduo $a$ $b$ $c$ = ($a$ + $b$) * $c$"
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+\noindent Потом подижемо ову дефининицију на ниво количничког типа:
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{lif}\=\textbf{t\_definition} add :: "moduo\_qt $\Rightarrow$ moduo\_qt $\Rightarrow$ moduo\_qt $\Rightarrow$ moduo\_qt" \textbf{is} \\
+\> add\_moduo
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+\noindent и ова дефиниција ствара обавезу да се докаже:
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+$\bigwedge$ $x$ \= $y$ $z$ $x_1$ $y_1$ $z_1$. \\
+       \> $\lbrakk$ $x$ \= $\approx$ $x_1$; $y$ $\approx$ $y_1$; $z$ $\approx$ $z_1$ $\rbrakk$ $\Longrightarrow$ \\
+       \>\> add\_moduo $x$ $y$ $z$ $\approx$ add\_moduo $x_1$ $y_1$ $z_1$
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+\noindent што заправо представља тврђење да како год изабрали представнике класе
+резултат ће бити елемент тачно једне класе. Како се може тривијално
+доказати да плус и пута чувају модуо, доказ је прилично једноставан и
+захтева само додавање одговарајућих дефиниција типа и функције у скуп
+правила:
+\smallskip
+\selectlanguage{english}
+\begin{small}
+{\tt 
+\begin{tabbing}
+\textbf{apply} (simp add: add\_moduo\_def moduo\_def) \\
+\textbf{by} auto
+\end{tabbing}
+}
+\end{small}
+\selectlanguage{serbian}
+
+Пакет \emph{transfer} обезбеђује методу за доказивање {\tt transfer}
+која замењује тренутни подциљ са логички еквивалентним који узима
+друге типове и константе. Односно, за количнички тип, метод {\tt
+  transfer} редукује тренутни подциљ који је везан за количнички тип
+на подциљ који је везан за основни, базични тип. Овај метод није
+строго везан само за количнички тип, може бити примењен и за друге
+типове ако постоје одговарајућа правила за трансфер. Када дефинишемо
+функцију коришћењем {\tt \textbf{lift\_definition}} аутоматски се
+генеришу правила за трансфер за дату функцију (током рада овај
+поступак се не примећује јер се одвија у позадини).
+
+Узмимо да желимо да докажемо једноставно тврђење са нашу дефинисану
+функцију {\tt add}:
+\selectlanguage{english}
+{\tt \textbf{lemma} "add $a$ $b$ $c$ = add $b$ $a$ $c$"}
+\selectlanguage{serbian}
+
+Када применимо {\tt \textbf{apply} transfer} генерише се нови подциљ
+који је над представницима класа:
+
+{\tt $\bigwedge$ $a$ $b$ $c$. add\_moduo $a$ $b$ $c$ $\approx$ add\_moduo $b$ $a$ $c$}
+
+Обратимо пажњу да је релација једнакости замењена раније дефинисаном
+релацијом еквиваленције, односно како год изабрали представнике класе,
+резултат ће бити елемент једне те исте класе. Као и раније овај подциљ
+се врло лако доказује:
+
+{\tt
+\textbf{apply} (simp add: add\_moduo\_def moduo\_def)
+
+\textbf{by} auto
+}
+
+Више детаља о количничком пакету се може пронаћи у литератури
+\cite{isabelle-quotient,lifting-transfer}.  У овом тексту користићемо
+неагресивну нотацију ($\lfloor\_\rfloor$ и $\lceil\_\rceil$) за
+функцију репрезентације и за функцију апстракције и игноришући ове
+ознаке текст може бити разумљивији и сличнији уобичајеним математичким
+текстовима.
+
+
+
+
+

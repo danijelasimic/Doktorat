@@ -1,0 +1,671 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[serbian]{babel}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{cirilica}
+\usepackage{pgf}
+\usepackage{wrapfig}
+\usepackage{gclc}
+\usepackage{hyphenat}
+
+\usepackage{fullpage}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{tikz}
+
+\newcommand{\agbett}[3]{\ensuremath{\mathcal{B}_T^{\mathit{ag}}\ #1\ #2\ #3}}
+\newcommand{\agbeth}[3]{\ensuremath{\mathcal{B}_H^{\mathit{ag}}\ #1\ #2\ #3}}
+\newcommand{\agcongr}[4]{\ensuremath{#1#2 \cong^{ag} #3#4}}
+\newcommand{\aginh}[2]{\ensuremath{#1 \in^{ag}_H #2}}
+\newcommand{\agtransp}[2]{\ensuremath{transp^{ag}\ #1\ #2}}
+\newcommand{\agtransl}[2]{\ensuremath{trans^{ag}_l\ #1\ #2}}
+\newcommand{\agrotp}[2]{\ensuremath{rotp^{ag}\ #1\ #2}}
+\newcommand{\agsymp}[1]{\ensuremath{symp^{ag}\ #1}}
+\newcommand{\agrotl}[2]{\ensuremath{rotl^{ag}\ #1\ #2}}
+\newcommand{\agsqdist}[2]{\ensuremath{d^2_{ag}\ #1\ #2}}
+
+
+
+\newcommand{\bett}[3]{\ensuremath{\mathcal{B}_t(#1, #2, #3)}}
+\newcommand{\colint}[3]{\ensuremath{\mathcal{C}_t(#1, #2, #3)}}
+\newcommand{\congrt}[4]{\ensuremath{#1#2 \cong_t #3#4}}
+
+\newcommand{\inh}[2]{\ensuremath{#1 \in_h #2}}
+\renewcommand{\beth}[3]{\ensuremath{\mathcal{B}_h(#1, #2, #3)}}
+\newcommand{\colinh}[3]{\ensuremath{\mathcal{C}_h(#1, #2, #3)}}
+\newcommand{\congrh}[4]{\ensuremath{#1#2 \cong_h #3#4}}
+
+\newcommand{\vect}[1]{\vec{#1}}
+
+
+
+\begin{document}
+% ------------------------------------------------------------------------------
+\section{Увод}
+% ------------------------------------------------------------------------------
+У класичној математици постоји много различитих геометрија. Такође,
+различита су и гледишта шта се сматра стандардном (Еуклидском)
+геометријом. ПОнекад, геометрија се дефинише као независна формална
+теорија, а понекад као специфични модел. Наравно, везе између
+различтих заснивања геометрије су јаке. На пример, може се показати да
+Декартова раван представља модел формалних теорија геометрије.
+
+Традиционална Еукидска (синетичка) геометрија, која датира још од
+античке Грчке, је геометрија заснована на често малом скупу основних
+појмова (на пример, тачке, линије, релација подударности, \ldots) и на
+скупу аксиома које имплицитно дефинишу ове основне појмове.  Постоји
+више варијанти аксиоматског система за Еуклидску геометрију, а
+најважнији су Еуклидски систем аксиома (из његовог рада "Елементи"),
+потом Хилбертов систем аксиома\cite{hilbert}, систем аксиома
+Тарског\cite{tarski} и најмодернија варијанта -- Авигадов систем
+аксиома\cite{avigad}.
+
+Једна од најзначајнијих открића у математици, које датира из {\lat
+  XVII} века, јесте Декартово откриће координатног система и оно је
+омогућило да се алгебарским изразима представе геометријски облици. То
+је довело до рада на новој математичкој области која се зове
+\emph{аналитичка геометрија}. Она је послужила да споји геометрију и
+алгебру и била је веома важна за откриће бесконачности и математичке
+анализе.
+
+Последњих година, са појавом модерних интерактвних доказивача теорема,
+многе класичне математичке теорије су формално механички
+анализиране. Међу њима је и геометрија и постоји неколико покушаја да
+се формализују раличите геометрије и различити приступи у
+геометрији. Ми нисмо упознати да је поптпуно комплетно формализован
+Хилбертов систем\cite{hilbert} или систем аксиома
+Тарског\cite{tarski}, али значајно кораци су направљени и велики
+делови ових теорија су формализоване у оквиру интерактивних доказивача
+теорема\cite{hilbert-isabelle,narboux,projective-coq1}.  Како искуство
+за сада показује, коришћењем доказивача теорема значајно се повећава
+ниво прецизности јер се показало да су многе класичне математичке
+књиге непрецизне, а понекад чак имају и грешке. Зато би приликом
+формалног заснивања геометрије требало користити доказивач теорема, а
+у нашем раду ми смо користили {\lat Isabelle/HOL}\cite{Isabelle}
+доказивач.
+
+Главна примена нашег рада је у аутоматском доказивању теорема у
+геометрији и у математичком образовању и учењу геометрије.
+
+Код аутоматског доказивања теорема у геометрији, аналитички приступ у
+доказима се показао далеко супериорнији у односу на остале
+доказиваче. Најуспешнији методи на овом пољу су \emph{алгебарски
+  методи} (Вуоов метод\cite{wu} и метод Гребнерових
+база\cite{buchberger,kapur}) и они се заснивају на репрезентацији
+тачака коришћењем координата. Модерни доказивачи теорема који се
+заснивају на овим методима су коришћени да се докажу стотине
+нетривијалних теорема. Са друге стране, доказивачи теорема засновани
+на синтетичкој аксиоматизацији нису толико успешни. Већина система са
+аналитичким приступом за доказивање теорема се користи као софтвер
+којем се верује иако нису повезани са модерним интерактивним
+доказивачима теорема. Да би се повећала њихова поузданост потребно их
+је повезати са модерним интерактивним доказивачима теорема и то је
+могуће учинити на два начина -- њиховом имплементацијом у оквиру
+интерактивног доказивача теорема и показивањем њихиове исправности или
+коришћењем интерактивних доказивача да провере њихова
+тврђења. Неколико корака у овом правцу је већ
+направљено\cite{wucoq,thedu}.
+
+У математичком образовању у средњим школама и на факултетима оба
+приступа у геометрији (аналитички и синтетички) се
+демонстрирају. Ипак, док се синтетички приступ предаје као ригорозан
+систем (????) (са намером да се демонстрира ригорозан аксиоматски
+приступ), аналитичка геометрија се показује много мање формално
+(понекад само као део рачуна {\lat calculus}).  Такође, ова два
+приступа се показују независно, и веза између ова два приступа се
+ретко формално показује у оквиру стандарог наставног плана.
+
+Имајћи све ово на уму, ова рад покушава да премости више празнина за које мислимо да
+тренутно постоје у формализацији геометрије.
+
+
+\begin{enumerate}
+\item Прво, наш циљ је да формализујемо Декартову геометрију у оквиру
+      интерактивног доказивача теорема, са ригорозним приступом, али веома блиско
+      стандарном средњошколском образовању.
+\item Намеравамо да покажемо да су разиличите дефиниције основних појмова
+      аналитичке геометрије које можемо видети у литератури заправо еквивалентне,
+      и да заправо представљају јединствен апстрактни ентитет -- Декартову раван.
+\item Намеравамо да покажемо да стандарна геометрија координатне равни
+      представља модел неколико геометријских аксиоматизација (пре свега
+      систем аксиома Тарског и Хилбертов систем аксиома).
+\item Желимо формално да анализирамо теоретске особине различитих аксиоматских система
+      (на пример, желимо да покажемо да сви модели Хилбертовог система аксиома су
+      изоморфни стандарној координатној геометрији).
+\item Желимо формално да анализирамо аксиоматизације и моделе не-Еуклидске геометрије
+      и њихове особине (на пример, да покажемо да је Поинкареов диск модел запараво модел
+      геометрије Лобачевског).
+\item Желимо да формално успоставимо везу између геометрије координатног система са
+      алгебарским методама за аутоматско доказивање теорема у геометрији.
+\end{enumerate}
+
+
+
+Поред тога што су многе теореме формализоване и доказане у оквиру
+система {\lat Isabelle/HOL}, ми такође дискутујемо и наше искуство у
+примени различитих техника за поједностављење доказа.  Најзначајнија
+техника је "без губитка на општости" (``{\lat wlog}''), која прати приступ
+Харисона\cite{wlog} и која је оправдна коришћењем разних
+изометријиских трансформација.
+
+% ------------------------------------------------------------------------------
+\section{Osnovni pojmovi} (??? {\lat background})
+\label{sec:background}
+% ------------------------------------------------------------------------------
+{\lat \paragraph{ Isabelle/HOL.}}  {\lat Isabelle/HOL} је интерактивни
+доказивач теорема који је заснова на логици вишег реда ({\lat HOL}).
+Он обезбеђује моћне аутоматске методе за доказивање (proof methods
+??), који су обично засновани на симлификацији класичном
+резоновању. {\lat Isar} је декларативни језик за доказе у {\lat
+  Isabell/HOL} систему, који дозвољава писање структурних, читљивих
+доказа. У {\lat Isabelle/HOL} систему $\llbracket P_1; \ldots P_n
+\rrbracket \Longrightarrow Q$ значи ако $P_1$, \ldots, $P_n$ је тачно,
+онда $Q$ је такође тачно. Ова нотација се користи да означи и правила
+закључивања и тврђења (леме, теореме).  Језик {\lat Isar} такође
+омогоћува и нотацију {\lattt assumes "$P_1$" \ldots "$P_n$"\ shows
+  "$Q$"\ } , и она ће бити коришћена у овом раду. Такође, користићемо
+и везнике међу објектима (??? {\lat object-level connectives})
+$\wedge$, $\vee$, $\longrightarrow$, and $\longleftrightarrow$ за
+означавање коњукције, дисјункције, имликације и логичке
+еквиваленције. Квантификатори ће бити означени са $\forall x.\ P x$ и
+$\exists x.\ P x$.
+
+% ------------------------------------------------------------------------------
+\section{Формализација геометрије Декартове равни}
+\label{sec:cartesian}
+% ------------------------------------------------------------------------------
+
+Када се формализује теорија, мора се одлучити који појмови ће бити
+основни, а који појмови ће бити дефинисани помоћу тих основних
+појмова. Циљ наше формализације аналитичке геометрије је да успостави
+везу са синтетичком геометријом, па зато има исте основне појмове који
+су дати у синтетичком приступу (?? {\lat so it follows primitive
+  notions given in synthetic approaches}). Свака геометрија има класу
+објеката(?? {\lat class of objects}) који се називају
+\emph{тачке}. Неке геометрије (на пример, Хилбертова) има и додатни
+скуп објеката који се наизвају \emph{линије}, док неке геометрије (на
+пример, геометрија Тарског) уопште не разматра линије .  У неким
+геометријама, линије су дефинисани појам, и оне су дефинисане као скуп
+тачака.  Ово подразумева рад са теоријом скупова, а многе
+аксиоматизације желе то да избегну.  У нашој формализацији аналитичке
+геометрије, ми ћемо дефинисати и тачке и линије јер желимо да
+омогућимо анализу и геометрије Тарског и геометрије Хилберта. Основна
+релација која спаја тачке и линије је релације \emph{инциденције},
+која неформално означава да линија садржи тачку (или дуално да се
+тачка налази на линији). Други примитивни појмови (у већини
+аксиоматских система) су релација \emph{између} (која дефише редослед
+колинеарних тачака) и релација \emph{конгруенције}.
+
+Важно је напоменути да су обично многи појмови који су заправно
+изведени појмови у синтетичкој геометрији у аналитичком геометрији
+дати у облику дефиниција. На пример, у књигама за средњу школу дефише
+се да су линије нормалне ако је производ њихових праваца $-1$. Ипка,
+ово нарушава везу са синтетичком геометријом (где је нормалност
+изведени појам) јер би оваква карактеризација требало да буде доказана
+као теорема, а не узета као дефиниција.
+
+-----------------------------------------------------------
+
+\subsection{Ta\v cke u analiti\v ckoj geometriji.}
+Ta\v cka u realnoj koordinatnoj ravni je odre\dj ena sa svojim $x$ i
+$y$ koordinatama. Zato, ta\v cke su parovi realnih brojeva
+($\mathbb{R}^2$), \v sto se mo\v ze lako formalizovati u {\lat
+  Isabell/HOL} sistemu sa {\lattt type\_synonym\ $point^{ag}\ =\ "real
+  \times real"$}.
+
+
+\subsection{Redosled ta\v caka.} Redosled (kolinernih) ta\v caka se
+defini\v se kori\v s\'cenjem relacije \emph{izme\dj u}. Ovo je
+relacija koja ima tri argumenta, $\mathcal{B}(A, B, C)$ ozna\v cava da
+su ta\v cke $A$, $B$, i $C$ kolinerane i da je ta\v cka $B$ izme\dj u
+ta\v caka $A$ i $C$. Ipak, neke aksiomatizacije (na primer,
+aksiomatizacija Tarskog) dozvoljava slu\v caj kada je ta\v cka $B$
+jednaka ta\v cki $A$ ili ta\v cki $C$ (re\'ci cemo da je relacija
+izme\dj u inkluzivna (??? {\lat inclusive})), dok neke druge
+aksiomatizacije (na primer, Hilbertova aksiomatizacija) ne
+dozvoljavaju jednakost ta\v caka (i tada ka\v zemo da je relacija
+izme\dj u ekskluzivna (??? {\lat exclusive})). U prvom slu\v caju,
+ta\v cke $A$, $B$ i $C$ zadovoljavaju relaciju izme\dj u ako postoji
+realan broj $0 \le k \le 1$ takav da $\vect{AB} = k \cdot
+\vect{AC}$. \v Zelimo da izbegenemo eksplicitno kori\v s\'cenje
+vektora jer su oni \v ce\v s\'ce izvedeni, a re\dj e primitivan pojam u
+sinteti\v ckoj geometriji, tako da relaciju izme\dj formalizujemo u
+{\lat Isabelle/HOL} sistemu na slede\'ci na\v cin :
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\hspace{5mm}\=\kill
+$\agbett{(xa, ya)}{(xb, yb)}{(xc, yc)} \longleftrightarrow$\\
+\>$(\exists (k::real).\ 0 \le k \ \wedge\ k \le 1 \ \wedge$\\
+\>\>$(xb - xa) = k \cdot (xc - xa) \ \wedge\ (yb - ya) = k \cdot (yc - ya))$
+\end{tabbing}
+}
+
+
+\noindent Ako zahtevamo da ta\v cke $A$, $B$ i $C$ budu razli\v cite,
+ona mora da va\v zi $0 < k < 1$, i relaciju \'cemo ozna\v cavati sa
+$\agbeth{}{}{}$.
+
+\subsection{Kongruencija.} Relacija kongrunecije defini\v se se na parovima
+ta\v caka. Neformalno, $\congrt{A}{B}{C}{D}$ ozna\v cava da je segment
+$AB$ kongruentan segmentu $CD$. Standardna metrika u $\mathbb{R}^2$
+defini\v se da rastojanje me\dj u ta\v ckama $A(x_A, y_A)$, $B(x_B,
+y_B)$ je $d(A, B) = \sqrt{(x_B-x_A)^2+(y_B-y_A)^2}$. Kvadratno
+rastojanje se defini\v se kao $\agsqdist{A}{B} =
+(x_B-x_A)^2+(y_B-y_A)^2$. Ta\v cke $A$ i $B$ su kongruentne ta\v ckama
+$C$ i $D$ ako i samo ako $\agsqdist{A}{B} = \agsqdist{C}{D}$. U {\lat
+  Isabelle/HOL} sistemu ovo se mo\v ze formalizovati na slede\'ci na\v
+cin:
+
+{\tt
+\begin{tabbing}
+$\agsqdist{(x_1, y_1)}{(x_2, y_2)} = (x_2-x_1)\cdot (x_2-x_1)+(y_2-y_1)\cdot (y_2-y_1)$\\
+$\agcongr{A_1}{B_1}{A_2}{B_2} \longleftrightarrow \agsqdist{A_1}{B_1} = \agsqdist{A_2}{B_2}$
+\end{tabbing}
+}
+
+\subsection{Prava i incidencija.}
+
+\paragraph{Jedna\v cina prave.}
+Prave u Dekartovoj koordinatnoj ravni se obi\v cno predstavljaju
+jedna\v cinama oblika $Ax + By + C = 0$, pa tako trojka $(A, B, C) \in
+\mathbb{R}^3$ ozna\v cava liniju. Ipak, trojke u kojima je $A = 0$ i
+$B = 0$ moraju biti izuzete jer ne predstavljaju ispravnu jedna\v cinu
+prave. Tako\dj e, jedna\v cine $Ax + By + C = 0$ i $kAx + kBy + kC =
+0$, za realno $k \neq 0$, ozna\v cavaju istu pravu. Zato prava ne mo\v
+ze biti definisana kori\v s\'cenjem samo jedne jedna\v cine, ve\' c
+prava mora biti definisana kao klasa jedna\v cina koje imaju
+proporcionalne koeficiente. Formalizacija u sistemu {\lat
+  Isabelle/HOL} se sastoji iz nekoliko koraka. Prvo, defini\v se se
+domen validnih trojki koji su koeficienti jedna\v cine.
+{\tt
+\begin{tabbing}
+typedef $\mathit{line\_coeffs}^{ag}$ = \\
+\hspace{5mm}$\{((A::real), (B::real), (C::real)).\ A \neq 0 \vee B \neq 0\}$
+\end{tabbing}
+}
+\noindent Kada je ovaj tip definisan, funkcija
+$\mathit{Rep\_line\_coeffs}$ konvertuje apsreaktne vrednosti ovog tipa
+u njihove konkretne reprezentacije (trojke realnih brojeva), a
+funkcija $\mathit{Abs\_line\_coeffs}$ konvertuje (validne) trojke u
+vrednosti koje pripadaju ovom tipu.
+
+Dve trojke su ekvivalente ako i samo ako su proporcionalne.
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+$l_1 \approx^{ag} l_2$ $\longleftrightarrow$ \\
+\>  $(\exists\ A_1\,B_1\,C_1\,A_2\,B_2\,C_2.$\\
+\>  $(\mathit{Rep\_line\_coeffs}\ l_1 = (A_1, B_1, C_1)) \ \wedge\ \mathit{Rep\_line\_coeffs}\ l_2 = (A_2, B_2, C_2)\ \wedge$\\
+\>  $(\exists k.\ k \neq 0 \,\wedge\, A_2 = k\cdot A_1 \,\wedge\,  B_2 = k\cdot B_1\,\wedge\,C_2 = k\cdot C_1))$
+\end{tabbing}
+}
+\noindent Pokazano je da je ovo relacija ekvivalencije. Definicija
+tipa prave koristi podrsku za koli\v cni\v cke tipove i koli\v cni\v
+cke definicije koji su skoro integrisani u sistem {\lat
+  Isabelle\HOL}. Zna\v ci prava (tip $\mathit{line^{ag}}$) se defini\v
+se kori\v s\'cenjem \verb|quotient_type| komande kao klasa
+ekvivalencije nad relacijom $\approx^{ag}$.
+
+Da bi izbegli kori\v s\'cenje teorije skupova, geometrijske
+aksiomatizacije koje eksplicitno razmatraju prave koriste relaciju
+incidencije (??? pripadanja). Ako se koristi prethodna definicija za
+prave, ona provera incidencije se svodi na izra\v cunavanje da li ra\v
+cka $(x, y)$ zadovoljava jedna\v cinu prave $A\cdot x + B\cdot y + C =
+0$, za neke koeficijente $A$, $B$, i $C$ koji su predstavnici klase.
+
+ {\tt
+\begin{tabbing}
+\hspace{5mm}\=\hspace{5mm}\=\kill
+$ag\_in\_h\ (x, y)\ l \longleftrightarrow$\\
+\>$(\exists\ A\ B\ C.\ \mathit{Rep\_line\_coeffs}\ l = (A,\ B,\ C) \,\wedge\,  (A\cdot x + B\cdot y + C = 0))$
+\end{tabbing}
+}
+
+Ipak, da bi pokazali da je relacija zasnovana na predstavnicima klase
+dobro zasnovama, mora biti pokazano da ako se izaberu drugi
+predstavnici klase $A'$, $B'$, i $C'$ (koji su proporcionalni sa $A$,
+$B$, i $C$), onda $A'\cdot x + B'\cdot y + C = 0$. Zato, u na\v so
+{\lat Isabelle\HOL} formalizaciji, mi koristimo paket koji podr\v zava
+rad sa koli\v cnickim tipovima ({\lat quotient package}). Onda
+$\aginh{A}{l}$ se defini\v se kori\v s\'cenjem
+\verb|quotient_definition| koja se zasniva na relaciji
+$ag\_in\_h$. Lema dobre definisanosti je
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\hspace{5mm}\=\kill
+lemma \\
+\>shows "$l \approx l' \Longrightarrow ag\_in\_h\ P\ l = ag\_in\_h\ P\ l'$"
+\end{tabbing}
+}
+
+
+\paragraph{Afina definicija.}
+U afinoj geometriji, prava se defini\v se pomo\'cu fiksne ta\v cke i
+vektora. Kao i ta\v cke, vektori tako\dj e mogu biti zapisani kao par
+realnih brojeva {\tt type\_synonym\ $vec^{ag}\ =\ "real \times
+  real"$}. Vektori definisani na ovaj na\v cin \v cine vektorski
+prostor (sa prirodno definisanim vektorskim zbirom i skalarnim
+proizvodom). Ta\v cke i vektori se mogu sabirati kao $(x, y) + (v_x,
+v_y) = (x + v_x, y + v_y)$. Zato, prava se zapisuje kao ta\v cka i
+vektor koji je razli\v cit od nule:
+
+{\tt
+\begin{tabbing}
+typedef $\mathit{line\_point\_vec}^{ag} =\{(p::point^{ag}, v::vec^{ag}).\ v \neq (0, 0)\}$
+\end{tabbing}
+}
+
+Ipak, tazli\v cite ta\v cke i vektori mogu zapravo odre\dj ivati jednu
+te istu pravu, pa konstrukcija sa koli\v cni\v ckim tipom opet mora
+biti kori\v s\'cena.
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\\
+$l_1 \approx^{ag} l_2 \longleftrightarrow (\exists\,p_1\,v_1\,p_2\,v_2.$\\
+\>$\mathit{Rep\_line\_point\_vec}\ l_1 = (p_1, v_1) \,\wedge\,  \mathit{Rep\_line\_point\_vec}\ l_2 = (p_2, v_2) \,\wedge$\\
+\>$(\exists k m.\ v_1 = k\cdot v_2 \,\wedge\, p_2 = p_1 + m\cdot v_1))$
+\end{tabbing}
+}
+\noindent Pokazuje se da je ovo zaista relacija ekvivalencije. Onda se
+tip prave ($\mathit{line^{ag}}$) se defini\v se kori\v s\'cenjem
+komande \verb|quotient_type|, kao klasa ekvivalencije nad relacijom
+$\approx^{ag}$.
+
+U ovom slu\v caju, incidencija se defini\v se na na\v cin koji mo\v
+zete videti u nastavku (ponovo se uop\v stava (???{\lat lifted})
+kori\v s\'cenjem koli\v cnickog paketa, nakon \v sto se poka\v ze
+dobra definisanost).
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\hspace{5mm}\=\kill
+$ag\_in\_h\,p\,l,\longleftrightarrow\,(\exists\,p_0\,v_0.\,\mathit{Rep\_line\_point\_vec}\,l = (p_0, v_0) \,\wedge\,  (\exists k.\,p = p_0 + k \cdot v_0))$
+\end{tabbing}
+}
+
+Jo\v s jedna mogu\'ca definicija prave je klasa ekvivalencije parova
+razli\v citih ta\v caka. Mi nismo formalizovali ovaj pristup jer je
+trivialno izomorfan sa afinom definicijom (razlika ta\v caka je vektor
+koji se pojavljuje u afinoj definiciji).
+
+\subsection{Izometrije}
+
+U sinteti\v ckoj geometriji izometrije se uvode kori\v s\'cenjem
+definicije. Refleksije mogu prve da se defini\v su, a onda se
+druge izometrije mogu definisati kao kompozicija refleksija. Ipak,
+u na\v soj formalizaciji , izometrije se koriste samo kao
+pomo\'cno sredstvo da uproste na\v se dokaze (\v sto \'ce biti
+dodatno poja\v snjeno u odeljku \ref{sec:iso}). Zato mi nismo bili
+zainteresovani da defini\v semo izometrije kao primitivne pojmove
+(kao \v sto su ta\v cke i kongruencija) nego smo predstavili
+aanaliti\v cke definicje i dokazali svojstva koja su potrebna za
+kasnije dokaze.
+
+Translacija je definisana preko datog vektora (koji nije
+eksplicitno defininsan, ve\'c je predstavljen kao par realnih
+brojeva). Formalna definicja u {\lat Isabelle/HOL } je
+jednostavna.
+
+{\tt
+\begin{tabbing}
+$\agtransp{(v_1, v_2)}{(x_1, x_2)} = (v_1 + x_1, v_2 + x_2)$
+\end{tabbing}
+}
+
+Rotacija je parametrizovana za realni parametar $\alpha$ (koji
+predstavlja ugao rotacije), a samo posmatramo rotacije oko
+koordinatnog po\v cetka (ostale rotacije mogu se dobiti kao
+kompozicija translacije i rotacije oko koordinatnog po\v cetka).
+Koristimo osnovna pravila trigonometrije da bi dobili slede\'cu
+formalnu definiciju u \lat{Isabelle/HOL}-u.
+
+{\tt
+\begin{tabbing}
+$\agrotp{\alpha}{(x, y)} = ((\cos \alpha)\cdot x - (\sin
+\alpha)\cdot y , (\sin \alpha)\cdot x + (\cos \alpha)\cdot y)$
+\end{tabbing}
+}
+
+Tako\d e, centralna simetrija se lako defini\v se kori\v s\'cenjem
+koordinata ta\v cake:
+ {\tt
+\begin{tabbing}
+$\agsymp{(x, y)} = (-x, -y)$
+\end{tabbing}
+}
+
+Va\v zna osobina svih izometrija je svojstvo invarijantnosti, tj.
+one \v cuvaju osnovne relacije (kao \v sto su izme\d u i
+kongruencija).
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+$ \agbett{A}{B}{C} \longleftrightarrow \agbett{(\agtransp{v}{A})}{(\agtransp{v}{B})}{(\agtransp{v}{C})}$\\
+$\agcongr{A}{B}{C}{D} \longleftrightarrow$\\
+\> $\agcongr{(\agtransp{v}{A})}{(\agtransp{v}{B})}{(\agtransp{v}{C})}{(\agtransp{v}{D})}$\\
+$\agbett{A}{B}{C} \longleftrightarrow \agbett{(\agrotp{\alpha}{A})}{(\agrotp{\alpha}{B})}{(\agrotp{\alpha}{C})}$\\
+$\agcongr{A}{B}{C}{D} \longleftrightarrow
+   \agcongr{(\agrotp{\alpha}{A})}{(\agrotp{\alpha}{B})}{(\agrotp{\alpha}{C})}{(\agrotp{\alpha}{D})}$\\
+$\agbett{A}{B}{C} \longleftrightarrow \agbett{(\agsymp{A})}{(\agsymp{B})}{(\agsymp{C})}$\\
+$\agcongr{A}{B}{C}{D} \longleftrightarrow
+   \agcongr{(\agsymp{A})}{(\agsymp{B})}{(\agsymp{C})}{(\agsymp{D})}$
+\end{tabbing}
+}
+
+Izometrije se pre svega koriste da transformi\v su ta\v cku u
+njenu kanonsku poziciju (obi\v cno pomeranjem na $y$-osu).
+Slede\'ce leme pokazuje da je to mogu\'ce u\v ciniti.
+
+{\tt
+\begin{tabbing}
+$\exists v.\ \agtransp{v}{P} = (0, 0)$\\
+$\exists \alpha.\ \agrotp{\alpha}{P} = (0, p)$\\
+$\agbett{(0, 0)}{P_1}{P_2} \longrightarrow \exists \alpha\ p_1\
+p_2.\ \agrotp{\alpha}{P_1} = (0, p_1) \wedge \agrotp{\alpha}{P_2}
+= (0, p_2)$
+\end{tabbing}
+}
+
+Izometrijske transformacije linija se defini\v su kori\v s\'cenjem
+izometrijskih transformacija nad ta\v ckama (linija se
+transformi\v se tako \v sto se transformi\v su dve njene
+proizvoljne ta\v cke.
+
+ ------------------------------------------------------------------------------
+\section{Kori\v s\'cenje izometrijskih transformacija}
+\label{sec:iso}
+% ------------------------------------------------------------------------------
+Jedna od najva\v znijih tehnika koja je kori\v s\'cenja za upro\v
+s\'cavanje formalizacije oslanjala se na kori\v s\'cenje
+izometrijskih transformacija. Mi \'cemo poku\v sati da predstavimo
+motivacioni razlog za primenu izometrija na slede\'cem,
+jednostavnom primeru.
+
+Cilj je da poka\v zemo da u na\v sem modelu va\v zi, ako
+$\agbett{A}{X}{B}$ i $\agbett{A}{B}{Y}$ onda$\agbett{X}{B}{Y}$. \v
+Cak i na ovom jednostavnom primeru, ako primenimo direktan dokaz,
+bez kori\s\'cenja izometrijskih transformacija, algebarski ra\v
+cun postaje previ\v se kompleksan.
+
+Neka va\v zi $A=(x_A, y_A)$, $B=(x_B, y_B)$, i $X=(x_X, y_X)$.
+Kako $\agbett{A}{X}{B}$ va\v zi, postoji realan broj $k_1$, $0 \le
+k_1 \le 1$, takav da $(x_X - x_A) = k_1 \cdot (x_B - x_A)$, i
+$(y_X - y_A) = k_1 \cdot (y_B - y_A)$. Sli\v cno, kako
+$\agbett{A}{B}{Y}$ va\v zi, postoji realan broj $k_2$, $0 \le k_2
+\le 1$, takav da $(x_B - x_A) = k_2 \cdot (x_Y - x_A)$, i $(y_B -
+y_A) = k_2 \cdot (y_Y - y_A)$. Onda, mo\v ze se definisati realan
+broj $k$ sa $(k_2 - k_2\cdot k_1) / (1-k_2\cdot k_1).$ Ako $X\neq
+B$, onda kori\v s\'cem kompleksinih algebarskih transformacija,
+mo\v ze se pokazati da $0 \le k \le 1$, i da $(x_B - x_X) = k
+\cdot (x_Y - x_X)$, i $(y_B - y_X) = k \cdot (y_Y - y_X)$, i zato
+$\agbett{X}{B}{Y}$ va\v zi. Degenerativni slu\v caj $X=B$
+trivijalno va\v zi.
+
+Ipak, ako primenimo izometrijske transformacije, onda mo\v zemo
+predspostaviti da $A=(0, 0)$, $B=(0, y_B)$, i $X=(0, y_X)$, i da
+$0 \le y_X \le y_B$. Slu\v caj kada je $y_B = 0$ trivijalno va\v
+zi. U suprotnom, $x_Y = 0$ i $0 \le y_B \le y_Y$. Zato, $y_X \le
+y_B \le y_Y$, i tvr\d enje va\v zi. Primetimo da u ovom slu\v caju
+nisu bile potrebne velike algebarske transformacije i dokaz se
+oslanja na jednostavne osobine tranzitivnosti relacije $\le$.
+
+Porede\'ci prethodna dva dokaza, mo\v zemo da vidimo kako primena 
+izometrijskih transformacija zna\v cajno upro\v s\'cava potrebna 
+izra\v cunavanja i skra\' cuje dokaze.
+
+Kako je ova tehnika dosta kori\v s\'cena u na\v soj formalizaciji,
+va\v zno je prodiskutovati koje je najbolji na\v cin da se formuli\v su
+odgovaraju\'ce leme koje opravdavaju upotrebu ove tehnike i poku\v sati 
+\v sto vi\v se automatizovati kori\v s\'cenje ove tehnike. Mi smo
+primenili pristup koji je predlo\v zio Harison \cite{wlog}.
+
+Svojstvo $P$ je invarijantno pod transformacijom $t$ akko na njega ne 
+uti\v ce transformacija ta\v caka na koju je primenjena transformacija $t$.
+
+{\tt
+\begin{tabbing}
+$inv\ P\ t \longleftrightarrow (\forall\ A\ B\ C.\ P\ A\ B\ C
+\longleftrightarrow P\ (t A)\ (t B)\ (t C))$
+\end{tabbing}
+}
+
+Tada, slede\'ca lema se mo\v ze koristiti da svedemo tvr\d enje 
+koje va\v zi za bilo koje kolinearne ta\v cke na tvr\d enje za
+koje razmatramo damo ta\v cke $y$-ose (mo\v zemo izabrati i $x$-osu
+ukoliko nam tako vi\v se odgovara).
+
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+lemma\\
+\>assumes \="$\forall\ y_B\ y_C.\ 0 \le y_B \ \wedge\  y_B \le y_C \longrightarrow P\ (0, 0)\ (0, y_B)\ (0, y_C)$"\\
+\>\>       "$\forall\,v.\ inv\ P\ (\agtransp{v}{})$" "$\forall\,\alpha.\ inv\ P\ (\agrotp{\alpha}{})$"\\
+\>\>       "$inv\ P\ (\agsymp{})$"\\
+\>shows\>"$\forall\,A\,B\,C.\ \agbett{A}{B}{C} \longrightarrow\ P\
+A\ B\ C$"
+\end{tabbing}
+}
+
+Dokaz da je neko tvr\d enje invarijantno u odnosu na izometrijsku 
+transformaciju najvi\v se se oslanja na leme koje pokazuju da su 
+relacija izme\d u i relacija kongruencije invarijantne u odnosu
+na izometrijske transformacije.
+
+% ------------------------------------------------------------------------------
+\section{Geometrija Tarskog}
+\label{sec:tarski}
+% ------------------------------------------------------------------------------
+
+Na\v s cilj u ovom poglavlju je da doka\v zemo da na\v se definicije 
+Dekartove koordinatne ravni zadovoljavaju sve aksiome geometrije Tarskog\cite{tarski}.
+Osnovni pojmovi u geometriji Tarskog su samo tri pojma - ta\v cke,
+(inkluzivna) relacija izme\d u (ozna\v cena sa $\bett{A}{B}{C}$) i relacija kongruencije (koju ozna\v cavamo sa
+ $\bett{A}{B}{C}$). U geometriji Tarskog linije nisu eksplicitno definisane i
+kolinearnost se defini\v se kori\v s\'cenjem relacije izme\d u
+$$\colint{A}{B}{C} \longleftrightarrow \bett{A}{B}{C} \vee \bett{B}{C}{A} \vee \bett{C}{A}{B}$$
+
+
+\subsection{Aksiome kongruencije.}
+
+Prve tri aksiome Tarskog predstavljaju osnovna svojstva kongruencije.
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+$\congrt{A}{B}{B}{A}$\\
+$\congrt{A}{B}{C}{C} \longrightarrow\ A = B$\\
+$\congrt{A}{B}{C}{D} \wedge\ \congrt{A}{B}{E}{F}\ \longrightarrow \congrt{C}{D}{E}{F}$
+\end{tabbing}
+}
+\vspace{-2mm}
+
+\v Zelimo da doka\v zemo da na\v sa relacija $\agcongr{}{}{}{}$ zadovoljava
+svojstva relacije $\congrt{}{}{}{}$ koja je apstraktno zadana sa 
+prethodnim aksiomama (tj. da date aksiome va\v ze u na\v sem modelu
+Dekartove koordinatne ravni)\footnote{U na\v soj formalizaciji, aksiome geometrije
+Tarskog su formulisane kori\v\'cenjem \emph{locale} \cite{locales},
+i pokazano je da koordinatna ravan predstavlja interpretaciju 
+tog definisanog \emph{locale}. Kako je ovo tehni\v cka strana formalizacije
+u Isabelle/HOL sistemu, mi je ne\'cemo diskutovati u vi\v se detalja}.
+Na primer, za prvu aksiomu, dokaz se svodi na pokazivanje tvr\d enja
+\mbox{$\agcongr{A}{B}{B}{A}$}. Dokazi su {\lat straightforward} (?? jednostavni)
+i gotovo automatski (pojednostavljivanjem nakon razvijanja (?? \lat{unfolding}) definicija). 
+
+\subsection{Aksiome za relaciju izme\d u.}
+
+\paragraph{{\lat Identity} relacije izme\d u.}
+
+Prva aksioma (inskluzivne) relacije izme\d u daje jedno
+njeno jednostavno svojstvo i, za na\v s model, dokazuje se gotovo automatski.
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+$\bett{A}{B}{A} \longrightarrow A = B$
+\end{tabbing}
+}
+
+\paragraph{Pa\v sova aksioma.}
+
+Slede\'ca aksioma je Pa\v sova aksioma:
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+$\bett{A}{P}{C} \wedge \bett{B}{Q}{C} \longrightarrow (\exists X.\ (\bett{P}{X}{B} \wedge \bett{Q}{X}{A}))$
+\end{tabbing}
+}
+
+Pod pretpostavkom da su sve ta\v cke koje se pominju u aksiomi razli\v cite, slika koja odgovara aksiomi je:
+
+\begin{center}
+\input{ax_t_5.tkz}
+\end{center}
+
+Pre nego \v sto damo dokaz da u na\v sem modelu Dekartove koordinatne ravni va\v zi ova aksioma, \v zelimo da prodiskutujemo neka pitanja koja se odnose na geometriju Tarskog i koja su se pokazala va\v za za sveukupnu organizaciju na\v seg dokaza. Poslednja verzija aksiomatskog sistema Tarskog je napravljena da bude minimalna (sadr\v zi samo 11 aksioma), i centralne aksiome koje opisuju relaciju izme\d u su {\lat identity} relacije izme\d u i Pa\v sova aksioma. U formalizaciji geometrije Tarskog (\cite{narboux}) sva ostala elementarna svojstva ove relacije se izvode iz ove dve aksiome. Na primer, da bi se izvela simetri\v cnost relacije izme\d u (i.e.,
+$\bett{A}{B}{C} \longrightarrow \bett{C}{B}{A}$), aksioma Pa\v sa se primenjuje na trojke $ABC$ i $BCC$ i tada se dobija ta\v cka $X$ tako da va\v zi $\bett{C}{X}{A}$ i $\bett{B}{X}{B}$, i onda prema aksiomi 1, $X=B$ i $\bett{C}{B}{A}$. Ipak, prema na\v sem iskustvu, u nameri da poka\v zemo da je na\v sa Dekartova koordinatna ravan je model aksioma Tarskog (pogotovo za Pa\v sovu aksiomu), potrebno je da ve\' c imamo pokazane neke njene posledice (kao \v sto su simetri\v cnost i tranzitivnost). Jo\v s da dodamo, da su ranije varijante aksiomatskog sistema Tarskog imale vi\v se aksioma, a ova svojstva su upravo bile neke od tih dodatnih aksioma. Tako\d e, svojstvo simetrije je jednostavnije svojstvo nego Pa\v sova aksioma (na primer, ono uklju\v cuje samo ta\v cke koje le\v ze na liniji, dok u aksiomi Pa\v sa imamo ta\v cke koje le\v ze u ravni i ne moraju biti kolinerane). Dodatno, prethodni dokaz koristi veoma supstilna svojstva koja zavise od toga kako je Pa\v sova aksioma formulisana. Na primer, ako se u njenom zaklju\v cku koristi $\bett{B}{X}{P}$ i $\bett{A}{X}{Q}$ umesto $\bett{P}{X}{B}$ i $\bett{Q}{X}{A}$, onda dokaz ne mo\v ze da se izvede. Zato, mi smo odlu\v cili da bi dobar pristup bio da direktno poka\v zemo da neka elementarna svojstva (kao \v sto su simetrija, tranzitivnost) relacije izme\d u va\v ze u modelu, a onda da koristimo ove \v cinjenice u dokazu mnogo kompleksnije Pa\v sove aksiome.  
+
+{\tt
+\begin{tabbing}
+\hspace{5mm}\=\kill
+\>$\agbett{A}{A}{B}$\\
+\>$\agbett{A}{B}{C} \longrightarrow \agbett{C}{B}{A}$\\
+\>$\agbett{A}{X}{B}\ \wedge\ \agbett{A}{B}{Y} \longrightarrow \agbett{X}{B}{Y}$\\
+\>$\agbett{A}{X}{B}\ \wedge\ \agbett{A}{B}{Y} \longrightarrow \agbett{A}{X}{Y}$
+\end{tabbing}
+}
+
+
+
+
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,570 @@
+
+\paragraph{M\"obius action on oriented circlines.} On the
+representation level, the M\"obius action on an oriented circline is
+the same as on to an unoriented circline.  {\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lift\_definition} mobius\_o\_circline :: "mobius $\Rightarrow$ o\_circline $\Rightarrow$ o\_circline" {\bf is} \\
+\>mobius\_circline\_rep
+  \end{tabbing}
+}
+
+\noindent M\"obius action on (unoriented) circlines could have been
+defined using the action on oriented circlines, but not the other way
+around.  {\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} "\=mobius\_circline $M$ $H$ = $\ofocircline{(\mathtt{mobius\_o\_circline}\ M\ (\ofcircline{H}))}$"\\
+{\bf lemma} "l\=et \=$H_1$ = mobius\_o\_circline $M$ $H$; $H_2$ = $\ofcircline{(\mathtt{mobius\_circline}\ M\ (\ofocircline{H}))}$ \\
+\>in  $H_1$ = $H_2$ $\vee$ $H_1$ = $\oppocircline{H_2}$"
+  \end{tabbing}
+}
+
+\noindent M\"obius actions on oriented circlines have similar
+properties as M\"obius actions on unoriented ones. For example, they
+agree with inverse ({\tt {\bf lemma} "mobius\_o\_circline (mobius\_inv
+  $M$) = inv (mobius\_o\_circline $M$)"}), with composition, identity
+transformation, they are injective ({\tt inj mobius\_circline}), and so
+on. The central lemmas in this section connects the action of M\"obius
+transformations on points, on oriented circlines, and discs.
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} "\=mobius\_pt $M$ ` o\_circline\_set H = \\
+\>o\_circline\_set (mobius\_o\_circline $M$ $H$)"\\
+{\bf lemma} "\=mobius\_pt $M$ ` disc H = disc (mobius\_o\_circline $M$ $H$)"\\
+{\bf lemma} "\=mobius\_pt $M$ ` disc\_compl H = disc\_compl (mobius\_o\_circline $M$ $H$)"
+  \end{tabbing}
+}
+
+All Euclidean similarities preserve circline orientation.
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma}
+  assumes "$a$ $\neq$ $0$" "$M$ = similarity $a$ $b$" "$\infty_{hc}$ $\notin$ o\_circline\_set $H$"\\
+\>  shows "pos\_o\_circline $$H$$ $\longleftrightarrow$ pos\_o\_circline (mobius\_o\_circline $M$ $H$)"
+  \end{tabbing}
+}
+
+\noindent Orientation of the image of a given oriented circline $H$
+under a given M\"obius transformation $M$ depends on whether the pole
+of $M$ (the point that $M$ maps to $\infty_{hc}$) lies in the disc or
+in the disc complement of $H$ (if it is on the set of $H$, then it
+maps onto a line and we do not discuss the orientation).
+
+{\tt
+  \begin{tabbing}
+  \hspace{3mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma}\\
+\>"$0_{hc}$ $\in$ disc\_compl $H$ $\Longrightarrow$ pos\_o\_circline (mobius\_o\_circline reciprocation $H$)"\\
+\>"$0_{hc}$ $\in$ disc $H$ $\Longrightarrow$ $\neg$ pos\_o\_circline (mobius\_o\_circline reciprocation $H$)"\\
+{\bf lemma}\\
+\>assumes "$M$ = mk\_mobius a b c d" "c $\neq$ 0" "a*d - b*c $\neq$ 0"\\
+\>shows \="pole $M$ $\in$ disc $H$ $\longrightarrow$ $\neg$ pos\_o\_circline (mobius\_o\_circline $M$ $H$)"\\
+\>\>"pole $M$ $\in$ disc\_compl $H$ $\longrightarrow$ pos\_o\_circline (mobius\_o\_circline $M$ $H$)"
+  \end{tabbing}
+}
+
+\noindent Note that this is different to what is claimed by
+Schwerdtfeger \cite{schwerdtfeger}: ,,Reciprocation preserves the
+orientation of a circle which does not contain 0, but inverts the
+orientation of any circle containing 0 as an interior point. Every
+M\"obius transformation preserves the orientation of any circle that
+does not contain its pole. If circle contains its pole, then the image
+circle has its orientation opposite.''. Our formalization shows that
+the orientation of the resulting circles does not depend on the
+orientation of the initial one (e.g., in the case of reciprocation,
+the orientation of the initial circle shows the relative position of
+the circle and the infinite point that is determined by the sign of
+the coefficient $A$ in a representation matrix and that is independent
+issue of the relative position of the circle and the zero point that
+is determined by the sign of the coefficient $D$ --- these two
+coefficients are exchanged by reciprocation).
+
+\paragraph{Angle preservation.}
+M\"obius transformations are conformal, meaning that they preserve
+oriented angle between oriented circlines.  If angle is defined in
+purely algebraic terms (following Schwerdtfeger \cite{schwerdtfeger}),
+then this property is a very easy to prove. We also print the
+definition of a mixed determinant defined in our background theory of
+linear algebra. {\tt
+  \begin{tabbing}
+    \hspace{3mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf fun} mat\_det\_mix :: "C2\_mat $\Rightarrow$ C2\_mat $\Rightarrow$ complex" {\bf where}\\
+\> "mat\_det\_mix $(A_1, B_1, C_1, D_1)$ $(A_2, B_2, C_2, D_2)$ =\\
+\>\> $A_1*D_2 - B_1*C_2 + A_2*D_1 - B_2*C_1$"\\
+{\bf definition} cos\_angle\_rep {\bf where}\\
+\>  "cos\_angle\_rep $H_1$ $H_2$ = \=- Re (mat\_det\_mix $\Repcm{H_1}$ $\Repcm{H_2}$) / \\
+\> \> 2 * (sqrt (Re (mat\_det $\Repcm{H_1}$ * mat\_det $\Repcm{H_2}$))))"\\
+{\bf lift\_definition} cos\_angle :: "o\_circline $\Rightarrow$ o\_circline $\Rightarrow$ complex" {\bf is}\\
+\> cos\_angle\_rep\\
+{\bf lemma} "cos\_angle $H_1$ $H_2$ = \\
+\> cos\_angle (moebius\_o\_circline $M$ $H_1$) (moebius\_o\_circline $M$ $H\_2$)"
+  \end{tabbing}
+}
+
+However, this definition is not intuitive, and for pedagogical reasons
+we want to connect it to the more common definition. First, we define
+the angle between two complex vectors ($\downharpoonright \_
+\downharpoonleft$ denotes the angle normalization function described
+earlier). {\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf definition} ang\_vec ("$\measuredangle$") {\bf where} "$\measuredangle$ $z_1$ $z_2$ = $\downharpoonright$arg $z_2$ - arg $z_1$$\downharpoonleft$"    
+  \end{tabbing}
+}
+
+Given a center $\mu$ of an ordinary Euclidean circle and a point $z$ on
+it, we define the tangent vector in $z$ as the radius vector
+$\overrightarrow{\mu z}$, rotated by $\pi/2$, clockwise or
+counterclockwise, depending on the circle orientation.
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf definition} tang\_vec :: "complex $\Rightarrow$ complex $\Rightarrow$ bool $\Rightarrow$ complex" {\bf where}\\
+\>"tang\_vec $\mu$ $z$ $p$ = sgn\_bool $p$ * $i$ * ($z$ - $\mu$)"
+  \end{tabbing}
+}
+\noindent The Boolean $p$ encodes the orientation of the circle, and
+the function {\tt sgn\_bool $p$} returns $1$ when $p$ is true, and
+$-1$ for when $p$ is false. Finally, angle between two oriented
+circles at their common point $z$ is defined as the angle between
+tangent vectors at $z$.
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf definition} ang\_circ {\bf where}\\
+\> "ang\_circ $z$ $\mu_1$ $\mu_2$ $p_1$ $p_2$ = $\measuredangle$ (tang\_vec $\mu_1$ $z$ $p_1$) (tang\_vec $\mu_2$ $z$ $p_2$)"
+  \end{tabbing}
+}
+
+\noindent Finally, the connection between algebraic and geometric definition of
+angle cosine is given by the following lemma.
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} {\bf assumes} "is\_circle ($\ofocircline{H_1}$)" "is\_circle ($\ofocircline{H_2}$)"\\
+\>\>  "circline\_type ($\ofocircline{H_1}$) $< 0$" "circline\_type ($\ofocircline{H_2}$) $< 0$"\\
+\>\>  "($\mu_1$, $r_1$) = euclidean\_circle ($\ofocircline{H_1}$)"\\
+\>\>  "($\mu_2$, $r_2$) = euclidean\_circle ($\ofocircline{H_2}$)"\\
+\>\>  "of\_complex $z$ $\in$ o\_circline\_set H1 $\cap$ o\_circline\_set H2"\\
+\>{\bf shows} "\=cos\_angle $H_1$ $H_2$ = \\
+\>\>cos (ang\_circ $z$ $\mu_1$ $\mu_2$ (pos\_o\_circline $H_1$) (pos\_o\_circline $H_2$))"
+  \end{tabbing}
+}
+\noindent To prove this lemma we needed to show the law of cosines in
+Isabelle/HOL, but it turned out to be a very easy task.
+
+\subsection{Some Important Subgroups of M\"obius Transformations}
+\label{subsec:classification}
+
+We have already described the parabolic group (the group of Euclidean
+similarities), crucial for the Euclidean plane geometry. Now we will
+describe characterizations of two very important subgroups of the
+M\"obius group --- the group of sphere rotations, important for the
+elliptic plane geometry, and the group of disc automorphisms important
+for the hyperbolic plane geometry.
+
+\paragraph{Sphere rotations.}
+General unitary group, denoted by $GU_2(\mathbb{C})$ is the group that
+contains all M\"obius transformations represented by generalized
+unitary matrices.  {\tt
+  \begin{tabbing}
+    \hspace{3mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf definition} unitary\_gen {\bf where}\\
+\>"unitary\_gen $M$ $\longleftrightarrow$ $(\exists$ $k$::complex. $k \neq 0$ $\wedge$ mat\_adj $M *_{mm} M$ = $k$ $*_{sm}$ eye$)$"
+  \end{tabbing}
+}
+
+\noindent Although the definition allows any complex factor $k$, it
+turns out that $k$ can only be real. Generalized unitary matrices can
+be factored into ordinary unitary matrices and positive multiples of
+the identity matrix.
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf definition} unitary {\bf where} "unitary $M$ $\longleftrightarrow$ mat\_adj $M *_{mm} M$ = eye"\\
+{\bf lemma} "unitary\_gen $M$ $\longleftrightarrow$ \\
+\> $($$\exists\ k\ M'$. $k > 0$ $\wedge$ unitary $M'$ $\wedge$ $M$ = (cor $k$ $*_{sm}$ eye) $*_{mm}$ $M'$)"
+  \end{tabbing}
+}
+
+The group of unitary matrices is very important as it describes all
+rotations of the Riemann sphere (it is isomorphic to the real special
+orthogonal group $SO_3(\mathbb{R})$). One characterization of
+$GU_2(\mathbb{C})$ in $\extC$ is that it is a group of transformations
+that leave the imaginary unit circle fixed (this is the circle with
+the identity representation matrix, contained in the plane at
+infinity).
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} "mat\_det $(A, B, C, D)$ $\neq 0$ $\Longrightarrow$ unitary\_gen ($A$, $B$, $C$, $D$)  $\longleftrightarrow$\\
+\>moebius\_circline (mk\_moebius $A$ $B$ $C$ $D$) imag\_unit\_circle = \\
+\>imag\_unit\_circle"
+  \end{tabbing}
+}
+
+
+The characterization of generalized unitary matrices in coordinates is
+given by the following lemma.  {\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} "unitary\_gen M $\longleftrightarrow$ $($$\exists$ $a$ $b$ $k$.\ let $M' = (a,\,b,\,-\mathtt{cnj}\ b,\,\mathtt{cnj}\ a)$ in \\
+\>$k \neq 0$ $\wedge$ mat\_det $M' \neq 0$ $\wedge$ $M = k *_{sm} M'$$)$"
+  \end{tabbing}
+}
+
+Along the way we have also defined the special unitary group
+$SU_2(\mathbb{C})$, containing generalized unitary matrices with unit
+determinant (they are recognized by the form $(a,\,b,\,-\mathtt{cnj}\
+b,\,\mathtt{cnj}\ a)$, without the multiple $k$, and we used this to
+derive the coordinate form of generalized unitary matrices).
+
+\paragraph{Disc automorphisms.}
+A dual group to the previous one is the group of generalized unitary
+matrices with the $1-1$ signature ($GU_{1,1}(\mathbb{C})$).
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf definition} unitary11 {\bf where}\\
+\>"unitary11 $M$ $\longleftrightarrow$ mat\_adj $M *_{mm} (1, 0, 0, -1) *_{mm} M = (1, 0, 0, -1)$"\\
+{\bf definition} unitary11\_gen {\bf where}\\
+\>"unitary11\_gen $M$ $\longleftrightarrow$ $(\exists$ $k$::complex. $k \neq 0$ $\wedge$\\
+\>\>mat\_adj $M$ $*_{mm} (1, 0, 0, -1) *_{mm}$ $M$ = $k$ $*_{sm}$ $(1, 0, 0, -1)$$)$"
+  \end{tabbing}
+}
+\noindent Again, the definition allows a complex factor $k$, but it is
+shown that only real factors are plausible.
+
+A characterization of the $GU_{1,1}(\mathbb{C})$ is that it contains
+all M\"obius transformations that leaves the unit circle fixed.
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} "mat\_det $(A, B, C, D)$ $\neq 0$ $\Longrightarrow$ unitary11\_gen ($A$, $B$, $C$, $D$)  $\longleftrightarrow$\\
+\>moebius\_circline (mk\_moebius $A$ $B$ $C$ $D$) unit\_circle = unit\_circle"
+  \end{tabbing}
+}
+
+The characterization of generalized unitary 1-1 matrices in coordinates is given by the following lemmas.
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} "unitary11\_gen $M$ $\longleftrightarrow$ $($$\exists$ $a$ $b$ $k$. let $M' = (a,\,b,\,\mathtt{cnj}\ b,\,\mathtt{cnj}\ a)$ in \\
+\> $k \neq 0$ $\wedge$ mat\_det $M' \neq 0$ $\wedge$ $(M = k *_{sm} M'$ $\vee$ $M = k *_{sm} (\mathtt{cis}\ pi,\,0,\,0,\,1) *_{sm} M'$$))$\\
+{\bf lemma} "unitary11\_gen M $\longleftrightarrow$ $($$\exists$ $a$ $b$ $k$. let $M' = (a,\,b,\,\mathtt{cnj}\ b,\,\mathtt{cnj}\ a)$ in \\
+\> $k \neq 0$ $\wedge$ mat\_det $M' \neq 0$ $\wedge$ $M = k *_{sm} M'$ $)$"
+  \end{tabbing}
+}
+\noindent Note that the first lemma is subsumed by the second
+one. However, the first lemma was simpler to prove, and gives matrices
+of another shape $k *_{sm} (a,\,b,\,-{\tt cnj}\ b,\, -{\tt cnj}\ a)$
+--- geometrically, the second kind of transformation combines the
+first kind with an additional central symmetry.
+
+Another important characterization of these transformations is via
+so-called Blaschke factors. Each transformation is a composition of a
+Blaschke factor (a reflection that brings some point that is not on
+the unit circle to zero), and a rotation.
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} \={\bf assumes} \="$k \neq 0$" "$M' = (a,\,b,\,\mathtt{cnj}\ b,\,\mathtt{cnj}\ a)$"\\
+\>\>"$M = k *_{sm} M'$" "mat\_det $M' \neq 0$" "$a \neq 0$"\\
+\hspace{5mm}\=\kill
+\>{\bf shows} "\=$\exists$ $k'$ $\phi$ $a'$. $k' \neq 0$ $\wedge$ $a' * \mathtt{cnj}\ a' \neq 1$ $\wedge$\\
+\>\> $M = k' *_{sm} (\mathtt{cis}\ \phi,\,0,\,0,\,1) *_{mm} (1,\,-a',\,-\mathtt{cnj}\ a',\,1)$"
+  \end{tabbing}
+}
+\noindent The exceptions come when $a=0$ and then instead of the Blaschke
+factor, a reciprocation is used (the infinity plays the role of $a'$
+in the previous lemma).  {\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} \={\bf assumes} \="$k \neq 0$" "$M' = (0,\,b,\,\mathtt{cnj}\ b,\,0)$" "$b \neq 0$" "$M = k *_{sm} M'$" \\
+\>{\bf shows} "\=$\exists$ $k'$ $\phi$. $k' \neq 0$ $\wedge$ $M = k' *_{sm} (\mathtt{cis}\ \phi,\,0,\,0,\,1) *_{mm} (0,\,1,\,1,\,0)$"
+  \end{tabbing}
+}
+
+Matrices of $GU_{1,1}(\mathbb{C})$ naturally split into two
+subgroups. All transformations fix the unit circle, but the first
+subgroup consists of transformations that map the unit disc to itself
+(so called \emph{disc automorphisms}), while the second subgroup
+consists of transformations that exchange the unit disc and its
+complement. Given a matrix, its subgroup can be determined only on by
+looking at the sign of the determinant of $M' = (a,\,b,\,\mathtt{cnj}\
+b,\,\mathtt{cnj}\ a)$. If only $M = (a_1, b_1, c_1, d_1)$, and not
+$M'$ nor $k$ is given, a criterion to determine the subgroup is the
+value of $\mathtt{sgn} (\mathtt{Re}\ ((a_1*d_1)/(b_1*c_1)) - 1)$.
+
+Note that all the important subgroups are here described only in pure
+algebraic terms. We have also formalized some more geometric proofs
+resulting in equivalent characterization to these we have just
+described. Additionally, it holds that all analytic disc automorphisms
+are compositions of Blaschke factors and rotations (however, the
+proofs relies on mathematical analysis, maximum modulus principle, and
+the Swartz lemma --- techniques that we did not consider). Even weaker
+statement, that all M\"obius disc automorphisms are of this form has
+not yet been formally proved (the crucial step is showing that disc
+automorphisms fix the unit circle, and that is something that we did
+not manage to do without deep topological investigations that we are
+currently working on).
+
+\section{Discussion}
+\label{sec:discuss}
+Visual, geometric arguments are often used in textbook proofs. As an
+example, we will demonstrate one proof of the angle preservation
+property of M\"obius transformations often encountered in textbooks on
+the subject (in the rest of this section we will follow Needham
+\cite{needham} which does not aim to be a very formal book, but,
+still, that kind of reasoning is common for many other authors).
+
+First important issue is the notion of angle. Angles can be defined
+between oriented, or unoriented curves and angles themselves can be
+oriented or unoriented. Needham defines angles between two curves in
+the following way: ,,Let $S_1$ and $S_2$ be curves intersecting at
+$z$. As illustrated, we may draw their tangent lines $T_1$ and $T_2$
+at $z$. The angle between curves $S_1$ and $S_2$ at their common point
+$z$ is the acute angle $\alpha$ from $T_1$ to $T_2$. Thus this angle
+$\alpha$ has a sign attached to it: the angle between $S_2$ and $S_1$
+is minus the illustrated angle between $S_1$ and $S_2$.'' So, the
+angle is defined only between unoriented curves (and that is different
+from our definition), but the angle itself is oriented (and that is the
+same as in our final definition). In our early formalization we have
+defined and used the unoriented convex and the acute angle between two
+vectors.
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf definition} "$\measuredangle_c$" {\bf where} "$\measuredangle_c$ $z_1$ $z_2$ $\equiv$ abs ($\measuredangle$ $z_1$ $z_2$)"\\
+{\bf definition} acutize {\bf where} "acutize $\alpha$ = (if $\alpha$ $>$ $\frac{\pi}{2}$ then $\pi$ - $\alpha$ else $\alpha$)"\\
+{\bf definition} "$\measuredangle_a$" {\bf where} "$\measuredangle_a$ $z_1$ $z_2$ $\equiv$ acutize ($\measuredangle_c$ $z_1$ $z_2$)"
+  \end{tabbing}
+}
+
+As our circles were oriented from the beginning, we have shown that the
+acute angle between the two circles is not affected by the orientation
+and can only be expressed in terms of three points (the intersection
+point and the two centers).
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} "$\lbrakk z \neq \mu_1$;$z \neq \mu_2\rbrakk$ $\Longrightarrow$ ang\_circ\_a $z$ $\mu_1$ $\mu_2$ $p_1$ $p_2$ = $\measuredangle_a\ (z - \mu_1)\ (z - \mu_2)$"
+\end{tabbing}
+}
+\noindent The function {\tt ang\_circ\_a} was defined as the acute
+angle between the two tangent vectors (similar to {\tt ang\_circ} in
+our final formalization).
+
+The angle preservation proof for M\"obius transformations in the
+textbook \cite{needham} relies on the fact that each M\"obius
+transformation can be decomposed to translations, rotation,
+dilatation, and inversion. The fact that translations, rotations, and
+dilatations preserve angles is taken for granted (and, to be honest,
+formalizing this was rather simple, once the underlying notions were
+appropriately formally defined). Therefore, the central challenge is
+to show that inversion preserves angles, i.e., that ,,Inversion in a
+circle is an anticonformal mapping''. The proof relies on the ,,fact
+that given any point $z$ not on the inversion circle $K$, there is
+precisely one circle orthogonal to $K$ that passes through $z$ in any
+given direction''. Then the proof proceeds ,,Suppose that two curves
+$S_1$ and $S_2$ intersect at $z$, and that their tangents there are
+$T_1$ and $T_2$, the angle between them being $\alpha$. To find out
+what happens to this angle under inversion in $K$, let us replace
+$S_1$ and $S_2$ with the unique circles $R_1$ and $R_2$ orthogonal to
+$K$ that pass through $z$ in the same directions as directions $S_1$
+and $S_2$, i.e., circles whose tangents at $z$ are $T_1$ and
+$T_2$. Since inversion in $K$ maps each of these circles to
+themselves, the new angle at $\tilde{z}$ is $-\alpha$. Done.''
+
+In our earlier attempts, we have formalized this ,,proof'', but this
+required tremendous amount of effort, compared to the sleek algebraic
+proof in our final formalization. First, the textbook is often
+imprecise in whether it deals with ,,complex inversion'' or
+,,geometric inversion'' (i.e., between the reciprocation and the
+inversion put in our terms). In the textbook proof, the author uses
+inversion over any circle $K$, but it is sufficient to consider only
+the reciprocation (always given over the unit circle).  Formalizing
+the textbook reasoning only for the reciprocation already gave quite
+large formulas, and it would be even more complicated and tedious (if
+not impossible) to finish proof using inversion over arbitrary
+circle. For example, a simple reciprocation of a circle with a center
+$\mu$ and radius $r$ gives a circle with the center $\tilde{\mu} = \mu
+/ \mathtt{cor}\ (|\mu|^2 - r^2)$, and radius $\tilde{r} = r / ||\mu|^2
+- r^2|$, and this relationship would be much more complex for an
+arbitrary M\"obius transformation, if it was written in coordinates,
+without using matrix notation as we did in our main formalization.
+
+
+The formal text of the angle preservation statement was the following.
+
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma } \\
+ \> {\bf assumes} \= "$z$ $\in$ circle $\mu_1$ $r_1$" "$z$ $\in$ circle $\mu_2$ $r_2$"  \\
+  \>               \> "inv ` circle $\mu_1$ $r_1$ = circle $\tilde{\mu_1}$ $\tilde{r_1}$"   \\
+  \>               \> "inv ` circle $\mu_2$ $r_2$ = circle $\tilde{\mu_2}$ $\tilde{r_2}$"\\
+  \> {\bf shows} "ang\_circ\_a $z$ $\mu_1$ $\mu_2$ = ang\_circ\_a $\tilde{z}$ $\tilde{\mu_1}$ $\tilde{\mu_2}$"
+  \end{tabbing}
+}
+
+Apart from missing discussion of many special cases, the informal
+proof misses one key ingredient. Namely, it is easy to prove that the
+intersection of $R_1$ and $R_2$ is $\tilde{z}$ (the intersection of
+$\tilde{S_1}$ and $\tilde{S_2}$, the images of $S_1$ and $S_2$ under
+inversion), but showing that $R_1$ and $\tilde{S_1}$ and that $R_2$
+and $\tilde{S_2}$ share tangents at $\tilde{z}$ required not so
+trivial calculations (that proof relies on the fact that center
+$\mu_i'$ of $R_i$, the center $\tilde{\mu_i}$ of $\tilde{S_i}$, and
+$\tilde{z}$ are collinear).
+
+Simple symmetry argument showing that the angles between the circles
+in their two different intersection points are the same was again not
+so simple to formalize.
+{\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} {\bf assumes} \="$\mu_1$ $\neq$ $\mu_2$" "$r_1$ $>$ 0" "$r_2$ $>$ 0"\\
+\>"$\{z_1, z_2\}$ $\subseteq$ circle $\mu_1$ $r_1$ $\cap$ circle $\mu_2$ $r_2$" "$z_1$ $\neq$ $z_2$" \\
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+  \> {\bf shows} "ang\_circ\_a $z_1$ $\mu_1$ $\mu_2$ = ang\_circ\_a $z_2$ $\mu_1$ $\mu_2$"
+  \end{tabbing}
+}
+\noindent We have shown this lemma only after employing ,,wlog''
+reasoning and moving the configuration so that the centers of the two
+circles are on the x-axis.
+
+In the proof, we have found many degenerate cases that had to be
+analyzed separately. First, we had to prove that intersecting circles
+can share the same center (i.e., that $\mu_1$$\neq$$\mu_2$) only if
+they are the same, and then the acute angle between tangents is $0$.
+If the two centers are collinear with the intersection point $z$ (i.e.,
+if {\tt collinear $\mu_1$ $\mu_2$ $z$} holds), the two circles touch
+(either from inside or from the outside), and again the acute angle is
+$0$.
+
+Existence of the circle $R_i$ orthogonal to the unit circle, sharing
+the same tangent in the given point $z$ with the given circle centered
+in the given point $\mu_i$ is given by the following lemma
+(determining its center $\mu_i'$).  {\tt
+  \begin{tabbing}
+    \hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\hspace{5mm}\=\kill
+{\bf lemma} \\
+\> {\bf assumes} \="$\langle$$\mu_i$ - $z$, $z$$\rangle$ $\neq 0$"\\
+\>\> "$\mu_i'$ = $z$ + (1 - $z$*$\mathtt{cnj}\ z$) * ($\mu_i$ - $z$) / $(2 * \langle$$\mu_i$ - $z$, $z$$\rangle$)"\\
+  \> {\bf shows} "collinear $z$ $\mu_i$ $\mu_i'$" "$z$ $\in$ ortho\_unit\_circ $\mu'_i$" \\
+  \end{tabbing}
+}
+\noindent The analytic expressions reveal some other degenerate cases.
+The numerator of the fraction can be zero only when the circles
+intersect on the unit circles (i.e., when $z*\mathtt{cnj}\ z = 1$). In
+that case, the textbook proof cannot be adapted, as $\mu_1' = \mu_2' =
+z$, and the circles $R_1$ and $R_2$ cannot not be constructed (they
+are the empty circles). The case when denominator is zero (either for
+$\mu_1'$ or $\mu_2'$) is also degenerate. That happens when vectors
+$\mu_i - z$ and $z$ are orthogonal. Geometrically, in that case the
+circle $R_i$ degenerates into a line (what is not a problem in the
+extended complex plane, but is a problem in the original proof set in
+the ordinary complex plane). Therefore, this special case had to be
+handled separately. So, our formal analysis quickly shows that the
+simple statement in Needham that ,,given any point $z$ not on the
+inversion circle $K$, there is precisely one circle orthogonal to $K$
+that passes through $z$ in any given direction'' is not true in many
+cases.
+
+\section{Conclusions and Further Work}
+\label{sec:concl}
+In this paper we have described some elements of our formalization of
+the geometry of the complex plane $\extC$ both as complex projective
+line and the Riemann sphere, arithmetic operations in $\extC$, ratio
+and cross-ratio, chordal metric in $\extC$, the group of M\"obius
+transformations and their action on $\extC$, some of its special
+subgroups (Euclidean similarities, sphere rotations, disk
+automorphisms), circlines and their connection with circles and lines,
+the chordal metric, and the Riemann sphere, M\"obius action of
+circlines, circline uniqueness, circline types and set cardinality,
+oriented circlines, relations between M\"obius transformations and the
+orientation, angle preservation properties of M\"obius
+transformations, etc. Our current development counts around 12,000
+lines of Isabelle/HOL code (all proofs are structured and written in
+the proof language Isabelle/Isar, and our early attempts that are
+subsumed by shorter algebraic proofs are not included), around 125
+definitions and around 800 lemmas.
+
+The crucial step in our formalization was our decision to use the
+algebraic representation of all relevant objects (vectors of
+homogeneous coordinates, matrices for M\"obius transformations,
+Hermitean matrices for circlines, etc.). Although this is not a new
+approach (for example, Schwerdtfeger's classic book
+\cite{schwerdtfeger} follows this approach quite consistently), it is
+not so common in the literature (and in the course material available
+online). Instead, other, more geometrically oriented approaches
+prevail. We have tried to follow that kind of geometric reasoning in
+our early work on this subject, but we have encountered many
+difficulties and did not have so much success. Based on this
+experience, we conclude that introducing the powerful techniques of
+linear algebra, makes the work on formalization an order of magnitude
+simpler then when using just plain geometric reasoning.
+
+It can be argued that sometimes geometrical arguments give better
+explanations of some theorems, but when only justification is
+concerned, the algebraic approach is clearly superior. However, to
+keep the connection with the standard, geometric intuition, several
+definitions must be introduced (more geometric, and more algebraic
+ones) and they must be proved equivalent. For example, when the
+definition of angles is given only through algebraic operations on
+matrices and their determinants, the angle preservation property is
+very easy to prove, but for educational purposes, this becomes
+relevant only when that definition is connected with the standard
+definition of angle between curves (i.e., their tangent vectors) ---
+otherwise, the formalization becomes a game with meaningless symbols.
+
+Another important conclusion that we make is that in formal documents,
+case analysis should be avoided and extensions that help avoiding it
+should be pursued whenever possible (e.g., it was much better to use
+the homogeneous coordinates instead of a single distinguished infinity
+point, it was much simpler to work with circlines then to distinguish
+between circles and lines, etc.). Keeping different models of the same
+concept (for example, in our case, homogeneous coordinates and the
+Riemann sphere) also helps, as some proofs are easier in one, and some
+proofs are easier in other models.
+
+In principle, our proofs are not long (15-20 lines in
+average). However, some tedious reasoning was sometimes required,
+especially when switching between real and complex numbers (by the
+conversion functions {\tt Re} and {\tt cor}). These conversion are
+usually not present in informal texts and some better automation of
+reasoning about these functions would be welcome. Isabelle's
+automation was quite powerful in equational reasoning about ordinary
+complex numbers using {\tt (simp add: field\_simps)} (with some minor
+exceptions), but in the presence of inequalities, the automation was
+not so good and we had to prove many things manually, that would be
+considered trivial in informal texts.
+
+In our further work we plan to use these results for formalizing
+non-Euclidean geometries and their models (especially, spherical model
+of the elliptic geometry and the Poincar\'e disc and upper half-plane
+models of hyperbolic geometry).
+
+
+\acknowledgement{The authors are grateful to Pascal Schreck, Pierre
+  Boutry, and Julien Narboux for many valuable suggestions and
+  advice.}
+
+\bibliography{moebius}{}
+\bibliographystyle{plain}
+
+\end{document}

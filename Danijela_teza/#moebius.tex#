@@ -1,0 +1,11 @@
+
+
+
+\acknowledgement{The authors are grateful to Pascal Schreck, Pierre
+  Boutry, and Julien Narboux for many valuable suggestions and
+  advice.}
+
+\bibliography{moebius}{}
+\bibliographystyle{plain}
+
+\end{document}

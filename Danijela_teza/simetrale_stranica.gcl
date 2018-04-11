@@ -1,0 +1,32 @@
+number XSIZE 100
+number YSIZE 50
+dim XSIZE YSIZE
+
+point C 30 40
+point A 20 10
+point B 70 10
+
+cmark A
+cmark B
+cmark C
+
+drawsegment A B
+drawsegment A C
+drawsegment B C
+
+med l1 A B
+med l2 B C
+
+drawline l1
+drawline l2
+
+intersec O l1 l2
+
+cmark O
+
+printat_lb A {A(0, 0)}
+printat_rb B {B(b^x, 0)}
+printat_t C {C(c^x, c^y)}
+
+printat_l O {O_1(o^x_{1}, o^y_{1})}
+printat_r O {O_2(o^x_{2}, o^y_{2})}

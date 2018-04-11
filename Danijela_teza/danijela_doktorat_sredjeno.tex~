@@ -1,0 +1,239 @@
+% Format teze zasnovan je na paketu memoir
+% http://tug.ctan.org/macros/latex/contrib/memoir/memman.pdf ili
+% http://texdoc.net/texmf-dist/doc/latex/memoir/memman.pdf
+% Podešava se veličina papira, veličina slova i jednostrano štampanje
+% Ne menjati ove parametre
+\documentclass[a4paper,12pt,oneside]{memoir}
+
+% Paket koji definiše sve specifičnosti doktorata Matematičkog fakulteta
+\usepackage{matfdoktorat}
+\usepackage{presek_reci}
+
+
+% Datoteka sa literaturom u BibTex tj. BibLaTeX/Biber formatu
+\bib{danijela_doktorat}
+
+% Ime doktoranda na srpskom jeziku (u odabranom pismu)
+\autor{Данијела Симић}
+% Ime doktoranda na engleskom jeziku
+\author{Danijela Simic}
+% Naslov teze na srpskom jeziku (u odabranom pismu)
+\naslov{Формализација различитих модела геометрије и примене у верификацији аутоматских доказивача теорема}
+% Naslov teze na engleskom jeziku
+\title{Formalization of different geometry models and applications in verification of automated theorem provers}
+% Godina u kojoj je teza predana komisiji
+\godina{2015}
+% Ime i afilijacija mentora (u odabranom pismu)
+\mentor{др Филип \textsc{Марић}, ванредни професор\\ Универзитет у Београду, Математички факултет}
+% Ime i afilijacija prvog člana komisije (u odabranom pismu)
+\komisijaA{др Предраг Јаничић \textsc{Јаничић}, редовни професор\\ Универзитет у Београду, Математички факултет}
+% Ime i afilijacija drugog člana komisije (u odabranom pismu)
+\komisijaB{др Срђан Вукмировић \textsc{Вумировић}, ванредни професор\\ Универзитет у Београду, Математички факултет}
+% Ime i afilijacija trećeg člana komisije (opciono)
+\komisijaC{др Петар Максимовић \textsc{Максимовић}, ? \\ ?}
+% Ime i afilijacija četvrtog člana komisije (opciono)
+% \komisijaD{}
+% Datum odbrane (obrisati ili iskomentarisati narednu liniju ako datum odbrane nije poznat)
+%\datumodbrane{15. јануар 2016.}
+
+% Apstrakt na srpskom jeziku (u odabranom pismu)
+\apstr{% 
+
+У овој тези представљена је интерактивна формализација модела разних
+геометрија и алгебарских метода аутоматског доказивања геометријских
+теорема.
+ 
+Представљен наш рад на формализацији аналитичке (Декартове) планарне
+геометрије у оквиру асистента за доказивање теорема
+\emph{Isabelle/HOL}. Дајемо неколико еквивалентних дефиниција
+Декартове координатне равни и доказујемо да је она модел ситетичких
+планарних геометрија (коришћем аксиоматског система Тарског и
+аксиоматског система Хилберта). Такође, дискутујемо о неколико техника
+којима се поједностављују и аутоматизују докази. Како је један од
+наших циљева да подржимо коришћење асистената за доказивање теорема у
+математичком образовању, наше излагањe ће бити блиско стандардним
+дефиницијама у уџбеницима, али потпуно формално и машински
+провериво. Ова формализација представља део потребне инфраструктуре за
+имплементацију процедура одлучивања базираних на аналитичкој
+геометрији у оквиру асистената за доказивање теорема.
+
+Додатно, формално разматрамо и геометрију комплексне равни. Блиска
+повезаност између комплексних бројева и геометрије је добро позната и
+пажљиво је изучавана још вековима уназад. Основни објекти који су
+изучавани су комплексна раван (обично проширена са једном бесконачном
+тачком), њени објекти (тачке, праве и кругови), и група трансформација
+која на њих делује (на пример, иневрзије и Мебијусове
+трансформације). У овој тези, ми формално посмтрамо геометрију
+комплексних бројева и представаљамо потпуно механички верификовану
+теорију у овиру асистента за доказивање теорема
+\emph{Isabelle/HOL}. Дискутујемо о различитим приступима формализацији
+и главним предностима приступа који је више алгебарски
+оријентисан. Поред примена у формализације математике и у образовању,
+овај рад је основа за формалну анализу нееуклидских геометрија и
+њихове међусобне повезаности. Такође, представљамо и формализацију
+дела аксиоматског система Тарског у овиру Поинкареовог диск модела у
+систему \emph{Isabelle/HOL}.
+
+Треће, анализирамо везу између геометрије и полинома и примене која
+ова веза даје. У Еуклидској геометрији објекти и релације међу њима
+могу се изразити полиномиијалним једнакостима. Додатно, било која
+геометријска конструкција може се изразити скупом полиномијалних
+једнакости, а геометријска тврђења се могу доказати коришћењем
+алгебарских метода (на пример, метод Гребнерових база или Вуовом
+методом) над скупом полинома. Описујемо опис алгоритма у систему
+\emph{Isabelle/HOL} који као улазни податак прихвада геометријску
+конструкцију записану коришћењем термова, а враћа одговарајући скуп
+полинома. Наш даљи рад ће бити примена методе Гребнерових база у
+оквиру система \emph{Isabelle/HOL} над генерисаним полиномима у намери
+да се докаже исправност дате конструкције. Додатно, истражујемо како
+се конструкције у тродимензионалном простору могу приказати коришћењем
+полинома. Истражујемо два различита приступа у извођењу ових полинома
+и онда поредимо ефикасност алгебарских метода у зависности од
+коришћеног приступа. Представљамо потпуно аутоматски систем за
+превођење геометријских конструкција из стереометрије у скуп
+полинома. Наш даљи рад ће бити да повежемо представљени систем са
+динамичким геометријским софтвером и на тај начин да омогућимо
+студентима лакше коришћење овог аутоматизованог система за доказивање
+у стереометрији.}
+
+% искоментарисати енглески
+% Apstrakt na engleskom jeziku
+\abstr{In this thesis is present our current work on formalizing
+  analytic (Cartesian) plane geometries within the proof assistant
+  Isabelle/HOL. We give several equivalent definitions of the
+  Cartesian plane and show that it models synthetic plane geometries
+  (using both Tarski's and Hilbert's axiom systems). We also discuss
+  several techniques used to simplify and automate the proofs. As one
+  of our aims is to advocate the use of proof assistants in
+  mathematical education, our exposure tries to remain simple and
+  close to standard textbook definitions. Our other aim is to develop
+  the necessary infrastructure for implementing decision procedures
+  based on analytic geometry within proof assistants.  Furthermore, we
+  investigate complex numbers. Deep connections between complex
+  numbers and geometry had been well known and carefully studied
+  centuries ago. Fundamental objects that are investigated are the
+  complex plane (usually extended by a single infinite point), its
+  objects (points, lines and circles), and groups of transformations
+  that act on them (e.g., inversions and M\"obius transformations). In
+  this paper we treat the geometry of complex numbers formally and
+  present a fully mechanically verified development within the theorem
+  prover Isabelle/HOL. We discuss different approaches to
+  formalization and discuss the major advantages of the more
+  algebraically oriented approach. Apart from applications in
+  formalizing mathematics and in education, this work serves as a
+  ground for formally investigating various non-Euclidean geometries
+  and their intimate connections. We also presented a formalization of
+  Tarski axiom system withing Poincare disk model in Isabelle/HOL.
+  Further on, we analyze connections between geometry and polynomials
+  and the use of these connections. In Euclidean geometry objects and
+  relations between them can be expressed as polynomials.  Further,
+  any geometry construction can be expressed by set of polynomials and
+  geometry statements can be proved by using algebraic methods
+  (e.g. the Gr\"obner bases method or Wu's method) over that set of
+  polynomials. We describe an implementation of an algorithm in
+  Isabelle/HOL that accepts a term representation of a geometry
+  construction and returns its corresponding set of polynomials. Our
+  further work will be to use the method of Gr\"obner bases within
+  Isabelle system on the generated polynomials, in order to prove
+  correctness of the given construction.  Furthermore, we investigate
+  how solid geometry constructions can be presented using
+  polynomials. We investigate two different approaches in deriving
+  those polynomials and then we compare efficiency of algebraic
+  provers depending on the approach used. We present a fully automated
+  system for transforming geometry constructions into the set of
+  polynomials. Our further work would be to connect these geometry
+  provers with dynamic geometry software and thus made easier for
+  students to use it.  }
+
+% Ključne reči na srpskom jeziku (u odabranom pismu)
+\kljucnereci{асистент за доказивање теорема, геометрија, интерактивно
+  доказивање у геометрији, аутоматско доказивање у геометрији,
+  хиперболичка геометрија, стереометрија, аксиоматски систем Тарског,
+  аксиоматски систем Хилберта, Декартов координатни систем}
+
+% Ključne reči na engleskom jeziku
+\keywords{proof assistants, geometry, interactive proving in geometry,
+  automated proving in geometry, hyperbolic geometry, solid geometry,
+  Tarski axiom system, Hilbert axiom system, Cartesian coordinate
+  system}
+
+% Šira i uža oblast teze na srpskom jeziku (u odabranom pismu)
+\oblast{рачунарство}
+\uzaoblast{аутоматско резоновање}
+
+% Šira i uža oblast teze na engleskom jeziku
+\area{computer science}
+\subarea{automated reasoning}
+
+% Univerzalna decimalna klasifikacija (UDK tj. UDC)
+% https://en.wikipedia.org/wiki/Universal_Decimal_Classification
+\udk{?}
+
+%!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! ukljucujem sta meni treba
+\usepackage{moji_paketi}
+
+\begin{document}
+% ==============================================================================
+% Uvodni deo teze
+\frontmatter
+% ==============================================================================
+% Naslovna strana
+\naslovna
+% Naslovna strana na engleskom jeziku
+\naslovnaen
+% Strana sa podacima o mentoru i članovima komisije
+\komisija
+% Strana sa posvetom (u odabranom pismu)
+\posveta{родитељима, Милијани и Драгану Петровићу}
+% Strana sa podacima o disertaciji na srpskom jeziku
+\apstrakt
+% Strana sa podacima o disertaciji na engleskom jeziku
+\apstrakten
+% Sadržaj teze
+\tableofcontents*
+
+% ==============================================================================
+% Glavni deo teze
+\mainmatter
+% ==============================================================================
+
+%\input{prevod_adg}
+%\input{prevod_sci}
+
+\input{Glava_1_Uvod}
+\input{Glava_2_dokazivaci_teorema}
+\input{Glava_3_pregled_oblasti}
+\input{Glava_4_analiticka_geometrija}
+\input{Glava_5_hiperbolicka_geometrija}
+\input{Glava_6_stereometrija}
+\input{Glava_7_zakljuci}
+
+
+% ------------------------------------------------------------------------------
+% Literatura
+% ------------------------------------------------------------------------------
+\literatura
+
+% ==============================================================================
+% Završni deo teze i prilozi
+\backmatter
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+% Biografija doktoranda
+\begin{biografija}
+Ovde pisem svoju biografiju.
+\end{biografija}
+% ------------------------------------------------------------------------------
+
+
+% Prilog 1: Izjava o autorstvu
+\includepdf{_Prilog1.pdf}
+% Prilog 2: Izjava o istovetnosti štampane i elektronske verzije doktorskog rada
+\includepdf{_Prilog2.pdf}
+% Prilog 3: Izjava o korišćenju
+\includepdf{_Prilog3.pdf}
+
+\end{document} 
+
+

@@ -1,0 +1,85 @@
+
+
+\section{Conclusions and Further Work}
+\label{sec:concl}
+In this paper we have described some elements of our formalization of
+the geometry of the complex plane $\extC$ both as complex projective
+line and the Riemann sphere, arithmetic operations in $\extC$, ratio
+and cross-ratio, chordal metric in $\extC$, the group of M\"obius
+transformations and their action on $\extC$, some of its special
+subgroups (Euclidean similarities, sphere rotations, disk
+automorphisms), circlines and their connection with circles and lines,
+the chordal metric, and the Riemann sphere, M\"obius action of
+circlines, circline uniqueness, circline types and set cardinality,
+oriented circlines, relations between M\"obius transformations and the
+orientation, angle preservation properties of M\"obius
+transformations, etc. Our current development counts around 12,000
+lines of Isabelle/HOL code (all proofs are structured and written in
+the proof language Isabelle/Isar, and our early attempts that are
+subsumed by shorter algebraic proofs are not included), around 125
+definitions and around 800 lemmas.
+
+The crucial step in our formalization was our decision to use the
+algebraic representation of all relevant objects (vectors of
+homogeneous coordinates, matrices for M\"obius transformations,
+Hermitean matrices for circlines, etc.). Although this is not a new
+approach (for example, Schwerdtfeger's classic book
+\cite{schwerdtfeger} follows this approach quite consistently), it is
+not so common in the literature (and in the course material available
+online). Instead, other, more geometrically oriented approaches
+prevail. We have tried to follow that kind of geometric reasoning in
+our early work on this subject, but we have encountered many
+difficulties and did not have so much success. Based on this
+experience, we conclude that introducing the powerful techniques of
+linear algebra, makes the work on formalization an order of magnitude
+simpler then when using just plain geometric reasoning.
+
+It can be argued that sometimes geometrical arguments give better
+explanations of some theorems, but when only justification is
+concerned, the algebraic approach is clearly superior. However, to
+keep the connection with the standard, geometric intuition, several
+definitions must be introduced (more geometric, and more algebraic
+ones) and they must be proved equivalent. For example, when the
+definition of angles is given only through algebraic operations on
+matrices and their determinants, the angle preservation property is
+very easy to prove, but for educational purposes, this becomes
+relevant only when that definition is connected with the standard
+definition of angle between curves (i.e., their tangent vectors) ---
+otherwise, the formalization becomes a game with meaningless symbols.
+
+Another important conclusion that we make is that in formal documents,
+case analysis should be avoided and extensions that help avoiding it
+should be pursued whenever possible (e.g., it was much better to use
+the homogeneous coordinates instead of a single distinguished infinity
+point, it was much simpler to work with circlines then to distinguish
+between circles and lines, etc.). Keeping different models of the same
+concept (for example, in our case, homogeneous coordinates and the
+Riemann sphere) also helps, as some proofs are easier in one, and some
+proofs are easier in other models.
+
+In principle, our proofs are not long (15-20 lines in
+average). However, some tedious reasoning was sometimes required,
+especially when switching between real and complex numbers (by the
+conversion functions {\tt Re} and {\tt cor}). These conversion are
+usually not present in informal texts and some better automation of
+reasoning about these functions would be welcome. Isabelle's
+automation was quite powerful in equational reasoning about ordinary
+complex numbers using {\tt (simp add: field\_simps)} (with some minor
+exceptions), but in the presence of inequalities, the automation was
+not so good and we had to prove many things manually, that would be
+considered trivial in informal texts.
+
+In our further work we plan to use these results for formalizing
+non-Euclidean geometries and their models (especially, spherical model
+of the elliptic geometry and the Poincar\'e disc and upper half-plane
+models of hyperbolic geometry).
+
+
+\acknowledgement{The authors are grateful to Pascal Schreck, Pierre
+  Boutry, and Julien Narboux for many valuable suggestions and
+  advice.}
+
+\bibliography{moebius}{}
+\bibliographystyle{plain}
+
+\end{document}

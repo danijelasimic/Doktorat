@@ -1,0 +1,49 @@
+\begin{tikzpicture}
+\clip (0,0) rectangle (10.000000,5.000000);
+{\footnotesize
+
+% Marking point A by circle
+\draw [line width=0.016cm] (3.000000,4.000000) circle (0.040000);%
+
+% Marking point B by circle
+\draw [line width=0.016cm] (2.000000,1.000000) circle (0.040000);%
+
+% Marking point C by circle
+\draw [line width=0.016cm] (7.000000,1.000000) circle (0.040000);%
+
+% Drawing segment A B
+\draw [line width=0.016cm] (2.987351,3.962053) -- (2.512649,2.537947);%
+\draw [line width=0.016cm] (2.487351,2.462053) -- (2.012649,1.037947);%
+
+% Drawing segment A C
+\draw [line width=0.016cm] (3.032000,3.976000) -- (4.968000,2.524000);%
+\draw [line width=0.016cm] (5.032000,2.476000) -- (6.968000,1.024000);%
+
+% Drawing segment B C
+\draw [line width=0.016cm] (2.040000,1.000000) -- (6.960000,1.000000);%
+
+% Marking point B1 by circle
+\draw [line width=0.016cm] (5.000000,2.500000) circle (0.040000);%
+
+% Marking point C1 by circle
+\draw [line width=0.016cm] (2.500000,2.500000) circle (0.040000);%
+
+% Drawing segment B1 C1
+\draw [line width=0.016cm] (4.960000,2.500000) -- (2.540000,2.500000);%
+
+% Printing text at point A
+\draw (3.000000,4.000000) node [anchor=south] { $A(u_0, u_1)$ };%
+
+% Printing text at point B
+\draw (2.030000,1.030000) node [anchor=north east] { $B(u_2, u_3)$ };%
+
+% Printing text at point C
+\draw (6.970000,1.030000) node [anchor=north west] { $C(u_4, u_5)$ };%
+
+% Printing text at point B1
+\draw (5.000000,2.500000) node [anchor=west] { $B_1(x_0, x_1)$ };%
+
+% Printing text at point C1
+\draw (2.500000,2.500000) node [anchor=east] { $C_1(x_2, x_3)$ };%
+}
+\end{tikzpicture}
