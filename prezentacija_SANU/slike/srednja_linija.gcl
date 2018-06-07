@@ -1,0 +1,29 @@
+number XSIZE 100
+number YSIZE 50
+dim XSIZE YSIZE
+
+point A 30 40
+point B 20 10
+point C 70 10
+
+cmark A
+cmark B
+cmark C
+
+drawsegment A B
+drawsegment A C
+drawsegment B C
+
+midpoint B1 A C
+midpoint C1 B A
+
+cmark B1
+cmark C1
+
+drawsegment B1 C1
+
+printat_t A {A(u_0, u_1)}
+printat_lb B {B(0, 0)}
+printat_rb C {C(u_4, 0)}
+printat_r B1 {B_1(x_0, x_1)}
+printat_l C1 {C_1(x_2, x_3)}
